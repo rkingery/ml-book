@@ -4,6 +4,31 @@ from pathlib import Path
 
 local = Path().cwd().parent / 'local'
 
+## basic-math
+
+def gen_all_floats(n_mantissa, n_exp, bias):
+    n_mantissa -= 1
+    n_digits = int(np.log(2 ** n_mantissa) / np.log(10)) + 1
+    exp_min, exp_max = 1 - bias, 2 ** n_exp - 1 - bias
+    x = []
+    for m in range(exp_min, exp_max + 1):
+        max_val = 2 ** n_mantissa - 1
+        for n in range(max_val + 1):
+            mantissa = 1 + n / (2 ** n_mantissa)
+            for sign in [-1, 1]:
+                num = sign * mantissa * 2 ** m
+                num = np.round(num, n_digits)
+                x.append(num)
+    return sorted(x)
+
+def plot_float_dist(x, title=''):
+    plt.figure(figsize=(12, 1))
+    plt.scatter(x, np.ones(len(x)), c='red', s=4);
+    plt.title('Distribution of All Floats')
+    plt.yticks([])
+    plt.title(title)
+    plt.show()
+
 def plot_function(x, y, xlim, ylim=None, title=None):
     xlow, xhigh = xlim
     ylow, yhigh = ylim if ylim is not None else xlim
@@ -36,6 +61,30 @@ def query_wolfram_alpha(query, api_file='wolfram_key.txt'):
     response = client.query(query)
     answer = next(response.results).text
     return answer
+
+def plot_3d(x, y, f, title=''):
+    X, Y = np.meshgrid(x, y)
+    Z = f(X, Y)
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot_surface(X, Y, Z)
+    ax.set_title(title)
+    ax.set_xlabel('$x$')
+    ax.set_ylabel('$y$')
+    ax.set_zlabel('$z$')
+    plt.show()
+    
+def plot_countour(x, y, f, title=''):
+    X, Y = np.meshgrid(x, y)
+    Z = f(X, Y)
+    cs = plt.contour(X, Y, Z)
+    plt.clabel(cs, fmt='%1.1f')
+    plt.title(title)
+    plt.xlabel('$x$')
+    plt.ylabel('$y$')
+    plt.show()
+
+## linear-algebra
 
 def plot_vectors(vs, xlim=(), ylim=(), title='', labels=None):
     plt.figure(figsize=(5, 4))
