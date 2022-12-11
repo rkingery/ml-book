@@ -135,3 +135,56 @@ def plot_vector_add(v, w, xlim=(0, 5), ylim=(0, 5)):
     plt.legend()
     plt.title('Vector Addition')
     plt.show();
+    
+# calculus
+
+def plot_right_triangle(points, base_label='', height_label='', hyp_label='', offset=0.05):
+    x0, y0 = points[0]
+    x1, y1 = points[1]
+    x2, y2 = points[2]
+    x = [x0, x1, x2]
+    y = [y0, y1, y2]
+    hyp_x = [x[0], x[2]]
+    hyp_y = [y[0], y[2]]
+    mid_base = (x[1] - x[0]) / 2 + x[0]
+    mid_height = (y[2] - y[1]) / 2 + y[1]
+    
+    plt.figure(figsize=(6, 4))
+    plt.plot(x, y, color='black')
+    plt.plot(hyp_x, hyp_y, color='black')
+    plt.text(mid_base, y[0] - 1.5 * offset, base_label)
+    plt.text(x[1] + 0.5 * offset, mid_height, height_label)
+    plt.text(mid_base - 2.5 * offset, mid_height + 2.5 * offset, hyp_label)
+    plt.axis('off')
+    plt.show()
+
+def plot_tangent_plane(x, y, f, f_tangent, point, title=''):
+    X, Y = np.meshgrid(x, y)
+    Z = f(X, Y)
+    Z_tangent = f_tangent(X, Y)
+    x0, y0 = point
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot_surface(X, Y, Z, color='blue', alpha=0.4)
+    ax.plot_surface(X, Y, Z_tangent, color='green', alpha=0.4)
+    ax.scatter([x0], [y0], [f(x0, y0)], s=50, marker='.', zorder=10, color='red')
+    # ax.view_init(elev=40, azim=90)
+    ax.set_title(title)
+    ax.set_xlabel('$x$')
+    ax.set_ylabel('$y$')
+    ax.set_zlabel('$z$')
+    plt.show()
+    
+def plot_area_under_curve(x, y, dx=1, show_all_xticks=True):
+    x_rect = np.arange(min(x), max(x), dx) + dx / 2
+    n_rects = len(x_rect)
+    y_rect = np.sqrt(x_rect + dx / 2)
+    print(f'Approximate Area: {np.sum(y_rect * dx)}')
+    plt.figure(figsize=(4, 3))
+    plt.plot(x, y, color='red')
+    plt.bar(x_rect, y_rect, width=dx, alpha=1, edgecolor='black', facecolor='none', linewidth=1)
+    plt.title(f'{n_rects} Rectangles')
+    if show_all_xticks:
+        plt.xticks(np.arange(min(x), max(x) + 1))
+    plt.show()
