@@ -6,18 +6,16 @@ local = Path().cwd().parent / 'local'
 
 ## basic-math
 
-def gen_all_floats(n_mantissa, n_exp, bias):
-    n_mantissa -= 1
-    n_digits = int(np.log(2 ** n_mantissa) / np.log(10)) + 1
+def gen_all_floats(n_precision, n_exp, bias):
+    n_precision -= 1  # last bit is used for reserved numbers
     exp_min, exp_max = 1 - bias, 2 ** n_exp - 1 - bias
     x = []
     for m in range(exp_min, exp_max + 1):
-        max_val = 2 ** n_mantissa - 1
+        max_val = 2 ** n_precision - 1
         for n in range(max_val + 1):
-            mantissa = 1 + n / (2 ** n_mantissa)
+            precision = 1 + n / (2 ** n_precision)
             for sign in [-1, 1]:
-                num = sign * mantissa * 2 ** m
-                num = np.round(num, n_digits)
+                num = sign * precision * 2 ** m  # definition of float
                 x.append(num)
     return sorted(x)
 
