@@ -148,7 +148,6 @@ def plot_right_triangle(points, base_label='', height_label='', hyp_label='', of
     hyp_y = [y[0], y[2]]
     mid_base = (x[1] - x[0]) / 2 + x[0]
     mid_height = (y[2] - y[1]) / 2 + y[1]
-    
     plt.figure(figsize=(6, 4))
     plt.plot(x, y, color='black')
     plt.plot(hyp_x, hyp_y, color='black')
@@ -163,7 +162,6 @@ def plot_tangent_plane(x, y, f, f_tangent, point, title=''):
     Z = f(X, Y)
     Z_tangent = f_tangent(X, Y)
     x0, y0 = point
-
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     ax.plot_surface(X, Y, Z, color='blue', alpha=0.4)
@@ -176,10 +174,11 @@ def plot_tangent_plane(x, y, f, f_tangent, point, title=''):
     ax.set_zlabel('$z$')
     plt.show()
     
-def plot_area_under_curve(x, y, dx=1, show_all_xticks=True):
+def plot_area_under_curve(x, f, dx=1, show_all_xticks=True):
+    y = f(x)
     x_rect = np.arange(min(x), max(x), dx) + dx / 2
     n_rects = len(x_rect)
-    y_rect = np.sqrt(x_rect + dx / 2)
+    y_rect = f(x_rect + dx / 2)
     print(f'Approximate Area: {np.sum(y_rect * dx)}')
     plt.figure(figsize=(4, 3))
     plt.plot(x, y, color='red')
