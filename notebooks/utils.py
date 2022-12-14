@@ -174,6 +174,37 @@ def plot_tangent_plane(x, y, f, f_tangent, point, title=''):
     ax.set_zlabel('$z$')
     plt.show()
     
+def plot_gradient_descent(f, grad_fn, x0, alpha, n_iters, annotate_start_end=True, xlim=None, ylim=None, title=''):
+    def gradient_descent(f, grad_fn, x0, alpha, n_iters):
+        points = [(x0, f(x0))]
+        for i in range(n_iters):
+            x0 = x0 - alpha * grad_fn(x0)
+            points.append((x0, f(x0)))
+        return points
+    
+    points = gradient_descent(f, grad_fn, x0, alpha, n_iters)
+    x0, y0 = zip(*points)
+    x0, y0 = np.array(x0), np.array(y0)
+    lim = np.max([np.abs(np.min(x0)), np.abs(np.max(x0))])
+    x = np.linspace(-1.5 * lim, 1.5 * lim, 100)
+    y = f(x)
+    plt.figure(figsize=(5, 4))
+    plt.plot(x, f(x), color='black')
+    plt.scatter(x0, y0, color='red', s=10)
+    if annotate_start_end:
+        plt.annotate('start', points[0], xytext=(-10, 5), textcoords='offset points')
+        plt.annotate('end', points[-1], xytext=(-10, 5), textcoords='offset points')
+    for i in range(1, len(points)):
+        x1, y1 = points[i-1]
+        x2, y2 = points[i]
+        plt.plot([x1, x2], [y1, y2], color='red')
+    plt.title(title)
+    plt.xlabel('$x$')
+    plt.ylabel('$y$')
+    plt.xlim(xlim)
+    plt.ylim(ylim)
+    plt.show()
+    
 def plot_area_under_curve(x, f, dx=1, show_all_xticks=True):
     y = f(x)
     x_rect = np.arange(min(x), max(x), dx) + dx / 2
