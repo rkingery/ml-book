@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 from pathlib import Path
 
 local = Path().cwd().parent / 'local'
@@ -27,7 +28,7 @@ def plot_float_dist(x, title=''):
     plt.title(title)
     plt.show()
 
-def plot_function(x, y, xlim, ylim=None, title=None):
+def plot_function(x, y, xlim=None, ylim=None, title=None, show_grid=True):
     xlow, xhigh = xlim
     ylow, yhigh = ylim if ylim is not None else xlim
     plt.figure(figsize=(4, 3))
@@ -42,10 +43,12 @@ def plot_function(x, y, xlim, ylim=None, title=None):
     plt.title(title)
     plt.xlabel('$x$')
     plt.ylabel('$y$')
-    plt.grid(True, alpha=0.5)
-    plt.xticks(range(int(xlow), int(xhigh) + 1, 1))
-    plt.yticks(range(int(ylow), int(yhigh) + 1, 1))
-    plt.xlim(*xlim)
+    if show_grid:
+        plt.grid(True, alpha=0.5)
+        plt.xticks(range(int(xlow), int(xhigh) + 1, 1))
+        plt.yticks(range(int(ylow), int(yhigh) + 1, 1))
+    if xlim is not None:
+        plt.xlim(*xlim)
     if ylim is not None:
         plt.ylim(*ylim)
     else:
@@ -218,3 +221,10 @@ def plot_area_under_curve(x, f, dx=1, show_all_xticks=True):
     if show_all_xticks:
         plt.xticks(np.arange(min(x), max(x) + 1))
     plt.show()
+    
+# probability
+
+def print_table(data, columns):
+    data = np.array(data).T
+    df = pd.DataFrame(data=data, columns=columns)
+    print(df.to_string(index=False))
