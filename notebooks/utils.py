@@ -7,39 +7,18 @@ local = Path().cwd().parent / 'local'
 
 ## basic-math
 
-def gen_all_floats(n_precision, n_exp, bias):
-    n_precision -= 1  # last bit is used for reserved numbers
-    exp_min, exp_max = 1 - bias, 2 ** n_exp - 1 - bias
-    x = []
-    for m in range(exp_min, exp_max + 1):
-        max_val = 2 ** n_precision - 1
-        for n in range(max_val + 1):
-            precision = 1 + n / (2 ** n_precision)
-            for sign in [-1, 1]:
-                num = sign * precision * 2 ** m  # definition of float
-                x.append(num)
-    return sorted(x)
-
-def plot_float_dist(x, title=''):
-    plt.figure(figsize=(12, 1))
-    plt.scatter(x, np.ones(len(x)), c='red', s=4);
-    plt.title('Distribution of All Floats')
-    plt.yticks([])
-    plt.title(title)
-    plt.show()
-
-def plot_function(x, y, xlim=None, ylim=None, title=None, show_grid=True):
-    xlow, xhigh = xlim
+def plot_function(x, f, xlim=None, ylim=None, title=None, show_grid=True):
+    xlow, xhigh = xlim if xlim is not None else (-10, 10)
     ylow, yhigh = ylim if ylim is not None else xlim
     plt.figure(figsize=(4, 3))
     plt.hlines(0 * x, xlow, xhigh, color='black', linewidth=0.7)
-    if not isinstance(y, tuple):
-        plt.vlines(0 * y, ylow, yhigh, color='black', linewidth=0.7)
-        plt.plot(x, y, color='red')
+    if not isinstance(f, tuple) or isinstance(f, list):
+        plt.vlines(0 * f(x), ylow, yhigh, color='black', linewidth=0.7)
+        plt.plot(x, f(x), color='red')
     else:
-        plt.vlines(0 * y[0], ylow, yhigh, color='black', linewidth=0.7)
-        for yy in y:
-            plt.plot(x, yy)
+        plt.vlines(0 * f[0](x), ylow, yhigh, color='black', linewidth=0.7)
+        for fn in f:
+            plt.plot(x, fn(x))
     plt.title(title)
     plt.xlabel('$x$')
     plt.ylabel('$y$')
@@ -63,16 +42,25 @@ def query_wolfram_alpha(query, api_file='wolfram_key.txt'):
     answer = next(response.results).text
     return answer
 
-def plot_3d(x, y, f, title=''):
+def plot_3d(x, y, f, title='', show_ticks=True, elev=30, azim=30):
     X, Y = np.meshgrid(x, y)
     Z = f(X, Y)
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     ax.plot_surface(X, Y, Z)
+    ax.view_init(elev=elev, azim=azim)
     ax.set_title(title)
-    ax.set_xlabel('$x$')
-    ax.set_ylabel('$y$')
-    ax.set_zlabel('$z$')
+    if not show_ticks:
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_zticks([])
+        ax.set_xlabel('x', labelpad=-10)
+        ax.set_ylabel('y', labelpad=-10)
+        ax.set_zlabel('z', labelpad=-10)
+    else:
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('z')
     plt.show()
     
 def plot_countour(x, y, f, title=''):
@@ -84,6 +72,31 @@ def plot_countour(x, y, f, title=''):
     plt.xlabel('$x$')
     plt.ylabel('$y$')
     plt.show()
+
+    
+## numerical-computing
+
+def gen_all_floats(n_precision, n_exp, bias):
+    n_precision -= 1  # last bit is used for reserved numbers
+    exp_min, exp_max = 1 - bias, 2 ** n_exp - 1 - bias
+    x = []
+    for m in range(exp_min, exp_max + 1):
+        max_val = 2 ** n_precision - 1
+        for n in range(max_val + 1):
+            precision = 1 + n / (2 ** n_precision)
+            for sign in [-1, 1]:
+                num = sign * precision * 2 ** m  # definition of float
+                x.append(num)
+    return sorted(x)
+
+def plot_number_dist(x, title=''):
+    plt.figure(figsize=(12, 1))
+    plt.scatter(x, np.ones(len(x)), c='red', s=4);
+    plt.title(title)
+    plt.yticks([])
+    plt.title(title)
+    plt.show()
+    
 
 ## linear-algebra
 
@@ -139,7 +152,8 @@ def plot_vector_add(v, w, xlim=(0, 5), ylim=(0, 5)):
     plt.title('Vector Addition')
     plt.show();
     
-# calculus
+
+## calculus
 
 def plot_right_triangle(points, base_label='', height_label='', hyp_label='', offset=0.05):
     x0, y0 = points[0]
@@ -222,9 +236,86 @@ def plot_area_under_curve(x, f, dx=1, show_all_xticks=True):
         plt.xticks(np.arange(min(x), max(x) + 1))
     plt.show()
     
+
 # probability
 
 def print_table(data, columns):
     data = np.array(data).T
     df = pd.DataFrame(data=data, columns=columns)
     print(df.to_string(index=False))
+    
+def plot_3d_hist(x, y, bins=10, xlim=(-2, 2), ylim=(-2, 2), elev=20, azim=30, title='', show_ticks=False):
+    hist, xedges, yedges = np.histogram2d(x, y, bins=bins, range=[xlim, ylim])
+    xpos, ypos = np.meshgrid(xedges[:-1] + 0.25, yedges[:-1] + 0.25, indexing="ij")
+    xpos = xpos.ravel()
+    ypos = ypos.ravel()
+    zpos = 0
+    dx = dy = 0.5 * np.ones_like(zpos)
+    dz = hist.ravel()
+
+    fig = plt.figure()
+    ax = fig.add_subplot(projection='3d')
+    ax.bar3d(xpos, ypos, zpos, dx, dy, dz, zsort='average')
+    ax.view_init(elev=elev, azim=azim)
+    #ax.set_axis_off()
+    ax.set_title(title)
+    if not show_ticks:
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_zticks([])
+        ax.set_xlabel('x', labelpad=-10)
+        ax.set_ylabel('y', labelpad=-10)
+        ax.set_zlabel('counts', labelpad=-10)
+    else:
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('counts')
+    plt.show()
+    
+def plot_multivariate_gaussian(mu, Sigma, show_ticks=False, elev=30, azim=30):
+    from scipy.stats import multivariate_normal
+    from matplotlib import gridspec
+    dist = multivariate_normal(mu, Sigma)
+    p = lambda X: dist.pdf(X)
+    lim = max(1.5 * Sigma[0, 0], 1.5 * Sigma[1, 1])
+    lim = (-lim, lim)
+    x = np.linspace(lim[0], lim[1], 1000)
+    y = np.linspace(lim[0], lim[1], 1000)
+    x, y = np.meshgrid(x, y)
+    z = p(np.dstack((x, y)))
+    fig = plt.figure(figsize=(12,5))
+    spec = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[1.5, 1], wspace=1, hspace=1)#, height_ratios=[2, 1])
+    ax1 = fig.add_subplot(spec[0], projection='3d')
+    ax1.plot_surface(x, y, z, cmap='viridis', edgecolor='none')
+    ax1.view_init(elev=elev, azim=azim)
+    fig.suptitle('Multivariate Gaussian $\mathcal{N}(\mu,\Sigma)$\n' 
+                 + f'$\mu=${mu.tolist()} \n $\Sigma=${Sigma.tolist()}', y=0.9, fontsize=11)
+    ax1.set_xlim(lim)
+    ax1.set_ylim(lim)
+    ax1.set_zticks([])
+    ax1.set_zlabel('p', labelpad=-10)
+    if not show_ticks:
+        ax1.set_xticks([])
+        ax1.set_yticks([])
+        ax1.set_xlabel('x', labelpad=-10)
+        ax1.set_ylabel('y', labelpad=-10)
+    else:
+        ax1.tick_params(axis='y',direction='in', pad=-4)
+        ax1.tick_params(axis='x',direction='in', pad=-4)
+        ax1.set_xticks(np.arange(xlim[0], xlim[1] + 1))
+        ax1.set_yticks(np.arange(ylim[0], ylim[1] + 1))
+        ax1.set_xlabel('x', labelpad=-5)
+        ax1.set_ylabel('y', labelpad=-5)
+    ax1.set_title('3D Plot', y=0.9)
+    ax2 = fig.add_subplot(spec[1])
+    ax2.contour(x, y, z)
+    ax2.set_xlabel('x')
+    ax2.set_ylabel('y')
+    ax2.set_aspect('equal')
+    lim = max(1.5 * Sigma[0, 0], 1.5 * Sigma[1, 1])
+    lim = (-lim, lim)
+    ax2.set_xlim(lim)
+    ax2.set_ylim(lim)
+    ax2.set_title('Contour Plot', y=1)
+    fig.subplots_adjust(wspace=1)
+    plt.show()
