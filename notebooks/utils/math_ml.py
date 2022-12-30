@@ -34,12 +34,13 @@ def plot_function(x, f, xlim=None, ylim=None, title=None, show_grid=True):
         plt.ylim(*xlim)
     plt.show();
     
-def query_wolfram_alpha(query, api_file='wolfram_key.txt'):
+def query_wolfram_alpha(query, api_file='wolfram_key.txt', answer='formatted'):
     import wolframalpha
     api_key = (local / api_file).read_text()
     client = wolframalpha.Client(api_key)
     response = client.query(query)
-    answer = next(response.results).text
+    if answer == 'formatted':
+        answer = next(response.results).text
     return answer
 
 def plot_3d(x, y, f, title='', show_ticks=True, elev=30, azim=30):
