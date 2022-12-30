@@ -101,7 +101,7 @@ def plot_number_dist(x, title=''):
 ## linear-algebra
 
 def plot_vectors(vs, xlim=(), ylim=(), title='', labels=None):
-    plt.figure(figsize=(5, 4))
+    plt.figure(figsize=(4, 3))
     if not isinstance(vs, list):
         vs = [vs]
     if labels is None:
@@ -118,7 +118,7 @@ def plot_vectors(vs, xlim=(), ylim=(), title='', labels=None):
     plt.show();
 
 def plot_scalar_mult(v, cs, include_neg=False, xlim=(0, 3), ylim=(0, 3)):
-    plt.figure(figsize=(5, 4))
+    plt.figure(figsize=(4, 3))
     if not isinstance(cs, list):
         cs = [cs]
     for c in cs:
@@ -139,7 +139,7 @@ def plot_scalar_mult(v, cs, include_neg=False, xlim=(0, 3), ylim=(0, 3)):
     plt.show();
     
 def plot_vector_add(v, w, xlim=(0, 5), ylim=(0, 5)):
-    plt.figure(figsize=(5, 4))
+    plt.figure(figsize=(4, 3))
     plt.quiver(0, 0, v[0], v[1], angles='xy', scale_units='xy', scale=1, color='blue', label='$v$')
     plt.quiver(v[0], v[1], w[0], w[1], angles='xy', scale_units='xy', scale=1, color='green', label='$w$')
     plt.quiver(0, 0, v[0] + w[0], v[1] + w[1], angles='xy', scale_units='xy', scale=1, color='red', label='$v+w$')
@@ -155,7 +155,8 @@ def plot_vector_add(v, w, xlim=(0, 5), ylim=(0, 5)):
 
 ## calculus
 
-def plot_right_triangle(points, base_label='', height_label='', hyp_label='', offset=0.05):
+def plot_right_triangle(points=[(0, 0), (1, 0), (1, 1)], base_label='$dx$', height_label='$dy$', 
+                        hyp_label='slope$=dy/dx$', offset=0.08):
     x0, y0 = points[0]
     x1, y1 = points[1]
     x2, y2 = points[2]
@@ -165,7 +166,7 @@ def plot_right_triangle(points, base_label='', height_label='', hyp_label='', of
     hyp_y = [y[0], y[2]]
     mid_base = (x[1] - x[0]) / 2 + x[0]
     mid_height = (y[2] - y[1]) / 2 + y[1]
-    plt.figure(figsize=(6, 4))
+    plt.figure(figsize=(4, 2.66))
     plt.plot(x, y, color='black')
     plt.plot(hyp_x, hyp_y, color='black')
     plt.text(mid_base, y[0] - 1.5 * offset, base_label)
@@ -174,11 +175,10 @@ def plot_right_triangle(points, base_label='', height_label='', hyp_label='', of
     plt.axis('off')
     plt.show()
 
-def plot_tangent_plane(x, y, f, f_tangent, point, title=''):
+def plot_tangent_plane(x, y, x0, y0, f, f_tangent, title=''):
     X, Y = np.meshgrid(x, y)
     Z = f(X, Y)
     Z_tangent = f_tangent(X, Y)
-    x0, y0 = point
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     ax.plot_surface(X, Y, Z, color='blue', alpha=0.4)
@@ -191,35 +191,25 @@ def plot_tangent_plane(x, y, f, f_tangent, point, title=''):
     ax.set_zlabel('$z$')
     plt.show()
     
-def plot_gradient_descent(f, grad_fn, x0, alpha, n_iters, annotate_start_end=True, xlim=None, ylim=None, title=''):
-    def gradient_descent(f, grad_fn, x0, alpha, n_iters):
-        points = [(x0, f(x0))]
-        for i in range(n_iters):
-            x0 = x0 - alpha * grad_fn(x0)
-            points.append((x0, f(x0)))
-        return points
+def plot_tangent_contour(x, y, x0, y0, f, f_tangent, dfdx, title=''):
+    X, Y = np.meshgrid(x, y)
+    Z = f(X, Y)
+    Z0 = f_tangent(X, Y)
     
-    points = gradient_descent(f, grad_fn, x0, alpha, n_iters)
-    x0, y0 = zip(*points)
-    x0, y0 = np.array(x0), np.array(y0)
-    lim = np.max([np.abs(np.min(x0)), np.abs(np.max(x0))])
-    x = np.linspace(-1.5 * lim, 1.5 * lim, 100)
-    y = f(x)
-    plt.figure(figsize=(5, 4))
-    plt.plot(x, f(x), color='black')
-    plt.scatter(x0, y0, color='red', s=10)
-    if annotate_start_end:
-        plt.annotate('start', points[0], xytext=(-10, 5), textcoords='offset points')
-        plt.annotate('end', points[-1], xytext=(-10, 5), textcoords='offset points')
-    for i in range(1, len(points)):
-        x1, y1 = points[i-1]
-        x2, y2 = points[i]
-        plt.plot([x1, x2], [y1, y2], color='red')
-    plt.title(title)
+    grad = dfdx(x0, y0)
+    m = - grad[1] / grad[0]
+    b = y0 - m * x0
+    y_tangent = m * x + b
+
+    plt.figure(figsize=(4, 3))
+    plt.contour(X, Y, Z)
+    plt.plot(x, y_tangent, color='red')
+    plt.scatter([x0], [y0], marker='o', color='red')
+    plt.xlim(x.min(), x.max())
+    plt.ylim(y.min(), y.max())
     plt.xlabel('$x$')
     plt.ylabel('$y$')
-    plt.xlim(xlim)
-    plt.ylim(ylim)
+    plt.title(title)
     plt.show()
     
 def plot_area_under_curve(x, f, dx=1, show_all_xticks=True):
@@ -318,4 +308,38 @@ def plot_multivariate_gaussian(mu, Sigma, show_ticks=False, elev=30, azim=30):
     ax2.set_ylim(lim)
     ax2.set_title('Contour Plot', y=1)
     fig.subplots_adjust(wspace=1)
+    plt.show()
+    
+
+# statistics
+
+def plot_gradient_descent(f, grad_fn, x0, alpha, n_iters, annotate_start_end=True, xlim=None, ylim=None, title=''):
+    def gradient_descent(f, grad_fn, x0, alpha, n_iters):
+        points = [(x0, f(x0))]
+        for i in range(n_iters):
+            x0 = x0 - alpha * grad_fn(x0)
+            points.append((x0, f(x0)))
+        return points
+    
+    points = gradient_descent(f, grad_fn, x0, alpha, n_iters)
+    x0, y0 = zip(*points)
+    x0, y0 = np.array(x0), np.array(y0)
+    lim = np.max([np.abs(np.min(x0)), np.abs(np.max(x0))])
+    x = np.linspace(-1.5 * lim, 1.5 * lim, 100)
+    y = f(x)
+    plt.figure(figsize=(5, 4))
+    plt.plot(x, f(x), color='black')
+    plt.scatter(x0, y0, color='red', s=10)
+    if annotate_start_end:
+        plt.annotate('start', points[0], xytext=(-10, 5), textcoords='offset points')
+        plt.annotate('end', points[-1], xytext=(-10, 5), textcoords='offset points')
+    for i in range(1, len(points)):
+        x1, y1 = points[i-1]
+        x2, y2 = points[i]
+        plt.plot([x1, x2], [y1, y2], color='red')
+    plt.title(title)
+    plt.xlabel('$x$')
+    plt.ylabel('$y$')
+    plt.xlim(xlim)
+    plt.ylim(ylim)
     plt.show()
