@@ -39,8 +39,7 @@ def query_wolfram_alpha(query, api_file='wolfram_key.txt', answer='formatted'):
     api_key = (local / api_file).read_text()
     client = wolframalpha.Client(api_key)
     response = client.query(query)
-    if answer == 'formatted':
-        answer = next(response.results).text
+    answer = next(response.results).texts
     return answer
 
 def plot_3d(x, y, f, title='', show_ticks=True, elev=30, azim=30):
@@ -176,6 +175,21 @@ def plot_right_triangle(points=[(0, 0), (1, 0), (1, 1)], base_label='$dx$', heig
     plt.axis('off')
     plt.show()
 
+def plot_tangent_line(x, x0, f, f_tangent, xlim=None, ylim=None, title=None):
+    plt.figure(figsize=(4, 3))
+    plt.plot(x, f(x))
+    plt.plot(x, f_tangent(x))
+    plt.scatter([x0], [f(x0)], marker='o', color='red')
+    plt.title(title)
+    plt.xlabel('$x$')
+    plt.ylabel('$y$')
+    plt.grid(True, alpha=0.5)
+    if xlim is not None:
+        plt.xlim(*xlim)
+    if ylim is not None:
+        plt.ylim(*ylim)
+    plt.show();
+    
 def plot_tangent_plane(x, y, x0, y0, f, f_tangent, title=''):
     X, Y = np.meshgrid(x, y)
     Z = f(X, Y)
