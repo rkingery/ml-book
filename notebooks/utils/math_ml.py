@@ -76,16 +76,45 @@ def plot_countour(x, y, f, title=''):
     
 ## numerical-computing
 
-def gen_all_floats(n_precision, n_exp, bias):
-    n_precision -= 1  # last bit is used for reserved numbers
+def represent_as_float(x, n, n_exp, n_man, bias):
+    import math
+    # get sign
+    sign = 1 if x < 0 else 0
+    x = -x if sign == 1 else x
+    # get exponent and precision = 1 + mantissa
+    exponent = 0 if x == 0 else int(math.log2(x))
+    precision = 0 if x == 0 else x / (2 ** exponent)
+    # normalize precision to be between 1 and 2
+    if precision >= 2:
+        precision /= 2
+        exponent += 1
+    elif precision < 1:
+        precision *= 2
+        exponent -= 1
+    # bias exponent and convert to binary
+    exp_biased = exponent + bias
+    exp_bits = bin(exp_biased)[2:][:n_exp]
+    exp_bits = exp_bits[:n_exp]
+    if n_exp >= len(exp_bits):
+        exp_bits = '0' * (n_exp - len(exp_bits)) + exp_bits
+    # get mantissa and convert it to binary
+    mantissa = precision - 1
+    man_bits = bin(int(mantissa * 2 ** n_man))[2:]
+    man_bits = man_bits[-n_man:]
+    # print output
+    print(f'scientific notation: (-1)^{sign} * (1 + {precision-1}) * 2^{exponent}')
+    print(f'{n}-bit floating point representation: {sign} {exp_bits} {man_bits}')
+
+def gen_all_floats(n, n_man, n_exp, bias):
+    n_man -= 1  # last bit is used for reserved numbers
     exp_min, exp_max = 1 - bias, 2 ** n_exp - 1 - bias
     x = []
-    for m in range(exp_min, exp_max + 1):
-        max_val = 2 ** n_precision - 1
+    for exp in range(exp_min, exp_max + 1):
+        max_val = 2 ** n_man - 1
         for n in range(max_val + 1):
-            precision = 1 + n / (2 ** n_precision)
+            mantissa = n * 2 ** (-n_man)
             for sign in [-1, 1]:
-                num = sign * precision * 2 ** m  # definition of float
+                num = sign * (1 + mantissa) * 2 ** exp
                 x.append(num)
     return sorted(x)
 
