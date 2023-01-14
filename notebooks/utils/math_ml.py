@@ -272,6 +272,14 @@ def plot_area_under_curve(x, f, dx=1, show_all_xticks=True):
     
 
 # probability
+    
+def plot_histogram(x, is_discrete=False, title=''):
+    if not is_discrete:
+        sns.histplot(x)
+    else:
+        sns.countplot(np.sort(np.array(x).astype(str)))
+    plt.title(title)
+    plt.show()
 
 def print_table(data, columns):
     data = np.array(data).T
