@@ -32,7 +32,7 @@ def plot_function(x, f, xlim=None, ylim=None, title=None, show_grid=True):
         plt.ylim(*ylim)
     else:
         plt.ylim(*xlim)
-    plt.show();
+    plt.show()
     
 def query_wolfram_alpha(query, api_file='wolfram_key.txt', answer='formatted'):
     import wolframalpha
@@ -66,6 +66,7 @@ def plot_3d(x, y, f, title='', show_ticks=True, elev=30, azim=30):
 def plot_countour(x, y, f, title=''):
     X, Y = np.meshgrid(x, y)
     Z = f(X, Y)
+    plt.figure(figsize=(4, 3))
     cs = plt.contour(X, Y, Z)
     plt.clabel(cs, fmt='%1.1f')
     plt.title(title)
