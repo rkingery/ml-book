@@ -220,16 +220,51 @@ def plot_tangent_line(x, x0, f, f_tangent, xlim=None, ylim=None, title=None):
         plt.ylim(*ylim)
     plt.show();
     
-def plot_tangent_plane(x, y, x0, y0, f, f_tangent, title=''):
+def plot_tangent_plane(x, y, x0, y0, f, f_tangent, dfdx, title='', plot_grad=False, grad_scale=2):
+    from mpl_toolkits.mplot3d.proj3d import proj_transform
+    from mpl_toolkits.mplot3d.axes3d import Axes3D
+    from matplotlib.patches import FancyArrowPatch
+
+    class Arrow3D(FancyArrowPatch):
+        def __init__(self, x, y, z, dx, dy, dz, *args, **kwargs):
+            super().__init__((0, 0), (0, 0), *args, **kwargs)
+            self._xyz = (x, y, z)
+            self._dxdydz = (dx, dy, dz)
+
+        def draw(self, renderer):
+            x1, y1, z1 = self._xyz
+            dx, dy, dz = self._dxdydz
+            x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
+            xs, ys, zs = proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
+            self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
+            super().draw(renderer)
+
+        def do_3d_projection(self, renderer=None):
+            x1, y1, z1 = self._xyz
+            dx, dy, dz = self._dxdydz
+            x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
+            xs, ys, zs = proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
+            self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
+            return np.min(zs)
+
+    def _arrow3D(ax, x, y, z, dx, dy, dz, *args, **kwargs):
+        arrow = Arrow3D(x, y, z, dx, dy, dz, *args, **kwargs)
+        ax.add_artist(arrow)
+    setattr(Axes3D, 'arrow3D', _arrow3D)
+    
     X, Y = np.meshgrid(x, y)
     Z = f(X, Y)
     Z_tangent = f_tangent(X, Y)
+    grad = dfdx(x0, y0)
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
-    ax.plot_surface(X, Y, Z, color='blue', alpha=0.4)
-    ax.plot_surface(X, Y, Z_tangent, color='green', alpha=0.4)
-    ax.scatter([x0], [y0], [f(x0, y0)], s=50, marker='.', zorder=10, color='red')
-    # ax.view_init(elev=40, azim=90)
+    ax.plot_surface(X, Y, Z, color='blue', alpha=0.4, zorder=1)
+    ax.plot_surface(X, Y, Z_tangent, color='green', alpha=0.4, zorder=2)
+    if plot_grad:
+        offset = 0.01
+        ax.arrow3D(x0 + offset, y0 + offset, f(x0, y0) + offset, grad[0] / grad_scale, grad[1] / grad_scale, 0, 
+                   mutation_scale=15, fc='red')
+    ax.scatter([x0], [y0], [f(x0, y0)], s=250, marker='.', color='red', zorder=4, edgecolors='black')
     ax.set_title(title)
     ax.set_xlabel('$x$')
     ax.set_ylabel('$y$')
@@ -246,10 +281,12 @@ def plot_tangent_contour(x, y, x0, y0, f, f_tangent, dfdx, title=''):
     b = y0 - m * x0
     y_tangent = m * x + b
 
-    plt.figure(figsize=(4, 3))
-    plt.contour(X, Y, Z)
-    plt.plot(x, y_tangent, color='red')
-    plt.scatter([x0], [y0], marker='o', color='red')
+    plt.figure(figsize=(4, 4))
+    plt.contour(X, Y, Z, zorder=1)
+    plt.plot(x, y_tangent, color='green', zorder=2, linewidth=3)
+    plt.quiver(x0, y0, grad[0], grad[1], color='red', angles='xy', scale_units='xy', scale=3, headwidth=3,
+               zorder=3, width=0.013, headlength=4, edgecolors='black', linewidth=1)
+    plt.scatter([x0], [y0], marker='o', color='red', edgecolors='black', zorder=4)
     plt.xlim(x.min(), x.max())
     plt.ylim(y.min(), y.max())
     plt.xlabel('$x$')
