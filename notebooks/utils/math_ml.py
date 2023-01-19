@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 import pandas as pd
 from pathlib import Path
 
@@ -311,11 +312,30 @@ def plot_area_under_curve(x, f, dx=1, show_all_xticks=True):
 
 # probability
     
-def plot_histogram(x, is_discrete=False, title=''):
-    if not is_discrete:
-        sns.histplot(x)
+def plot_histogram(x, is_discrete=False, title='', bins=10):
+    if is_discrete:
+        sns.countplot(x=sorted(np.array(x).astype(str), key=lambda x: int(x)))
     else:
-        sns.countplot(np.sort(np.array(x).astype(str)))
+        sns.histplot(x, bins=bins)
+    plt.title(title)
+    plt.show()
+    
+def plot_joint_histogram(X, title='', figsize=(4, 3)):
+    X = np.column_stack(X)
+    counter = np.unique([str(tuple(X[i])) for i in range(len(X))], return_counts=True)
+    plt.figure(figsize=figsize)
+    sns.barplot(x=counter[0], y=counter[1])
+    plt.xticks(rotation=90)
+    plt.ylabel('count')
+    plt.title(title)
+    plt.show()
+    
+def plot_hist2d(x, y, title='', figsize=(4, 3), bins=(10, 10)):
+    plt.figure(figsize=figsize)
+    plt.hist2d(x, y, bins=bins, cmap='Blues')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.colorbar()
     plt.title(title)
     plt.show()
 
