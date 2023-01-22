@@ -312,11 +312,14 @@ def plot_area_under_curve(x, f, dx=1, show_all_xticks=True):
 
 # probability
     
-def plot_histogram(x, is_discrete=False, title='', bins=10):
+def plot_histogram(x, is_discrete=False, title='', **kwargs):
     if is_discrete:
-        sns.countplot(x=sorted(np.array(x).astype(str), key=lambda x: int(x)))
+        sns.histplot(x, discrete=True, shrink=0.8, **kwargs)
+        unique = np.unique(x)
+        if len(unique) < 15:
+            plt.xticks(unique)
     else:
-        sns.histplot(x, bins=bins)
+        sns.histplot(x, **kwargs)
     plt.title(title)
     plt.show()
     
@@ -324,7 +327,7 @@ def plot_joint_histogram(X, title='', figsize=(4, 3)):
     X = np.column_stack(X)
     counter = np.unique([str(tuple(X[i])) for i in range(len(X))], return_counts=True)
     plt.figure(figsize=figsize)
-    sns.barplot(x=counter[0], y=counter[1])
+    sns.barplot(x=counter[0], y=counter[1], color=u'#1f77b4')
     plt.xticks(rotation=90)
     plt.ylabel('count')
     plt.title(title)
@@ -421,7 +424,7 @@ def plot_multivariate_gaussian(mu, Sigma, show_ticks=False, elev=30, azim=30):
     plt.show()
     
 
-# statistics
+# optimization
 
 def plot_gradient_descent(f, grad_fn, x0, alpha, n_iters, annotate_start_end=True, xlim=None, ylim=None, title=''):
     def gradient_descent(f, grad_fn, x0, alpha, n_iters):
