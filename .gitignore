@@ -1,5 +1,6 @@
 # local hidden files/folders
 local/
+notebooks/hidden/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
