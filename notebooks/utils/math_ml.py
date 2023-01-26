@@ -8,31 +8,30 @@ local = Path().cwd().parent / 'local'
 
 ## basic-math
 
-def plot_function(x, f, xlim=None, ylim=None, title=None, show_grid=True):
-    xlow, xhigh = xlim if xlim is not None else (-10, 10)
-    ylow, yhigh = ylim if ylim is not None else xlim
+def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labels=None, xlabel='$x$', ylabel='$y$'):
+    xlim = xlim if xlim is not None else (min(x), max(x))
+    ylim = ylim if ylim is not None else xlim
+    xlow, xhigh = xlim
+    ylow, yhigh = ylim
+    if not isinstance(f, list):
+        f = [f]
     plt.figure(figsize=(4, 3))
     plt.hlines(0 * x, xlow, xhigh, color='black', linewidth=0.7)
-    if not isinstance(f, tuple) or isinstance(f, list):
-        plt.vlines(0 * f(x), ylow, yhigh, color='black', linewidth=0.7)
-        plt.plot(x, f(x), color='red')
-    else:
-        plt.vlines(0 * f[0](x), ylow, yhigh, color='black', linewidth=0.7)
-        for fn in f:
-            plt.plot(x, fn(x))
+    plt.vlines(0 * f[0](x), ylow, yhigh, color='black', linewidth=0.7)
+    for i, fn in enumerate(f):
+        label = labels[i] if isinstance(labels, list) else None
+        plt.plot(x, fn(x), label=label)
     plt.title(title)
-    plt.xlabel('$x$')
-    plt.ylabel('$y$')
-    if show_grid:
-        plt.grid(True, alpha=0.5)
-        plt.xticks(range(int(xlow), int(xhigh) + 1, 1))
-        plt.yticks(range(int(ylow), int(yhigh) + 1, 1))
-    if xlim is not None:
-        plt.xlim(*xlim)
-    if ylim is not None:
-        plt.ylim(*ylim)
-    else:
-        plt.ylim(*xlim)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    if ticks_every is not None:
+        plt.xticks(np.arange(int(xlow), int(xhigh) + 1, ticks_every))
+        plt.yticks(np.arange(int(ylow), int(yhigh) + 1, ticks_every))
+    plt.grid(True, alpha=0.5)
+    if labels is not None:
+        plt.legend()
+    plt.xlim(*xlim)
+    plt.ylim(*ylim)
     plt.show()
     
 def query_wolfram_alpha(query, api_file='wolfram_key.txt', answer='formatted'):
@@ -43,12 +42,16 @@ def query_wolfram_alpha(query, api_file='wolfram_key.txt', answer='formatted'):
     answer = next(response.results).texts
     return answer
 
-def plot_3d(x, y, f, title='', show_ticks=True, elev=30, azim=30):
+def plot_3d(x, y, f, title='', show_ticks=True, elev=30, azim=30, labels=None):
     X, Y = np.meshgrid(x, y)
-    Z = f(X, Y)
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
-    ax.plot_surface(X, Y, Z)
+    if not isinstance(f, list):
+        ax.plot_surface(X, Y, f(X, Y), label=labels)
+    else:
+        for i, fn in enumerate(f):
+            label = labels[i] if isinstance(labels, list) else None
+            ax.plot_surface(X, Y, fn(X, Y), label='hey', zorder=i)
     ax.view_init(elev=elev, azim=azim)
     ax.set_title(title)
     if not show_ticks:
@@ -62,6 +65,8 @@ def plot_3d(x, y, f, title='', show_ticks=True, elev=30, azim=30):
         ax.set_xlabel('x')
         ax.set_ylabel('y')
         ax.set_zlabel('z')
+    if labels is not None:
+        pass # ax.legend()
     plt.show()
     
 def plot_countour(x, y, f, title=''):
@@ -131,56 +136,39 @@ def plot_number_dist(x, title=''):
 
 ## linear-algebra
 
-def plot_vectors(vs, xlim=(), ylim=(), title='', labels=None):
+def plot_vectors(vectors, xlim=None, ylim=None, title='', labels=None, colors=None, tails=None, text_offsets=None, 
+                 zorders=None, ticks_every=None, **kwargs):
+    if not isinstance(vectors, list):
+        vectors = [vectors]
+    if not isinstance(tails, list):
+        tails = [[0, 0] for _ in range(len(vectors))]
+    all_x = [v[0] for v in vectors] + [tail[0] for tail in tails]
+    all_y = [v[1] for v in vectors] + [tail[1] for tail in tails]
+    xlim = (min(all_x) - 1, max(all_x) + 1) if xlim is None else xlim
+    ylim = (min(all_y) - 1, max(all_y) + 1) if ylim is None else ylim
+    xlow, xhigh = xlim
+    ylow, yhigh = ylim
     plt.figure(figsize=(4, 3))
-    if not isinstance(vs, list):
-        vs = [vs]
-    if labels is None:
-        labels = ['v'] * len(vs)
-    for i, v in enumerate(vs):
-        plt.quiver(0, 0, v[0], v[1], scale=1, angles='xy', scale_units='xy', color='red')
-        plt.annotate(labels[i], v, fontsize=14)
+    plt.hlines(0 * np.arange(xlow, xhigh, 100), xlow, xhigh, color='black', linewidth=0.5)
+    plt.vlines(0 * np.arange(ylow, yhigh, 100), ylow, yhigh, color='black', linewidth=0.5)
+    for i, v in enumerate(vectors):
+        zorder = zorders[i] if isinstance(zorders, list) else 10 - i
+        label = labels[i] if isinstance(labels, list) else None
+        color = colors[i] if isinstance(colors, list) else 'red'
+        text_offset = np.array(text_offsets[i]) if isinstance(text_offsets, list) else np.array([0, 0])
+        tail = np.array(tails[i])
+        plt.quiver(tail[0], tail[1], v[0], v[1], scale=1, angles='xy', scale_units='xy', zorder=zorder, color=color, **kwargs)
+        text_loc = v + text_offset if isinstance(text_offsets, list) else v
+        plt.annotate(label, v + tail, fontsize=15, zorder=zorder, xytext=(text_loc[0].item(), text_loc[1].item()))
+    if ticks_every is not None:
+        plt.xticks(np.arange(int(xlow), int(xhigh) + 1, ticks_every))
+        plt.yticks(np.arange(int(ylow), int(yhigh) + 1, ticks_every))
     plt.grid(True, alpha=0.5)
     plt.xlabel('$x$')
     plt.ylabel('$y$')
     plt.xlim(*xlim)
     plt.ylim(*ylim)
     plt.title(title)
-    plt.show();
-
-def plot_scalar_mult(v, cs, include_neg=False, xlim=(0, 3), ylim=(0, 3)):
-    plt.figure(figsize=(4, 3))
-    if not isinstance(cs, list):
-        cs = [cs]
-    for c in cs:
-        plt.quiver(0, 0, c * v[0], c * v[1], angles='xy', scale_units='xy', scale=1, color='orange', 
-                   label=f'${int(c)}v$', linewidth=2, edgecolors='orange', alpha=1)
-    plt.quiver(0, 0, v[0], v[1], angles='xy', scale_units='xy', scale=1, color='black', label='$v$',
-               linewidth=0.5, edgecolors='black', headwidth=5)
-    if include_neg:
-        plt.quiver(0, 0, -v[0], -v[1], angles='xy', scale_units='xy', scale=1, color='lime', label='$-v$',
-                  linewidth=1, edgecolors='lime', headwidth=5)
-    plt.grid(True, alpha=0.5)
-    plt.xlabel('$x$')
-    plt.ylabel('$y$')
-    plt.xlim(*xlim)
-    plt.ylim(*ylim)
-    plt.legend(loc='upper left')
-    plt.title('Scalar Multiplication')
-    plt.show();
-    
-def plot_vector_add(v, w, xlim=(0, 5), ylim=(0, 5)):
-    plt.figure(figsize=(4, 3))
-    plt.quiver(0, 0, v[0], v[1], angles='xy', scale_units='xy', scale=1, color='blue', label='$v$')
-    plt.quiver(v[0], v[1], w[0], w[1], angles='xy', scale_units='xy', scale=1, color='green', label='$w$')
-    plt.quiver(0, 0, v[0] + w[0], v[1] + w[1], angles='xy', scale_units='xy', scale=1, color='red', label='$v+w$')
-    plt.grid(True, alpha=0.5)
-    plt.xlabel('$x$')
-    plt.ylabel('$y$')
-    plt.xlim(*xlim)
-    plt.ylim(*ylim)
-    plt.legend()
-    plt.title('Vector Addition')
     plt.show();
     
 
@@ -206,7 +194,7 @@ def plot_right_triangle(points=[(0, 0), (1, 0), (1, 1)], base_label='$dx$', heig
     plt.axis('off')
     plt.show()
 
-def plot_tangent_line(x, x0, f, f_tangent, xlim=None, ylim=None, title=None):
+def plot_tangent_curve(x, x0, f, f_tangent, xlim=None, ylim=None, title=None):
     plt.figure(figsize=(4, 3))
     plt.plot(x, f(x))
     plt.plot(x, f_tangent(x))
@@ -219,7 +207,7 @@ def plot_tangent_line(x, x0, f, f_tangent, xlim=None, ylim=None, title=None):
         plt.xlim(*xlim)
     if ylim is not None:
         plt.ylim(*ylim)
-    plt.show();
+    plt.show()
     
 def plot_tangent_plane(x, y, x0, y0, f, f_tangent, dfdx, title='', plot_grad=False, grad_scale=2):
     from mpl_toolkits.mplot3d.proj3d import proj_transform
@@ -295,7 +283,7 @@ def plot_tangent_contour(x, y, x0, y0, f, f_tangent, dfdx, title=''):
     plt.title(title)
     plt.show()
     
-def plot_area_under_curve(x, f, dx=1, show_all_xticks=True):
+def plot_approximating_rectangles(x, f, dx=1, show_all_xticks=True):
     y = f(x)
     x_rect = np.arange(min(x), max(x), dx) + dx / 2
     n_rects = len(x_rect)
@@ -309,7 +297,18 @@ def plot_area_under_curve(x, f, dx=1, show_all_xticks=True):
         plt.xticks(np.arange(min(x), max(x) + 1))
     plt.show()
     
-
+def plot_function_with_area(x, f, a, b, title='', xlabel='$x$', ylabel='$y$', **kwargs):
+    y = f(x)
+    mask = (x >= a) & (x <= b)
+    plt.plot(x, y, color='red', **kwargs)
+    plt.fill_between(x, y, where=mask)
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.grid(True, alpha=0.5)
+    plt.show()
+    
+    
 # probability
     
 def plot_histogram(x, is_discrete=False, title='', **kwargs):
@@ -327,9 +326,9 @@ def plot_joint_histogram(X, title='', figsize=(4, 3)):
     X = np.column_stack(X)
     counter = np.unique([str(tuple(X[i])) for i in range(len(X))], return_counts=True)
     plt.figure(figsize=figsize)
-    sns.barplot(x=counter[0], y=counter[1], color=u'#1f77b4')
+    sns.barplot(x=counter[0], y=counter[1], color=sns.color_palette()[0], edgecolor='black', linewidth=1.3, alpha=0.75)
     plt.xticks(rotation=90)
-    plt.ylabel('count')
+    plt.ylabel('Count')
     plt.title(title)
     plt.show()
     
