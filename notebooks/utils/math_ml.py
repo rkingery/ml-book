@@ -8,25 +8,27 @@ local = Path().cwd().parent / 'local'
 
 ## basic-math
 
-def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labels=None, xlabel='$x$', ylabel='$y$'):
+def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labels=None, colors=None, xlabel='$x$', ylabel='$y$'):
     xlim = xlim if xlim is not None else (min(x), max(x))
     ylim = ylim if ylim is not None else xlim
     xlow, xhigh = xlim
     ylow, yhigh = ylim
     if not isinstance(f, list):
         f = [f]
+        colors = ['red']
     plt.figure(figsize=(4, 3))
     plt.hlines(0 * x, xlow, xhigh, color='black', linewidth=0.7)
     plt.vlines(0 * f[0](x), ylow, yhigh, color='black', linewidth=0.7)
     for i, fn in enumerate(f):
         label = labels[i] if isinstance(labels, list) else None
-        plt.plot(x, fn(x), label=label)
+        color = colors[i] if isinstance(colors, list) else None
+        plt.plot(x, fn(x), label=label, color=color)
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     if ticks_every is not None:
-        plt.xticks(np.arange(int(xlow), int(xhigh) + 1, ticks_every))
-        plt.yticks(np.arange(int(ylow), int(yhigh) + 1, ticks_every))
+        plt.xticks(np.arange(int(xlow), int(xhigh) + 1, ticks_every[0]))
+        plt.yticks(np.arange(int(ylow), int(yhigh) + 1, ticks_every[1]))
     plt.grid(True, alpha=0.5)
     if labels is not None:
         plt.legend()
@@ -42,29 +44,48 @@ def query_wolfram_alpha(query, api_file='wolfram_key.txt', answer='formatted'):
     answer = next(response.results).texts
     return answer
 
-def plot_3d(x, y, f, title='', show_ticks=True, elev=30, azim=30, labels=None):
-    X, Y = np.meshgrid(x, y)
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
+def plot_function_3d(x, y, f, title='', ticks_every=None, elev=30, azim=30, labels=None, zorders=None, colors=None, xlim=None, 
+                     ylim=None, zlim=None, labelpad=0, points=None, lines=None, figsize=None, titlepad=0, dist=10, **kwargs):
     if not isinstance(f, list):
-        ax.plot_surface(X, Y, f(X, Y), label=labels)
-    else:
-        for i, fn in enumerate(f):
-            label = labels[i] if isinstance(labels, list) else None
-            ax.plot_surface(X, Y, fn(X, Y), label='hey', zorder=i)
+        f = [f]
+    X, Y = np.meshgrid(x, y)
+    all_z = np.array([fn(X, Y) for fn in f]).flatten()
+    xlim = xlim if xlim is not None else (min(x), max(x))
+    ylim = ylim if ylim is not None else (min(y), max(y))
+    zlim = zlim if zlim is not None else (min(all_z), max(all_z))
+    xlow, xhigh = xlim
+    ylow, yhigh = ylim
+    zlow, zhigh = zlim
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_subplot(111, projection='3d', computed_zorder=False)
+    for i, fn in enumerate(f):
+        zorder = zorders[i] if isinstance(zorders, list) else i
+        color = colors[i] if isinstance(colors, list) else None
+        label = labels[i] if isinstance(labels, list) else None
+        ax.plot_surface(X, Y, fn(X, Y), zorder=zorder, color=color, label=label, **kwargs)
+    if points is not None:
+        for point in points:
+            x0, y0, z0 = point
+            ax.scatter([x0], [y0], [z0], s=150, marker='.', color='red', zorder=10, edgecolors='black')
+    if lines is not None:
+        import matplotlib.patheffects as mpe
+        outline = mpe.withStroke(linewidth=2, foreground='black')
+        for line in lines:
+            xline, yline, zline = line
+            ax.plot3D(xline, yline, zline, color='red', zorder=9, linewidth=1, path_effects=[outline])
     ax.view_init(elev=elev, azim=azim)
-    ax.set_title(title)
-    if not show_ticks:
-        ax.set_xticks([])
-        ax.set_yticks([])
-        ax.set_zticks([])
-        ax.set_xlabel('x', labelpad=-10)
-        ax.set_ylabel('y', labelpad=-10)
-        ax.set_zlabel('z', labelpad=-10)
-    else:
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
-        ax.set_zlabel('z')
+    ax.set_title(title, y=1, pad=titlepad, fontsize=15)
+    if ticks_every is not None:
+        ax.set_xticks(np.arange(int(xlow), int(xhigh) + 1, ticks_every[0]))
+        ax.set_yticks(np.arange(int(ylow), int(yhigh) + 1, ticks_every[1]))
+        ax.set_zticks(np.arange(int(zlow), int(zhigh) + 1, ticks_every[2]))
+    ax.set_xlabel('x', labelpad=labelpad)
+    ax.set_ylabel('y', labelpad=labelpad)
+    ax.set_zlabel('z', labelpad=labelpad)
+    ax.set_xlim(*xlim)
+    ax.set_ylim(*ylim)
+    ax.set_zlim(*zlim)
+    ax.dist = dist
     if labels is not None:
         pass # ax.legend()
     plt.show()
@@ -159,7 +180,7 @@ def plot_vectors(vectors, xlim=None, ylim=None, title='', labels=None, colors=No
         tail = np.array(tails[i])
         plt.quiver(tail[0], tail[1], v[0], v[1], scale=1, angles='xy', scale_units='xy', zorder=zorder, color=color, **kwargs)
         text_loc = v + text_offset if isinstance(text_offsets, list) else v
-        plt.annotate(label, v + tail, fontsize=15, zorder=zorder, xytext=(text_loc[0].item(), text_loc[1].item()))
+        plt.annotate(label, v + tail, fontsize=15, zorder=zorder, xytext=(text_loc[0].item(), text_loc[1].item()), color=color)
     if ticks_every is not None:
         plt.xticks(np.arange(int(xlow), int(xhigh) + 1, ticks_every))
         plt.yticks(np.arange(int(ylow), int(yhigh) + 1, ticks_every))
@@ -196,9 +217,9 @@ def plot_right_triangle(points=[(0, 0), (1, 0), (1, 1)], base_label='$dx$', heig
 
 def plot_tangent_curve(x, x0, f, f_tangent, xlim=None, ylim=None, title=None):
     plt.figure(figsize=(4, 3))
-    plt.plot(x, f(x))
-    plt.plot(x, f_tangent(x))
-    plt.scatter([x0], [f(x0)], marker='o', color='red')
+    plt.plot(x, f(x), zorder=0)
+    plt.plot(x, f_tangent(x), zorder=1)
+    plt.scatter([x0], [f(x0)], marker='o', color='red', zorder=2)
     plt.title(title)
     plt.xlabel('$x$')
     plt.ylabel('$y$')
@@ -291,7 +312,7 @@ def plot_approximating_rectangles(x, f, dx=1, show_all_xticks=True):
     print(f'Approximate Area: {np.sum(y_rect * dx)}')
     plt.figure(figsize=(4, 3))
     plt.plot(x, y, color='red')
-    plt.bar(x_rect, y_rect, width=dx, alpha=1, edgecolor='black', facecolor='none', linewidth=1)
+    plt.bar(x_rect, y_rect, width=dx, edgecolor='black', facecolor='steelblue', alpha=0.7, linewidth=1)
     plt.title(f'{n_rects} Rectangles')
     if show_all_xticks:
         plt.xticks(np.arange(min(x), max(x) + 1))
@@ -301,7 +322,7 @@ def plot_function_with_area(x, f, a, b, title='', xlabel='$x$', ylabel='$y$', **
     y = f(x)
     mask = (x >= a) & (x <= b)
     plt.plot(x, y, color='red', **kwargs)
-    plt.fill_between(x, y, where=mask)
+    plt.fill_between(x, y, where=mask, color='steelblue', alpha=0.7)
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
