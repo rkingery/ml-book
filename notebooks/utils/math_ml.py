@@ -191,7 +191,41 @@ def plot_vectors(vectors, xlim=None, ylim=None, title='', labels=None, colors=No
     plt.ylim(*ylim)
     plt.title(title)
     plt.show();
-    
+
+def plot_svd(A, num=200, seed=0, **kwargs):
+    # sample `num` total points inside the unit disk
+    np.random.seed(seed)
+    r = np.sqrt(np.random.uniform(0, 1, size=num))
+    theta = np.pi * np.random.uniform(0, 2, size=num)
+    x = r * np.cos(theta)
+    y = r * np.sin(theta)
+    # calculate all transformation vectors
+    U, sigma, Vt = np.linalg.svd(A)
+    Sigma = np.diag(sigma)
+    xs = [np.array([x[i], y[i]]).reshape(-1, 1) for i in range(num)]
+    ys = [Vt @ x for x in xs]
+    zs = [Sigma @ y for y in ys]
+    vs = [U @ z for z in zs]
+    vectors = [v.flatten() for v in xs + ys + zs + vs]
+    # plot vectors in the plane
+    plot_vectors(
+        vectors, colors=['red'] * num + ['blue'] * num + ['green'] * num + ['black'] * num, 
+        headwidth=2, alpha=0.3, xlim=(-2.5, 2.5), ylim=(-1.5, 1.5),
+        title='$\mathbf{v} = \mathbf{A}\mathbf{x} = \mathbf{U}\mathbf{\Sigma}\mathbf{V}^\\top \mathbf{x}$',
+        text_offsets=[[-0.05, 0.4]] + [[0, 0]] * (num - 1) + [[-0.15, -0.65]] + [[0, 0]] * (num - 1) + \
+        [[-1.25, -0.3]] + [[0, 0]] * (num - 1) + [[0.25, 0]] + [[0, 0]] * (num - 1),
+        labels=
+            ['$\mathbf{x}$'] + [''] * (num - 1) + ['$\mathbf{y}=\mathbf{V}^\\top \mathbf{x}$'] + [''] * (num - 1) + \
+            ['$\mathbf{z}=\mathbf{\Sigma y}$'] + [''] * (num - 1) + ['$\mathbf{v} = \mathbf{Uz}$'] + [''] * (num - 1)) 
+
+def sample_mnist(size=5000, seed=0):
+    np.random.seed(seed)
+    from sklearn.datasets import fetch_openml
+    data = fetch_openml('mnist_784', version=1, return_X_y=True, parser='auto')
+    sample = np.random.choice(len(data[0]), size, replace=False)
+    X = data[0].iloc[sample].values.astype(np.float64)
+    return X / 255
+
 
 ## calculus
 
