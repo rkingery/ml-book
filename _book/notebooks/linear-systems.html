@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Machine Learning For The 2020s - 5&nbsp; Systems of Linear Equations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notebooks/vector-spaces.html" rel="next">
+<link href="../notebooks/basic-calculus.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Machine Learning For The 2020s</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/basic-math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basic Math</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/numerical-computing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Numerical Computation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/vectorization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arrays and Vectorization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Calculus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/multivariate-probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Multivariate Distributions</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#linear-systems" id="toc-linear-systems" class="nav-link active" data-scroll-target="#linear-systems">Linear Systems</a></li>
+  <li><a href="#matrix-vector-notation" id="toc-matrix-vector-notation" class="nav-link" data-scroll-target="#matrix-vector-notation">Matrix-Vector Notation</a></li>
+  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication">Matrix Multiplication</a>
+  <ul class="collapse">
+  <li><a href="#matrix-multiplication-algorithm" id="toc-matrix-multiplication-algorithm" class="nav-link" data-scroll-target="#matrix-multiplication-algorithm">Matrix Multiplication Algorithm</a></li>
+  <li><a href="#multiplying-multiple-matrices" id="toc-multiplying-multiple-matrices" class="nav-link" data-scroll-target="#multiplying-multiple-matrices">Multiplying Multiple Matrices</a></li>
+  <li><a href="#matrix-multiplication-vs-element-wise-multiplication" id="toc-matrix-multiplication-vs-element-wise-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication-vs-element-wise-multiplication">Matrix Multiplication vs Element-Wise Multiplication</a></li>
+  </ul></li>
+  <li><a href="#solving-linear-systems" id="toc-solving-linear-systems" class="nav-link" data-scroll-target="#solving-linear-systems">Solving Linear Systems</a>
+  <ul class="collapse">
+  <li><a href="#square-systems" id="toc-square-systems" class="nav-link" data-scroll-target="#square-systems">Square Systems</a></li>
+  <li><a href="#rectangular-systems" id="toc-rectangular-systems" class="nav-link" data-scroll-target="#rectangular-systems">Rectangular Systems</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>In this lesson I’ll introduce the basics of linear algebra, particularly vectors and matrices. Linear algebra at its most basic level is about the study of systems of linear equations. Let’s get started.</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="linear-systems" class="level1">
+<h1>Linear Systems</h1>
+<p>You’re certainly familiar by now with solving a simple linear equation. Suppose you need to solve the linear equation <span class="math inline">\(ax=b\)</span> for <span class="math inline">\(x\)</span>. Provided <span class="math inline">\(a \neq 0\)</span>, you can divide both sides by <span class="math inline">\(a\)</span> to get</p>
+<p><span class="math display">\[x = \frac{b}{a} = a^{-1} b.\]</span></p>
+<p>Suppose now you need to solve not just one, but 2 linear equations with 1 unknown <span class="math inline">\(x\)</span>,</p>
+<p><span class="math display">\[
+\begin{alignat*}{2}
+   ax &amp; {}={} &amp; b  \\
+   cx &amp; {}={} &amp; d.
+\end{alignat*}
+\]</span></p>
+<p>The first equation has the same solution as above, <span class="math inline">\(x = a^{-1} b\)</span>. The second equation has solution <span class="math inline">\(x = c^{-1} d\)</span>. If we want a solution <span class="math inline">\(x\)</span> that satisifies <em>both</em> of these equations it’s going to be impossible unless <span class="math inline">\(a^{-1} b = c^{-1} d\)</span>, that is, if <span class="math inline">\(ad = bc\)</span>. If this relationship isn’t satisfied, there’s no single solution that will solve both of these equations.</p>
+<p>Stepping up now, suppose you again have 2 linear equations, but this time with two unknowns <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. Here’s an example,</p>
+<p><span class="math display">\[
+\begin{alignat*}{2}
+   x &amp; {}+{} &amp;  y &amp; {}={} &amp; 2  \\
+   x &amp; {}-{} &amp;  y &amp; {}={} &amp; 0.
+\end{alignat*}
+\]</span></p>
+<p>Let’s try to find a pair <span class="math inline">\((x,y)\)</span> that will solve <em>both</em> of these equations simultaneously. This is a pretty simple system to solve. If you stare at equation two, you’ll immediately see it implies <span class="math inline">\(x=y\)</span>. Plugging this into equation one then gives <span class="math inline">\(x + x = 2\)</span>, or <span class="math inline">\(x=1\)</span>. The pair that solves this system is thus <span class="math inline">\(x=y=1\)</span>. In fact, this is the <em>only</em> solution to this linear system. No other choice of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> will work.</p>
+<p>This is an example of a linear system of equations with 2 linear equations and 2 unknowns. These have the form</p>
+<p><span class="math display">\[
+\begin{alignat*}{2}
+   ax &amp; {}+{} &amp;  by &amp; {}={} &amp; e \\
+   cx &amp; {}+{} &amp;  dy &amp; {}={} &amp; f.
+\end{alignat*}
+\]</span></p>
+<p>Systems with 2 equations and 2 unknowns will always have a unique solution provided the coefficients <span class="math inline">\(ad \neq bc\)</span>, given by</p>
+<p><span class="math display">\[
+\begin{align*}
+x &amp;= \frac{de-bf}{ad-bc} \\
+y &amp;= \frac{af-ce}{ad-bc}.
+\end{align*}
+\]</span></p>
+<p>If you don’t believe me, plug these in to check they satisfy the linear system. Or you can solve the linear system by substitution again. Or just ask sympy.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>a, b, c, d, e, f <span class="op">=</span> sp.symbols(<span class="st">'a b c d e f'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>eq1 <span class="op">=</span> sp.Eq(a <span class="op">*</span> x <span class="op">+</span> b <span class="op">*</span> y, e)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>eq2 <span class="op">=</span> sp.Eq(c <span class="op">*</span> x <span class="op">+</span> d <span class="op">*</span> y, f)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> sp.solve((eq1, eq2), (x, y))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>sol[x]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>sol[y]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x = (-b*f + d*e)/(a*d - b*c)
+y = (a*f - c*e)/(a*d - b*c)</code></pre>
+</div>
+</div>
+<p>It’s worth plotting what these equations look like to try to visualize what’s going on. In the simple case of 2 variables we can do that. In the above example with solution <span class="math inline">\(x=y=1\)</span>, solving each equation for <span class="math inline">\(y\)</span> as a function of <span class="math inline">\(x\)</span> gives</p>
+<p><span class="math display">\[
+\begin{align*}
+y &amp;= 2-x \\
+y &amp;= x.
+\end{align*}
+\]</span></p>
+<p>If we plot these two lines, the point where they intersect is <span class="math inline">\((1,1)\)</span>, i.e.&nbsp;the solution to the system found above. Feel free to play around with different choices of <span class="math inline">\(a,b,c,d,e,f\)</span> to see what happens. What you’re doing is varying the slopes and intercepts of both of the lines. Varying any of these will change the location of the point of intersection, i.e.&nbsp;the solution to the linear system. The special case where both have the same slope is when <span class="math inline">\(ad=bc\)</span>. This is when the two lines are parallel. Since parallel lines don’t intersect, such a system would have no solution.</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a, b, e <span class="op">=</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>c, d, f <span class="op">=</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>f0 <span class="op">=</span> <span class="kw">lambda</span> x: <span class="op">-</span>a <span class="op">/</span> b <span class="op">*</span> x <span class="op">+</span> e <span class="op">/</span> b</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> <span class="kw">lambda</span> x: <span class="op">-</span>c <span class="op">/</span> d <span class="op">*</span> x <span class="op">+</span> f <span class="op">/</span> d</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f0, f1], xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">3</span>), title<span class="op">=</span><span class="st">'2 Linear Equations, 2 Unknowns'</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>              labels<span class="op">=</span>[<span class="ss">f'$y=2-x$'</span>, <span class="ss">f'$y=x$'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="linear-systems_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Suppose now you have a system of 2 equations with 3 unknowns <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>. For example,</p>
+<p><span class="math display">\[
+\begin{alignat*}{2}
+   x &amp; {}+{} &amp;  y &amp; {}+{} &amp; z {}={} &amp; 2  \\
+   x &amp; {}-{} &amp;  y &amp; {}+{} &amp; z {}={} &amp; 0.
+\end{alignat*}
+\]</span></p>
+<p>Does this system have a solution that satisfies both equations? Clearly it does. If we set <span class="math inline">\(z=0\)</span> then the original solution <span class="math inline">\(x=y=1\)</span> still works, so <span class="math inline">\(x=1, y=1, z=0\)</span> is a solution to this system. But is it the <em>only</em> solution? No, <em>any</em> solution of the form</p>
+<p><span class="math display">\[
+\begin{align*}
+x=1-t, \\
+y=1, \\
+z=t.
+\end{align*}
+\]</span></p>
+<p>will work for <em>any</em> real number <span class="math inline">\(t\)</span>. If you don’t believe me, pick any choice of <span class="math inline">\(t\)</span> you want and plug it in, and it’ll solve this system. Said differently, this system has <em>infinitely many solutions</em>.</p>
+<p>This fact will be true for any system of 2 equations with 3 unknowns. The system is <em>underdetermined</em>, meaning it has too many variables to solve for. There will always be one that’s <em>free</em>, in the sense that we can set it to be whatever we want.</p>
+<p>Here’s a plot of what this situation looks like. Since there are 3 variables the space is now 3-dimensional, so I’ll have to use a 3D plot. Notice that now we don’t have 2 intersecting <em>lines</em>, but 2 intersecting <em>planes</em>. Two planes intersect at a line, not a point. Any point on this line is a valid solution to this underdetermined linear system.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.9</span>, <span class="fl">3.9</span>, <span class="dv">100</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> <span class="kw">lambda</span> x, y: <span class="dv">2</span> <span class="op">-</span> x <span class="op">-</span> y</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> <span class="kw">lambda</span> x, y: y <span class="op">-</span> x</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, [f1, f2], azim<span class="op">=</span><span class="dv">30</span>, elev<span class="op">=</span><span class="dv">20</span>, ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>], figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>), zorders<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], dist<span class="op">=</span><span class="dv">11</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        colors<span class="op">=</span>[<span class="st">'steelblue'</span>, <span class="st">'limegreen'</span>], alpha<span class="op">=</span><span class="fl">0.6</span>, titlepad<span class="op">=-</span><span class="dv">5</span>, labelpad<span class="op">=</span><span class="dv">2</span>, title<span class="op">=</span><span class="st">'2 Equations, 3 Unknowns'</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        lines<span class="op">=</span>[[<span class="dv">1</span> <span class="op">-</span> t, np.full(<span class="bu">len</span>(t), <span class="dv">1</span>), t]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="linear-systems_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Let’s now step up to a system with 3 linear equations and 3 unknowns. For example, take the following,</p>
+<p><span class="math display">\[
+\begin{alignat*}{3}
+   3x &amp; {}+{} &amp;  2y &amp; {}+{} &amp; z {}={} &amp; 0 \\
+   x &amp; {}+{} &amp;  y &amp; {}-{} &amp; z {}={} &amp; 1 \\
+   x &amp; {}-{} &amp;  3y &amp; {}-{} &amp; z {}={} &amp; -3 \\
+\end{alignat*}.
+\]</span></p>
+<p>Again using substitution, you can iteratively solve each equation one by one to check that this system has exactly one solution when <span class="math inline">\(x=-\frac{1}{2}\)</span>, <span class="math inline">\(y=1\)</span>, and <span class="math inline">\(z=-\frac{1}{2}\)</span>.</p>
+<p>To visualize what’s going on here, again realize we’re in 3 dimensions since there are 3 variables. Each equation in the system again defines a plane. Solving each for <span class="math inline">\(z=f(x,y)\)</span>, the three planes are given by</p>
+<p><span class="math display">\[
+\begin{align*}
+z &amp;= -3x - 2y + 0, \\
+z &amp;= x + y - 1, \\
+z &amp;= 4 .
+\end{align*}
+\]</span></p>
+<p>We can plot these planes and see if they intersect, and roughly where they intersect. It may be a little hard to visualize, but you should see the planes all intersect at a point, namely the red dot at <span class="math inline">\(x=-\frac{1}{2}\)</span>, <span class="math inline">\(y=1\)</span>, and <span class="math inline">\(z=-\frac{1}{2}\)</span>.</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">2.5</span>, <span class="fl">1.5</span>, <span class="dv">100</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">100</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> <span class="kw">lambda</span> x, y: <span class="op">-</span><span class="dv">3</span> <span class="op">*</span> x <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> <span class="dv">0</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> <span class="kw">lambda</span> x, y: x <span class="op">+</span> y <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>f3 <span class="op">=</span> <span class="kw">lambda</span> x, y: x <span class="op">-</span> <span class="dv">3</span> <span class="op">*</span> y <span class="op">+</span> <span class="dv">3</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, [f1, f2, f3], azim<span class="op">=</span><span class="dv">65</span>, elev<span class="op">=</span><span class="dv">25</span>, ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>], figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>), zorders<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                 colors<span class="op">=</span>[<span class="st">'steelblue'</span>, <span class="st">'salmon'</span>, <span class="st">'limegreen'</span>], points<span class="op">=</span>[[<span class="op">-</span><span class="fl">0.5</span>, <span class="dv">1</span>, <span class="op">-</span><span class="fl">0.5</span>]], alpha<span class="op">=</span><span class="fl">0.6</span>, labelpad<span class="op">=</span><span class="dv">3</span>, </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                 dist<span class="op">=</span><span class="dv">11</span>, title<span class="op">=</span><span class="st">'3 Equations, 3 Unknowns'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="linear-systems_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Every linear system of 3 equations with 3 unknowns will look like this. The only time there won’t be a solution is when any two planes are parallel to each other. Note now it only takes any two being parallel for there to be no solution, not all of them.</p>
+<p>If we like, we could again outright solve for the solutions of a general <span class="math inline">\(3 \times 3\)</span> linear system, but the solutions will look far more complex since there are now 12 coefficients <span class="math inline">\(a, b, c, \cdots, k, l\)</span>,</p>
+<p><span class="math display">\[
+\begin{alignat*}{3}
+   ax &amp; {}+{} &amp;  by &amp; {}+{} &amp; cz {}={} &amp; j \\
+   dx &amp; {}+{} &amp;  ey &amp; {}+{} &amp; fz {}={} &amp; k \\
+   gx &amp; {}+{} &amp;  hy &amp; {}+{} &amp; iz {}={} &amp; l \\
+\end{alignat*}.
+\]</span></p>
+<p>Here’s what sympy gives as the solution to this system. Notice again that each term depends on the same denominator. When that denominator is zero the system won’t have a solution.</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x, y, z <span class="op">=</span> sp.symbols(<span class="st">'x y z'</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>a, b, c, d, e, f, g, h, i, j, k, l <span class="op">=</span> sp.symbols(<span class="st">'a b c d e f g h i j k l'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>eq1 <span class="op">=</span> sp.Eq(a <span class="op">*</span> x <span class="op">+</span> b <span class="op">*</span> y <span class="op">+</span> c <span class="op">*</span> z, j)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>eq2 <span class="op">=</span> sp.Eq(d <span class="op">*</span> x <span class="op">+</span> e <span class="op">*</span> y <span class="op">+</span> f <span class="op">*</span> z, k)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>eq3 <span class="op">=</span> sp.Eq(g <span class="op">*</span> x <span class="op">+</span> h <span class="op">*</span> y <span class="op">+</span> i <span class="op">*</span> z, l)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> sp.solve((eq1, eq2, eq3), (x, y, z))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>sol[x]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>sol[y]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = </span><span class="sc">{</span>sol[z]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x = (b*f*l - b*i*k - c*e*l + c*h*k + e*i*j - f*h*j)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g)
+y = (-a*f*l + a*i*k + c*d*l - c*g*k - d*i*j + f*g*j)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g)
+z = (a*e*l - a*h*k - b*d*l + b*g*k + d*h*j - e*g*j)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g)</code></pre>
+</div>
+</div>
+<p>These denominators keep showing up for square-shaped systems like this. They’re called <strong>determinants</strong>. In the <span class="math inline">\(1 \times 1\)</span> case <span class="math inline">\(x=\frac{b}{a}\)</span>, so the determinant is just the denominator <span class="math inline">\(D=a\)</span>. For the <span class="math inline">\(2 \times 2\)</span> system the determinant is <span class="math inline">\(D = ad-bc\)</span>. For the <span class="math inline">\(3 \times 3\)</span> system it’s a more complicated expression, but still just a polynomial function of all of the coefficients on the left-hand side,</p>
+<p><span class="math display">\[D = aei - afh - bdi + bfg + cdh - ceg.\]</span></p>
+<p>When <span class="math inline">\(D \neq 0\)</span> these kinds of linear systems evidently have unique solutions. When <span class="math inline">\(D=0\)</span> they have no solution at all since the denominators blow up. This is when two of the lines or planes are parallel to each other. This is a general pattern for any <span class="math inline">\(n \times n\)</span> linear system.</p>
+<p>I could keep stepping up like this, going to 4 linear equations, 5 linear equations, etc. But you should start to see the idea by now. Suppose we have a system of <span class="math inline">\(m\)</span> linear equations with <span class="math inline">\(n\)</span> unknown variables <span class="math inline">\(x_0, x_1, \cdots, x_{n-1}\)</span>,</p>
+<p><span class="math display">\[
+\begin{array}{c&lt;{x_1} C c&lt;{x_2} C c C c&lt;{x_n} C l}
+a_{0,0}x_0 &amp; + &amp; a_{0,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{0,n-1}x_{n-1} &amp; = &amp; b_0 \\
+a_{1,0}x_0 &amp; + &amp; a_{1,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{1,n-1}x_{n-1} &amp; = &amp; b_1 \\
+\vdots    &amp;   &amp; \vdots    &amp;   &amp;  \ddots  &amp;   &amp; \quad \vdots    &amp;   &amp; \vdots\\
+a_{m-1,0}x_0 &amp; + &amp; a_{m-1,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{m-1,n-1}x_{n-1} &amp; = &amp; b_{m-1} \\
+\end{array}.
+\]</span></p>
+<p>We can classify the solutions of an arbitrary <span class="math inline">\(m \times n\)</span> linear system as follows: - If the linear system is <em>square</em>, i.e.&nbsp;<span class="math inline">\(m=n\)</span>, then the system will have - A unique solution if the determinant is nonzero, - If the determinant <em>is</em> zero, the system will have - Infinitely many solutions if <em>all</em> the equations are multiples of each other, - No solution otherwise. - If the linear system is <em>underdetermined</em>, i.e.&nbsp;<span class="math inline">\(m &lt; n\)</span>, then the system will have infinitely many solutions. - If the linear system is <em>overdetermined</em>, i.e.&nbsp;<span class="math inline">\(m &gt; n\)</span>, then the system will have no solutions.</p>
+<p>Graphically, a unique solution means that the <span class="math inline">\(n\)</span> <em>hyperplanes</em> defined by the <span class="math inline">\(n\)</span> linear equations all intersect at a single point <span class="math inline">\((x_0, x_1, \cdots, x_n)\)</span> in <span class="math inline">\(\mathbb{R}^n\)</span>. Think of a hyperplane as an <span class="math inline">\(n\)</span>-dimensional generalization of a plane. If any of two hyperplanes are parallel in <span class="math inline">\(\mathbb{R}^n\)</span>, there will be no solution.</p>
+</section>
+<section id="matrix-vector-notation" class="level1">
+<h1>Matrix-Vector Notation</h1>
+<p>These systems of linear equations are incredibly tedious to write out and analyze as is for all but the simplest cases of like two or three equations. There’s a cleaner notation for working with these things. Here’s what we can do. We have 3 separate types of objects showing up in these equations: - The <span class="math inline">\(m \cdot n\)</span> coefficients <span class="math inline">\(a_{0,0}, \ a_{0,1}, \ \cdots, \ a_{m-1,n-1}\)</span>. - The <span class="math inline">\(n\)</span> unknown variables <span class="math inline">\(x_0, x_1, \cdots, x_{n-1}\)</span>. - The <span class="math inline">\(m\)</span> constant terms <span class="math inline">\(b_0, b_1, \cdots, b_{m-1}\)</span>.</p>
+<p>Let’s put each of these three objects inside their own arrays and write the linear system as</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+a_{0,0} &amp; a_{0,1} &amp; \cdots &amp; a_{0,n-1} \\
+a_{1,0} &amp; a_{1,1} &amp; \cdots &amp; a_{1,n-1} \\
+\vdots  &amp; \vdots  &amp; \ddots &amp; \vdots    \\
+a_{m-1,0} &amp; a_{m-1,1} &amp; \cdots &amp; a_{m-1,n-1}
+\end{pmatrix}
+\begin{pmatrix}
+x_0 \\ x_1 \\ \vdots \\ x_{n-1}
+\end{pmatrix} =
+\begin{pmatrix}
+b_0 \\ b_1 \\ \vdots \\ b_{m-1}
+\end{pmatrix}.
+\]</span></p>
+<p>We’ll <em>define</em> this notation to mean exactly the same thing as writing out the full system of linear equations. The array of coefficients is a rank-2 array of shape <span class="math inline">\((m,n)\)</span>. We’ll call this an <span class="math inline">\(m \times n\)</span> <strong>matrix</strong>, denoted by a bold-face <span class="math inline">\(\mathbf{A}\)</span>. The array of unknowns is a rank-2 array of shape <span class="math inline">\((n,1)\)</span>. Though technically also a matrix, we’ll call an array of this shape a <strong>column vector</strong> of size <span class="math inline">\(n\)</span>, denoted by a bold-face <span class="math inline">\(\mathbf{x}\)</span>. The array of constants is also a rank-2 array of shape <span class="math inline">\((m,1)\)</span>. We’ll call this a column vector of size <span class="math inline">\(m\)</span>, denoted by a bold-face <span class="math inline">\(\mathbf{b}\)</span>. In this sleek notation, our complicated system of <span class="math inline">\(m\)</span> linear equations with <span class="math inline">\(n\)</span> unknowns can be written</p>
+<p><span class="math display">\[\mathbf{A} \mathbf{x} = \mathbf{b}.\]</span></p>
+<p>For example, the 3 systems we considered above can be written in matrix-vector notation as</p>
+<p><span class="math display">\[
+\begin{alignat*}{2}
+   x &amp; {}+{} &amp;  y &amp; {}={} &amp; 2  \\
+   x &amp; {}-{} &amp;  y &amp; {}={} &amp; 0
+\end{alignat*} \quad \Longrightarrow \quad
+\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1
+\end{pmatrix}
+\begin{pmatrix}
+x \\
+y
+\end{pmatrix} =
+\begin{pmatrix}
+2 \\
+0
+\end{pmatrix},
+\]</span></p>
+<p><span class="math display">\[
+\begin{alignat*}{2}
+   x &amp; {}+{} &amp;  y &amp; {}+{} &amp; z {}={} &amp; 2  \\
+   x &amp; {}-{} &amp;  y &amp; {}+{} &amp; z {}={} &amp; 0
+\end{alignat*} \quad \Longrightarrow \quad
+\begin{pmatrix}
+1 &amp; 1 &amp; 1 \\
+1 &amp; -1 &amp; 1
+\end{pmatrix}
+\begin{pmatrix}
+x \\
+y \\
+z
+\end{pmatrix} =
+\begin{pmatrix}
+2 \\
+0 \\
+\end{pmatrix},
+\]</span></p>
+<p><span class="math display">\[
+\begin{alignat*}{2}
+   x {}={} &amp; 2  \\
+   x {}={} &amp; 0
+\end{alignat*} \quad \Longrightarrow \quad
+\begin{pmatrix}
+1 \\
+1
+\end{pmatrix}
+\begin{pmatrix}
+x
+\end{pmatrix} =
+\begin{pmatrix}
+2 \\
+0
+\end{pmatrix}.
+\]</span></p>
+<p>It may not be at all obvious, but having written a linear system as a matrix-vector equation, I’ve implicitly defined a new kind of array multiplication. To see this, I’ll define a new column vector that I’ll call <span class="math inline">\(\mathbf{A} \mathbf{x}\)</span> whose elements are just the left-hand side of the linear system when written out,</p>
+<p><span class="math display">\[
+\mathbf{A} \mathbf{x} =
+\begin{pmatrix}
+a_{0,0}x_0 &amp; + &amp; a_{0,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{0,n-1}x_{n-1} \\
+a_{1,0}x_0 &amp; + &amp; a_{1,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{1,n-1}x_{n-1} \\
+\vdots    &amp;   &amp; \vdots    &amp;   &amp;  \ddots  &amp;   &amp; \quad \vdots     \\
+a_{m-1,0}x_0 &amp; + &amp; a_{m-1,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{m-1,n-1}x_{n-1} \\
+\end{pmatrix}.
+\]</span></p>
+<p>Setting the <span class="math inline">\(i\)</span><sup>th</sup> row of <span class="math inline">\(\mathbf{A} \mathbf{x}\)</span> equal to the <span class="math inline">\(i\)</span><sup>th</sup> row of <span class="math inline">\(\mathbf{b}\)</span> must imply that each <span class="math inline">\(b_i\)</span> can be written</p>
+<p><span class="math display">\[b_i = a_{i,0}x_0 + a_{i,1}x_1 + \cdots + a_{i,n-1}x_{n-1} = \sum_{k=0}^{n-1} a_{i,k}x_k.\]</span></p>
+<p>That is, each constant term <span class="math inline">\(b_i\)</span> is the sum of the products of the <span class="math inline">\(i\)</span><sup>th</sup> row of the matrix <span class="math inline">\(\mathbf{A}\)</span> with the vector <span class="math inline">\(\mathbf{x}\)</span>. This is <strong>matrix-vector multiplication</strong>, a special case of matrix multiplication, which I’ll get to shortly.</p>
+<p>Here’s a quick example, where a <span class="math inline">\(2 \times 3\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> is matrix multiplied with a size <span class="math inline">\(3\)</span> vector <span class="math inline">\(\mathbf{x}\)</span>. For each row we’re element-wise multiplying that row of <span class="math inline">\(\mathbf{A}\)</span> with the vector <span class="math inline">\(\mathbf{x}\)</span> and then summing up the terms. The output will be the vector <span class="math inline">\(\mathbf{b}\)</span> of size <span class="math inline">\(2\)</span>.</p>
+<p><span class="math display">\[
+\mathbf{A} \mathbf{x} =
+\begin{pmatrix}
+1 &amp; 2 &amp; 3 \\
+4 &amp; 5 &amp; 6
+\end{pmatrix}
+\begin{pmatrix}
+1 \\
+1 \\
+1
+\end{pmatrix} =
+\begin{pmatrix}
+1 \cdot 1 + 2 \cdot 1 + 3 \cdot 1 \\
+4 \cdot 1 + 5 \cdot 1 + 6 \cdot 1 \\
+\end{pmatrix} =
+\begin{pmatrix}
+6 \\
+15
+\end{pmatrix} = \mathbf{b}.
+\]</span></p>
+<p>Here’s a better way of thinking about what matrix-vector multiplication is. Notice that the <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> consists of <span class="math inline">\(n\)</span> columns each containing <span class="math inline">\(m\)</span> elements. We can think of each of these <span class="math inline">\(n\)</span> columns as a <em>vector</em> of size <span class="math inline">\(m\)</span>. They’re called the <strong>column vectors</strong> of <span class="math inline">\(\mathbf{A}\)</span>. If <span class="math inline">\(\mathbf{a}_0, \mathbf{a}_1, \cdots, \mathbf{a}_{n-1}\)</span> are the <span class="math inline">\(n\)</span> column vectors of <span class="math inline">\(\mathbf{A}\)</span>, we can write</p>
+<p><span class="math display">\[
+\mathbf{A}=
+\begin{pmatrix}
+\mathbf{a}_0 &amp; \mathbf{a}_1 &amp; \cdots &amp; \mathbf{a}_{n-1}
+\end{pmatrix}.
+\]</span></p>
+<p>In the previous example, the column vectors of <span class="math inline">\(\mathbf{A}\)</span> are the three size-2 vectors</p>
+<p><span class="math display">\[\mathbf{a}_0 = \binom{1}{4}, \quad \mathbf{a}_1 = \binom{2}{5}, \quad \mathbf{a}_2 = \binom{3}{6}.\]</span></p>
+<p>In this notation, matrix-vector multiplication is just a sum of the column vectors of <span class="math inline">\(\mathbf{A}\)</span>, but with each column <span class="math inline">\(\mathbf{a}_j\)</span> weighted by some <span class="math inline">\(x_j\)</span>,</p>
+<p><span class="math display">\[
+\mathbf{A} \mathbf{x} =
+\begin{pmatrix}
+\mathbf{a}_0 &amp; \mathbf{a}_1 &amp; \cdots &amp; \mathbf{a}_{n-1}
+\end{pmatrix}
+\begin{pmatrix}
+x_0 \\
+x_1 \\
+\cdots \\
+x_{n-1}
+\end{pmatrix} =
+x_0 \mathbf{a}_0 + x_1 \mathbf{a}_1 + \cdots x_{n-1} \mathbf{a}_{n-1}.
+\]</span></p>
+<p>This weighted sum of vectors on the right-hand side is called a <strong>linear combination</strong>. A linear combination is a weighted sum of a bunch of vectors. That is, the matrix-vector product <span class="math inline">\(\mathbf{A} \mathbf{x}\)</span> is a linear combination of the column vectors of the matrix <span class="math inline">\(\mathbf{A}\)</span>, weighted by the vector <span class="math inline">\(\mathbf{x}\)</span>. In the above example, this would look like</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+1 &amp; 2 &amp; 3 \\
+4 &amp; 5 &amp; 6
+\end{pmatrix}
+\begin{pmatrix}
+1 \\
+1 \\
+1
+\end{pmatrix} = 1 \cdot \binom{1}{4} + 1 \cdot \binom{2}{5} + 1 \cdot \binom{3}{6} = \binom{1+2+3}{4+5+6} = \binom{6}{15}.
+\]</span></p>
+</section>
+<section id="matrix-multiplication" class="level1">
+<h1>Matrix Multiplication</h1>
+<p>While I’m on the topic, I’ll go ahead and define <strong>matrix multiplication</strong> for two matrices <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> as well. If <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span> and <span class="math inline">\(\mathbf{B}\)</span> is <span class="math inline">\(n \times p\)</span>, define the matrix product <span class="math inline">\(\mathbf{C}=\mathbf{A}\mathbf{B}\)</span> as the <span class="math inline">\(m \times p\)</span> matrix <span class="math inline">\(\mathbf{C}\)</span> whose elements are given by</p>
+<p><span class="math display">\[C_{i,j} = \sum_{k=0}^{n-1} A_{i,k} B_{k,j} = A_{i,0} B_{0,j} + A_{i,1} B_{1,j} + \cdots + A_{i,n-1} B_{n-1,j}.\]</span></p>
+<p>Matrix multiplication is always expressed symbolically by directly concatenating the two matrix symbols next to each other like <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>. We’d never use a multiplication symbol between them since those are often used to represent other kinds of multiplication schemes like element-wise multiplication or convolutions. Further, matrix multiplication is only defined when the numbers of <em>columns</em> in <span class="math inline">\(\mathbf{A}\)</span> equals the number of <em>rows</em> of <span class="math inline">\(\mathbf{B}\)</span>. We say matrices satisfying this condition are <strong>compatible</strong>. If they can’t be multiplied, they’re called <strong>incompatible</strong>.</p>
+<p>In words, matrix multiplication is the process where you take a <em>row</em> <span class="math inline">\(i\)</span> of the left matrix <span class="math inline">\(\mathbf{A}\)</span>, element-wise multiply it with a <em>column</em> <span class="math inline">\(j\)</span> of the right matrix <span class="math inline">\(\mathbf{B}\)</span>, and then sum up the results to get the entry <span class="math inline">\(C_{i,j}\)</span> of the output matrix <span class="math inline">\(\mathbf{C}\)</span>. Doing this for all pairs of rows and columns will fill in <span class="math inline">\(\mathbf{C}\)</span>.</p>
+<p>Here’s an example where <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(3 \times 3\)</span> and <span class="math inline">\(\mathbf{B}\)</span> is <span class="math inline">\(3 \times 2\)</span>. The output matrix <span class="math inline">\(\mathbf{C}\)</span> will be <span class="math inline">\(3 \times 2\)</span>.</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+    \color{red}{1} &amp; \color{red}{2} &amp; \color{red}{3} \\
+    \color{blue}{4} &amp; \color{blue}{5} &amp; \color{blue}{6} \\
+    \color{green}{7} &amp; \color{green}{8} &amp; \color{green}{9} \\
+\end{pmatrix}
+\begin{pmatrix}
+    \color{orange}{6} &amp; \color{purple}{5} \\
+    \color{orange}{4} &amp; \color{purple}{3} \\
+    \color{orange}{2} &amp; \color{purple}{1} \\
+\end{pmatrix} =
+\begin{pmatrix}
+   \color{red}{1} \cdot \color{orange}{6} + \color{red}{2} \cdot \color{orange}{4} + \color{red}{3} \cdot \color{orange}{2} &amp; \color{red}{1} \cdot \color{purple}{5} + \color{red}{2} \cdot \color{purple}{3} + \color{red}{3} \cdot \color{purple}{1} \\
+   \color{blue}{4} \cdot \color{orange}{6} + \color{blue}{5} \cdot \color{orange}{4} + \color{blue}{6} \cdot \color{orange}{2} &amp; \color{blue}{4} \cdot \color{purple}{5} + \color{blue}{5} \cdot \color{purple}{3} + \color{blue}{6} \cdot \color{purple}{1} \\
+   \color{green}{7} \cdot \color{orange}{6} + \color{green}{8} \cdot \color{orange}{4} + \color{green}{9} \cdot \color{orange}{2} &amp; \color{green}{7} \cdot \color{purple}{5} + \color{green}{8} \cdot \color{purple}{3} + \color{green}{9} \cdot \color{purple}{1} \\
+\end{pmatrix} =
+\begin{pmatrix}
+   20 &amp; 14 \\
+   56 &amp; 41 \\
+   92 &amp; 68 \\
+\end{pmatrix}.
+\]</span></p>
+<p><strong>Aside:</strong> If you’re still having a hard time picturing what matrix multiplication is doing, you may find <a href="http://matrixmultiplication.xyz/">this</a> online visualization tool useful.</p>
+<p>Note that matrix multiplication does not <strong>commute</strong>. That is, we can’t swap the order of the two matrices being multiplied, <span class="math inline">\(\mathbf{A}\mathbf{B} \neq \mathbf{B}\mathbf{A}\)</span>. Try to multiply the above example in the opposite order and see what happens. The two matrices won’t even be compatible anymore. However, matrix multiplication is <strong>associative</strong>, which means you can group parentheses just like you ordinarily would. For example, multiplying three matrices <span class="math inline">\(\mathbf{A}, \mathbf{B}, \mathbf{C}\)</span> could be done by multiplying either the first two, and then the last; or the last two, and then the first. That is,</p>
+<p><span class="math display">\[\mathbf{A}\mathbf{B}\mathbf{C} = \mathbf{A}(\mathbf{B}\mathbf{C}) = (\mathbf{A}\mathbf{B})\mathbf{C}.\]</span></p>
+<p>Matrix multiplication can be thought of as a kind of extension to matrix-vector multiplication, where instead of just trying to solve one linear system, we’re trying to solve a bunch of them in parallel, but all having the same coefficients <span class="math inline">\(\mathbf{A}\)</span>. Suppose we want to simultaneously solve the systems of equations</p>
+<p><span class="math display">\[\mathbf{A}\mathbf{x}_0=\mathbf{b}_0, \quad \mathbf{A}\mathbf{x}_1=\mathbf{b}_1, \quad \cdots, \quad \mathbf{A}\mathbf{x}_{p-1}=\mathbf{b}_{p-1}.\]</span></p>
+<p>What we can do is create two matrices <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> by making column vectors out of each <span class="math inline">\(\mathbf{x}_j\)</span> and <span class="math inline">\(\mathbf{b}_j\)</span>,</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathbf{X} &amp;=
+\begin{pmatrix}
+\mathbf{x}_0 &amp; \mathbf{x}_1 &amp; \cdots &amp; \mathbf{x}_{n-1}
+\end{pmatrix}, \\
+\mathbf{B} &amp;=
+\begin{pmatrix}
+\mathbf{b}_0 &amp; \mathbf{b}_1 &amp; \cdots &amp; \mathbf{b}_{m-1}
+\end{pmatrix}.
+\end{align*}
+\]</span></p>
+<p>Then the bunch of linear systems we’re trying to solve is just the matrix product <span class="math inline">\(\mathbf{A}\mathbf{X}=\mathbf{B}\)</span>. Each column <span class="math inline">\(\mathbf{A}\mathbf{x}_j=\mathbf{b}_j\)</span> can again be thought of as a linear combination of the columns of <span class="math inline">\(\mathbf{A}\)</span>, but with each column weighted by its own vector <span class="math inline">\(\mathbf{x}_j\)</span>.</p>
+<section id="matrix-multiplication-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-multiplication-algorithm">Matrix Multiplication Algorithm</h2>
+<p>Matrix multiplication is perhaps the single most important mathematical operation in machine learning. It’s so important I’m going to write a function to code it from scratch before showing how to do it in numpy. I’ll also analyze the speed of the algorithm in FLOPS and the memory in terms of word size. Algorithmically, all matrix multiplication is doing is looping over every single element of <span class="math inline">\(\mathbf{C}\)</span> and performing the sum-product calculation above for each <span class="math inline">\(C_{i,j}\)</span>. Here’s a function <code>matmul</code> that takes in two numpy arrays <code>A</code> and <code>B</code> and multiplies them, returning the product <code>C</code> if the dimensions are compatible.</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matmul(A, B):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> A.shape[<span class="dv">1</span>] <span class="op">==</span> B.shape[<span class="dv">0</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    m, n, p <span class="op">=</span> A.shape[<span class="dv">0</span>], A.shape[<span class="dv">1</span>], B.shape[<span class="dv">1</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    C <span class="op">=</span> np.zeros((m, p))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(m):</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(p):</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                C[i, j] <span class="op">+=</span> A[i, k] <span class="op">*</span> B[k, j]</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'A = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">6</span>, <span class="dv">5</span>], [<span class="dv">4</span>, <span class="dv">3</span>], [<span class="dv">2</span>, <span class="dv">1</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'B = </span><span class="ch">\n</span><span class="sc">{</span>B<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> matmul(A, B)<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'C = AB = </span><span class="ch">\n</span><span class="sc">{</span>C<span class="sc">.</span>astype(A.dtype)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A = 
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+B = 
+[[6 5]
+ [4 3]
+ [2 1]]
+C = AB = 
+[[20 14]
+ [56 41]
+ [92 68]]</code></pre>
+</div>
+</div>
+<p>Let’s take a quick look at what this function is doing complexity wise. First off, we’re pre-computing the output matrix <span class="math inline">\(\mathbf{C}\)</span>. That’ll contribute <span class="math inline">\(O(mp)\)</span> memory since <span class="math inline">\(\mathbf{C}\)</span> is <span class="math inline">\(m \times p\)</span>. All of the FLOPS are happening inside the double loop over <span class="math inline">\(m\)</span> and <span class="math inline">\(p\)</span>. For each <span class="math inline">\(i,j\)</span> pair, the function performing <span class="math inline">\(n\)</span> total multiplications and <span class="math inline">\(n-1\)</span> total additions, i.e.&nbsp;<span class="math inline">\(2n-1\)</span> FLOPs per <span class="math inline">\(i,j\)</span> pair. Since we’re doing this <span class="math inline">\(m \times p\)</span> times, that gives <span class="math inline">\(m \cdot p \cdot (2n-1)\)</span> total FLOPS, or to leading order <span class="math inline">\(O(mnp)\)</span> FLOPS. Matrix multiplication is an example of a <em>cubic time</em> algorithm since if <span class="math inline">\(n=m=p\)</span> we’d have a cubic leading order of <span class="math inline">\(O(n^3)\)</span> FLOPS.</p>
+<p><strong>Aside:</strong> People have found algorithms that can matrix multiply somewhat faster than cubic time. For example, <a href="https://en.wikipedia.org/wiki/Strassen_algorithm">Strassen’s algorithm</a> can matrix multiply in about <span class="math inline">\(O(n^{2.8})\)</span> time. Matrices that have special forms, e.g.&nbsp;banded matrices or sparse matrices, have special algorithms that can multiply them even faster, for example by using the <a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform">Fast Fourier Transform</a>. These special algorithms have their uses, but it remains the case that practically speaking most matrix multiplication is best done using the naive cubic time algorithm.</p>
+<p>Cubic time may seem fast, but it’s really not unless the matrices are relatively small (say <span class="math inline">\(n \leq 1000\)</span> or so). For this reason, a lot of effort has gone into making matrix multiplication run highly efficiently on hardware, mostly by parallelizing the function above, optimizing blocks to take advantage of meory, and compiling operations down to low-level C or FORTRAN code. In fact, it’s no exaggeration to say that the entire reason the deep learning revolution over the past decade happened because people found ways to multiply matrices much faster by using GPUs.</p>
+<p>Anyway, we’d never want to implement matrix multiplication natively in python like this. It’s far too slow. In practice we’d use <code>np.matmul(A, B)</code> to matrix multiply. A cleaner notation is to use the special <code>@</code> symbol for matrix multiplication, in which case we can just write <code>A @ B</code>.</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">@</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>array([[20, 14],
+       [56, 41],
+       [92, 68]])</code></pre>
+</div>
+</div>
+</section>
+<section id="multiplying-multiple-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="multiplying-multiple-matrices">Multiplying Multiple Matrices</h2>
+<p>What about multiplying three or more matrices together. I already said matrix multiplication is associative, so we can multiply any two at a time we like and get the same answer. However, there are often computational advantages to multiplying them together in some particular sequence. For example, suppose we wanted to multiply <span class="math inline">\(\mathbf{D} = \mathbf{A}\mathbf{B}\mathbf{C}\)</span>. Suppose, <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, <span class="math inline">\(\mathbf{B}\)</span> is <span class="math inline">\(n \times p\)</span>, and <span class="math inline">\(\mathbf{C}\)</span> is <span class="math inline">\(p \times q\)</span>. No matter which order we do it, the output <span class="math inline">\(\mathbf{D}\)</span> will have size <span class="math inline">\(m \times q\)</span>. But there are two ways we could do this multiplication. 1. <span class="math inline">\(\mathbf{D} = \mathbf{A}(\mathbf{B}\mathbf{C})\)</span>: In this case, the <span class="math inline">\(\mathbf{E}=\mathbf{B}\mathbf{C}\)</span> computation requires <span class="math inline">\(nq(2p-1)\)</span> FLOPS, and then the <span class="math inline">\(\mathbf{A}\mathbf{E}\)</span> computation requires <span class="math inline">\(mq(2n-1)\)</span> FLOPS. The total is thus the sum of these two, i.e. <span class="math display">\[nq(2p-1) + mq(2n-1) = O(npq+mnq) \ \ \text{FLOPS}.\]</span></p>
+<ol start="2" type="1">
+<li><span class="math inline">\(\mathbf{D} = (\mathbf{A}\mathbf{B})\mathbf{C}\)</span>: In this case, the <span class="math inline">\(\mathbf{F}=\mathbf{A}\mathbf{B}\)</span> computation requires <span class="math inline">\(mp(2n-1)\)</span> FLOPS, and then the <span class="math inline">\(\mathbf{F}\mathbf{C}\)</span> computation requires <span class="math inline">\(mq(2n-1)\)</span> FLOPS. The total is thus the sum of these two, i.e. <span class="math display">\[mq(2p-1) + mp(2n-1) = O(mpq+mnp) \ \ \text{FLOPS}.\]</span></li>
+</ol>
+<p>Let’s put some numbers in to make it clear what’s going on. Suppose <span class="math inline">\(m=1000\)</span>, <span class="math inline">\(n=2\)</span>, <span class="math inline">\(p=100\)</span>, and <span class="math inline">\(q=100\)</span>. Then the first case takes</p>
+<p><span class="math display">\[nq(2p-1) + mq(2n-1) = 339800 \ \ \text{FLOPS},\]</span></p>
+<p>while the second case takes a staggering</p>
+<p><span class="math display">\[mq(2p-1) + mp(2n-1) = 20200000 \ \ \text{FLOPS}.\]</span></p>
+<p>It would thus behoove us in this case to multiply the matrices in the first order to save on computation, <span class="math inline">\(\mathbf{D} = \mathbf{A}(\mathbf{B}\mathbf{C})\)</span>. Here’s a programmatic way to see this.</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A(BC): </span><span class="sc">{</span>m <span class="op">*</span> q <span class="op">*</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> n <span class="op">*</span> q <span class="op">*</span> (<span class="dv">2</span> <span class="op">*</span> p <span class="op">-</span> <span class="dv">1</span>)<span class="sc">}</span><span class="ss"> FLOPS'</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'(AB)C: </span><span class="sc">{</span>m <span class="op">*</span> p <span class="op">*</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> m <span class="op">*</span> q <span class="op">*</span> (<span class="dv">2</span> <span class="op">*</span> p <span class="op">-</span> <span class="dv">1</span>)<span class="sc">}</span><span class="ss"> FLOPS'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A(BC): 339800 FLOPS
+(AB)C: 20200000 FLOPS</code></pre>
+</div>
+</div>
+<p>The same issues extend to multiplying together arbitrarily many matrices. You can save <em>a lot</em> of compute by first taking time to find the optimal order to multiply them together before doing the computation. Don’t just naively multiply them in order. Numpy has a function <code>np.linalg.multi_dot</code> that can do this for you. If you pass in a list of matrices, it’ll multiply them together in the most efficient order to help save on computation. Here’s an example. I’ll profile the different ways we can do the <span class="math inline">\(\mathbf{A}\mathbf{B}\mathbf{C}\)</span> example above. Notice that indeed <span class="math inline">\(\mathbf{A}(\mathbf{B}\mathbf{C})\)</span> is much faster than <span class="math inline">\((\mathbf{A}\mathbf{B})\mathbf{C}\)</span>. The <code>multi_dot</code> solution is roughly as fast as the <span class="math inline">\(\mathbf{A}(\mathbf{B}\mathbf{C})\)</span> solution, but it does take slightly longer because it first calculates the optimal ordering, which adds a little bit of time.</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.rand(m, n)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.random.rand(n, p)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.random.rand(p, q)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit A <span class="op">@</span> (B <span class="op">@</span> C)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>65.5 µs ± 659 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit (A <span class="op">@</span> B) <span class="op">@</span> C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>640 µs ± 137 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit np.linalg.multi_dot([A, B, C])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>78.2 µs ± 79 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
+</div>
+</div>
+</section>
+<section id="matrix-multiplication-vs-element-wise-multiplication" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-multiplication-vs-element-wise-multiplication">Matrix Multiplication vs Element-Wise Multiplication</h2>
+<p>We’ve already seen a different way we can multiply two matrices (or any array), namely element-wise multiplication. For matrices, element-wise multiplication is sometimes called the <strong>Hadamard product</strong>. I’ll denote element-wise multiplication as <span class="math inline">\(\mathbf{A} \circ \mathbf{B}\)</span>. It’s only defined when the shapes of <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> are <em>equal</em> (or can be broadcasted to be equal).</p>
+<p>It’s important to mind the difference between matrix multiplication and element-wise multiplication of matrices. In general <span class="math inline">\(\mathbf{A} \circ \mathbf{B} \neq \mathbf{A} \mathbf{B}\)</span>. They’re defined completely differently,</p>
+<p><span class="math display">\[
+(A \circ B)_{i,j} = A_{i,j} \cdot B_{i,j} \\
+(AB)_{i,j} = \sum_k A_{i,k}B_{k,j}.
+\]</span></p>
+<p>In numpy we’ll use <code>A * B</code> for element-wise multiplication and <code>A @ B</code> for matrix multiplication. To make it clear the two kinds of multiplication aren’t the same thing here’s an example.</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">1</span>]])</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A*B = </span><span class="ch">\n</span><span class="sc">{</span>A <span class="op">*</span> B<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'AB = </span><span class="ch">\n</span><span class="sc">{</span>A <span class="op">@</span> B<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A*B = 
+[[1 0]
+ [0 4]]
+AB = 
+[[1 2]
+ [3 4]]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="solving-linear-systems" class="level1">
+<h1>Solving Linear Systems</h1>
+<section id="square-systems" class="level2">
+<h2 class="anchored" data-anchor-id="square-systems">Square Systems</h2>
+<p>We can use the idea of matrix multiplication to try to solve a linear system of equations. Suppose we have a system of <span class="math inline">\(n\)</span> linear equations with <span class="math inline">\(n\)</span> unknowns (it’s important <span class="math inline">\(m=n\)</span> here),</p>
+<p><span class="math display">\[
+\begin{array}{c&lt;{x_1} C c&lt;{x_2} C c C c&lt;{x_n} C l}
+a_{0,0}x_0 &amp; + &amp; a_{0,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{0,n-1}x_{n-1} &amp; = &amp; b_0 \\
+a_{1,0}x_0 &amp; + &amp; a_{1,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{1,n-1}x_{n-1} &amp; = &amp; b_1 \\
+\vdots    &amp;   &amp; \vdots    &amp;   &amp;  \ddots  &amp;   &amp; \quad \vdots    &amp;   &amp; \vdots\\
+a_{n-1,0}x_0 &amp; + &amp; a_{n-1,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{n-1,n-1}x_{n-1} &amp; = &amp; b_{n-1} \\
+\end{array}.
+\]</span></p>
+<p>Written in matrix vector notation, we’d like to solve the equation <span class="math inline">\(\mathbf{A}\mathbf{x} = \mathbf{b}\)</span> for the vector <span class="math inline">\(\mathbf{x}\)</span>. How do we go about this? Let’s look at the simplest cases when <span class="math inline">\(n=1,2\)</span> and see if we can spot a pattern.</p>
+<p>When <span class="math inline">\(n=1\)</span>, we’re just solving the single linear equation <span class="math inline">\(ax=b\)</span>, where <span class="math inline">\(a,x,b\)</span> are all real numbers. In this case it’s easy, as dividing both sides by <span class="math inline">\(a\)</span> gives <span class="math inline">\(x = a^{-1}b\)</span> when <span class="math inline">\(a \neq 0\)</span>.</p>
+<p>When <span class="math inline">\(n=2\)</span>, we’re solving the <span class="math inline">\(2 \times 2\)</span> linear system</p>
+<p><span class="math display">\[
+\begin{alignat*}{2}
+   ax &amp; {}+{} &amp;  by &amp; {}={} &amp; e \\
+   cx &amp; {}+{} &amp;  dy &amp; {}={} &amp; f,
+\end{alignat*}
+\]</span></p>
+<p>which I showed before was given by</p>
+<p><span class="math display">\[
+\begin{align*}
+x &amp;= \frac{de-bf}{ad-bc} \\
+y &amp;= \frac{af-ce}{ad-bc},
+\end{align*}
+\]</span></p>
+<p>provided <span class="math inline">\(ad \neq bc\)</span>. Now, if I rewrite this equation in matrix-vector notation, I’d get</p>
+<p><span class="math display">\[
+\mathbf{A}\mathbf{x} =
+\begin{pmatrix}
+a &amp; b \\
+c &amp; d
+\end{pmatrix}
+\begin{pmatrix}
+x \\
+y
+\end{pmatrix} =
+\begin{pmatrix}
+e \\
+f
+\end{pmatrix}
+= \mathbf{b},
+\]</span></p>
+<p>and the solutions would look like</p>
+<p><span class="math display">\[
+\mathbf{x} =
+\begin{pmatrix}
+x \\
+y
+\end{pmatrix} =
+\begin{pmatrix}
+\frac{de-bf}{ad-bc} \\
+\frac{af-ce}{ad-bc}
+\end{pmatrix} =
+\begin{pmatrix}
+\frac{d}{ad-bc} &amp; -\frac{b}{ad-bc} \\
+-\frac{c}{ad-bc} &amp; \frac{a}{ad-bc}
+\end{pmatrix}
+\begin{pmatrix}
+e \\
+f
+\end{pmatrix} =
+\mathbf{A}^{-1} \mathbf{b}.
+\]</span></p>
+<p>The matrix on the right I’m calling <span class="math inline">\(\mathbf{A}^{-1}\)</span> because it looks something like the <span class="math inline">\(x=a^{-1}b\)</span> equation from the <span class="math inline">\(n=1\)</span> case. You can verify it gives the right result by matrix multiplying <span class="math inline">\(\mathbf{A}^{-1}\)</span> with <span class="math inline">\(\mathbf{b}\)</span> and confirming it does indeed give the equations for <span class="math inline">\(\mathbf{x}\)</span>.</p>
+<p>But what exactly does it mean to talk about “dividing by” a matrix? In the <span class="math inline">\(n=1\)</span> case, dividing by <span class="math inline">\(a\)</span> just means that <span class="math inline">\(a a^{-1} = 1\)</span>. That is, the two values undo each other when multiplied together. Let’s see what undoing a matrix would look like by matrix multiplying <span class="math inline">\(\mathbf{A}\mathbf{A}^{-1}\)</span> when <span class="math inline">\(n=2\)</span>,</p>
+<p><span class="math display">\[
+\mathbf{A}\mathbf{A}^{-1} =
+\begin{pmatrix}
+a &amp; b \\
+c &amp; d
+\end{pmatrix}
+\begin{pmatrix}
+\frac{d}{ad-bc} &amp; -\frac{b}{ad-bc} \\
+-\frac{c}{ad-bc} &amp; \frac{a}{ad-bc}
+\end{pmatrix} =
+\begin{pmatrix}
+\frac{ad}{ad-bc}-\frac{bc}{ad-bc} &amp; -\frac{ab}{ad-bc}+\frac{ab}{ad-bc} \\
+\frac{cd}{ad-bc}-\frac{dc}{ad-bc} &amp; -\frac{cb}{ad-bc}+\frac{da}{ad-bc}
+\end{pmatrix} =
+\begin{pmatrix}
+\frac{ad-bc}{ad-bc} &amp; \frac{ab-ab}{ad-bc} \\
+\frac{cd-cd}{ad-bc} &amp; \frac{ad-bc}{ad-bc}
+\end{pmatrix} =
+\begin{pmatrix}
+1 &amp; 0 \\
+0 &amp; 1
+\end{pmatrix} = \mathbf{I}.
+\]</span></p>
+<p>The matrix on the right <span class="math inline">\(\mathbf{I}\)</span> seems to behave kind of like the <span class="math inline">\(1\)</span> in the <span class="math inline">\(a a^{-1} = 1\)</span> case. This matrix is called the <span class="math inline">\(2 \times 2\)</span> <strong>identity matrix</strong>. The matrix <span class="math inline">\(\mathbf{A}^{-1}\)</span> is called the <strong>inverse</strong> of <span class="math inline">\(\mathbf{A}\)</span>. The denominator <span class="math inline">\(D=ad-bc\)</span> is again the <strong>determinant</strong> of <span class="math inline">\(\mathbf{A}\)</span>, usually denoted <span class="math inline">\(\text{det}(\mathbf{A})\)</span> or often more simply just <span class="math inline">\(|\mathbf{A}|\)</span> when the meaning is clear,</p>
+<p><span class="math display">\[|\mathbf{A}| = \text{det}(\mathbf{A}) = ad - bc.\]</span></p>
+<p>The inverse <span class="math inline">\(\mathbf{A}^{-1}\)</span> will only exist when <span class="math inline">\(|\mathbf{A}| = ad-bc \neq 0\)</span>. If <span class="math inline">\(\mathbf{A}^{-1}\)</span> doesn’t exist, neither does a solution to the linear system, since we can’t solve for <span class="math inline">\(\mathbf{x}\)</span>.</p>
+<p>The exact same idea extends to arbitrary <span class="math inline">\(n \times n\)</span> systems as well. The <span class="math inline">\(n \times n\)</span> identity matrix <span class="math inline">\(\mathbf{I}\)</span> is the matrix whose values are <span class="math inline">\(1\)</span> when <span class="math inline">\(i=j\)</span> and <span class="math inline">\(0\)</span> when <span class="math inline">\(i \neq j\)</span>. The terms in a matrix when <span class="math inline">\(i=j\)</span> are called the <strong>diagonal</strong> of the matrix. The terms when <span class="math inline">\(i \neq j\)</span> are called the <strong>off-diagonals</strong>. Thus, the identity matrix is the matrix that takes on the value <span class="math inline">\(1\)</span> on the diagonal and <span class="math inline">\(0\)</span> on the off-diagonals.</p>
+<p>If we’d like to solve the system <span class="math inline">\(\mathbf{A}\mathbf{x} = \mathbf{b}\)</span>, we could find the inverse of <span class="math inline">\(\mathbf{A}\)</span> somehow, and then get the solution <span class="math inline">\(\mathbf{x}\)</span> by writing <span class="math inline">\(\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}\)</span>, provided its determinant <span class="math inline">\(\text{det}(\mathbf{A}) \neq 0\)</span>. A matrix with non-zero determinant is called <strong>invertible</strong>. Invertible matrices have inverses. A matrix with zero determinant are called <strong>singular</strong>. Singular matrices can’t be inverted.</p>
+<p>Of course, it’s no longer obvious at all how to even find <span class="math inline">\(\mathbf{A}^{-1}\)</span> or <span class="math inline">\(\text{det}(\mathbf{A})\)</span> when <span class="math inline">\(n&gt;2\)</span>. Thankfully we don’t need to cover this for machine learning purposes. I’ll just mention that there are efficient algorithms for solving large linear systems like this. You can use <code>np.linalg.solve(A, b)</code> to do this, provided <span class="math inline">\(\mathbf{A}\)</span> can be inverted. Here’s an example of solving a <span class="math inline">\(3 \times 3\)</span> linear system. You can also get the inverse directly by using <code>np.linalg.inv(A)</code>, though you’d rarely actually want to do this. It turns out matrix inversion is a very numerically unstable operation. Try to avoid explicitly calculating matrix inverses if you can.</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'A = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([[<span class="dv">1</span>], [<span class="dv">1</span>], [<span class="dv">1</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'b = </span><span class="ch">\n</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linalg.solve(A, b)<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'x = </span><span class="ch">\n</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A = 
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+b = 
+[[1]
+ [1]
+ [1]]
+x = 
+[[ 0.2]
+ [-1.4]
+ [ 1.2]]</code></pre>
+</div>
+</div>
+</section>
+<section id="rectangular-systems" class="level2">
+<h2 class="anchored" data-anchor-id="rectangular-systems">Rectangular Systems</h2>
+<p>What about when <span class="math inline">\(m \neq n\)</span>? Things become more interesting then. If <span class="math inline">\(m &lt; n\)</span> the linear system is under-determined, and will have infinitely many solutions. In this case, there are infinitely many ways to “invert” <span class="math inline">\(\mathbf{A}\)</span>. We just need to find any one of them that will work. If <span class="math inline">\(m &gt; n\)</span> the linear system is over-determined, and will have no exact solution. We can however find an <em>approximate</em> solution by looking for the <span class="math inline">\(\mathbf{x}\)</span> that most <em>nearly</em> solves the linear system. In both cases, a generalization of the inverse exists, called the <strong>pseudoinverse</strong>.</p>
+<p>Here’s how to find out what the pseudoinverse should be. Let’s define a matrix similar to <span class="math inline">\(\mathbf{A}\)</span>, but with its rows and columns swapped, called the <strong>transpose</strong> of <span class="math inline">\(\mathbf{A}\)</span>. The transpose of <span class="math inline">\(\mathbf{A}\)</span>, denoted by the symbol <span class="math inline">\(\mathbf{A}^\top\)</span>, is defined by the relationship <span class="math inline">\(A_{i,j}^\top = A_{j,i}\)</span>. For example, if <span class="math inline">\(\mathbf{A}\)</span> is the <span class="math inline">\(3 \times 2\)</span> matrix</p>
+<p><span class="math display">\[
+\mathbf{A} =
+\begin{pmatrix}
+    1 &amp; 2 &amp; 3 \\
+    4 &amp; 5 &amp; 6 \\
+\end{pmatrix}, \quad \text{then} \quad
+\mathbf{A}^\top =
+\begin{pmatrix}
+    1 &amp; 4 \\
+    2 &amp; 5 \\
+    3 &amp; 6 \\
+\end{pmatrix}
+\]</span></p>
+<p>is its transpose. The key thing to notice is that if <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, then <span class="math inline">\(\mathbf{A}^\top\)</span> is <span class="math inline">\(n \times m\)</span>. This means that the <em>product</em> of the two is square since <span class="math inline">\(\mathbf{A} \mathbf{A}^\top\)</span> is <span class="math inline">\(m \times m\)</span>. Note a <strong>square</strong> matrix is a matrix with the same number of rows as columns, i.e.&nbsp;with <span class="math inline">\(m=n\)</span>. The product in the opposite order is square too since <span class="math inline">\(\mathbf{A}^\top \mathbf{A}\)</span> is <span class="math inline">\(n \times n\)</span>.</p>
+<p>Here’s an example. In numpy, we can use <code>np.transpose(A)</code>, or more simply <code>A.T</code> to get the transpose of a matrix. Notice both of the products <span class="math inline">\(\mathbf{A} \mathbf{A}^\top\)</span> and <span class="math inline">\(\mathbf{A}^\top \mathbf{A}^\top\)</span> are square, but each</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'A = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>At <span class="op">=</span> A.T<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'At = </span><span class="ch">\n</span><span class="sc">{</span>At<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>AAt <span class="op">=</span> A <span class="op">@</span> At<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'A At = </span><span class="ch">\n</span><span class="sc">{</span>AAt<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>AtA <span class="op">=</span> At <span class="op">@</span> A<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'At A = </span><span class="ch">\n</span><span class="sc">{</span>AtA<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A = 
+[[1 2 3]
+ [4 5 6]]
+At = 
+[[1 4]
+ [2 5]
+ [3 6]]
+A At = 
+[[14 32]
+ [32 77]]
+At A = 
+[[17 22 27]
+ [22 29 36]
+ [27 36 45]]</code></pre>
+</div>
+</div>
+<p>Now, suppose we want to solve an <span class="math inline">\(m \times n\)</span> linear system <span class="math inline">\(\mathbf{A}\mathbf{x} = \mathbf{b}\)</span>, where <span class="math inline">\(m \neq n\)</span>, i.e.&nbsp;<span class="math inline">\(\mathbf{A}\)</span> isn’t square. A non-square matrix is called <strong>rectangular</strong>. We can’t invert <span class="math inline">\(\mathbf{A}\)</span> since it isn’t square. But what we <em>can</em> do is make the linear system square by multiplying both sides on the left by <span class="math inline">\(\mathbf{A}^\top\)</span>,</p>
+<p><span class="math display">\[\mathbf{A}^\top \mathbf{A}\mathbf{x} = \mathbf{A}^\top \mathbf{b}.\]</span></p>
+<p>Since <span class="math inline">\(\mathbf{A}^\top \mathbf{A}\)</span> is square, it’s invertible (provided it’s non-singular). Thus, this modified linear system has a solution given by</p>
+<p><span class="math display">\[\mathbf{x} = (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top \mathbf{b}.\]</span></p>
+<p>This looks kind of like <span class="math inline">\(\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}\)</span>. If we define the <strong>pseudoinverse</strong> <span class="math inline">\(\mathbf{A}^+\)</span> by</p>
+<p><span class="math display">\[\mathbf{A}^+ = (\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top,\]</span></p>
+<p>then we could write the solution to this modified linear system as</p>
+<p><span class="math display">\[\mathbf{x} = \mathbf{A}^+ \mathbf{b}.\]</span></p>
+<p>The solution we get from this is called the <strong>least squares solution</strong> to <span class="math inline">\(\mathbf{A}\mathbf{x} = \mathbf{b}\)</span>. It’s the closest we can get to an exact solution in a certain sense.</p>
+<p>In numpy, you can use <code>np.linalg.lstsq</code> to solve such a system. It returns a tuple of values, the first of which is the least squares solution itself, i.e.&nbsp;<span class="math inline">\(\mathbf{x}\)</span>. You can also get the pseudoinverse directly by using <code>np.linalg.pinv(A)</code>, though you’d rarely actually want to do this.</p>
+<p>In the example below I’ll take the same <span class="math inline">\(2 \times 3\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> from the transpose example, and <span class="math inline">\(\mathbf{b}=\binom{1}{1}\)</span>. Since <span class="math inline">\(m&lt;n\)</span>, this is an under-determined system, so it’ll have infinitely many solutions. The least squares solution will find <em>one</em> of these possible solutions, which turns out to be</p>
+<p><span class="math display">\[
+\mathbf{x} =
+\begin{pmatrix}
+-\frac{1}{2} \\
+0 \\
+\frac{1}{2} \\
+\end{pmatrix}.
+\]</span></p>
+<p>I’ll also confirm that indeed <span class="math inline">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span> in this case.</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'A = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'b = </span><span class="ch">\n</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>x, _, _, _ <span class="op">=</span> np.linalg.lstsq(A, b, rcond<span class="op">=</span><span class="va">None</span>)<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">.</span><span class="bu">round</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Ax = </span><span class="sc">{</span>A <span class="op">@</span> x<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A = 
+[[1 2 3]
+ [4 5 6]]
+b = 
+[1 1]
+x = [-0.5 -0.   0.5]
+Ax = [1. 1.]</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../notebooks/basic-calculus.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Calculus</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notebooks/vector-spaces.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
