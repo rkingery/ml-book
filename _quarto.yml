@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: docs
 
 book:
   title: "Machine Learning For The 2020s"
@@ -9,13 +10,14 @@ book:
     - index.qmd
     - notebooks/basic-math.ipynb
     - notebooks/numerical-computing.ipynb
-    - notebooks/vectorization.ipynb
-    - notebooks/basic-calculus.ipynb
-    - notebooks/linear-systems.ipynb
-    - notebooks/vector-spaces.ipynb
-    - notebooks/matrix-algebra.ipynb
-    - notebooks/probability.ipynb
-    - notebooks/multivariate-probability.ipynb
+    #- notebooks/vectorization.ipynb
+    #- notebooks/basic-calculus.ipynb
+    #- notebooks/linear-systems.ipynb
+    #- notebooks/vector-spaces.ipynb
+    #- notebooks/matrix-algebra.ipynb
+    #- notebooks/multivariate-calculus.ipynb
+    #- notebooks/probability.ipynb
+    #- notebooks/multivariate-probability.ipynb
 
 bibliography: references.bib
 
