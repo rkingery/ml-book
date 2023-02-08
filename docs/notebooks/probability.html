@@ -415,14 +415,26 @@ x =
 <p>In the above example, there are <span class="math inline">\(N=10000\)</span> samples, and each bin has about <span class="math inline">\(N_k=1000\)</span> counts, so you should expect the counts to fluctuate by about</p>
 <p><span class="math display">\[\sigma_k = \sqrt{1000\bigg(1 - \frac{1000}{10000}\bigg)} = 30,\]</span></p>
 <p>which means the counts should rougly lie in the range <span class="math inline">\(1000 \pm 30\)</span>. This seems to be in line with what we’re seeing experimentally. Notice as the sample size <span class="math inline">\(N \rightarrow \infty\)</span>, the fluctuations <span class="math inline">\(\sigma_k \rightarrow 0\)</span>. We’ll see where this rule comes from later (hint: the binomial distribution).</p>
-<p>Back to random variables. Broadly speaking we can divide random variables into two classes of distributions: - discrete distributions: random variables that can only take on a discrete set of values. - continuous distributions: random variables that can take on any continuum of real values.</p>
+<p>Back to random variables. Broadly speaking we can divide random variables into two classes of distributions:</p>
+<ul>
+<li>discrete distributions: random variables that can only take on a discrete set of values.</li>
+<li>continuous distributions: random variables that can take on any continuum of real values.</li>
+</ul>
 <p>I’ll start by talking about the discrete case since it’s easier to understand.</p>
 </section>
 </section>
 <section id="discrete-probability" class="level1">
 <h1>Discrete Probability</h1>
 <p>Discrete random variables are variables that can only take on a discrete range of values. Usually this range is a finite set like <span class="math inline">\(\{0,1\}\)</span> or <span class="math inline">\(\{1,2,3,4,5,6\}\)</span> or something like that. But they could have an infinite range too, for example the set <span class="math inline">\(\mathbb{N}\)</span> of all non-negative integers. Rand is not an example of a discrete random variable, since there the range is all of the interval <span class="math inline">\([0,1]\)</span>.</p>
-<p>Here are some examples of real life things that can be modeled by a discrete random variable: - Modeling the rolls of a die with faces <span class="math inline">\(1,2,3,4,5,6\)</span>. - Modeling values from flipping a coin taking on a value of heads or tails. - Modeling a hand of poker, where there are 5 cards each drawn from the same deck of 52 cards. - Modeling the outputs of data used to train a machine learning classification model. - Modeling the number of heads gotten from flipping a coin a whole bunch of times. - Modeling the number of people entering a building per hour.</p>
+<p>Here are some examples of real life things that can be modeled by a discrete random variable:</p>
+<ul>
+<li>Modeling the rolls of a die with faces <span class="math inline">\(1,2,3,4,5,6\)</span>.</li>
+<li>Modeling values from flipping a coin taking on a value of heads or tails.</li>
+<li>Modeling a hand of poker, where there are 5 cards each drawn from the same deck of 52 cards.</li>
+<li>Modeling the outputs of data used to train a machine learning classification model.</li>
+<li>Modeling the number of heads gotten from flipping a coin a whole bunch of times.</li>
+<li>Modeling the number of people entering a building per hour.</li>
+</ul>
 <section id="motivation-rolling-a-die" class="level2">
 <h2 class="anchored" data-anchor-id="motivation-rolling-a-die">Motivation: Rolling a Die</h2>
 <p>Consider a very simple toy problem: rolling a die (singular of dice). If you’ve never seen dice before, they’re white cubes with black dots on each face of the cube. Each face gets some number of black dots on it between 1 and 6. People like to “roll” these dice in games by shaking and tossing them onto the ground. The person with the highest score, i.e.&nbsp;the most number of dots facing upward, wins that round.</p>
@@ -996,7 +1008,17 @@ n &amp;= \frac{\log(1 - O)}{\log(1 - p)}.
 <section id="continuous-probability" class="level1">
 <h1>Continuous Probability</h1>
 <p>So far we’ve covered discrete random variables, ones that take on a finite (or countably infinite) set of values. We can also consider random variables that take on a continuous range of values. For example, a continuous random variable <span class="math inline">\(x\)</span> can take on values in the entire interval <span class="math inline">\([0,1]\)</span>, or the whole real line <span class="math inline">\(\mathbb{R} = (-\infty, \infty)\)</span>. The key difference between continuous variables and discrete variables is that we have to think in terms of calculus now. Instead of points we’ll have infinitesimal areas. Instead of sums we’ll have integrals.</p>
-<p>It may not be obvious to you that there are practical examples where continuous random variables would be useful. Here are some examples: - Modeling the behavior of random number generators like rand. - Modeling the total sales a business will do next quarter. - Modeling the time it takes for a customer to complete a purchase in an online store. - Modeling the amount of fuel consumed by a vehicle on a given day. - Modeling the height of waves in the ocean at a given time. - Modeling the length of a stay in a hospital by a typical patient. - Modeling the amount of rainfall in a specific region over a period of time. - Modeling the measured voltage of a car battery at any point in time.</p>
+<p>It may not be obvious to you that there are practical examples where continuous random variables would be useful. Here are some examples:</p>
+<ul>
+<li>Modeling the behavior of random number generators like rand.</li>
+<li>Modeling the total sales a business will do next quarter.</li>
+<li>Modeling the time it takes for a customer to complete a purchase in an online store.</li>
+<li>Modeling the amount of fuel consumed by a vehicle on a given day.</li>
+<li>Modeling the height of waves in the ocean at a given time.</li>
+<li>Modeling the length of a stay in a hospital by a typical patient.</li>
+<li>Modeling the amount of rainfall in a specific region over a period of time.</li>
+<li>Modeling the measured voltage of a car battery at any point in time.</li>
+</ul>
 <p>In fact, any continuous variable you can think of could be treated as random depending on the situation. Even if a variable is completely deterministic, there may be situations where it’s helpful to think of it as random. The whole idea of <em>Monte Carlo methods</em> is based on this idea, in fact.</p>
 <section id="motivation-rand-again" class="level2">
 <h2 class="anchored" data-anchor-id="motivation-rand-again">Motivation: Rand Again</h2>

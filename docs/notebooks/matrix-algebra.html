@@ -474,13 +474,25 @@ det(AB) = 36.0</code></pre>
 <p>More generally, if <span class="math inline">\(\mathbf{A}\)</span> is diagonal or upper/lower triangular, then</p>
 <p><span class="math display">\[\text{det}(\mathbf{A}) = \prod_{i=0}^{n-1} A_{i,i} = A_{0,0} A_{1,1} \cdots A_{n-1,n-1}.\]</span></p>
 <p>It’s not yet obvious, but we can always “change” a square matrix <span class="math inline">\(\mathbf{A}\)</span> into one of these three kinds of matrices, and then calculate the determinant of <span class="math inline">\(\mathbf{A}\)</span> this way. There are a few ways to do this. I’ll cover these when I get to matrix factorizations below.</p>
-<p>Some other properties of the determinant that you can verify are, - <span class="math inline">\(\text{det}(\mathbf{I}) = 1\)</span>. - <span class="math inline">\(\text{det}(\mathbf{A}^\top) = \text{det}(\mathbf{A})\)</span>. - <span class="math inline">\(\text{det}(\mathbf{A}^{-1}) = \frac{1}{\text{det}(\mathbf{A})}\)</span>. - <span class="math inline">\(\text{det}(c\mathbf{A}) = c^n\text{det}(\mathbf{A})\)</span>.</p>
+<p>Some other properties of the determinant that you can verify are,</p>
+<ul>
+<li><span class="math inline">\(\text{det}(\mathbf{I}) = 1\)</span>.</li>
+<li><span class="math inline">\(\text{det}(\mathbf{A}^\top) = \text{det}(\mathbf{A})\)</span>.</li>
+<li><span class="math inline">\(\text{det}(\mathbf{A}^{-1}) = \frac{1}{\text{det}(\mathbf{A})}\)</span>.</li>
+<li><span class="math inline">\(\text{det}(c\mathbf{A}) = c^n\text{det}(\mathbf{A})\)</span>.</li>
+</ul>
 <p>The determinant is one important way to get a scalar out of a matrix. Another useful scalar is the <strong>trace</strong>, which is far simpler to calculate. The trace of a matrix <span class="math inline">\(\mathbf{A}\)</span> is the sum of its diagonal elements, usually written</p>
 <p><span class="math display">\[\text{tr}(\mathbf{A}) = \sum_{i=0}^{n-1} A_{i,i} = A_{0,0} + A_{1,1} + \cdots + A_{n-1,n-1}.\]</span></p>
 <p>Unlike the determinant, the trace doesn’t split up over products. It instead splits over addition,</p>
 <p><span class="math display">\[\text{tr}(\mathbf{A} + \mathbf{B}) = \text{tr}(\mathbf{A}) + \text{tr}(\mathbf{B}).\]</span></p>
 <p>This is very easy to verify from the fact that the sum is element-wise, so <span class="math inline">\(\sum (A+B)_{i,i} = \sum A_{i,i} + \sum B_{i,i}\)</span>.</p>
-<p>Some other fairly trivial properties the trace satisfies are, - <span class="math inline">\(\text{tr}(\mathbf{I}) = n\)</span>. - <span class="math inline">\(\text{tr}(\mathbf{A}^\top) = \text{tr}(\mathbf{A})\)</span>. - <span class="math inline">\(\text{tr}(c\mathbf{A}) = c\text{tr}(\mathbf{A})\)</span>. - <span class="math inline">\(\text{tr}(\mathbf{A}\mathbf{B}) = \text{tr}(\mathbf{B}\mathbf{A})\)</span>.</p>
+<p>Some other fairly trivial properties the trace satisfies are,</p>
+<ul>
+<li><span class="math inline">\(\text{tr}(\mathbf{I}) = n\)</span>.</li>
+<li><span class="math inline">\(\text{tr}(\mathbf{A}^\top) = \text{tr}(\mathbf{A})\)</span>.</li>
+<li><span class="math inline">\(\text{tr}(c\mathbf{A}) = c\text{tr}(\mathbf{A})\)</span>.</li>
+<li><span class="math inline">\(\text{tr}(\mathbf{A}\mathbf{B}) = \text{tr}(\mathbf{B}\mathbf{A})\)</span>.</li>
+</ul>
 <p>Here’s a “proof” of the last result on the same <span class="math inline">\(3 \times 3\)</span> matrices above. In numpy, you can calculate the trace using <code>np.trace</code>. It’s not unstable like the determinant is, and it’s fast to calculate since it’s only summing the <span class="math inline">\(n\)</span> diagonal terms, which is <span class="math inline">\(O(n)\)</span> time.</p>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tr_AB <span class="op">=</span> np.trace(A <span class="op">@</span> B)</span>
@@ -792,7 +804,11 @@ Dx = [1 2 3]</code></pre>
 </div>
 <p>I’ll finish this section by noting that orthogonal matrices always have determinant <span class="math inline">\(\pm 1\)</span>. You can see this by applying the determinant product formula to <span class="math inline">\(\mathbf{Q}^\top \mathbf{Q}=\mathbf{I}\)</span>,</p>
 <p><span class="math display">\[1 = \text{det}(\mathbf{I}) = \text{det}(\mathbf{Q}^\top \mathbf{Q}) = \text{det}(\mathbf{Q}^\top) \cdot \text{det}(\mathbf{Q}) = \big(\text{det}(\mathbf{Q})\big)^2,\]</span></p>
-<p>which implies <span class="math inline">\(\text{det}(\mathbf{Q}) = \pm 1\)</span>. This evidently divides orthogonal matrices into two distinct classes: - <span class="math inline">\(\text{det}(\mathbf{Q}) = +1\)</span>: These are the orthogonal matrices that correspond to pure rotations. - <span class="math inline">\(\text{det}(\mathbf{Q}) = -1\)</span>: These are the orthogonal matrices that correspond to reflections.</p>
+<p>which implies <span class="math inline">\(\text{det}(\mathbf{Q}) = \pm 1\)</span>. This evidently divides orthogonal matrices into two distinct classes:</p>
+<ul>
+<li><span class="math inline">\(\text{det}(\mathbf{Q}) = +1\)</span>: These are the orthogonal matrices that correspond to pure rotations.</li>
+<li><span class="math inline">\(\text{det}(\mathbf{Q}) = -1\)</span>: These are the orthogonal matrices that correspond to reflections.</li>
+</ul>
 <p>I’ll verify that the rotation matrix I just plotted indeed has determinant <span class="math inline">\(+1\)</span>.</p>
 <div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'det(Q) = </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>det(Q)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -808,7 +824,11 @@ Dx = [1 2 3]</code></pre>
 <section id="lu-factorization" class="level2">
 <h2 class="anchored" data-anchor-id="lu-factorization">LU Factorization</h2>
 <p>Probably the most basic matrix factorization is the LU Factorization. LU factorization factors an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> into a product of a lower triangular matrix <span class="math inline">\(\mathbf{L}\)</span> and an upper triangular matrix <span class="math inline">\(\mathbf{U}\)</span>, <span class="math display">\[\mathbf{A} = \mathbf{L}\mathbf{U}.\]</span></p>
-<p>The LU factorization is most useful for solving a system of linear equations. If <span class="math inline">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>, we can do an LU factorization of <span class="math inline">\(\mathbf{A}\)</span> and write the system as <span class="math inline">\(\mathbf{LUx} = \mathbf{b}\)</span>. This can then be solved by breaking it into two steps, known as <em>forward substitution</em> and <em>back substitution</em>, - Forward substitution: Solve <span class="math inline">\(\mathbf{Ly} = \mathbf{b}\)</span> for <span class="math inline">\(\mathbf{y}\)</span>. - Back Substitution: Solve <span class="math inline">\(\mathbf{Ux} = \mathbf{y}\)</span> for <span class="math inline">\(\mathbf{x}\)</span>.</p>
+<p>The LU factorization is most useful for solving a system of linear equations. If <span class="math inline">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>, we can do an LU factorization of <span class="math inline">\(\mathbf{A}\)</span> and write the system as <span class="math inline">\(\mathbf{LUx} = \mathbf{b}\)</span>. This can then be solved by breaking it into two steps, known as <em>forward substitution</em> and <em>back substitution</em>,</p>
+<ul>
+<li>Forward substitution: Solve <span class="math inline">\(\mathbf{Ly} = \mathbf{b}\)</span> for <span class="math inline">\(\mathbf{y}\)</span>.</li>
+<li>Back Substitution: Solve <span class="math inline">\(\mathbf{Ux} = \mathbf{y}\)</span> for <span class="math inline">\(\mathbf{x}\)</span>.</li>
+</ul>
 <p>These two steps are easy to do since each system can be solved by substitution, working from the “tip” of the triangle down. The LU factorization is essentially what matrix solvers like <code>np.linalg.solve</code> do to solve linear systems.</p>
 <p>Of course, the question still remains how to actually factor <span class="math inline">\(\mathbf{A}\)</span> into <span class="math inline">\(\mathbf{L}\mathbf{U}\)</span>. I won’t describe the algorithm to do this, or any matrix factorization really, since their inner workings aren’t that relevant to machine learning. If you’re curious, LU factorization is done using some variant of an algorithm known as <a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian Elimination</a>. Note the LU factorization in general is a cubic time algorithm, i.e.&nbsp;<span class="math inline">\(O(n^3)\)</span> if <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(n \times n\)</span>.</p>
 <p>The LU factorization can also be used to compute the determinant of a square matrix. Since <span class="math inline">\(\mathbf{L}\)</span> and <span class="math inline">\(\mathbf{U}\)</span> are triangular, their determinant is just the product of their diagonals. Using the product rule for determinants then gives</p>
@@ -1039,7 +1059,16 @@ X Lambda X^T =
 \text{det}(\mathbf{S}) &amp;= \prod_{i=0}^{n-1} \lambda_i = \lambda_0 \cdot \lambda_1 \cdots \lambda_{n-1}.
 \end{align*}\]</span></p>
 <p>This fact implies that <span class="math inline">\(\mathbf{S}\)</span> will be invertible if and only if all the eigenvalues are non-zero, since otherwise we’d have <span class="math inline">\(\text{det}(\mathbf{S})=0\)</span>.</p>
-<p>Given how important the spectral decomposition is to many applications, there are a lot of different algorithms for finding it, each with its own trade-offs. One popular algorithm for doing so is the <em>QR algorithm</em>. Roughly speaking, the QR algorithm works as follows: - Start with <span class="math inline">\(\mathbf{S}_0 = \mathbf{S}\)</span>. - For some number of iterations <span class="math inline">\(t=0,1,\cdots, T-1\)</span> do the following: - Calculate the QR factorization of <span class="math inline">\(\mathbf{S}_t\)</span>: <span class="math inline">\(\mathbf{Q}_{t+1}, \mathbf{R}_{t+1} = \text{qr}(\mathbf{S}_t)\)</span>. - Update <span class="math inline">\(\mathbf{S}_t\)</span> by reversing the factorization order: <span class="math inline">\(\mathbf{S}_{t+1} = \mathbf{R}_{t+1} \mathbf{Q}_{t+1}\)</span>. - Take <span class="math inline">\(\mathbf{\Lambda} \approx \mathbf{S}_{T-1}\)</span> and <span class="math inline">\(\mathbf{X} \approx \mathbf{Q}_{T-1}\)</span>.</p>
+<p>Given how important the spectral decomposition is to many applications, there are a lot of different algorithms for finding it, each with its own trade-offs. One popular algorithm for doing so is the <em>QR algorithm</em>. Roughly speaking, the QR algorithm works as follows:</p>
+<ul>
+<li>Start with <span class="math inline">\(\mathbf{S}_0 = \mathbf{S}\)</span>.</li>
+<li>For some number of iterations <span class="math inline">\(t=0,1,\cdots, T-1\)</span> do the following:
+<ul>
+<li>Calculate the QR factorization of <span class="math inline">\(\mathbf{S}_t\)</span>: <span class="math inline">\(\mathbf{Q}_{t+1}, \mathbf{R}_{t+1} = \text{qr}(\mathbf{S}_t)\)</span>.</li>
+<li>Update <span class="math inline">\(\mathbf{S}_t\)</span> by reversing the factorization order: <span class="math inline">\(\mathbf{S}_{t+1} = \mathbf{R}_{t+1} \mathbf{Q}_{t+1}\)</span>.</li>
+</ul></li>
+<li>Take <span class="math inline">\(\mathbf{\Lambda} \approx \mathbf{S}_{T-1}\)</span> and <span class="math inline">\(\mathbf{X} \approx \mathbf{Q}_{T-1}\)</span>.</li>
+</ul>
 <p>Due to the QR factorizations and matrix multiplications, this algorithm will be <span class="math inline">\(O(n^3)\)</span> at each step, which all together gives a time complexity of <span class="math inline">\(O(Tn^3)\)</span>. It’s not at all obvious from what I’ve said why the QR algorithm even works. In fact, to work well it requires a few small <a href="https://en.wikipedia.org/wiki/QR_algorithm">modifications</a> I won’t go into.</p>
 </section>
 <section id="positive-definiteness" class="level2">
@@ -1130,7 +1159,12 @@ U Sigma V^T =
  [ 1. -1.]]</code></pre>
 </div>
 </div>
-<p>To give you an intuition is to what the SVD is doing, suppose <span class="math inline">\(\mathbf{x} \in \mathbb{R}^n\)</span> is some size-<span class="math inline">\(n\)</span> vector. Suppose we want to operate on <span class="math inline">\(\mathbf{x}\)</span> with <span class="math inline">\(\mathbf{A}\)</span> to get a new vector <span class="math inline">\(\mathbf{v} = \mathbf{A}\mathbf{x}\)</span>. Writing <span class="math inline">\(\mathbf{A} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top\)</span>, we can do this operation in a sequence of three successive steps: 1. Calculate <span class="math inline">\(\mathbf{y} = \mathbf{V}^\top \mathbf{x}\)</span>: The output is also a size-<span class="math inline">\(n\)</span> vector <span class="math inline">\(\mathbf{y} \in \mathbb{R}^n\)</span>. Since <span class="math inline">\(\mathbf{V}\)</span> is orthogonal, this action can only rotate (or reflect) <span class="math inline">\(\mathbf{x}\)</span> by some angle in space. 2. Calculate <span class="math inline">\(\mathbf{z} = \mathbf{\Sigma}\mathbf{y}\)</span>: The output is now a size-<span class="math inline">\(k\)</span> vector <span class="math inline">\(\mathbf{z} \in \mathbb{R}^k\)</span>. Since <span class="math inline">\(\mathbf{\Sigma}\)</span> is diagonal, it can only stretch <span class="math inline">\(\mathbf{y}\)</span> along the singular directions of <span class="math inline">\(\mathbf{V}\)</span>, not rotate it. 3. Calculate <span class="math inline">\(\mathbf{v} = \mathbf{U}\mathbf{z}\)</span>: The output is now a size-<span class="math inline">\(m\)</span> vector <span class="math inline">\(\mathbf{v} \in \mathbb{R}^m\)</span>. Since <span class="math inline">\(\mathbf{U}\)</span> is orthogonal, this action can only rotate (or reflect) <span class="math inline">\(\mathbf{z}\)</span> by some angle in space.</p>
+<p>To give you an intuition is to what the SVD is doing, suppose <span class="math inline">\(\mathbf{x} \in \mathbb{R}^n\)</span> is some size-<span class="math inline">\(n\)</span> vector. Suppose we want to operate on <span class="math inline">\(\mathbf{x}\)</span> with <span class="math inline">\(\mathbf{A}\)</span> to get a new vector <span class="math inline">\(\mathbf{v} = \mathbf{A}\mathbf{x}\)</span>. Writing <span class="math inline">\(\mathbf{A} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top\)</span>, we can do this operation in a sequence of three successive steps:</p>
+<ol type="1">
+<li>Calculate <span class="math inline">\(\mathbf{y} = \mathbf{V}^\top \mathbf{x}\)</span>: The output is also a size-<span class="math inline">\(n\)</span> vector <span class="math inline">\(\mathbf{y} \in \mathbb{R}^n\)</span>. Since <span class="math inline">\(\mathbf{V}\)</span> is orthogonal, this action can only rotate (or reflect) <span class="math inline">\(\mathbf{x}\)</span> by some angle in space.</li>
+<li>Calculate <span class="math inline">\(\mathbf{z} = \mathbf{\Sigma}\mathbf{y}\)</span>: The output is now a size-<span class="math inline">\(k\)</span> vector <span class="math inline">\(\mathbf{z} \in \mathbb{R}^k\)</span>. Since <span class="math inline">\(\mathbf{\Sigma}\)</span> is diagonal, it can only stretch <span class="math inline">\(\mathbf{y}\)</span> along the singular directions of <span class="math inline">\(\mathbf{V}\)</span>, not rotate it.</li>
+<li>Calculate <span class="math inline">\(\mathbf{v} = \mathbf{U}\mathbf{z}\)</span>: The output is now a size-<span class="math inline">\(m\)</span> vector <span class="math inline">\(\mathbf{v} \in \mathbb{R}^m\)</span>. Since <span class="math inline">\(\mathbf{U}\)</span> is orthogonal, this action can only rotate (or reflect) <span class="math inline">\(\mathbf{z}\)</span> by some angle in space.</li>
+</ol>
 <p>The final output is thus a vector <span class="math inline">\(\mathbf{v} = \mathbf{A}\mathbf{x}\)</span> that first got rotated in <span class="math inline">\(\mathbb{R}^n\)</span>, then scaled in <span class="math inline">\(\mathbb{R}^k\)</span>, then rotated again in <span class="math inline">\(\mathbb{R}^m\)</span>. So you can visualize this better let’s take a specific example. To make everything show up on one plot I’ll choose a <span class="math inline">\(2 \times 2\)</span> matrix, so <span class="math inline">\(m=n=k=2\)</span>, for example</p>
 <p><span class="math display">\[
 \mathbf{A} =

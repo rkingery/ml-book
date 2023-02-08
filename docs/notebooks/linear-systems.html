@@ -407,12 +407,30 @@ a_{1,0}x_0 &amp; + &amp; a_{1,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{1,n-1}
 a_{m-1,0}x_0 &amp; + &amp; a_{m-1,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{m-1,n-1}x_{n-1} &amp; = &amp; b_{m-1} \\
 \end{array}.
 \]</span></p>
-<p>We can classify the solutions of an arbitrary <span class="math inline">\(m \times n\)</span> linear system as follows: - If the linear system is <em>square</em>, i.e.&nbsp;<span class="math inline">\(m=n\)</span>, then the system will have - A unique solution if the determinant is nonzero, - If the determinant <em>is</em> zero, the system will have - Infinitely many solutions if <em>all</em> the equations are multiples of each other, - No solution otherwise. - If the linear system is <em>underdetermined</em>, i.e.&nbsp;<span class="math inline">\(m &lt; n\)</span>, then the system will have infinitely many solutions. - If the linear system is <em>overdetermined</em>, i.e.&nbsp;<span class="math inline">\(m &gt; n\)</span>, then the system will have no solutions.</p>
+<p>We can classify the solutions of an arbitrary <span class="math inline">\(m \times n\)</span> linear system as follows:</p>
+<ul>
+<li>If the linear system is <em>square</em>, i.e.&nbsp;<span class="math inline">\(m=n\)</span>, then the system will have
+<ul>
+<li>A unique solution if the determinant is nonzero,</li>
+<li>If the determinant <em>is</em> zero, the system will have
+<ul>
+<li>Infinitely many solutions if <em>all</em> the equations are multiples of each other,</li>
+<li>No solution otherwise.</li>
+</ul></li>
+</ul></li>
+<li>If the linear system is <em>underdetermined</em>, i.e.&nbsp;<span class="math inline">\(m &lt; n\)</span>, then the system will have infinitely many solutions.</li>
+<li>If the linear system is <em>overdetermined</em>, i.e.&nbsp;<span class="math inline">\(m &gt; n\)</span>, then the system will have no solutions.</li>
+</ul>
 <p>Graphically, a unique solution means that the <span class="math inline">\(n\)</span> <em>hyperplanes</em> defined by the <span class="math inline">\(n\)</span> linear equations all intersect at a single point <span class="math inline">\((x_0, x_1, \cdots, x_n)\)</span> in <span class="math inline">\(\mathbb{R}^n\)</span>. Think of a hyperplane as an <span class="math inline">\(n\)</span>-dimensional generalization of a plane. If any of two hyperplanes are parallel in <span class="math inline">\(\mathbb{R}^n\)</span>, there will be no solution.</p>
 </section>
 <section id="matrix-vector-notation" class="level1">
 <h1>Matrix-Vector Notation</h1>
-<p>These systems of linear equations are incredibly tedious to write out and analyze as is for all but the simplest cases of like two or three equations. There’s a cleaner notation for working with these things. Here’s what we can do. We have 3 separate types of objects showing up in these equations: - The <span class="math inline">\(m \cdot n\)</span> coefficients <span class="math inline">\(a_{0,0}, \ a_{0,1}, \ \cdots, \ a_{m-1,n-1}\)</span>. - The <span class="math inline">\(n\)</span> unknown variables <span class="math inline">\(x_0, x_1, \cdots, x_{n-1}\)</span>. - The <span class="math inline">\(m\)</span> constant terms <span class="math inline">\(b_0, b_1, \cdots, b_{m-1}\)</span>.</p>
+<p>These systems of linear equations are incredibly tedious to write out and analyze as is for all but the simplest cases of like two or three equations. There’s a cleaner notation for working with these things. Here’s what we can do. We have 3 separate types of objects showing up in these equations:</p>
+<ul>
+<li>The <span class="math inline">\(m \cdot n\)</span> coefficients <span class="math inline">\(a_{0,0}, \ a_{0,1}, \ \cdots, \ a_{m-1,n-1}\)</span>.</li>
+<li>The <span class="math inline">\(n\)</span> unknown variables <span class="math inline">\(x_0, x_1, \cdots, x_{n-1}\)</span>.</li>
+<li>The <span class="math inline">\(m\)</span> constant terms <span class="math inline">\(b_0, b_1, \cdots, b_{m-1}\)</span>.</li>
+</ul>
 <p>Let’s put each of these three objects inside their own arrays and write the linear system as</p>
 <p><span class="math display">\[
 \begin{pmatrix}
@@ -652,9 +670,10 @@ C = AB =
 </section>
 <section id="multiplying-multiple-matrices" class="level2">
 <h2 class="anchored" data-anchor-id="multiplying-multiple-matrices">Multiplying Multiple Matrices</h2>
-<p>What about multiplying three or more matrices together. I already said matrix multiplication is associative, so we can multiply any two at a time we like and get the same answer. However, there are often computational advantages to multiplying them together in some particular sequence. For example, suppose we wanted to multiply <span class="math inline">\(\mathbf{D} = \mathbf{A}\mathbf{B}\mathbf{C}\)</span>. Suppose, <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, <span class="math inline">\(\mathbf{B}\)</span> is <span class="math inline">\(n \times p\)</span>, and <span class="math inline">\(\mathbf{C}\)</span> is <span class="math inline">\(p \times q\)</span>. No matter which order we do it, the output <span class="math inline">\(\mathbf{D}\)</span> will have size <span class="math inline">\(m \times q\)</span>. But there are two ways we could do this multiplication. 1. <span class="math inline">\(\mathbf{D} = \mathbf{A}(\mathbf{B}\mathbf{C})\)</span>: In this case, the <span class="math inline">\(\mathbf{E}=\mathbf{B}\mathbf{C}\)</span> computation requires <span class="math inline">\(nq(2p-1)\)</span> FLOPS, and then the <span class="math inline">\(\mathbf{A}\mathbf{E}\)</span> computation requires <span class="math inline">\(mq(2n-1)\)</span> FLOPS. The total is thus the sum of these two, i.e. <span class="math display">\[nq(2p-1) + mq(2n-1) = O(npq+mnq) \ \ \text{FLOPS}.\]</span></p>
-<ol start="2" type="1">
-<li><span class="math inline">\(\mathbf{D} = (\mathbf{A}\mathbf{B})\mathbf{C}\)</span>: In this case, the <span class="math inline">\(\mathbf{F}=\mathbf{A}\mathbf{B}\)</span> computation requires <span class="math inline">\(mp(2n-1)\)</span> FLOPS, and then the <span class="math inline">\(\mathbf{F}\mathbf{C}\)</span> computation requires <span class="math inline">\(mq(2n-1)\)</span> FLOPS. The total is thus the sum of these two, i.e. <span class="math display">\[mq(2p-1) + mp(2n-1) = O(mpq+mnp) \ \ \text{FLOPS}.\]</span></li>
+<p>What about multiplying three or more matrices together. I already said matrix multiplication is associative, so we can multiply any two at a time we like and get the same answer. However, there are often computational advantages to multiplying them together in some particular sequence. For example, suppose we wanted to multiply <span class="math inline">\(\mathbf{D} = \mathbf{A}\mathbf{B}\mathbf{C}\)</span>. Suppose, <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, <span class="math inline">\(\mathbf{B}\)</span> is <span class="math inline">\(n \times p\)</span>, and <span class="math inline">\(\mathbf{C}\)</span> is <span class="math inline">\(p \times q\)</span>. No matter which order we do it, the output <span class="math inline">\(\mathbf{D}\)</span> will have size <span class="math inline">\(m \times q\)</span>. But there are two ways we could do this multiplication.</p>
+<ol type="1">
+<li><p><span class="math inline">\(\mathbf{D} = \mathbf{A}(\mathbf{B}\mathbf{C})\)</span>: In this case, the <span class="math inline">\(\mathbf{E}=\mathbf{B}\mathbf{C}\)</span> computation requires <span class="math inline">\(nq(2p-1)\)</span> FLOPS, and then the <span class="math inline">\(\mathbf{A}\mathbf{E}\)</span> computation requires <span class="math inline">\(mq(2n-1)\)</span> FLOPS. The total is thus the sum of these two, i.e. <span class="math display">\[nq(2p-1) + mq(2n-1) = O(npq+mnq) \ \ \text{FLOPS}.\]</span></p></li>
+<li><p><span class="math inline">\(\mathbf{D} = (\mathbf{A}\mathbf{B})\mathbf{C}\)</span>: In this case, the <span class="math inline">\(\mathbf{F}=\mathbf{A}\mathbf{B}\)</span> computation requires <span class="math inline">\(mp(2n-1)\)</span> FLOPS, and then the <span class="math inline">\(\mathbf{F}\mathbf{C}\)</span> computation requires <span class="math inline">\(mq(2n-1)\)</span> FLOPS. The total is thus the sum of these two, i.e. <span class="math display">\[mq(2p-1) + mp(2n-1) = O(mpq+mnp) \ \ \text{FLOPS}.\]</span></p></li>
 </ol>
 <p>Let’s put some numbers in to make it clear what’s going on. Suppose <span class="math inline">\(m=1000\)</span>, <span class="math inline">\(n=2\)</span>, <span class="math inline">\(p=100\)</span>, and <span class="math inline">\(q=100\)</span>. Then the first case takes</p>
 <p><span class="math display">\[nq(2p-1) + mq(2n-1) = 339800 \ \ \text{FLOPS},\]</span></p>

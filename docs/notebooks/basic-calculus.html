@@ -254,7 +254,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>In this lesson, I’ll cover the basics of the calculus of a single variable. Calculus is essentially the study of the continuum. Important things that calculus seeks to understand are: - Infinitesimals: How to manipulate numbers that are “infinitely” small. - Limits: What happens when numbers get arbitrarily close to each other. - Differentiation: How one variable changes continuously in response to one or more other variables. - Integration: How to add up infinitely many small numbers to get a finite number.</p>
+<p>In this lesson, I’ll cover the basics of the calculus of a single variable. Calculus is essentially the study of the continuum. Important things that calculus seeks to understand are:</p>
+<ul>
+<li>Infinitesimals: How to manipulate numbers that are “infinitely” small.</li>
+<li>Limits: What happens when numbers get arbitrarily close to each other.</li>
+<li>Differentiation: How one variable changes continuously in response to one or more other variables.</li>
+<li>Integration: How to add up infinitely many small numbers to get a finite number.</li>
+</ul>
 <p>Not all of these topics are equally important to know for machine learning, but I’ll try to at least touch on each topic a little bit. Let’s get started.</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -641,7 +647,12 @@ dx = 0.0000000000000000      dy/dx = 0.000000    error = -2.000000</code></pre>
 &amp;= \frac{1}{1 + e^{-x}} \bigg(1-\frac{1}{1 + e^{-x}}\bigg) \\
 &amp;= \sigma(x) \big(1 - \sigma(x)\big).
 \end{align}\]</span></p>
-<p>Let’s look at this answer and verify it matches our intuition as to what the derivative of the sigmoid should be. - When <span class="math inline">\(x &lt; -5\)</span>, <span class="math inline">\(\sigma(x) \approx 0\)</span>, hence <span class="math inline">\(\frac{d}{dx} \sigma(x) \approx 0\)</span>. - When <span class="math inline">\(x &gt; 5\)</span>, <span class="math inline">\(\sigma(x) \approx 1\)</span>, so <span class="math inline">\(1 - \sigma(x) \approx 0\)</span>, and again <span class="math inline">\(\frac{d}{dx} \sigma(x) \approx 0\)</span>. - When <span class="math inline">\(-1 &lt; x &lt; 1\)</span>, <span class="math inline">\(\sigma(x) \approx \sigma(0) + \frac{d}{dx}\sigma(0) \cdot (x-0) = \frac{1}{2} + \frac{1}{2}\big(1 - \frac{1}{2}\big) \cdot x = \frac{1}{2} + \frac{1}{4}x\)</span>, which is a tangent line with a positive slope of <span class="math inline">\(\frac{1}{4}\)</span>.</p>
+<p>Let’s look at this answer and verify it matches our intuition as to what the derivative of the sigmoid should be.</p>
+<ul>
+<li>When <span class="math inline">\(x &lt; -5\)</span>, <span class="math inline">\(\sigma(x) \approx 0\)</span>, hence <span class="math inline">\(\frac{d}{dx} \sigma(x) \approx 0\)</span>.</li>
+<li>When <span class="math inline">\(x &gt; 5\)</span>, <span class="math inline">\(\sigma(x) \approx 1\)</span>, so <span class="math inline">\(1 - \sigma(x) \approx 0\)</span>, and again <span class="math inline">\(\frac{d}{dx} \sigma(x) \approx 0\)</span>.</li>
+<li>When <span class="math inline">\(-1 &lt; x &lt; 1\)</span>, <span class="math inline">\(\sigma(x) \approx \sigma(0) + \frac{d}{dx}\sigma(0) \cdot (x-0) = \frac{1}{2} + \frac{1}{2}\big(1 - \frac{1}{2}\big) \cdot x = \frac{1}{2} + \frac{1}{4}x\)</span>, which is a tangent line with a positive slope of <span class="math inline">\(\frac{1}{4}\)</span>.</li>
+</ul>
 <p>To further verify the things look like a line around <span class="math inline">\(x=0\)</span>, we could look at the second derivative and verify it’s approximately zero in the region <span class="math inline">\(-1 &lt; x &lt; 1\)</span>. I’ll leave that exercise to you.</p>
 <p>The sigmoid function shows up in machine learning when doing binary classification. If a problem can be classified into two classes, <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>, the sigmoid can be used to model the probability of the input being in class <span class="math inline">\(1\)</span>. The closer the sigmoid is to <span class="math inline">\(1\)</span>, or equivalently the larger <span class="math inline">\(x\)</span> is, the more likely the input is a <span class="math inline">\(1\)</span>. More on this in a future lesson.</p>
 <p>To calculate the derivative of a function in sympy, use <code>y.diff(x)</code>, which means “differentiate <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span>”.</p>

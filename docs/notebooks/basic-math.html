@@ -275,7 +275,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="elementary-arithmetic-and-algebra" class="level1">
 <h1>Elementary Arithmetic and Algebra</h1>
 <p>It’s useful in machine learning to be able to read and manipulate basic arithmetic and algebraic equations. I won’t go into depth on the basics of high school arithmetic and algebra. I do have to assume <em>some</em> mathematical maturity of the reader, and this seems like a good place to draw the line. I’ll just mention a few key points.</p>
-<p>Recall that numbers can come in several forms. We can have, - Positive whole numbers <span class="math display">\[0, 1, 2, 3, 4, \cdots\]</span> These are sometimes called the <strong>natural numbers</strong> or the <strong>positive integers</strong>. Note the inclusion of <span class="math inline">\(0\)</span> in this group. Following the computer science convention I’ll tend to do that. - Whole numbers <span class="math display">\[\cdots, -3, -2, -1, 0, 1, 2, 3, \cdots\]</span> These can be positive <em>or</em> negative. They’re called the <strong>integers</strong>. - Ratios of whole numbers, for example <span class="math display">\[\frac{1}{2}, \frac{5}{4}, -\frac{3}{4}, \frac{1000}{999}, \cdots\]</span> Any ratio will do, so long as the <em>denominator</em> (the bottom number) is not zero. These are called the <strong>rational numbers</strong>. - Arbitrary decimal numbers, for example <span class="math display">\[1.00, \ 5.07956, \ -0.99999\dots, \ \pi=3.1415\dots, \ e=2.718\dots, \ \cdots\]</span> These are called the <strong>real numbers</strong>. They include as a special case both the integers and the rational numbers, but also include numbers that can’t be represented as fractions, like <span class="math inline">\(\pi\)</span> and <span class="math inline">\(e\)</span>. - <strong>Complex numbers</strong> like <span class="math inline">\(1 + 2i\)</span> where <span class="math inline">\(i=\sqrt{-1}\)</span> is the imaginary number. Complex numbers include the real numbers as a special case. Since they don’t really show up in machine learning we won’t deal with these after this.</p>
+<p>Recall that numbers can come in several forms. We can have,</p>
+<ul>
+<li>Positive whole numbers <span class="math display">\[0, 1, 2, 3, 4, \cdots\]</span> These are sometimes called the <strong>natural numbers</strong> or the <strong>positive integers</strong>. Note the inclusion of <span class="math inline">\(0\)</span> in this group. Following the computer science convention I’ll tend to do that.</li>
+<li>Whole numbers <span class="math display">\[\cdots, -3, -2, -1, 0, 1, 2, 3, \cdots\]</span> These can be positive <em>or</em> negative. They’re called the <strong>integers</strong>.</li>
+<li>Ratios of whole numbers, for example <span class="math display">\[\frac{1}{2}, \frac{5}{4}, -\frac{3}{4}, \frac{1000}{999}, \cdots\]</span> Any ratio will do, so long as the <em>denominator</em> (the bottom number) is not zero. These are called the <strong>rational numbers</strong>.</li>
+<li>Arbitrary decimal numbers, for example <span class="math display">\[1.00, \ 5.07956, \ -0.99999\dots, \ \pi=3.1415\dots, \ e=2.718\dots, \ \cdots\]</span> These are called the <strong>real numbers</strong>. They include as a special case both the integers and the rational numbers, but also include numbers that can’t be represented as fractions, like <span class="math inline">\(\pi\)</span> and <span class="math inline">\(e\)</span>.</li>
+<li><strong>Complex numbers</strong> like <span class="math inline">\(1 + 2i\)</span> where <span class="math inline">\(i=\sqrt{-1}\)</span> is the imaginary number. Complex numbers include the real numbers as a special case. Since they don’t really show up in machine learning we won’t deal with these after this.</li>
+</ul>
 <p>You should be familiar with the usual arithmetic operations defined on these systems of numbers. Things like addition, subtraction, multiplication, and division. You should also at least vaguely recall the order of operations, which defines the order in which complex arithmetic operations with parenthesis are carried out. For example,</p>
 <p><span class="math display">\[(5+1) \cdot \frac{(7-3)^2}{2} = 6 \cdot \frac{4^2}{2} = 6 \cdot \frac{16}{2} = 6 \cdot 8 = 48.\]</span></p>
 <p>You should be able to manipulate and simplify simple fractions by hand. For example,</p>
@@ -345,12 +352,23 @@ x &amp;= \frac{c - b}{a}.
 <p>Let’s quickly cover some of the common functions you’d have seen before in a math class, focusing mainly on the ones that show up in machine learning. I’ll also cover a couple machine-learning specific functions you perhaps haven’t seen before.</p>
 <section id="affine-functions" class="level2">
 <h2 class="anchored" data-anchor-id="affine-functions">Affine Functions</h2>
-<p>The most basic functions to be aware of are the straight-line functions: constant functions, linear functions, and affine functions: - Constant functions <span class="math inline">\(y=c\)</span> or <span class="math inline">\(x=c\)</span>: For example, <span class="math inline">\(y=2\)</span>, <span class="math inline">\(x=1\)</span>. - Linear functions <span class="math inline">\(y=ax\)</span>: For example, <span class="math inline">\(y=-x\)</span>, <span class="math inline">\(y=5x\)</span>. - Affine functions <span class="math inline">\(y=ax+b\)</span>: For example, <span class="math inline">\(y=-x+1\)</span>, <span class="math inline">\(y=5x-4\)</span>.</p>
+<p>The most basic functions to be aware of are the straight-line functions: constant functions, linear functions, and affine functions:</p>
+<ul>
+<li>Constant functions <span class="math inline">\(y=c\)</span> or <span class="math inline">\(x=c\)</span>: For example, <span class="math inline">\(y=2\)</span>, <span class="math inline">\(x=1\)</span>.</li>
+<li>Linear functions <span class="math inline">\(y=ax\)</span>: For example, <span class="math inline">\(y=-x\)</span>, <span class="math inline">\(y=5x\)</span>.</li>
+<li>Affine functions <span class="math inline">\(y=ax+b\)</span>: For example, <span class="math inline">\(y=-x+1\)</span>, <span class="math inline">\(y=5x-4\)</span>.</li>
+</ul>
 <p>All constant functions are affine functions, and all linear functions are affine functions. In the case of affine functions, the value <span class="math inline">\(b\)</span> is called the <strong>intercept</strong>. It corresponds to the value where the function crosses the y-axis. The value <span class="math inline">\(a\)</span> is called the <strong>slope</strong>. It corresponds to the steepness of the curve, i.e.&nbsp;its height over its width (or “rise” over “run”). Notice linear functions are the special case where the intercept is <em>always</em> the origin <span class="math inline">\(x=0, y=0\)</span>.</p>
 <section id="plotting" class="level3">
 <h3 class="anchored" data-anchor-id="plotting">Plotting</h3>
 <p>We can plot these and any other univariate function <span class="math inline">\(y=f(x)\)</span> in the usual way you learned about in school. We sample a lot of <span class="math inline">\((x,y)\)</span> pairs from the function, and plot them on a grid with a horizontal x-axis and vertical y-axis.</p>
-<p>Before plotting some examples I need to mention that plotting in python is usually done with the <code>matplotlib</code> library. Typically what we’d do to get a very simple plot is: 1. Import <code>plt</code>, which is the alias to the submodule <code>matplotlib.pyplot</code> 2. Get a grid of <code>x</code> values we want to plot, e.g.&nbsp;using <code>np.linspace</code> or <code>np.arange</code> 3. Get a grid of <code>y</code> values either directly, or by first defining a python function <code>f(x)</code> 4. Plot x vs y by calling <code>plt.(x, y)</code>, followed by <code>plt.show()</code>.</p>
+<p>Before plotting some examples I need to mention that plotting in python is usually done with the <code>matplotlib</code> library. Typically what we’d do to get a very simple plot is:</p>
+<ol type="1">
+<li>Import <code>plt</code>, which is the alias to the submodule <code>matplotlib.pyplot</code></li>
+<li>Get a grid of <code>x</code> values we want to plot, e.g.&nbsp;using <code>np.linspace</code> or <code>np.arange</code></li>
+<li>Get a grid of <code>y</code> values either directly, or by first defining a python function <code>f(x)</code></li>
+<li>Plot x vs y by calling <code>plt.(x, y)</code>, followed by <code>plt.show()</code>.</li>
+</ol>
 <p>Note step (2) requires another library called <code>numpy</code> to create the grid of points. You don’t <em>have</em> to use numpy for this, but it’s typically easiest. Usually numpy is imported with the alias <code>np</code>. Numpy is python’s main library for working with numerical arrays. We’ll cover it in much more detail in future lessons.</p>
 <p>Let me go ahead and load these libraries. I’ll also show a simple example of a plot. What I’ll do is define a grid <code>x</code> of 100 equally spaced points between -10 and 10, and plot the function <span class="math inline">\(y=x-1\)</span> using the method described above.</p>
 <div class="cell" data-execution_count="8">
@@ -393,7 +411,12 @@ x &amp;= \frac{c - b}{a}.
 <p><img src="basic-math_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>Note the following observations from each plot. 1. The constant function is horizontal. 2. The linear function is just a rightward-sloping line that passes through the origin <span class="math inline">\((0,0)\)</span> and the point <span class="math inline">\((1,2)\)</span>. 3. The affine function is just the same linear function shifted <em>down</em> by one unit of <span class="math inline">\(y\)</span>.</p>
+<p>Note the following observations from each plot.</p>
+<ol type="1">
+<li>The constant function is horizontal.</li>
+<li>The linear function is just a rightward-sloping line that passes through the origin <span class="math inline">\((0,0)\)</span> and the point <span class="math inline">\((1,2)\)</span>.</li>
+<li>The affine function is just the same linear function shifted <em>down</em> by one unit of <span class="math inline">\(y\)</span>.</li>
+</ol>
 </section>
 </section>
 <section id="polynomial-functions" class="level2">
@@ -741,7 +764,13 @@ x &amp; \text{if } x \ge 0 \\
 <h2 class="anchored" data-anchor-id="composite-functions">Composite Functions</h2>
 <p>We can also have any arbitrary hybrid of the above functions. We can apply exponentials to affine functions, logs to sine functions, sines to exponential functions. In essence, this kind of layered composition of functions is what a neural network is as we’ll see later on.</p>
 <p>Math folks often write an abstract compositional function as a function applied to another function, like <span class="math inline">\(y=f(g(x))\)</span> or <span class="math inline">\(y=(f \circ g)(x)\)</span>. These can be chained arbitrarily many times, not just two. Neural networks do just that, often hundreds or thousands of times.</p>
-<p>Consider, for example, the function composition done by applying the following functions in sequence: - an affine function <span class="math inline">\(y=wx+b\)</span> - followed by a linear function <span class="math inline">\(y=-x\)</span> - followed by an exponential function <span class="math inline">\(y=e^x\)</span> - followed by a rational function <span class="math inline">\(y=\frac{1}{x}\)</span></p>
+<p>Consider, for example, the function composition done by applying the following functions in sequence:</p>
+<ul>
+<li>an affine function <span class="math inline">\(y=wx+b\)</span></li>
+<li>followed by a linear function <span class="math inline">\(y=-x\)</span></li>
+<li>followed by an exponential function <span class="math inline">\(y=e^x\)</span></li>
+<li>followed by a rational function <span class="math inline">\(y=\frac{1}{x}\)</span></li>
+</ul>
 <p>to get the full function <span class="math display">\[y = \frac{1}{1 + e^{-(wx+b)}}.\]</span></p>
 <p>Here’s a plot of what this function looks like for the “standard form” where <span class="math inline">\(w=1, b=0\)</span>. Notice that <span class="math inline">\(0 \leq y \leq 1\)</span>. The values of <span class="math inline">\(x\)</span> get “squashed” to values between 0 and 1 after the function is applied.</p>
 <div class="cell" data-execution_count="28">
@@ -770,7 +799,13 @@ x &amp; \text{if } x \ge 0 \\
 </section>
 <section id="function-transformations" class="level2">
 <h2 class="anchored" data-anchor-id="function-transformations">Function Transformations</h2>
-<p>Suppose we have some arbitrary function <span class="math inline">\(f(x)\)</span> and we apply a series of compositions to get a new function <span class="math display">\[g(x)=a \cdot f(b \cdot (x + c)) + d.\]</span> We can regard each parameter <span class="math inline">\(a,b,c,d\)</span> as doing some kind of geometric transformation to the graph of the original function <span class="math inline">\(f(x)\)</span>. Namely, - <span class="math inline">\(a\)</span> re-scales the function vertically (if <span class="math inline">\(a\)</span> is negative it also flips <span class="math inline">\(f(x)\)</span> upside down) - <span class="math inline">\(b\)</span> re-scales the function horizontally (if <span class="math inline">\(b\)</span> is negative it also flips <span class="math inline">\(f(x)\)</span> left to right) - <span class="math inline">\(c\)</span> shifts the function horizontally (left if <span class="math inline">\(c\)</span> is positive, right if <span class="math inline">\(c\)</span> is negative) - <span class="math inline">\(d\)</span> shifts the function vertically (up if <span class="math inline">\(d\)</span> is positive, down if <span class="math inline">\(d\)</span> is negative)</p>
+<p>Suppose we have some arbitrary function <span class="math inline">\(f(x)\)</span> and we apply a series of compositions to get a new function <span class="math display">\[g(x)=a \cdot f(b \cdot (x + c)) + d.\]</span> We can regard each parameter <span class="math inline">\(a,b,c,d\)</span> as doing some kind of geometric transformation to the graph of the original function <span class="math inline">\(f(x)\)</span>. Namely,</p>
+<ul>
+<li><span class="math inline">\(a\)</span> re-scales the function vertically (if <span class="math inline">\(a\)</span> is negative it also flips <span class="math inline">\(f(x)\)</span> upside down)</li>
+<li><span class="math inline">\(b\)</span> re-scales the function horizontally (if <span class="math inline">\(b\)</span> is negative it also flips <span class="math inline">\(f(x)\)</span> left to right)</li>
+<li><span class="math inline">\(c\)</span> shifts the function horizontally (left if <span class="math inline">\(c\)</span> is positive, right if <span class="math inline">\(c\)</span> is negative)</li>
+<li><span class="math inline">\(d\)</span> shifts the function vertically (up if <span class="math inline">\(d\)</span> is positive, down if <span class="math inline">\(d\)</span> is negative)</li>
+</ul>
 <p>Here’s an example of how these work. Consider the function <span class="math inline">\(f(x)=x^2\)</span>. We’re going to apply each of these transformations one by one to show what they do to the graph of <span class="math inline">\(f(x)\)</span>.</p>
 <p>First, let’s look at the transformation <span class="math inline">\(g(x) = \frac{1}{2} f(x) = \frac{1}{2} x^2\)</span>. Here <span class="math inline">\(a=\frac{1}{2}\)</span> and the rest are zero. I’ll plot it along side the original graph (the blue curve). Notice the graph gets flattened vertically by a factor of two (the orange curve).</p>
 <div class="cell" data-execution_count="30">
@@ -830,7 +865,12 @@ x &amp; \text{if } x \ge 0 \\
 <p>Simply put, a multivariate function is a function of multiple variables. Instead of a single variable <span class="math inline">\(x\)</span>, we might have several variables, e.g.&nbsp;<span class="math inline">\(x_0, x_1, x_2, x_3, x_4, x_5\)</span>,</p>
 <p><span class="math display">\[y = f(x_0, x_1, x_2, x_3, x_4, x_5).\]</span></p>
 <p>If you think about mathematical functions analogously to python functions it shouldn’t be surprising functions can have multiple arguments. They usually do, in fact.</p>
-<p>Here’s an example of a function that takes two arguments <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> and produces a single output <span class="math inline">\(z\)</span>, more often written as <span class="math inline">\(z=f(x,y)\)</span>. The function we’ll look at is <span class="math inline">\(z = x^2 + y^2\)</span>. I’ll evaluate the function at three points: - <span class="math inline">\(x=0\)</span>, <span class="math inline">\(y=0\)</span>, - <span class="math inline">\(x=1\)</span>, <span class="math inline">\(y=-1\)</span>, - <span class="math inline">\(x=0\)</span>, <span class="math inline">\(y=1\)</span>.</p>
+<p>Here’s an example of a function that takes two arguments <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> and produces a single output <span class="math inline">\(z\)</span>, more often written as <span class="math inline">\(z=f(x,y)\)</span>. The function we’ll look at is <span class="math inline">\(z = x^2 + y^2\)</span>. I’ll evaluate the function at three points:</p>
+<ul>
+<li><span class="math inline">\(x=0\)</span>, <span class="math inline">\(y=0\)</span>,</li>
+<li><span class="math inline">\(x=1\)</span>, <span class="math inline">\(y=-1\)</span>,</li>
+<li><span class="math inline">\(x=0\)</span>, <span class="math inline">\(y=1\)</span>.</li>
+</ul>
 <p>The main thing to notice is the function does exactly what you think it does. If you plug in 2 values, you get out 1 value.</p>
 <div class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> y <span class="op">**</span> <span class="dv">2</span></span>

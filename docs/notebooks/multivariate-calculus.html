@@ -386,7 +386,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The Hessian is the multivariate generalization of the full second derivative, just as the gradient vector is the generalization of the full first derivative. I’ll often write the Hessian matrix with the symbol <span class="math inline">\(\mathbf{H}\)</span> or <span class="math inline">\(\mathbf{H}(\mathbf{x})\)</span> for brevity.</p>
 <p>Just as the second derivative of a univariate function can be interpreted geometrically as representing the curvature of the <em>curve</em> <span class="math inline">\(y=f(x)\)</span>, the Hessian of a multivariate function represents the curvature of the <em>surface</em> <span class="math inline">\(z=f(x,y)\)</span>. This comes from looking at the multivariate <strong>second-order perturbation</strong></p>
 <p><span class="math display">\[z = z_0 + \mathbf{g}(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0) + \frac{1}{2}(\mathbf{x} - \mathbf{x}_0)^\top \mathbf{H}(\mathbf{x}_0) (\mathbf{x} - \mathbf{x}_0).\]</span></p>
-<p>The curvature of the function can be obtained by looking at the eigenvalues of the Hessian at <span class="math inline">\(\mathbf{x}= \mathbf{x}_0\)</span>. Large eigenvalues represent steep curvature, while small eigenvalues represent shallow curvature. The sign of the eigenvalues indicate whether the function 1. Bowls upward: both eigenvalues are non-negative, 2. Bowls downward: both eigenvalues are non-positive, 3. Saddles: one eigenvalue is positive, one is eigenvalue negative.</p>
+<p>The curvature of the function can be obtained by looking at the eigenvalues of the Hessian at <span class="math inline">\(\mathbf{x}= \mathbf{x}_0\)</span>. Large eigenvalues represent steep curvature, while small eigenvalues represent shallow curvature. The sign of the eigenvalues indicate whether the function</p>
+<ol type="1">
+<li>Bowls upward: both eigenvalues are non-negative,</li>
+<li>Bowls downward: both eigenvalues are non-positive,</li>
+<li>Saddles: one eigenvalue is positive, one is eigenvalue negative.</li>
+</ol>
 <p>Case (3) creates what’s called a <strong>saddlepoint</strong>, a point where the function slopes upwards in one direction, but downward in the other, creating the shape of something that resembles a horse’s saddle.</p>
 <p>For the same working example <span class="math inline">\(z=x^2+y^2\)</span>, we’d have</p>
 <p><span class="math display">\[
@@ -475,8 +480,16 @@ dy &amp;= \frac{dy}{d\mathbf{x}} \cdot d\mathbf{x}.
 </section>
 <section id="the-jacobian" class="level2">
 <h2 class="anchored" data-anchor-id="the-jacobian">The Jacobian</h2>
-<p>Thus far we’ve seen the following two types of functions: - scalar-valued functions of a scalar variable: <span class="math inline">\(y=f(x)\)</span>, - scalar-valued functions of a vector variable: <span class="math inline">\(y = f(\mathbf{x})\)</span>.</p>
-<p>As you might expect, we can also have the equivalent vector-valued functions: - vector-valued functions of a scalar variable: <span class="math inline">\(\mathbf{y} = f(x)\)</span>, - vector-valued functions of a vector variable: <span class="math inline">\(\mathbf{y} = f(\mathbf{x})\)</span>.</p>
+<p>Thus far we’ve seen the following two types of functions:</p>
+<ul>
+<li>scalar-valued functions of a scalar variable: <span class="math inline">\(y=f(x)\)</span>,</li>
+<li>scalar-valued functions of a vector variable: <span class="math inline">\(y = f(\mathbf{x})\)</span>.</li>
+</ul>
+<p>As you might expect, we can also have the equivalent vector-valued functions:</p>
+<ul>
+<li>vector-valued functions of a scalar variable: <span class="math inline">\(\mathbf{y} = f(x)\)</span>,</li>
+<li>vector-valued functions of a vector variable: <span class="math inline">\(\mathbf{y} = f(\mathbf{x})\)</span>.</li>
+</ul>
 <p>The most relevant of these two for machine learning purposes is the vector-valued function of a vector variable <span class="math inline">\(\mathbf{y} = f(\mathbf{x})\)</span>. These functions are just extensions of the scalar-valued vector variable functions <span class="math inline">\(y = f(\mathbf{x})\)</span> we’ve been working with so far, except now we can have <span class="math inline">\(m\)</span> scalar-valued functions <span class="math inline">\(y_i = f_i(\mathbf{x})\)</span>, which when put together make up a <em>vector</em> output</p>
 <p><span class="math display">\[\mathbf{y} = (y_0,y_1,\cdots,y_{m-1}) = (f_0(\mathbf{x}),f_1(\mathbf{x}),\cdots,f_{m-1}(\mathbf{x})).\]</span></p>
 <p>To define the gradient of a vector-valued function, we just take the gradient of each output element <span class="math inline">\(y_i=f_i(\mathbf{x})\)</span>. Doing this over all <span class="math inline">\(m\)</span> output elements will give <span class="math inline">\(m\)</span> gradients each of size <span class="math inline">\(n\)</span>,</p>
@@ -791,7 +804,11 @@ y_0 (1 - y_0) &amp; -y_0 y_1 &amp; \cdots &amp; -y_0 y_{n-1} \\
 <h2 class="anchored" data-anchor-id="integration-in-n-dimensions">Integration in <span class="math inline">\(n\)</span> Dimensions</h2>
 <p>The same idea extends to <span class="math inline">\(n\)</span> dimensional functions <span class="math inline">\(y=f(x_0,\cdots,x_{n-1})\)</span>. In this case we’re calculating the <span class="math inline">\(n+1\)</span> dimensional <em>hypervolume</em> <span class="math inline">\(V_{n+1}\)</span> under the <span class="math inline">\(n\)</span> dimensional <em>manifold</em> <span class="math inline">\(y=f(x_0,\cdots,x_{n-1})\)</span>. The hyperrectangles would now have base hyperarea <span class="math inline">\(dA_n = dx_0dx_1\cdots dx_{n-1}\)</span> and height <span class="math inline">\(y\)</span>, so</p>
 <p><span class="math display">\[V_{n+1} = \int_{R_n} f(x_0,\cdots,x_{n-1}) dA_n = \sum_{\text{all hyperrectangles}} f(x_0,\cdots,x_{n-1}) dx_0dx_1\cdots dx_{n-1}.\]</span></p>
-<p>If we’re sufficiently lucky, we can factor a multivariate integral into a product of univariate integrals. We can do this as long as - the multivariate function <span class="math inline">\(f(x_0,\cdots,x_{n-1})\)</span> factors into a product of univariate functions <span class="math display">\[f(x_0,x_1,\cdots,x_{n-1}) = f_0(x_0) f_1(x_1) \cdots f_{n-1}(x_{n-1}),\]</span> - the integration region <span class="math inline">\(R_n\)</span> is a product of rectangles, <span class="math display">\[R_n = [a_0,b_0] \times [a_1,b_1] \times \cdots \times [a_{n-1},b_{n-1}].\]</span></p>
+<p>If we’re sufficiently lucky, we can factor a multivariate integral into a product of univariate integrals. We can do this as long as</p>
+<ul>
+<li>the multivariate function <span class="math inline">\(f(x_0,\cdots,x_{n-1})\)</span> factors into a product of univariate functions <span class="math display">\[f(x_0,x_1,\cdots,x_{n-1}) = f_0(x_0) f_1(x_1) \cdots f_{n-1}(x_{n-1}),\]</span></li>
+<li>the integration region <span class="math inline">\(R_n\)</span> is a product of rectangles, <span class="math display">\[R_n = [a_0,b_0] \times [a_1,b_1] \times \cdots \times [a_{n-1},b_{n-1}].\]</span></li>
+</ul>
 <p>When this is the case, we can simplify the integral to</p>
 <p><span class="math display">\[\int_{R_n} f(x_0,x_1,\cdots,x_{n-1}) dA_n = \bigg(\int_{a_0}^{b_0} f_0(x_0) dx_0\bigg) \bigg(\int_{a_1}^{b_1} f_1(x_1) dx_1\bigg) \cdots \bigg(\int_{a_{n-1}}^{b_{n-1}} f_{n-1}(x_{n-1}) dx_{n-1}\bigg).\]</span></p>
 <p>We can then evaluate each univariate integral one-by-one and put the results together to get the full multivariate integral.</p>

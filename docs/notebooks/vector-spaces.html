@@ -378,7 +378,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p><strong>Algorithm Analysis:</strong> Evaluating the dot product uses <span class="math inline">\(2n-1\)</span> or <span class="math inline">\(O(n)\)</span> total FLOPS, since for a vector of size <span class="math inline">\(n\)</span> there are <span class="math inline">\(n\)</span> multiplications and <span class="math inline">\(n-1\)</span> additions.</p>
-<p>Here are some fairly trivial properties the dot product satisfies. These follow straight from the definition. - The dot product of a vector with itself is nonnegative: <span class="math inline">\(\mathbf{v} \cdot \mathbf{v} \geq 0\)</span>. - It commutes: <span class="math inline">\(\mathbf{v} \cdot \mathbf{w} = \mathbf{w} \cdot \mathbf{v}\)</span>. - It distributes over scalar multiplication: <span class="math inline">\(c\mathbf{v} \cdot \mathbf{w} = \mathbf{v} \cdot c\mathbf{w} = c(\mathbf{v} \cdot \mathbf{w})\)</span>. - It distributes over vector addition: <span class="math inline">\((\mathbf{u} + \mathbf{v}) \cdot \mathbf{w} = \mathbf{u} \cdot \mathbf{w} + \mathbf{v} \cdot \mathbf{w}\)</span> and <span class="math inline">\(\mathbf{v} \cdot (\mathbf{u}+\mathbf{w}) = \mathbf{v} \cdot \mathbf{u} + \mathbf{v} \cdot \mathbf{w}\)</span>.</p>
+<p>Here are some fairly trivial properties the dot product satisfies. These follow straight from the definition.</p>
+<ul>
+<li>The dot product of a vector with itself is nonnegative: <span class="math inline">\(\mathbf{v} \cdot \mathbf{v} \geq 0\)</span>.</li>
+<li>It commutes: <span class="math inline">\(\mathbf{v} \cdot \mathbf{w} = \mathbf{w} \cdot \mathbf{v}\)</span>.</li>
+<li>It distributes over scalar multiplication: <span class="math inline">\(c\mathbf{v} \cdot \mathbf{w} = \mathbf{v} \cdot c\mathbf{w} = c(\mathbf{v} \cdot \mathbf{w})\)</span>.</li>
+<li>It distributes over vector addition: <span class="math inline">\((\mathbf{u} + \mathbf{v}) \cdot \mathbf{w} = \mathbf{u} \cdot \mathbf{w} + \mathbf{v} \cdot \mathbf{w}\)</span> and <span class="math inline">\(\mathbf{v} \cdot (\mathbf{u}+\mathbf{w}) = \mathbf{v} \cdot \mathbf{u} + \mathbf{v} \cdot \mathbf{w}\)</span>.</li>
+</ul>
 <p><strong>Notation</strong>: The dot product is often written in several different ways in different fields. Another notation arises by thinking of the dot product as the matrix multiplication of a <em>row vector</em> <span class="math inline">\(\mathbf{v}^\top = \begin{pmatrix}v_x &amp; v_y \end{pmatrix}\)</span> with a <em>column vector</em> <span class="math inline">\(\mathbf{w} = \begin{pmatrix} w_x \\ w_y \end{pmatrix}\)</span>. In that case,</p>
 <p><span class="math display">\[
 \mathbf{v}^\top \mathbf{w} =
@@ -471,9 +477,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In <span class="math inline">\(\mathbb{R}^2\)</span>, if we can find any two vectors <span class="math inline">\(\mathbf{a}\)</span> and <span class="math inline">\(\mathbf{b}\)</span> that are linearly independent, then we can write any other vector <span class="math inline">\(\mathbf{v}\)</span> as a linear combination of those two vectors,</p>
 <p><span class="math display">\[\mathbf{v} = v_a \mathbf{a} + v_b \mathbf{b}.\]</span></p>
 <p>The set <span class="math inline">\(\{\mathbf{a}, \mathbf{b}\}\)</span> is called a <em>basis</em>. We can use vectors in this set as a “basis” to write any other vector.</p>
-<p>More generally, a set of <span class="math inline">\(k\)</span> vectors <span class="math inline">\(\mathbf{v}_0, \mathbf{v}_1, \cdots, \mathbf{v}_{k-1}\)</span> form a <strong>basis</strong> for a vector space if the following two conditions hold, 1. The vectors are all linearly independent, 2. The vectors span the full vector space.</p>
+<p>More generally, a set of <span class="math inline">\(k\)</span> vectors <span class="math inline">\(\mathbf{v}_0, \mathbf{v}_1, \cdots, \mathbf{v}_{k-1}\)</span> form a <strong>basis</strong> for a vector space if the following two conditions hold,</p>
+<ol type="1">
+<li>The vectors are all linearly independent,</li>
+<li>The vectors span the full vector space.</li>
+</ol>
 <p>Another way of saying the same thing is that a basis is a set of exactly <span class="math inline">\(n\)</span> linearly independent vectors, where <span class="math inline">\(n\)</span> is the dimension of the vector space. A basis contains the minimal number of vectors needed to span the vector space.</p>
-<p>The special vectors <span class="math inline">\(\mathbf{e}_x\)</span> and <span class="math inline">\(\mathbf{e}_y\)</span> form a basis for <span class="math inline">\(\mathbb{R}^2\)</span>, since we can write any other vector as a linear combination of those two. Not only are these two vectors a basis, however. They satisfy two other useful properties, 1. They’re both unit vectors, <span class="math inline">\(||\mathbf{e}_x|| = ||\mathbf{e}_y|| = 1\)</span>. 2. They’re <strong>orthogonal</strong> to each other, that is, <span class="math inline">\(\mathbf{e}_x \cdot \mathbf{e}_y = 0\)</span>.</p>
+<p>The special vectors <span class="math inline">\(\mathbf{e}_x\)</span> and <span class="math inline">\(\mathbf{e}_y\)</span> form a basis for <span class="math inline">\(\mathbb{R}^2\)</span>, since we can write any other vector as a linear combination of those two. Not only are these two vectors a basis, however. They satisfy two other useful properties,</p>
+<ol type="1">
+<li>They’re both unit vectors, <span class="math inline">\(||\mathbf{e}_x|| = ||\mathbf{e}_y|| = 1\)</span>.</li>
+<li>They’re <strong>orthogonal</strong> to each other, that is, <span class="math inline">\(\mathbf{e}_x \cdot \mathbf{e}_y = 0\)</span>.</li>
+</ol>
 <p>A basis satisfying these two properties is called an <strong>orthonormal basis</strong>. An orthonormal basis is special in that it allows us to pick out the components of a vector directly by just taking dot products with the basis vectors. It’s only true in an orthonormal basis that we can write the components of a vector <span class="math inline">\(\mathbf{v}\)</span> as,</p>
 <p><span class="math display">\[\begin{align*}
 v_x &amp;= \mathbf{v} \cdot \mathbf{e}_x, \\
@@ -545,7 +559,11 @@ v_y &amp;= \mathbf{v} \cdot \mathbf{e}_y.
 <p><img src="vector-spaces_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>In machine learning, this formula for <span class="math inline">\(\cos \theta\)</span> is called the <strong>cosine similarity</strong>. The reason for this is that the dot product itself is a measure of how similar two vectors are. To see why, consider two special cases: - The two vectors are parallel: This is as large as the dot product between two vectors can get in absolute value. The vectors are as similar as they can be in a sense. Up to a scalar multiple, they contain the same information. - The two vectors are perpendicular: This is as small as the dot product between two vectors can get in absolute value. The two vectors are as different as they can be in a sense. They share pretty much no information. Information about one vector tells you basically nothing about the other.</p>
+<p>In machine learning, this formula for <span class="math inline">\(\cos \theta\)</span> is called the <strong>cosine similarity</strong>. The reason for this is that the dot product itself is a measure of how similar two vectors are. To see why, consider two special cases:</p>
+<ul>
+<li>The two vectors are parallel: This is as large as the dot product between two vectors can get in absolute value. The vectors are as similar as they can be in a sense. Up to a scalar multiple, they contain the same information.</li>
+<li>The two vectors are perpendicular: This is as small as the dot product between two vectors can get in absolute value. The two vectors are as different as they can be in a sense. They share pretty much no information. Information about one vector tells you basically nothing about the other.</li>
+</ul>
 <p>The cosine similarity is a function of two input vectors <span class="math inline">\(\mathbf{v}\)</span> and <span class="math inline">\(\mathbf{w}\)</span>. Since we don’t actually care about the angle <span class="math inline">\(\theta\)</span> usually, we’ll more often denote the cosine similarity using a notation like <span class="math inline">\(\cos(\mathbf{v},\mathbf{w})\)</span> to make it clear it’s a function of its two input vectors,</p>
 <p><span class="math display">\[\cos(\mathbf{v},\mathbf{w}) = \frac{\mathbf{v} \cdot \mathbf{w}}{||\mathbf{v}|| \cdot ||\mathbf{w}||}.\]</span></p>
 <p>Note the cosine similarity is just a normalized dot product, since dividing by the norms forces <span class="math inline">\(-1 \leq \cos(\mathbf{v},\mathbf{w}) \leq 1\)</span>. It thus captures the same idea of similarity that the dot product does, but it’s more useful when the lengths of vectors get out of control. This is particularly likely to happen in high dimensions, when <span class="math inline">\(n &gt;&gt; 2\)</span>. This is the so-called “curse of dimensionality”. We’ll come back to this idea in future lessons.</p>
