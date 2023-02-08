@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Machine Learning For The 2020s - 7&nbsp; Matrix Algebra</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notebooks/multivariate-calculus.html" rel="next">
+<link href="../notebooks/vector-spaces.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Machine Learning For The 2020s</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/basic-math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basic Math</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/numerical-computing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Numerical Computation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/vectorization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arrays and Vectorization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Calculus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#properties-of-matrices" id="toc-properties-of-matrices" class="nav-link active" data-scroll-target="#properties-of-matrices">Properties of Matrices</a>
+  <ul class="collapse">
+  <li><a href="#matrix-spaces" id="toc-matrix-spaces" class="nav-link" data-scroll-target="#matrix-spaces">Matrix Spaces</a></li>
+  <li><a href="#transposes" id="toc-transposes" class="nav-link" data-scroll-target="#transposes">Transposes</a></li>
+  <li><a href="#inverses" id="toc-inverses" class="nav-link" data-scroll-target="#inverses">Inverses</a></li>
+  <li><a href="#determinant-and-trace" id="toc-determinant-and-trace" class="nav-link" data-scroll-target="#determinant-and-trace">Determinant and Trace</a></li>
+  <li><a href="#linear-independence-and-rank" id="toc-linear-independence-and-rank" class="nav-link" data-scroll-target="#linear-independence-and-rank">Linear Independence and Rank</a></li>
+  <li><a href="#outer-products" id="toc-outer-products" class="nav-link" data-scroll-target="#outer-products">Outer Products</a></li>
+  </ul></li>
+  <li><a href="#special-matrices" id="toc-special-matrices" class="nav-link" data-scroll-target="#special-matrices">Special Matrices</a>
+  <ul class="collapse">
+  <li><a href="#diagonal-matrices" id="toc-diagonal-matrices" class="nav-link" data-scroll-target="#diagonal-matrices">Diagonal Matrices</a></li>
+  <li><a href="#symmetric-matrices" id="toc-symmetric-matrices" class="nav-link" data-scroll-target="#symmetric-matrices">Symmetric Matrices</a></li>
+  <li><a href="#upper-and-lower-triangular-matrices" id="toc-upper-and-lower-triangular-matrices" class="nav-link" data-scroll-target="#upper-and-lower-triangular-matrices">Upper and Lower Triangular Matrices</a></li>
+  <li><a href="#orthogonal-matrices" id="toc-orthogonal-matrices" class="nav-link" data-scroll-target="#orthogonal-matrices">Orthogonal Matrices</a></li>
+  </ul></li>
+  <li><a href="#matrix-factorizations" id="toc-matrix-factorizations" class="nav-link" data-scroll-target="#matrix-factorizations">Matrix Factorizations</a>
+  <ul class="collapse">
+  <li><a href="#lu-factorization" id="toc-lu-factorization" class="nav-link" data-scroll-target="#lu-factorization">LU Factorization</a></li>
+  <li><a href="#qr-factorization" id="toc-qr-factorization" class="nav-link" data-scroll-target="#qr-factorization">QR Factorization</a></li>
+  <li><a href="#spectral-decomposition" id="toc-spectral-decomposition" class="nav-link" data-scroll-target="#spectral-decomposition">Spectral Decomposition</a></li>
+  <li><a href="#positive-definiteness" id="toc-positive-definiteness" class="nav-link" data-scroll-target="#positive-definiteness">Positive Definiteness</a></li>
+  <li><a href="#singular-value-decomposition" id="toc-singular-value-decomposition" class="nav-link" data-scroll-target="#singular-value-decomposition">Singular Value Decomposition</a></li>
+  <li><a href="#low-rank-approximations" id="toc-low-rank-approximations" class="nav-link" data-scroll-target="#low-rank-approximations">Low-Rank Approximations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>In this lesson I’ll continue on with the topic of linear algebra. So far I’ve covered the basics of matrices and vectors, including how they arise from systems of linear equations, and how they can be understood geometrically via vector spaces and linear maps. In this lesson I’ll focus mainly on understanding matrices directly. Specifically, we’ll look at common matrix operations and important matrix factorizations. I’ll also briefly talk about tensors. Let’s get started.</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> (<span class="dv">4</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="properties-of-matrices" class="level1">
+<h1>Properties of Matrices</h1>
+<section id="matrix-spaces" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-spaces">Matrix Spaces</h2>
+<p>Just like vectors, matrices can be thought of as objects in their own <strong>matrix space</strong>. A matrix space is just a vector space, except it has two dimensions <span class="math inline">\(m\)</span> and <span class="math inline">\(n\)</span>. We’ll denote the matrix space of <span class="math inline">\(m \times n\)</span> matrices with the symbol <span class="math inline">\(\mathbb{R}^{m \times n}\)</span>. Just like vector spaces, matrix spaces must be closed under linear combinations. If <span class="math inline">\(\mathbf{A}, \mathbf{B} \in \mathbb{R}^{m \times n}\)</span> are two matrices, then any matrix linear combination <span class="math inline">\(\mathbf{C} = a\mathbf{A} + b\mathbf{B}\)</span> must also be a valid <span class="math inline">\(m \times n\)</span> matrix in <span class="math inline">\(\mathbb{R}^{m \times n}\)</span>. This means matrices behave the same way under addition and scalar multiplication as vectors do.</p>
+<p>While this fact should be kind of obvious by now, here’s an example anyway. I’ll choose <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> to both be <span class="math inline">\(2 \times 2\)</span> here. Adding them together or scalar multiplying them should also obviously give a matrix that’s <span class="math inline">\(2 \times 2\)</span>, since everything is element-wise.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    [[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">1</span>, <span class="dv">1</span>]])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    [[<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>     [<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>]])</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">A = </span><span class="ch">\n</span><span class="sc">{</span><span class="dv">5</span> <span class="op">*</span> A<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A + B = </span><span class="ch">\n</span><span class="sc">{</span>A <span class="op">+</span> B<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5A = 
+[[5 5]
+ [5 5]]
+A + B = 
+[[2 0]
+ [0 2]]</code></pre>
+</div>
+</div>
+<p>Since every matrix corresponds to a linear map <span class="math inline">\(\mathbf{F}(\mathbf{x}) = \mathbf{A}\mathbf{x}\)</span>, the space of matrices also corresponds to the space of linear maps from vectors <span class="math inline">\(\mathbf{x} \in \mathbb{R}^n\)</span> to vectors <span class="math inline">\(\mathbf{y} \in \mathbb{R}^m\)</span>. Recall that the composition of linear maps is equivalent to matrix multiplication. If <span class="math inline">\(\mathbf{F}(\mathbf{y}) = \mathbf{A}\mathbf{y}\)</span> and <span class="math inline">\(\mathbf{G}(\mathbf{x}) = \mathbf{B}\mathbf{x}\)</span> are two linear maps, then their composition is equivalent to the matrix product of the two maps,</p>
+<p><span class="math display">\[\mathbf{z}=\mathbf{F}(\mathbf{G}(\mathbf{x})) = \mathbf{A}\mathbf{B}\mathbf{x}.\]</span></p>
+<p>The composition, and hence the matrix multiplication operation, only makes sense when the two matrices are <strong>compatible</strong>, i.e.&nbsp;<span class="math inline">\(\mathbf{A} \in \mathbb{R}^{m \times n}\)</span> and <span class="math inline">\(\mathbf{B} \in \mathbb{R}^{n \times p}\)</span>. It also follows from this relationship to linear maps (which are of course just functions) that matrix multiplication is associative, i.e.&nbsp;we can put parenthesis wherever we like,</p>
+<p><span class="math display">\[\mathbf{A}\mathbf{B}\mathbf{C} = (\mathbf{A}\mathbf{B})\mathbf{C} = \mathbf{A}(\mathbf{B}\mathbf{C}).\]</span></p>
+<p>Do remember, however, that matrix multiplication (and function composition) doesn’t commute, i.e.&nbsp;<span class="math inline">\(\mathbf{A}\mathbf{B} \neq \mathbf{B}\mathbf{A}\)</span>, even when the two matrices <em>are</em> compatible.</p>
+</section>
+<section id="transposes" class="level2">
+<h2 class="anchored" data-anchor-id="transposes">Transposes</h2>
+<p>Recall that every matrix <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{m \times n}\)</span> has a <strong>transpose</strong> matrix <span class="math inline">\(\mathbf{A}^\top \in \mathbb{R}^{n \times m}\)</span> that’s defined as the same matrix, but with the indices swapped,</p>
+<p><span class="math display">\[(A^\top)_{i,j} = A_{j,i}.\]</span></p>
+<p>Here’s a quick example for a <span class="math inline">\(2 \times 3\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A^T = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="sc">.</span>T<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A^T = 
+[[1 4]
+ [2 5]
+ [3 6]]</code></pre>
+</div>
+</div>
+<p>What happens if we multiply two transposed matrices? Suppose <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span> and <span class="math inline">\(\mathbf{B}\)</span> is <span class="math inline">\(n \times p\)</span>. Then <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span> is <span class="math inline">\(m \times p\)</span>. That means its transpose <span class="math inline">\((\mathbf{A}\mathbf{B})^\top\)</span> should be <span class="math inline">\(p \times m\)</span>. But <span class="math inline">\(\mathbf{A}^\top\)</span> is <span class="math inline">\(n \times m\)</span> and <span class="math inline">\(\mathbf{B}^\top\)</span> is <span class="math inline">\(p \times n\)</span>. This implies that the transpose of the product can only make sense if it’s the product of the transposes, but in opposite order so the shapes match up right,</p>
+<p><span class="math display">\[(\mathbf{A}\mathbf{B})^\top = \mathbf{B}^\top \mathbf{A}^\top.\]</span></p>
+<p>This is not really a proof of this fact. If you want a proof, what you’ll want to do is look at the individual elements of each side, and show the equation must be true element-by-element. I won’t bore you with this. I’ll just give you an example with numpy so you can see they have to be equal. I’ll take <span class="math inline">\(\mathbf{A}\)</span> to be <span class="math inline">\(3 \times 2\)</span> and <span class="math inline">\(\mathbf{B}\)</span> to be <span class="math inline">\(2 \times 3\)</span>, which means <span class="math inline">\((\mathbf{A}\mathbf{B})^\top\)</span> should be <span class="math inline">\(2 \times 2\)</span>. Recall you can transpose a matrix in numpy using <code>A.T</code> or <code>np.transpose(A)</code>.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    [[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>], </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>     [<span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>], </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>     [<span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">6</span>]])</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'(AB)^T = </span><span class="ch">\n</span><span class="sc">{</span>(A <span class="op">@</span> B)<span class="sc">.</span>T<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B^T A^T = </span><span class="ch">\n</span><span class="sc">{</span>B<span class="sc">.</span>T <span class="op">@</span> A<span class="sc">.</span>T<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(AB)^T = 
+[[-22 -49]
+ [-28 -64]]
+B^T A^T = 
+[[-22 -49]
+ [-28 -64]]</code></pre>
+</div>
+</div>
+</section>
+<section id="inverses" class="level2">
+<h2 class="anchored" data-anchor-id="inverses">Inverses</h2>
+<p>When a matrix is square, i.e.&nbsp;<span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(n \times n\)</span>, we can think of it as mapping vectors to other vectors in the same vector space <span class="math inline">\(\mathbb{R}^n\)</span>. The identity map (the “do nothing” map) always maps a vector to itself. It corresponds to the <span class="math inline">\(n \times n\)</span> <strong>identity matrix</strong></p>
+<p><span class="math display">\[
+\mathbf{I} =
+\begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; 1 \\
+\end{pmatrix}.
+\]</span></p>
+<p>Here’s an example. I’ll use <code>np.eye(n)</code> to generate the identity matrix for <span class="math inline">\(n=5\)</span>.</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> np.eye(<span class="dv">5</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'I = </span><span class="ch">\n</span><span class="sc">{</span>I<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>I = 
+[[1. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 1.]]</code></pre>
+</div>
+</div>
+<p>Recall the inverse of a square matrix <span class="math inline">\(\mathbf{A}\)</span> is the matrix <span class="math inline">\(\mathbf{A}^{-1}\)</span> satisfying</p>
+<p><span class="math display">\[\mathbf{A}^{-1}\mathbf{A} = \mathbf{A}\mathbf{A}^{-1} = \mathbf{I}.\]</span></p>
+<p>The inverse matrix <span class="math inline">\(\mathbf{A}^{-1}\)</span> will exist exactly when the <strong>determinant</strong> of <span class="math inline">\(\mathbf{A}\)</span> is nonzero, i.e.&nbsp;<span class="math inline">\(\text{det}(\mathbf{A}) \neq 0\)</span>. If the determinant <em>is</em> zero, then the matrix is <strong>singular</strong>, and no inverse can be found no matter how hard you look for one.</p>
+<p>Recall that in numpy you can invert a square matrix using <code>np.linalg.inv(A)</code>. It’s usually not a good idea to do so because inverting a matrix is numerically unstable, but you can in principle. The inverse calculation runs in <span class="math inline">\(O(n^3)\)</span> time just like multiplication.</p>
+<p>Here’s an example where <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(2 \times 2\)</span>. You can already see from this example the numerical loss of precision creeping in, since neither <span class="math inline">\(\mathbf{A}^{-1}\mathbf{A}\)</span> nor <span class="math inline">\(\mathbf{A}\mathbf{A}^{-1}\)</span> exactly yield the identity matrix.</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    [[<span class="dv">1</span>, <span class="dv">2</span>], </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>A_inv <span class="op">=</span> np.linalg.inv(A)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A^(-1) = </span><span class="ch">\n</span><span class="sc">{</span>A_inv<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A^(-1) A = </span><span class="ch">\n</span><span class="sc">{</span>A_inv <span class="op">@</span> A<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A A^(-1) = </span><span class="ch">\n</span><span class="sc">{</span>A <span class="op">@</span> A_inv<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A^(-1) = 
+[[-2.   1. ]
+ [ 1.5 -0.5]]
+A^(-1) A = 
+[[1.00000000e+00 0.00000000e+00]
+ [1.11022302e-16 1.00000000e+00]]
+A A^(-1) = 
+[[1.0000000e+00 0.0000000e+00]
+ [8.8817842e-16 1.0000000e+00]]</code></pre>
+</div>
+</div>
+<p>Just like with the transpose, we can ask what happens if we try to invert the product of two matrices. You can convince yourself that the same kind of rule holds: the inverse of a product is the product of the inverses in <em>reverse order</em>,</p>
+<p><span class="math display">\[(\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1}.\]</span></p>
+<p>Here’s a <span class="math inline">\(2 \times 2\)</span> “proof” of this fact.</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    [[<span class="dv">1</span>, <span class="dv">2</span>], </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    [[<span class="dv">1</span>, <span class="dv">0</span>], </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">1</span>, <span class="dv">1</span>]])</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>A_inv <span class="op">=</span> np.linalg.inv(A)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>B_inv <span class="op">=</span> np.linalg.inv(B)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>AB_inv <span class="op">=</span> np.linalg.inv(A <span class="op">@</span> B)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'(AB)^(-1) = </span><span class="ch">\n</span><span class="sc">{</span>AB_inv<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B^(-1) A^(-1) = </span><span class="ch">\n</span><span class="sc">{</span>B_inv <span class="op">@</span> A_inv<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(AB)^(-1) = 
+[[-2.   1. ]
+ [ 3.5 -1.5]]
+B^(-1) A^(-1) = 
+[[-2.   1. ]
+ [ 3.5 -1.5]]</code></pre>
+</div>
+</div>
+<p>I encourage you to check this result using the fact I derived from the last lesson for <span class="math inline">\(2 \times 2\)</span> matrices,</p>
+<p><span class="math display">\[
+\mathbf{A} =
+\begin{pmatrix}
+a &amp; b \\
+c &amp; d \\
+\end{pmatrix} \quad \Longrightarrow \quad
+\mathbf{A}^{-1} = \frac{1}{ad-bc}
+\begin{pmatrix}
+d &amp; -b \\
+-c &amp; a \\
+\end{pmatrix}.
+\]</span></p>
+</section>
+<section id="determinant-and-trace" class="level2">
+<h2 class="anchored" data-anchor-id="determinant-and-trace">Determinant and Trace</h2>
+<p>Notice something from this formula. Since <span class="math inline">\(\text{det}(\mathbf{A}) = ad - bc\)</span> in this case, we can evidently write</p>
+<p><span class="math display">\[\mathbf{A}^{-1} = \frac{1}{\text{det}(\mathbf{A})} \mathbf{\tilde A},\]</span></p>
+<p>where <span class="math inline">\(\mathbf{\tilde A}\)</span> is some kind of matrix related to <span class="math inline">\(\mathbf{A}\)</span>. The properties of <span class="math inline">\(\mathbf{\tilde A}\)</span> aren’t important (it’s called the <em>adjugate</em> if you’re curious). But this general fact turns out to be true for any <span class="math inline">\(n \times n\)</span> matrix, except the formula for the determinant gets a lot more complicated. What’s important is that <span class="math inline">\(\mathbf{A}^{-1}\)</span> is <em>inversely proportional</em> to the determinant. That’s why we can’t allow <span class="math inline">\(\text{det}(\mathbf{A}) = 0\)</span>, because then <span class="math inline">\(\mathbf{A}^{-1}\)</span> blows up due to the division by zero.</p>
+<p>Now, I’ve already said <span class="math inline">\((\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1}\)</span>. If then</p>
+<p><span class="math display">\[\mathbf{A}^{-1} = \frac{1}{\text{det}(\mathbf{A})}\mathbf{\tilde A}, \quad \mathbf{B}^{-1} = \frac{1}{\text{det}(\mathbf{B})}\mathbf{\tilde B},\]</span></p>
+<p>it’s evidently the case that</p>
+<p><span class="math display">\[(\mathbf{AB})^{-1} = \frac{1}{\text{det}(\mathbf{AB})}\mathbf{\tilde{AB}} = \frac{1}{\text{det}(\mathbf{A}) \cdot \text{det}(\mathbf{B})}\mathbf{\tilde B}\mathbf{\tilde A} = \mathbf{B}^{-1} \mathbf{A}^{-1}.\]</span></p>
+<p>Provided that <span class="math inline">\(\mathbf{\tilde{AB}}=\mathbf{\tilde B}\mathbf{\tilde A}\)</span>, which is true, it thus follows that</p>
+<p><span class="math display">\[\text{det}(\mathbf{A}\mathbf{B}) = \text{det}(\mathbf{A}) \cdot \text{det}(\mathbf{B}) = \text{det}(\mathbf{B}) \cdot \text{det}(\mathbf{A}).\]</span></p>
+<p>Said differently, the determinant of a matrix product is just the product of their individual determinants.</p>
+<p>In general, the determinant of an <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> is a nasty <span class="math inline">\(n\)</span> degree multivariate polynomial of the elements of <span class="math inline">\(\mathbf{A}\)</span>. There’s no reliably easy way to calculate it except for small <span class="math inline">\(n\)</span> matrices. In numpy, you can use <code>np.linalg.det(A)</code> to calculate the determinant, but just as with inverses, this is a numerically unstable operation, and so should be avoided where possible. Moreover, it runs in <span class="math inline">\(O(n^3)\)</span> time, which is just as slow as matrix multiplication.</p>
+<p>Here’s an example. I’ll verify this “product rule” for determinants using two <span class="math inline">\(3 \times 3\)</span> matrices. The determinant of both matrices turns out to be <span class="math inline">\(6\)</span>, which means their product should have determinant <span class="math inline">\(36\)</span>.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    [[<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>],</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]])</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    [[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>]])</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>det_A <span class="op">=</span> np.linalg.det(A)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>det_B <span class="op">=</span> np.linalg.det(B)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>det_AB <span class="op">=</span> np.linalg.det(A <span class="op">@</span> B)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'det(A) = </span><span class="sc">{</span>det_A<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'det(B) = </span><span class="sc">{</span>det_B<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'det(AB) = </span><span class="sc">{</span>det_AB<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>det(A) = 6.0
+det(B) = 6.0
+det(AB) = 36.0</code></pre>
+</div>
+</div>
+<p>Notice in both cases the determinant happens to be the product of the diagonal elements</p>
+<p><span class="math display">\[\text{det}(\mathbf{A}) = \text{det}(\mathbf{B}) = 1 \cdot 2 \cdot 3 = 6.\]</span></p>
+<p>I rigged the result to come out this way. It’s not always true. It’s only true when a matrix is either lower triangular (the elements <em>above</em> the diagonal are all zero), upper triangular (the elements <em>below</em> the diagonal are all zero), or diagonal (the elements <em>off</em> the diagonal are all zero). In this example, <span class="math inline">\(\mathbf{A}\)</span> was lower triangular and <span class="math inline">\(\mathbf{B}\)</span> was upper triangular. I chose both to have the same diagonal elements (in different order) on purpose.</p>
+<p>More generally, if <span class="math inline">\(\mathbf{A}\)</span> is diagonal or upper/lower triangular, then</p>
+<p><span class="math display">\[\text{det}(\mathbf{A}) = \prod_{i=0}^{n-1} A_{i,i} = A_{0,0} A_{1,1} \cdots A_{n-1,n-1}.\]</span></p>
+<p>It’s not yet obvious, but we can always “change” a square matrix <span class="math inline">\(\mathbf{A}\)</span> into one of these three kinds of matrices, and then calculate the determinant of <span class="math inline">\(\mathbf{A}\)</span> this way. There are a few ways to do this. I’ll cover these when I get to matrix factorizations below.</p>
+<p>Some other properties of the determinant that you can verify are, - <span class="math inline">\(\text{det}(\mathbf{I}) = 1\)</span>. - <span class="math inline">\(\text{det}(\mathbf{A}^\top) = \text{det}(\mathbf{A})\)</span>. - <span class="math inline">\(\text{det}(\mathbf{A}^{-1}) = \frac{1}{\text{det}(\mathbf{A})}\)</span>. - <span class="math inline">\(\text{det}(c\mathbf{A}) = c^n\text{det}(\mathbf{A})\)</span>.</p>
+<p>The determinant is one important way to get a scalar out of a matrix. Another useful scalar is the <strong>trace</strong>, which is far simpler to calculate. The trace of a matrix <span class="math inline">\(\mathbf{A}\)</span> is the sum of its diagonal elements, usually written</p>
+<p><span class="math display">\[\text{tr}(\mathbf{A}) = \sum_{i=0}^{n-1} A_{i,i} = A_{0,0} + A_{1,1} + \cdots + A_{n-1,n-1}.\]</span></p>
+<p>Unlike the determinant, the trace doesn’t split up over products. It instead splits over addition,</p>
+<p><span class="math display">\[\text{tr}(\mathbf{A} + \mathbf{B}) = \text{tr}(\mathbf{A}) + \text{tr}(\mathbf{B}).\]</span></p>
+<p>This is very easy to verify from the fact that the sum is element-wise, so <span class="math inline">\(\sum (A+B)_{i,i} = \sum A_{i,i} + \sum B_{i,i}\)</span>.</p>
+<p>Some other fairly trivial properties the trace satisfies are, - <span class="math inline">\(\text{tr}(\mathbf{I}) = n\)</span>. - <span class="math inline">\(\text{tr}(\mathbf{A}^\top) = \text{tr}(\mathbf{A})\)</span>. - <span class="math inline">\(\text{tr}(c\mathbf{A}) = c\text{tr}(\mathbf{A})\)</span>. - <span class="math inline">\(\text{tr}(\mathbf{A}\mathbf{B}) = \text{tr}(\mathbf{B}\mathbf{A})\)</span>.</p>
+<p>Here’s a “proof” of the last result on the same <span class="math inline">\(3 \times 3\)</span> matrices above. In numpy, you can calculate the trace using <code>np.trace</code>. It’s not unstable like the determinant is, and it’s fast to calculate since it’s only summing the <span class="math inline">\(n\)</span> diagonal terms, which is <span class="math inline">\(O(n)\)</span> time.</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tr_AB <span class="op">=</span> np.trace(A <span class="op">@</span> B)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>tr_BA <span class="op">=</span> np.trace(B <span class="op">@</span> A)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'tr(AB) = </span><span class="sc">{</span>tr_AB<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'tr(BA) = </span><span class="sc">{</span>tr_BA<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tr(AB) = 13
+tr(BA) = 13</code></pre>
+</div>
+</div>
+<p>It’s kind of obvious what the determinant is good for. It tells you how invertible a matrix is. But what does the trace tell you? It turns out both the trace and the determinant also tell you something important about the <em>scale</em> of the matrix. We’ll see this in more depth below when we talk about eigenvalues.</p>
+</section>
+<section id="linear-independence-and-rank" class="level2">
+<h2 class="anchored" data-anchor-id="linear-independence-and-rank">Linear Independence and Rank</h2>
+<p>We can always think of a matrix in terms of its <strong>column vectors</strong>. If <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, it has <span class="math inline">\(n\)</span> column vectors <span class="math inline">\(\mathbf{a}_0, \mathbf{a}_1, \cdots, \mathbf{a}_{n-1}\)</span> each of size <span class="math inline">\(m\)</span>. Concatenated together in order, the column vectors form the matrix itself,</p>
+<p><span class="math display">\[
+\mathbf{A} =
+\begin{pmatrix}
+\mathbf{a}_0 &amp; \mathbf{a}_1 &amp; \cdots &amp; \mathbf{a}_{n-1}
+\end{pmatrix}.
+\]</span></p>
+<p>It turns out these column vectors also tell us how invertible a matrix is, but in a more general and useful way than the determinant does. Roughly speaking, a matrix is invertible if we can’t write any one column vector as a function of the other column vectors. This is just the definition of linear independence.</p>
+<p>Recall a set of vectors <span class="math inline">\(\mathbf{x}_0, \mathbf{x}_1, \cdots, \mathbf{x}_{k-1}\)</span> is <em>linearly independent</em> if no one vector is a linear combination of the rest,</p>
+<p><span class="math display">\[\mathbf{x}_j \neq \sum_{i \neq j} c_i \mathbf{x}_j.\]</span></p>
+<p>If one vector <em>is</em> a linear combination of the rest, they’re <em>linearly dependent</em>.</p>
+<p>An <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> is invertible if and only if its column vectors are all linearly independent. Equivalently, the column vectors span an <span class="math inline">\(n\)</span>-dimensional vector space. To see why this is true, let’s look at a <span class="math inline">\(2 \times 2\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> with column vectors <span class="math inline">\(\mathbf{a}=\binom{a}{b}\)</span> and <span class="math inline">\(\mathbf{b}=\binom{c}{d}\)</span>,</p>
+<p><span class="math display">\[
+\mathbf{A} = \begin{pmatrix} \mathbf{a} &amp; \mathbf{b} \end{pmatrix} =
+\begin{pmatrix}
+a &amp; b \\
+c &amp; d \\
+\end{pmatrix}.
+\]</span></p>
+<p>Now, if <span class="math inline">\(\mathbf{a}\)</span> and <span class="math inline">\(\mathbf{b}\)</span> are linearly <em>dependent</em>, then <span class="math inline">\(\mathbf{b}\)</span> must be a scalar multiple of <span class="math inline">\(\mathbf{a}\)</span>, say <span class="math inline">\(\mathbf{b} = \beta \mathbf{a}\)</span>. Then <span class="math inline">\(\mathbf{A}\)</span> would look like</p>
+<p><span class="math display">\[
+\mathbf{A} = \begin{pmatrix} \mathbf{a} &amp; \beta \mathbf{a} \end{pmatrix} =
+\begin{pmatrix}
+a &amp; \beta a \\
+c &amp; \beta c \\
+\end{pmatrix}.
+\]</span></p>
+<p>This means its determinant would be <span class="math inline">\(\text{det}(\mathbf{A}) = \beta ac - \beta ac = 0\)</span>, which of course means <span class="math inline">\(\mathbf{A}\)</span> can’t be invertible.</p>
+<p>Graphically, saying the column vectors are linearly dependent is saying they’ll map any vector onto the same subspace. For the <span class="math inline">\(2 \times 2\)</span> case, that means any vector <span class="math inline">\(\mathbf{v}\)</span> hit by <span class="math inline">\(\mathbf{A}\)</span> will get mapped onto the same line, no matter what <span class="math inline">\(\mathbf{v}\)</span> you pick. The matrix is collapsing, or <em>projecting</em>, the vector space down to a lower-dimensional subspace.</p>
+<p>Here’s a plot of this idea. I’ll make <span class="math inline">\(\mathbf{A}\)</span> have two linearly dependent columns, then plot its action on several different vectors, plotted in black. Acting on these by <span class="math inline">\(\mathbf{A}\)</span> will map them to the red vectors, which all lie on the same line in the plane. They’re all collapsing onto the same subspace, evidently the line <span class="math inline">\(y=-x\)</span>.</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>a0 <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>a1 <span class="op">=</span> beta <span class="op">*</span> a0</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.hstack([a0, a1])</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="op">-</span><span class="dv">3</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>vectors <span class="op">=</span> [x.flatten() <span class="cf">for</span> x <span class="kw">in</span> [v, A <span class="op">@</span> v, w, A <span class="op">@</span> w, u, A <span class="op">@</span> u]]</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plot_vectors(vectors, colors<span class="op">=</span>[<span class="st">'black'</span>, <span class="st">'red'</span>] <span class="op">*</span> <span class="dv">3</span>, title<span class="op">=</span><span class="st">'Linearly Dependence'</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>             labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>, <span class="st">'$\mathbf</span><span class="sc">{A}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>] <span class="op">+</span> [<span class="st">''</span>] <span class="op">*</span> <span class="dv">4</span>,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>             text_offsets<span class="op">=</span>[[<span class="dv">0</span>, <span class="dv">0</span>]] <span class="op">*</span> <span class="dv">6</span>, headwidth<span class="op">=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="matrix-algebra_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The number of linearly independent column vectors a matrix has is called its <strong>rank</strong>, written <span class="math inline">\(\text{rank}(\mathbf{A})\)</span>. Clearly it’ll always be the case that <span class="math inline">\(\text{rank}(\mathbf{A}) \leq n\)</span>. When <span class="math inline">\(\text{rank}(\mathbf{A}) = n\)</span> exactly the matrix is called <strong>full rank</strong>. Only full rank square matrices are invertible.</p>
+<p>Here’s an example. I’ll use <code>np.linalg.matrix_rank(A)</code> to calculate the rank of the above <span class="math inline">\(2 \times 2\)</span> example. Since <span class="math inline">\(\text{rank}(\mathbf{A})=1&lt;2\)</span>, the matrix <span class="math inline">\(\mathbf{A}\)</span> must be singular, as I’ve of course already shown.</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>rank <span class="op">=</span> np.linalg.matrix_rank(A)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'rank(A) = </span><span class="sc">{</span>rank<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>rank(A) = 1</code></pre>
+</div>
+</div>
+</section>
+<section id="outer-products" class="level2">
+<h2 class="anchored" data-anchor-id="outer-products">Outer Products</h2>
+<p>We’ll frequently be interested in <strong>low rank</strong> matrices, which are matrices whose rank is much much less than the dimension, i.e.&nbsp;<span class="math inline">\(\text{rank}(\mathbf{A}) &lt;&lt; n\)</span>. As we’ll see, low rank matrices are special because they can efficiently compress the information contained in a matrix, which often allows us to represent data more efficiently, or clean up data by denoising away “unnecessary” dimensions. In fact, approximating a matrix with a lower rank matrix is the whole idea behind dimension reduction, one of the core areas of unsupervised learning.</p>
+<p>The most useful low-rank matrices are the outer products of two vectors. If <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> are size <span class="math inline">\(n\)</span> vectors, define their <strong>outer product</strong> by</p>
+<p><span class="math display">\[
+\mathbf{x} \mathbf{y}^\top =
+\begin{pmatrix}
+x_0 y_0 &amp; x_0 y_1 &amp; \cdots &amp; x_0 y_{n-1} \\
+x_1 y_0 &amp; x_1 y_1 &amp; \cdots &amp; x_1 y_{n-1} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{n-1} y_0 &amp; x_{n-1} y_1 &amp; \cdots &amp; x_{n-1} y_{n-1} \\
+\end{pmatrix}.
+\]</span></p>
+<p>Each column vector <span class="math inline">\(\mathbf{a}_j\)</span> of the outer product matrix is linearly proportional to the first column <span class="math inline">\(\mathbf{a}_0\)</span>, since</p>
+<p><span class="math display">\[\mathbf{a}_j = \mathbf{x} y_j = \mathbf{x} y_0 \frac{y_j}{y_0} = \frac{y_j}{y_0} \mathbf{a}_0.\]</span></p>
+<p>This means that only one column vector is linearly independent, which implies <span class="math inline">\(\text{rank}(\mathbf{x} \mathbf{y}^\top)=1\)</span>. The outer product is evidently rank-1, and hence highly singular. You’d never be able to invert it. But it is useful as we’ll see soon.</p>
+<p>Here’s an example of an outer product calculation. You can either calculate <code>x @ y.T</code> directly or use <code>np.outer(x, y)</code>. Since both vectors are size <span class="math inline">\(3\)</span>, the outer product should be a <span class="math inline">\(3 \times 3\)</span> matrix with rank-1.</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>])</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>outer <span class="op">=</span> np.outer(x, y)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'xy^T = </span><span class="ch">\n</span><span class="sc">{</span>outer<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'rank(xy^T) = </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>matrix_rank(outer)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>xy^T = 
+[[3 2 1]
+ [6 4 2]
+ [9 6 3]]
+rank(xy^T) = 1</code></pre>
+</div>
+</div>
+<p>You can think of the outer product matrix as a kind of projection matrix. It always projects vectors onto the same one-dimensional line in <span class="math inline">\(\mathbb{R}^n\)</span>. Why? Suppose <span class="math inline">\(\mathbf{v}\)</span> is some vector. If we hit it with the outer product matrix <span class="math inline">\(\mathbf{x} \mathbf{y}^\top\)</span>, using the fact matrix multiplication is associative, we get</p>
+<p><span class="math display">\[(\mathbf{x} \mathbf{y}^\top) \mathbf{v} = \mathbf{x} (\mathbf{y}^\top \mathbf{v}) = (\mathbf{y} \cdot \mathbf{v}) \mathbf{x}.\]</span></p>
+<p>That is, <span class="math inline">\(\mathbf{v}\)</span> just gets projected onto the space spanned by the vector <span class="math inline">\(\mathbf{x}\)</span>. Evidently the other outer product vector <span class="math inline">\(\mathbf{y}\)</span> determines how long the projection vector will be. Here’s a visual representation of this idea for 2-dimensional vectors. Take</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{x} &amp;= (1, 1) \\
+\mathbf{y} &amp;= (1, -1) \\
+\mathbf{v}_0 &amp;= (-1, 2) \quad &amp;\Longrightarrow \quad (\mathbf{y} \cdot \mathbf{v}_0) \mathbf{x} &amp;= (-3, -3) \\
+\mathbf{v}_1 &amp;= (2, 0) \quad &amp;\Longrightarrow \quad (\mathbf{y} \cdot \mathbf{v}_1) \mathbf{x} &amp;= (2, 2) \\
+\mathbf{v}_2 &amp;= (2, -1) \quad &amp;\Longrightarrow \quad (\mathbf{y} \cdot \mathbf{v}_2) \mathbf{x} &amp;= (3, 3). \\
+\end{align*}\]</span></p>
+<p>Applying the outer product <span class="math inline">\(\mathbf{x} \mathbf{y}^\top\)</span> to each <span class="math inline">\(\mathbf{v}_i\)</span> should project each vector onto the space spanned by <span class="math inline">\(\mathbf{x}=(1, 1)\)</span>, which is just the line <span class="math inline">\(y=x\)</span>. Notice the projections are all proportional to <span class="math inline">\((1, 1)\)</span>, as they should be. In the plot below, each vector and its projection have the same color. The outer product vectors <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> are shown in black.</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>vs <span class="op">=</span> [np.array([<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>      np.array([<span class="dv">2</span>, <span class="dv">0</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>      np.array([<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)]</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>ws <span class="op">=</span> [(x <span class="op">@</span> y.T) <span class="op">@</span> v <span class="cf">for</span> v <span class="kw">in</span> vs]</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>vectors <span class="op">=</span> [vector.flatten() <span class="cf">for</span> vector <span class="kw">in</span> vs <span class="op">+</span> ws <span class="op">+</span> [x, y]]</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>plot_vectors(</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    vectors, colors<span class="op">=</span>[<span class="st">'salmon'</span>, <span class="st">'limegreen'</span>, <span class="st">'steelblue'</span>] <span class="op">*</span> <span class="dv">2</span> <span class="op">+</span> [<span class="st">'black'</span>, <span class="st">'black'</span>], headwidth<span class="op">=</span><span class="dv">5</span>, width<span class="op">=</span><span class="fl">0.01</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">_0$'</span>, <span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">_1$'</span>, <span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">_2$'</span>] <span class="op">+</span> [<span class="st">''</span>] <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> [<span class="st">'$\mathbf</span><span class="sc">{x}</span><span class="st">$'</span>, <span class="st">'$\mathbf</span><span class="sc">{y}</span><span class="st">$'</span>],</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    text_offsets <span class="op">=</span> [[<span class="dv">0</span>, <span class="fl">0.2</span>], [<span class="dv">0</span>, <span class="fl">0.2</span>], [<span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.3</span>]] <span class="op">+</span> [[<span class="dv">0</span>,<span class="dv">0</span>]] <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> [[<span class="op">-</span><span class="fl">0.4</span>, <span class="fl">0.15</span>], [<span class="dv">0</span>, <span class="op">-</span><span class="fl">0.3</span>]], ticks_every<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Outer Product Projections'</span>, zorders<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">7</span>], xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">3.5</span>, <span class="fl">3.5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">3.5</span>, <span class="fl">3.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="matrix-algebra_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="special-matrices" class="level1">
+<h1>Special Matrices</h1>
+<p>There are many classes of matrices that have various special properties. I’ll quickly introduce a few that’ll be of interest to us in machine learning.</p>
+<section id="diagonal-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="diagonal-matrices">Diagonal Matrices</h2>
+<p>Probably the most basic class of matrices are the diagonal matrices. A <strong>diagonal matrix</strong> is an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{D}\)</span> whose elements are only non-zero on the diagonals, i.e.&nbsp;<span class="math inline">\(D_{i,j} = 0\)</span> if <span class="math inline">\(i \neq j\)</span>. For example, the following <span class="math inline">\(3 \times 3\)</span> matrix is diagonal since its only non-zero values lie on the diagonal,</p>
+<p><span class="math display">\[
+\mathbf{D} =
+\begin{pmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 2 &amp; 0 \\
+0 &amp; 0 &amp; 3 \\
+\end{pmatrix}.
+\]</span></p>
+<p>We’ve already seen an important diagonal matrix a few times, the identity matrix <span class="math inline">\(\mathbf{I}\)</span>. The identity matrix is the diagonal matrix whose diagonal entries are all ones. It’s common to short-hand a diagonal matrix by just specifying its diagonal entries as a vector. In this notation, we’d use the short-hand</p>
+<p><span class="math display">\[\mathbf{D} = \text{diag}(1,2,3).\]</span></p>
+<p>to refer to the matrix in the above example. It means exactly the same thing, we’re just only specifying the diagonal elements. This is also the easiest way to define a diagonal matrix in numpy, by using <code>np.diag</code>. Notice that a diagonal matrix contains <span class="math inline">\(n^2\)</span> elements, but we only need to specify <span class="math inline">\(n\)</span> of them to fully determine what the matrix is (i.e.&nbsp;the diagonal elements themselves).</p>
+<p>In a sense, a diagonal matrix can only scale a vector it acts on, not rotate it or reflect it. This is because multiplying diagonal matrix with a vector is equivalent to element-wise multiplying the diagonal elements with the vector, which causes each vector component to get stretched by some amount. For example, if <span class="math inline">\(\mathbf{x}=(1,1,1)\)</span>, when the above example <span class="math inline">\(\mathbf{D}\)</span> acts on it, we’d get</p>
+<p><span class="math display">\[
+\mathbf{D}\mathbf{x} =
+\begin{pmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 2 &amp; 0 \\
+0 &amp; 0 &amp; 3 \\
+\end{pmatrix}
+\begin{pmatrix}
+1 \\
+1 \\
+1 \\
+\end{pmatrix} =
+\begin{pmatrix}
+1 \\
+2 \\
+3 \\
+\end{pmatrix} =
+\begin{pmatrix}
+1 \\
+2 \\
+3 \\
+\end{pmatrix} \circ
+\begin{pmatrix}
+1 \\
+1 \\
+1 \\
+\end{pmatrix}.
+\]</span></p>
+<p>Here’s an example of how to define a diagonal matrix in numpy using <code>np.diag</code>. I’ll define the same matrix as the above example, and then act on the same vector to show it just scales the entries.</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.diag([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'D = diag(1,2,3) = </span><span class="ch">\n</span><span class="sc">{</span>D<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Dx = </span><span class="sc">{</span>(D <span class="op">@</span> x)<span class="sc">.</span>flatten()<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>D = diag(1,2,3) = 
+[[1 0 0]
+ [0 2 0]
+ [0 0 3]]
+Dx = [1 2 3]</code></pre>
+</div>
+</div>
+</section>
+<section id="symmetric-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="symmetric-matrices">Symmetric Matrices</h2>
+<p>Another special class of matrices important to machine learning is the symmetric matrix. A <strong>symmetric matrix</strong> is a square matrix <span class="math inline">\(\mathbf{S}\)</span> that equals its own transpose, i.e.&nbsp;<span class="math inline">\(\mathbf{S}^\top = \mathbf{S}\)</span>. They’re called symmetric matrices because their lower diagonals and upper diagonals are mirror images. Symmetric matrices can be thought of as the matrix equivalent of a real number.</p>
+<p>For example, consider the matrix <span class="math display">\[
+\mathbf{S} =
+\begin{pmatrix}
+1 &amp; -1 &amp; -2 \\
+-1 &amp; 2 &amp; 1 \\
+-2 &amp; 1 &amp; 3 \\
+\end{pmatrix}.
+\]</span></p>
+<p>This matrix is symmetric since the upper diagonal and lower diagonal are the same, i.e.&nbsp;<span class="math inline">\(S_{i,j} = S_{j,i}\)</span>. Symmetric matrices are very important as we’ll see. They’re the matrix generalization of the idea of a real number.</p>
+<p>Since the lower diagonal and upper diagonal of a symmetric matrix always equal, we only need to specify what the diagonal and upper diagonal are to fully determine the matrix. If <span class="math inline">\(\mathbf{S}\)</span> contains <span class="math inline">\(n^2\)</span> entries, only <span class="math display">\[n + \frac{1}{2}(n^2 - n) = \frac{1}{2}n(n+1)\]</span></p>
+<p>of those elements are actually unique. This fact can be used to shave a lot of time off of algorithms involving symmetric matrices. In numpy, you can check a matrix <span class="math inline">\(\mathbf{S}\)</span> is symmetric by checking that it equals its transpose. Due to numerical roundoff, you may want to wrap the condition inside <code>np.allclose</code>.</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> np.array([</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>],</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    [<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    [<span class="op">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>]])</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>is_symmetric <span class="op">=</span> <span class="kw">lambda</span> A: np.allclose(A, A.T)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>is_symmetric(S)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>True</code></pre>
+</div>
+</div>
+</section>
+<section id="upper-and-lower-triangular-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="upper-and-lower-triangular-matrices">Upper and Lower Triangular Matrices</h2>
+<p>Closely related to diagonal matrices are lower and upper triangular matrices. An <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{L}\)</span> is <strong>lower-triangular</strong> if the entries in its <em>upper</em> diagonal are zero, i.e.&nbsp;<span class="math inline">\(L_{i,j} = 0\)</span> when <span class="math inline">\(i &lt; j\)</span>. Similarly, an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{U}\)</span> is <strong>upper-triangular</strong> if the entries in its <em>lower</em> diagonal are zero, i.e.&nbsp;<span class="math inline">\(U_{i,j} = 0\)</span> when <span class="math inline">\(i &gt; j\)</span>. I’ve already showed an example of these when I covered determinants. Here they are again,</p>
+<p><span class="math display">\[
+\mathbf{L} =
+\begin{pmatrix}
+3 &amp; 0 &amp; 0 \\
+1 &amp; 2 &amp; 0 \\
+1 &amp; 1 &amp; 1 \\
+\end{pmatrix}, \qquad \mathbf{U} =
+\begin{pmatrix}
+1 &amp; 1 &amp; 1 \\
+0 &amp; 2 &amp; 1 \\
+0 &amp; 0 &amp; 3 \\
+\end{pmatrix}.
+\]</span></p>
+<p>Upper and lower triangular (and diagonal) matrices are useful because it’s easy to invert them and calculate their determinants. Just like symmetric matrices, only <span class="math inline">\(\frac{1}{2}n(n+1)\)</span> unique elements are needed to fully specify these matrices since an entire off-diagonal is all zeros.</p>
+</section>
+<section id="orthogonal-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="orthogonal-matrices">Orthogonal Matrices</h2>
+<p>The last class of matrices I’ll introduce are more subtle, but very important geometrically. These are the orthogonal matrices. An <strong>orthogonal matrix</strong> is an <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(\mathbf{Q}\)</span> whose transpose is its inverse, i.e.</p>
+<p><span class="math display">\[\mathbf{Q}^\top = \mathbf{Q}^{-1} \quad \text{or} \quad \mathbf{Q}^\top \mathbf{Q}=\mathbf{I}.\]</span></p>
+<p>As an example, consider the following matrix,</p>
+<p><span class="math display">\[
+\mathbf{Q} = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1 \\
+\end{pmatrix} =
+\begin{pmatrix}
+\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} \\
+\frac{1}{\sqrt{2}} &amp; -\frac{1}{\sqrt{2}} \\
+\end{pmatrix}.
+\]</span></p>
+<p>We can check <span class="math inline">\(\mathbf{Q}\)</span> is orthogonal by checking it satisfies the condition <span class="math inline">\(\mathbf{Q}^\top \mathbf{Q}=\mathbf{I}\)</span>,</p>
+<p><span class="math display">\[
+\mathbf{Q}^\top \mathbf{Q} =
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1 \\
+\end{pmatrix}
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1 \\
+\end{pmatrix} =
+\frac{1}{2}
+\begin{pmatrix}
+2 &amp; 0 \\
+0 &amp; 2 \\
+\end{pmatrix} =
+\begin{pmatrix}
+1 &amp; 0 \\
+0 &amp; 1 \\
+\end{pmatrix} = \mathbf{I}.
+\]</span></p>
+<p>Notice from this example that the column vectors <span class="math inline">\(\mathbf{q}_0, \mathbf{q}_1\)</span> form an orthonormal basis for <span class="math inline">\(\mathbb{R}^2\)</span>, since</p>
+<p><span class="math display">\[\mathbf{q}_0 \cdot \mathbf{q}_1 = 0, \quad \mathbf{q}_0 \cdot \mathbf{q}_0 = \mathbf{q}_1 \cdot \mathbf{q}_1 = 1.\]</span></p>
+<p>This is a general fact. The column vectors of an orthogonal matrix <span class="math inline">\(\mathbf{Q}\)</span> form a complete set of orthonormal basis vectors for <span class="math inline">\(\mathbb{R}^n\)</span>. Conversely, we can always form an orthogonal matrix by first finding an orthonormal basis and then creating column vectors out of the basis vectors. This is usually the way orthogonal matrices are constructed in practice using algorithms like the <a href="https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process">Gram-Schmidt Algorithm</a>.</p>
+<p>It’s not at all obvious, but the fact that the column vectors of <span class="math inline">\(\mathbf{Q}\)</span> form an orthonormal basis constrains the number of unique elements <span class="math inline">\(\mathbf{Q}\)</span> is allowed to have. Requiring each <span class="math inline">\(\mathbf{q}_i\)</span> means <span class="math inline">\(n\)</span> total elements are already determined. The further requirement that the column vectors be mutually orthogonal determines another <span class="math inline">\(\frac{1}{2}n(n-1)\)</span>. This means <span class="math inline">\(\mathbf{Q}\)</span> only has <span class="math inline">\(n^2 - n - \frac{1}{2}n(n-1) = \frac{1}{2}n(n-1)\)</span> unique elements. For example, when <span class="math inline">\(\mathbf{Q}\)</span> is <span class="math inline">\(2 \times 2\)</span> it only has <span class="math inline">\(\frac{1}{2}2(2-1)=1\)</span> unique element. The other <span class="math inline">\(3\)</span> are all determined by that one element. This unique element can be thought of as a rotation angle. I’ll come back to this in a minute.</p>
+<p>An important fact about orthogonal matrices is that they preserve the dot products between vectors. If <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> are two vectors, then</p>
+<p><span class="math display">\[(\mathbf{Q} \mathbf{x}) \cdot (\mathbf{Q}\mathbf{y}) = \mathbf{x} \cdot \mathbf{y}.\]</span></p>
+<p>This follows from the fact that <span class="math inline">\((\mathbf{Q} \mathbf{x})^\top (\mathbf{Q} \mathbf{y}) = \mathbf{x}^\top \mathbf{Q}^\top\mathbf{Q}\mathbf{y} = \mathbf{x}^\top \mathbf{I} \mathbf{y} = \mathbf{x}^\top \mathbf{y}\)</span>. Since the dot product encodes the notions of length and angle, this fact implies that orthogonal matrices can’t change the lengths of vectors, nor the angles between vectors. Orthogonal matrices preserve the <em>geometry</em> of the vector space.</p>
+<p>This fact suggests some deep intuition about what orthogonal matrices do. If they can’t change the lengths of vectors or the angles between them, then all they can do is <em>rotate</em> vectors or <em>reflect</em> them across some line. In fact, it turns out any <span class="math inline">\(2 \times 2\)</span> orthogonal matrix can be written in the form</p>
+<p><span class="math display">\[
+\mathbf{Q} =
+\begin{pmatrix}
+\cos \theta &amp; \mp \sin \theta \\
+\sin \theta &amp; \pm \cos \theta \\
+\end{pmatrix},
+\]</span></p>
+<p>where <span class="math inline">\(\theta\)</span> is some angle (expressed in radians). When the right column vector is <span class="math inline">\(\binom{-\sin\theta}{\cos\theta}\)</span>, <span class="math inline">\(\mathbf{Q}\)</span> is a pure <strong>rotation matrix</strong>. It will rotate any vector in the plane by an angle <span class="math inline">\(\theta\)</span>, counterclockwise if <span class="math inline">\(\theta &gt; 0\)</span>, and clockwise if <span class="math inline">\(\theta &lt; 0\)</span>. When the right column vector is <span class="math inline">\(\binom{\sin\theta}{-\cos\theta}\)</span>, <span class="math inline">\(\mathbf{Q}\)</span> becomes a <strong>reflection matrix</strong>; it’ll reflect vectors about the line at an angle <span class="math inline">\(\frac{\theta}{2}\)</span> with the x-axis. The combination of these two together can generate any 2D rotation or reflection.</p>
+<p>Here’s a visual of this idea. I’ll take the unit vector <span class="math inline">\(\mathbf{e}_x=(1,0)\)</span> and use <span class="math inline">\(\mathbf{Q}\)</span> to rotate it by some angle, in this case <span class="math inline">\(\theta = 45^\circ\)</span>. Note the need to convert the angle to radians by multiplying the angle in degrees by <span class="math inline">\(\frac{\pi}{180}\)</span>. You should be able to confirm that the red vector is indeed the black vector <span class="math inline">\(\mathbf{e}_x\)</span> rotated counterclockwise by <span class="math inline">\(45^\circ\)</span> to the new vector <span class="math inline">\(\mathbf{Q}\mathbf{e}_x = 2^{-1/2}(1,1)\)</span>. The factor of <span class="math inline">\(2^{-1/2}\)</span> appears to keep the vector normalized to unit length.</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>theta_degrees <span class="op">=</span> <span class="dv">45</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> theta_degrees <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">180</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> np.array([</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    [np.cos(theta), <span class="op">-</span>np.sin(theta)], </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    [np.sin(theta), np.cos(theta)]])</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>ex <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">0</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>Qex <span class="op">=</span> Q <span class="op">@</span> ex</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>plot_vectors([ex.flatten(), Qex.flatten()], colors<span class="op">=</span>[<span class="st">'black'</span>, <span class="st">'red'</span>], title<span class="op">=</span><span class="ss">f'$</span><span class="sc">{</span>theta_degrees<span class="sc">}</span><span class="ss">^\circ$ Rotation'</span>,</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>             labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{e}</span><span class="st">_x$'</span>, <span class="st">'$\mathbf</span><span class="sc">{Q}</span><span class="st">\mathbf</span><span class="sc">{e}</span><span class="st">_x$'</span>], text_offsets<span class="op">=</span>[[<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>], [<span class="dv">0</span>, <span class="dv">0</span>]],</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>             ticks_every<span class="op">=</span><span class="dv">1</span>, xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="matrix-algebra_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>I’ll finish this section by noting that orthogonal matrices always have determinant <span class="math inline">\(\pm 1\)</span>. You can see this by applying the determinant product formula to <span class="math inline">\(\mathbf{Q}^\top \mathbf{Q}=\mathbf{I}\)</span>,</p>
+<p><span class="math display">\[1 = \text{det}(\mathbf{I}) = \text{det}(\mathbf{Q}^\top \mathbf{Q}) = \text{det}(\mathbf{Q}^\top) \cdot \text{det}(\mathbf{Q}) = \big(\text{det}(\mathbf{Q})\big)^2,\]</span></p>
+<p>which implies <span class="math inline">\(\text{det}(\mathbf{Q}) = \pm 1\)</span>. This evidently divides orthogonal matrices into two distinct classes: - <span class="math inline">\(\text{det}(\mathbf{Q}) = +1\)</span>: These are the orthogonal matrices that correspond to pure rotations. - <span class="math inline">\(\text{det}(\mathbf{Q}) = -1\)</span>: These are the orthogonal matrices that correspond to reflections.</p>
+<p>I’ll verify that the rotation matrix I just plotted indeed has determinant <span class="math inline">\(+1\)</span>.</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'det(Q) = </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>det(Q)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>det(Q) = 1.0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="matrix-factorizations" class="level1">
+<h1>Matrix Factorizations</h1>
+<p>Given any two compatible matrices <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span>, we can get a third matrix <span class="math inline">\(\mathbf{C}\)</span> by matrix multiplication, <span class="math inline">\(\mathbf{C} = \mathbf{A}\mathbf{B}\)</span>. Now suppose we wanted to go the other way. Given a matrix <span class="math inline">\(\mathbf{C}\)</span>, how can we <em>factor</em> it back out into a product <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>? This is the idea behind matrix factorization. In practice, we’re interested in factoring a matrix into a product of special types of matrices that are easier to work with, like symmetric, diagonal, or orthogonal matrices.</p>
+<section id="lu-factorization" class="level2">
+<h2 class="anchored" data-anchor-id="lu-factorization">LU Factorization</h2>
+<p>Probably the most basic matrix factorization is the LU Factorization. LU factorization factors an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> into a product of a lower triangular matrix <span class="math inline">\(\mathbf{L}\)</span> and an upper triangular matrix <span class="math inline">\(\mathbf{U}\)</span>, <span class="math display">\[\mathbf{A} = \mathbf{L}\mathbf{U}.\]</span></p>
+<p>The LU factorization is most useful for solving a system of linear equations. If <span class="math inline">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>, we can do an LU factorization of <span class="math inline">\(\mathbf{A}\)</span> and write the system as <span class="math inline">\(\mathbf{LUx} = \mathbf{b}\)</span>. This can then be solved by breaking it into two steps, known as <em>forward substitution</em> and <em>back substitution</em>, - Forward substitution: Solve <span class="math inline">\(\mathbf{Ly} = \mathbf{b}\)</span> for <span class="math inline">\(\mathbf{y}\)</span>. - Back Substitution: Solve <span class="math inline">\(\mathbf{Ux} = \mathbf{y}\)</span> for <span class="math inline">\(\mathbf{x}\)</span>.</p>
+<p>These two steps are easy to do since each system can be solved by substitution, working from the “tip” of the triangle down. The LU factorization is essentially what matrix solvers like <code>np.linalg.solve</code> do to solve linear systems.</p>
+<p>Of course, the question still remains how to actually factor <span class="math inline">\(\mathbf{A}\)</span> into <span class="math inline">\(\mathbf{L}\mathbf{U}\)</span>. I won’t describe the algorithm to do this, or any matrix factorization really, since their inner workings aren’t that relevant to machine learning. If you’re curious, LU factorization is done using some variant of an algorithm known as <a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian Elimination</a>. Note the LU factorization in general is a cubic time algorithm, i.e.&nbsp;<span class="math inline">\(O(n^3)\)</span> if <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(n \times n\)</span>.</p>
+<p>The LU factorization can also be used to compute the determinant of a square matrix. Since <span class="math inline">\(\mathbf{L}\)</span> and <span class="math inline">\(\mathbf{U}\)</span> are triangular, their determinant is just the product of their diagonals. Using the product rule for determinants then gives</p>
+<p><span class="math display">\[\text{det}(\mathbf{A}) = \text{det}(\mathbf{LU}) = \text{det}(\mathbf{L}) \cdot \text{det}(\mathbf{U}) = \prod_{i=0}^{n-1} L_{i,i} \cdot U_{i,i}.\]</span></p>
+<p>The LU factorization can also be used to compute the inverse of a square matrix. The idea is to solve the <em>matrix system</em> of equations</p>
+<p><span class="math display">\[\mathbf{A} \mathbf{X} = \mathbf{I},\]</span></p>
+<p>assuming <span class="math inline">\(\mathbf{X}=\mathbf{A}^{-1}\)</span> are the <span class="math inline">\(n^2\)</span> unknown variables you’re solving for. This system can be solved by using the same technique of forward substitution plus back substitution. Note that solving for both the determinant and inverse this way each takes <span class="math inline">\(O(n^3)\)</span> time due to the LU decomposition. This is one reason why you should probably avoid calculating these quantities explicitly unless you really need them.</p>
+<p>Strangely, numpy doesn’t have a built-in LU factorization solver, but scipy does using <code>scipy.linalg.lu</code>. It factors a matrix into not two, but three products, <span class="math inline">\(\mathbf{A}=\mathbf{PLU}\)</span>. The <span class="math inline">\(\mathbf{P}\)</span> is a <em>permutation matrix</em>. It just accounts for the fact that sometimes you need to swap the rows before doing the LU factorization. I won’t go into that. Here’s the LU factorization of the above example matrix. I’ll also verify that <span class="math inline">\(\mathbf{A}=\mathbf{LU}\)</span>.</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.linalg <span class="im">import</span> lu</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]])</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>P, L, U <span class="op">=</span> lu(A)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'L = </span><span class="ch">\n</span><span class="sc">{</span>L<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'U = </span><span class="ch">\n</span><span class="sc">{</span>U<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'LU = </span><span class="ch">\n</span><span class="sc">{</span>L <span class="op">@</span> U<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>L = 
+[[1. 0.]
+ [1. 1.]]
+U = 
+[[ 1.  1.]
+ [ 0. -2.]]
+LU = 
+[[ 1.  1.]
+ [ 1. -1.]]</code></pre>
+</div>
+</div>
+</section>
+<section id="qr-factorization" class="level2">
+<h2 class="anchored" data-anchor-id="qr-factorization">QR Factorization</h2>
+<p>Another useful factorization is to factor a matrix <span class="math inline">\(\mathbf{A}\)</span> into a product of an orthogonal matrix <span class="math inline">\(\mathbf{Q}\)</span> and an upper triangular matrix <span class="math inline">\(\mathbf{R}\)</span>,</p>
+<p><span class="math display">\[\mathbf{A} = \mathbf{QR}.\]</span></p>
+<p>The QR factorization is useful if we want to create an orthonormal basis out of the column vectors of <span class="math inline">\(\mathbf{A}\)</span>, since <span class="math inline">\(\mathbf{Q}\)</span> will give a complete set of basis vectors built from orthogonalizing <span class="math inline">\(\mathbf{A}\)</span>. It’s also useful for calculating other random things of interest. Like LU factorization, it can be used to calculate determinants, since</p>
+<p><span class="math display">\[\text{det}(\mathbf{A}) = \text{det}(\mathbf{QR}) = \text{det}(\mathbf{Q}) \cdot \text{det}(\mathbf{R}) = 1 \cdot \text{det}(\mathbf{R}) = \prod_{i=0}^{n-1} R_{i,i}.\]</span></p>
+<p>It can also be used to find the inverse matrix. Use the fact that <span class="math inline">\(\mathbf{A}^{-1} = (\mathbf{QR})^{-1} = \mathbf{R}^{-1} \mathbf{Q}^\top\)</span>, since <span class="math inline">\(\mathbf{Q}\)</span> is orthogonal. The matrix <span class="math inline">\(\mathbf{R}^{-1}\)</span> can be calculated efficiently via back-substitution since <span class="math inline">\(\mathbf{R}\)</span> just a triangular matrix. Both the determinant and inverse calculation again take <span class="math inline">\(O(n^3)\)</span> time because the QR factorization does.</p>
+<p>QR factorization is also useful for efficiently calculating the eigenvalues and eigenvectors of a symmetric matrix. I’ll cover what those are in a second.</p>
+<p>In practice, this factorization is done using algorithms like <a href="https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process">Gram-Schmidt</a> or <a href="https://en.wikipedia.org/wiki/Householder_reflection">Householder reflections</a>. Just like LU factorization, QR factorization is in general an <span class="math inline">\(O(n^3)\)</span> algorithm. In numpy, you can get the QR factorization using <code>np.linalg.qr(A)</code>. Here’s the QR factorization of the same matrix from before.</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]])</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>Q, R <span class="op">=</span> np.linalg.qr(A)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Q = </span><span class="ch">\n</span><span class="sc">{</span>Q<span class="sc">.</span><span class="bu">round</span>(<span class="dv">10</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'R = </span><span class="ch">\n</span><span class="sc">{</span>R<span class="sc">.</span><span class="bu">round</span>(<span class="dv">10</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'QR = </span><span class="ch">\n</span><span class="sc">{</span>Q <span class="op">@</span> R<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Q = 
+[[-0.70710678 -0.70710678]
+ [-0.70710678  0.70710678]]
+R = 
+[[-1.41421356  0.        ]
+ [ 0.         -1.41421356]]
+QR = 
+[[ 1.  1.]
+ [ 1. -1.]]</code></pre>
+</div>
+</div>
+</section>
+<section id="spectral-decomposition" class="level2">
+<h2 class="anchored" data-anchor-id="spectral-decomposition">Spectral Decomposition</h2>
+<p>The spectral decomposition is a way to factor a symmetric matrix <span class="math inline">\(\mathbf{S}\)</span> into a product of an orthonormal matrix <span class="math inline">\(\mathbf{X}\)</span> and a diagonal matrix <span class="math inline">\(\mathbf{\Lambda}\)</span>,</p>
+<p><span class="math display">\[\mathbf{S} = \mathbf{X \Lambda X}^\top.\]</span></p>
+<p>The matrix <span class="math inline">\(\mathbf{\Lambda}\)</span> is called the <strong>eigenvalue matrix</strong>, and <span class="math inline">\(\mathbf{X}\)</span> is the <strong>eigenvector matrix</strong>. The diagonal entries of <span class="math inline">\(\mathbf{\Lambda}\)</span> are called the <strong>eigenvalues</strong> of <span class="math inline">\(\mathbf{S}\)</span>, denoted <span class="math inline">\(\lambda_i\)</span>,</p>
+<p><span class="math display">\[\mathbf{\Lambda} = \text{diag}(\lambda_0, \lambda_1, \cdots, \lambda_n).\]</span></p>
+<p>The column vectors of <span class="math inline">\(\mathbf{X}\)</span> are called the <strong>eigenvectors</strong> of <span class="math inline">\(\mathbf{S}\)</span>, denoted <span class="math inline">\(\mathbf{x}_i\)</span>,</p>
+<p><span class="math display">\[\mathbf{X} = \begin{pmatrix} \mathbf{x}_0 &amp; \mathbf{x}_1 &amp; \cdots &amp; \mathbf{x}_{n-1} \end{pmatrix}.\]</span></p>
+<p>Eigenvalues and eigenvectors arise from trying to find special “characteristic” lines in the vector space <span class="math inline">\(\mathbb{R}^n\)</span> that stay fixed when acted on by <span class="math inline">\(\mathbf{S}\)</span>. Let <span class="math inline">\(\mathbf{x}\)</span> be the unit vector along one of these lines. Saying <span class="math inline">\(\mathbf{S}\)</span> can’t rotate <span class="math inline">\(\mathbf{x}\)</span> is equivalent to saying it can only <em>scale</em> <span class="math inline">\(\mathbf{x}\)</span> by some value <span class="math inline">\(\lambda\)</span>. Finding these special characteristic lines is thus equivalent to solving the equation</p>
+<p><span class="math display">\[\mathbf{S}\mathbf{x} = \lambda \mathbf{x}\]</span></p>
+<p>for <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\mathbf{x}\)</span>. The vector <span class="math inline">\(\mathbf{x}\)</span> is the eigenvector (German for “characteristic vector”). The scalar <span class="math inline">\(\lambda\)</span> is its corresponding eigenvalue (German for “characteristic value”). We can rewrite this equation as <span class="math inline">\((\mathbf{S} - \lambda \mathbf{I})\mathbf{x} = \mathbf{0}\)</span>, where <span class="math inline">\(\mathbf{0}\)</span> is the zero vector. Taking the determinant of <span class="math inline">\(\mathbf{S} - \lambda \mathbf{I}\)</span> and insisting it must be singular gives a polynomial equation, called the <strong>characteristic equation</strong>, that can (in principle) be solved for the eigenvalue <span class="math inline">\(\lambda\)</span>,</p>
+<p><span class="math display">\[\text{det}(\mathbf{S} - \lambda \mathbf{I}) = 0.\]</span></p>
+<p>For example, if <span class="math inline">\(\mathbf{S}\)</span> is a symmetric <span class="math inline">\(2 \times 2\)</span> matrix, we have</p>
+<p><span class="math display">\[
+\mathbf{S} =
+\begin{pmatrix}
+a &amp; b \\
+b &amp; d \\
+\end{pmatrix} \quad \Longrightarrow \quad
+\mathbf{S} - \lambda \mathbf{I} =
+\begin{pmatrix}
+a-\lambda &amp; b \\
+b &amp; d-\lambda \\
+\end{pmatrix} \quad \Longrightarrow \quad
+\text{det}(\mathbf{S} - \lambda \mathbf{I}) = (a - \lambda)(d - \lambda) - b^2 = \lambda^2 - (a + d)\lambda + (ad-b^2) = 0.
+\]</span></p>
+<p>Notice that <span class="math inline">\(\text{tr}(\mathbf{S}) = a + d\)</span> and <span class="math inline">\(\text{det}(\mathbf{S}) = ad-b^2\)</span>, so the characteristic equation in this special <span class="math inline">\(2 \times 2\)</span> cases reduces to</p>
+<p><span class="math display">\[\lambda^2 - \text{tr}(\mathbf{S})\lambda + \text{det}(\mathbf{S}) = 0.\]</span></p>
+<p>This is a quadratic equation whose solution is the two eigenvalues <span class="math inline">\(\lambda_0, \lambda_1\)</span>. Once the eigenvalues are known, they can be plugged back into the linear equation <span class="math inline">\((\mathbf{S} - \lambda \mathbf{I})\mathbf{x} = \mathbf{0}\)</span> to solve for the eigenvectors <span class="math inline">\(\mathbf{x}_0, \mathbf{x}_1\)</span>, e.g.&nbsp;using LU factorization.</p>
+<p>Just to put some numbers in, take the following specific <span class="math inline">\(2 \times 2\)</span> matrix</p>
+<p><span class="math display">\[
+\mathbf{S} =
+\begin{pmatrix}
+2 &amp; 1 \\
+1 &amp; 2 \\
+\end{pmatrix}.
+\]</span></p>
+<p>Since <span class="math inline">\(\text{tr}(\mathbf{S})=2+2=4\)</span> and <span class="math inline">\(\text{det}(\mathbf{S})=2 \cdot 2 - 1 \cdot 1 = 3\)</span>, the characteristic equation is</p>
+<p><span class="math display">\[\lambda^2 - 4\lambda + 3 = 0 \quad \Longrightarrow \quad (\lambda-1)(\lambda - 3) = 0 \quad \Longrightarrow \quad \lambda=1, 3.\]</span></p>
+<p>The eigenvalues for this matrix are thus <span class="math inline">\(\lambda_0 = 3\)</span> and <span class="math inline">\(\lambda_1 = 1\)</span>. Note it’s conventional to order the eigenvalues from largest to smallest, though it isn’t required. The eigenvectors are gotten by solving the two systems</p>
+<p><span class="math display">\[
+(\mathbf{S} - \lambda_0 \mathbf{I})\mathbf{x}_0 = \mathbf{0} \quad \Longrightarrow \quad
+\begin{pmatrix}
+2-3 &amp; 1 \\
+1 &amp; 2-3 \\
+\end{pmatrix}
+\begin{pmatrix}
+x_0 \\
+y_0 \\
+\end{pmatrix} =
+\begin{pmatrix}
+0 \\
+0 \\
+\end{pmatrix} \quad \Longrightarrow \quad
+\mathbf{x}_0 =
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+1 \\
+\end{pmatrix} \approx
+\begin{pmatrix}
+0.707 \\
+0.707 \\
+\end{pmatrix},
+\]</span></p>
+<p><span class="math display">\[
+(\mathbf{S} - \lambda_1 \mathbf{I})\mathbf{x}_1 = \mathbf{0} \quad \Longrightarrow \quad
+\begin{pmatrix}
+2-1 &amp; 1 \\
+1 &amp; 2-1 \\
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+y_1 \\
+\end{pmatrix} =
+\begin{pmatrix}
+0 \\
+0 \\
+\end{pmatrix} \quad \Longrightarrow \quad
+\mathbf{x}_1 =
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+-1 \\
+\end{pmatrix} \approx
+\begin{pmatrix}
+0.707 \\
+-0.707 \\
+\end{pmatrix}.
+\]</span></p>
+<p>You can easily check that <span class="math inline">\(\mathbf{x}_0\)</span> and <span class="math inline">\(\mathbf{x}_1\)</span> are orthogonal. Note the eigenvectors here have been normalized so <span class="math inline">\(||\mathbf{x}_0||=||\mathbf{x}_1||=1\)</span>. This isn’t required, but it’s the most common convention to ensure the eigenvector matrix <span class="math inline">\(\mathbf{X}\)</span> is a properly orthogonal.</p>
+<p>Here’s a plot of what this looks like. I’ll show that <span class="math inline">\(\mathbf{v}_0=\sqrt{2}\mathbf{x}_0=(1,1)\)</span> gets scaled by a factor of <span class="math inline">\(\lambda_0=3\)</span> when acted on by <span class="math inline">\(\mathbf{S}\)</span>. Similarly, I’ll show that <span class="math inline">\(\mathbf{v}_1=\sqrt{2}\mathbf{x}_1=(1,-1)\)</span> gets scaled by a factor of <span class="math inline">\(\lambda_1=1\)</span> (i.e.&nbsp;not at all) when acted on by <span class="math inline">\(\mathbf{S}\)</span>. Importantly, notice that <span class="math inline">\(\mathbf{S}\)</span> doesn’t rotate either vector. They stay along their characteristic lines, or <strong>eigenspaces</strong>, which in this example are the lines <span class="math inline">\(y=\pm x\)</span>.</p>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> np.array([</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">2</span>, <span class="dv">1</span>], </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>]])</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>v0 <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>Sv0 <span class="op">=</span> S <span class="op">@</span> v0</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>v1 <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>Sv1 <span class="op">=</span> S <span class="op">@</span> v1</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>vectors <span class="op">=</span> [x.flatten() <span class="cf">for</span> x <span class="kw">in</span> [v0, Sv0, v1, Sv1]]</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>plot_vectors(</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    vectors, colors<span class="op">=</span>[<span class="st">'black'</span>, <span class="st">'red'</span>, <span class="st">'black'</span>, <span class="st">'blue'</span>], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">4</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>), zorders<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>], </span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">_0$'</span>, <span class="st">'$\mathbf</span><span class="sc">{S}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st">_0$'</span>, <span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">_1$'</span>, <span class="st">'$\mathbf</span><span class="sc">{S}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st">_1$'</span>],</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    text_offsets<span class="op">=</span>[[<span class="op">-</span><span class="fl">0.45</span>, <span class="fl">0.25</span>], [<span class="fl">0.05</span>, <span class="fl">0.15</span>], [<span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.5</span>], [<span class="fl">0.05</span>, <span class="fl">0.3</span>]], </span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Eigenspaces of $\mathbf</span><span class="sc">{S}</span><span class="st">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="matrix-algebra_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>A result I won’t prove, called the <strong>spectral theorem</strong>, guarantees that the eigenvalues of a symmetric matrix will be real-valued, and that the eigenvectors will form an orthonormal basis for <span class="math inline">\(\mathbb{R}^n\)</span>. This is why <span class="math inline">\(\mathbf{X}\)</span> ends up being an orthogonal matrix. The fact that the eigenvalues have to be real is why we can think of symmetric matrices as the matrix generalization of a real number.</p>
+<p>The spectral decomposition <span class="math inline">\(\mathbf{S} = \mathbf{X \Lambda X}^\top\)</span> is just a matrix way of writing the individual equations <span class="math inline">\(\mathbf{S}\mathbf{x} = \lambda \mathbf{x}\)</span>. Grouping the eigenvectors and eigenvalues into matrices, we can write these equations in one go as <span class="math inline">\(\mathbf{S}\mathbf{X} = \mathbf{\Lambda} \mathbf{X}\)</span>, which is just the spectral decomposition.</p>
+<p>Back to our working example, putting the eigenvalues and eigenvectors into their respective matrices gives</p>
+<p><span class="math display">\[
+\mathbf{\Lambda} =
+\begin{pmatrix}
+3 &amp; 0 \\
+0 &amp; 1 \\
+\end{pmatrix}, \qquad
+\mathbf{X} =
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1 \\
+\end{pmatrix}.
+\]</span></p>
+<p>That is, the symmetric matrix <span class="math inline">\(\mathbf{S}\)</span> factorizes into the spectral decomposition</p>
+<p><span class="math display">\[
+\mathbf{S} = \mathbf{X \Lambda X}^\top =
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1 \\
+\end{pmatrix}
+\begin{pmatrix}
+3 &amp; 0 \\
+0 &amp; 1 \\
+\end{pmatrix}
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1 \\
+\end{pmatrix}.
+\]</span></p>
+<p>We can find the spectral decomposition of a symmetric matrix in numpy using <code>np.linalg.eigh(S)</code>. Note that <code>np.linalg.eig(S)</code> will also work, but <code>eigh</code> is more efficient for symmetric matrices than <code>eig</code>. In either case, they return a pair of arrays, the first being the <em>diagonals</em> of <span class="math inline">\(\mathbf{\Lambda}\)</span>, the second being <span class="math inline">\(\mathbf{X}\)</span>. I’ll also verify that the spectral decomposition indeed gives <span class="math inline">\(\mathbf{S}\)</span>.</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">1</span>], </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">1</span>, <span class="dv">2</span>]])</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>lambdas, X <span class="op">=</span> np.linalg.eigh(S)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>Lambda <span class="op">=</span> np.diag(lambdas)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Lambda = </span><span class="ch">\n</span><span class="sc">{</span>Lambda<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'X = </span><span class="ch">\n</span><span class="sc">{</span>X<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'X Lambda X^T = </span><span class="ch">\n</span><span class="sc">{</span>X <span class="op">@</span> Lambda <span class="op">@</span> X<span class="sc">.</span>T<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Lambda = 
+[[1. 0.]
+ [0. 3.]]
+X = 
+[[-0.70710678  0.70710678]
+ [ 0.70710678  0.70710678]]
+X Lambda X^T = 
+[[2. 1.]
+ [1. 2.]]</code></pre>
+</div>
+</div>
+<p>Notice something from the example I just worked. It turns out that <span class="math inline">\(\text{tr}(\mathbf{S}) = 4 = \lambda_0 + \lambda_1\)</span> and <span class="math inline">\(\text{det}(\mathbf{S}) = 3 = \lambda_0 \lambda_1\)</span>. This fact turns out to always be true for <span class="math inline">\(n \times n\)</span> symmetric matrices, namely if <span class="math inline">\(\mathbf{S}\)</span> has eigenvalues <span class="math inline">\(\lambda_0, \lambda_1, \cdots, \lambda_{n-1}\)</span>, then</p>
+<p><span class="math display">\[\begin{align*}
+\text{tr}(\mathbf{S}) &amp;= \sum_{i=0}^{n-1} \lambda_i = \lambda_0 + \lambda_1 + \cdots + \lambda_{n-1}, \\
+\text{det}(\mathbf{S}) &amp;= \prod_{i=0}^{n-1} \lambda_i = \lambda_0 \cdot \lambda_1 \cdots \lambda_{n-1}.
+\end{align*}\]</span></p>
+<p>This fact implies that <span class="math inline">\(\mathbf{S}\)</span> will be invertible if and only if all the eigenvalues are non-zero, since otherwise we’d have <span class="math inline">\(\text{det}(\mathbf{S})=0\)</span>.</p>
+<p>Given how important the spectral decomposition is to many applications, there are a lot of different algorithms for finding it, each with its own trade-offs. One popular algorithm for doing so is the <em>QR algorithm</em>. Roughly speaking, the QR algorithm works as follows: - Start with <span class="math inline">\(\mathbf{S}_0 = \mathbf{S}\)</span>. - For some number of iterations <span class="math inline">\(t=0,1,\cdots, T-1\)</span> do the following: - Calculate the QR factorization of <span class="math inline">\(\mathbf{S}_t\)</span>: <span class="math inline">\(\mathbf{Q}_{t+1}, \mathbf{R}_{t+1} = \text{qr}(\mathbf{S}_t)\)</span>. - Update <span class="math inline">\(\mathbf{S}_t\)</span> by reversing the factorization order: <span class="math inline">\(\mathbf{S}_{t+1} = \mathbf{R}_{t+1} \mathbf{Q}_{t+1}\)</span>. - Take <span class="math inline">\(\mathbf{\Lambda} \approx \mathbf{S}_{T-1}\)</span> and <span class="math inline">\(\mathbf{X} \approx \mathbf{Q}_{T-1}\)</span>.</p>
+<p>Due to the QR factorizations and matrix multiplications, this algorithm will be <span class="math inline">\(O(n^3)\)</span> at each step, which all together gives a time complexity of <span class="math inline">\(O(Tn^3)\)</span>. It’s not at all obvious from what I’ve said why the QR algorithm even works. In fact, to work well it requires a few small <a href="https://en.wikipedia.org/wiki/QR_algorithm">modifications</a> I won’t go into.</p>
+</section>
+<section id="positive-definiteness" class="level2">
+<h2 class="anchored" data-anchor-id="positive-definiteness">Positive Definiteness</h2>
+<p>The eigenvalues of a symmetric matrix <span class="math inline">\(\mathbf{S}\)</span> are important because they in some sense specify how much <span class="math inline">\(\mathbf{S}\)</span> tends to stretch vectors in different directions. Most important for machine learning purposes though is the <em>sign</em> of the eigenvalues. The sign of the eigenvalues of a symmetric matrix essentially determine how hard it is to optimize a given function. This is especially relevant in machine learning, since training a model is all about optimizing the loss function of a model’s predictions against the data.</p>
+<p>If <span class="math inline">\(\mathbf{S}\)</span> is <span class="math inline">\(n \times n\)</span>, it will have <span class="math inline">\(n\)</span> eigenvalues <span class="math inline">\(\lambda_0, \lambda_1, \cdots, \lambda_{n-1}\)</span>. Ignoring the fact that each eigenvalue can be zero, each one will be either positive or negative. That means the <em>sequence</em> of eigenvalues can have <span class="math inline">\(2^n\)</span> possible arrangements of signs. For example, when <span class="math inline">\(n=3\)</span>, we could have any of the <span class="math inline">\(2^3=8\)</span> possible sign arrangements for the eigenvalues <span class="math inline">\((\lambda_0, \lambda_1, \lambda_2)\)</span>,</p>
+<p><span class="math display">\[(+, +, +), \ (+, +, -), \ (+, -, +), \ (-, +, +), \ (+, -, -), \ (-, +, -), \ (-, -, +), \ (-, -, -).\]</span></p>
+<p>Most of these arrangements will have mixed signs, but there will always be exactly two arrangements that don’t, namely when the eigenvalues are all positive, and when the eigenvalues are all negative. These cases turn out to be special, as we’ll see.</p>
+<p>A symmetric matrix whose eigenvalues are all positive is called <strong>positive definite</strong>. A positive definite matrix is essentially the matrix equivalent of a positive real number. For this reason, we’ll write <span class="math inline">\(\mathbf{S} \succ 0\)</span> to make the analogy of a scalar <span class="math inline">\(s &gt; 0\)</span> being positive. Positive definite matrices loosely speaking correspond to what are called <em>convex functions</em>, or “upward bowl shaped” functions.</p>
+<p>Similarly, a symmetric matrix whose eigenvalues are all negative is called <strong>negative definite</strong>. A negative definite matrix is essentially the matrix equivalent of a negative real number. For this reason, we’ll write <span class="math inline">\(\mathbf{S} \prec 0\)</span> to make the analogy of a scalar <span class="math inline">\(s &lt; 0\)</span> being negative. Negative definite matrices loosely speaking correspond to what are called <em>concave functions</em>, or “downward bowl shaped” functions.</p>
+<p>If we now allow some of the eigenvalues to also be zero, we get the matrix equivalent of a non-negative and non-positive number, respectively. If the eigenvalues are all non-negative, the matrix is called <strong>positive semi-definite</strong>, written <span class="math inline">\(\mathbf{S} \succcurlyeq 0\)</span>. If the eigenvalues are all non-positive, it’s called <strong>negative semi-definite</strong>, written <span class="math inline">\(\mathbf{S} \preccurlyeq 0\)</span>.</p>
+<p>By taking the spectral decomposition of <span class="math inline">\(\mathbf{S}\)</span> and expanding everything out, it’s possible to show that the following facts hold for any non-zero vector <span class="math inline">\(\mathbf{x} \in \mathbb{R}^n\)</span>, - Positive definite: If <span class="math inline">\(\mathbf{S} \succ 0\)</span>, then <span class="math inline">\(\mathbf{x}^\top \mathbf{S} \mathbf{x} &gt; 0\)</span>. - Negative definite: If <span class="math inline">\(\mathbf{S} \prec 0\)</span>, then <span class="math inline">\(\mathbf{x}^\top \mathbf{S} \mathbf{x} &lt; 0\)</span>. - Positive semi-definite: If <span class="math inline">\(\mathbf{S} \succcurlyeq 0\)</span>, then <span class="math inline">\(\mathbf{x}^\top \mathbf{S} \mathbf{x} \geq 0\)</span>. - Negative semi-definite: If <span class="math inline">\(\mathbf{S} \preccurlyeq 0\)</span>, then <span class="math inline">\(\mathbf{x}^\top \mathbf{S} \mathbf{x} \leq 0\)</span>.</p>
+<p>Expressions of the form <span class="math inline">\(\mathbf{x}^\top \mathbf{S} \mathbf{x}\)</span> are called <strong>quadratic forms</strong>. They’ll always be scalars, since all they’re doing is taking the dot product <span class="math inline">\(\mathbf{x} \cdot \mathbf{S} \mathbf{x}\)</span>. This is why these types of matrices are the matrix generalization of positive or negative numbers. If these dot products are positive for any vector, that’s about as good as we can do to say that the matrix itself is positive. Etc.</p>
+<p>As you’d probably guess, the easiest way to determine if a symmetric matrix is any of these types of definite is to just calculate the eigenvalues and check their signs. For example, I showed before that the matrix</p>
+<p><span class="math display">\[
+\mathbf{S} =
+\begin{pmatrix}
+2 &amp; 1 \\
+1 &amp; 2 \\
+\end{pmatrix}
+\]</span></p>
+<p>has eigenvalues <span class="math inline">\(\lambda_0 = 3\)</span> and <span class="math inline">\(\lambda_1 = 1\)</span>. Since both of these are positive, <span class="math inline">\(\mathbf{S}\)</span> is positive definite. It’s also positive semi-definite since they’re both non-negative. To check if a matrix is positive definite, for example, in numpy, you can do something like the following. Modify the inequality accordingly for the other types.</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_positive_definite(S):</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    eigvals <span class="op">=</span> np.linalg.eigvals(S)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">all</span>(eigvals <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">1</span>], </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">1</span>, <span class="dv">2</span>]])</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>is_positive_definite(S)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>True</code></pre>
+</div>
+</div>
+</section>
+<section id="singular-value-decomposition" class="level2">
+<h2 class="anchored" data-anchor-id="singular-value-decomposition">Singular Value Decomposition</h2>
+<p>The spectral decomposition is mostly useful for square symmetric matrices. Yet, the properties of eigenvalues and eigenvectors seem to be incredibly useful for understanding how a matrix behaves. They say something useful about the characteristic scales and directions of a matrix and its underlying linear operator. It turns out we <em>can</em> generalize the spectral decomposition to arbitrary matrices, but with some slight modifications. This modified factorization is called the <strong>singular value decomposition</strong>, or <strong>SVD</strong> for short.</p>
+<p>Suppose <span class="math inline">\(\mathbf{A}\)</span> is some arbitrary <span class="math inline">\(m \times n\)</span> matrix. It turns out we can <em>always</em> factor <span class="math inline">\(\mathbf{A}\)</span> into a product of the form</p>
+<p><span class="math display">\[\mathbf{A} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top,\]</span></p>
+<p>where <span class="math inline">\(\mathbf{U}\)</span> is an <span class="math inline">\(m \times m\)</span> orthogonal matrix called the <strong>left singular matrix</strong>, <span class="math inline">\(\mathbf{V}\)</span> is a different <span class="math inline">\(n \times n\)</span> orthogonal matrix called the <strong>left singular matrix</strong>, and <span class="math inline">\(\mathbf{\Sigma}\)</span> is an <span class="math inline">\(m \times n\)</span> diagonal matrix called the <strong>singular value matrix</strong>.</p>
+<p>The singular value matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> is a rectangular diagonal matrix. This means the diagonal will only have <span class="math inline">\(k=\min(m, n)\)</span> entries. The diagonal entries are called the <strong>singular values</strong> of <span class="math inline">\(\mathbf{A}\)</span>, usually denoted <span class="math inline">\(\sigma_0, \sigma_1, \cdots, \sigma_{k-1}\)</span>. Unlike eigenvalues, singular values are required to be non-negative.</p>
+<p>The column vectors of <span class="math inline">\(\mathbf{U}\)</span> and <span class="math inline">\(\mathbf{V}\)</span> are called the left and right <strong>singular vectors</strong> respectively. Since both matrices are orthogonal, their singular vectors will form an orthonormal basis for <span class="math inline">\(\mathbb{R}^m\)</span> and <span class="math inline">\(\mathbb{R}^n\)</span> respectively.</p>
+<p>Notice that whereas with the spectral composition <span class="math inline">\(\mathbf{S} = \mathbf{X} \mathbf{\Lambda} \mathbf{X}^\top\)</span> has only a single orthogonal matrix <span class="math inline">\(\mathbf{X}\)</span>, the SVD has two different orthogonal matrices <span class="math inline">\(\mathbf{U}\)</span> and <span class="math inline">\(\mathbf{V}\)</span> to worry about, and each one is a different size. Also, while <span class="math inline">\(\mathbf{\Lambda}\)</span> can contain eigenvalues of any sign, <span class="math inline">\(\mathbf{\Sigma}\)</span> can only contain singular values that are nonnegative.</p>
+<p>Nonetheless, the two factorizations are related by the following fact: The <em>singular values</em> of <span class="math inline">\(\mathbf{A}\)</span> are the <em>eigenvalues</em> of the symmetric matrix <span class="math inline">\(\mathbf{S} = \mathbf{A}^\top \mathbf{A}\)</span>. Not only that, they’re also the eigenvalues of the transposed symmetric matrix <span class="math inline">\(\mathbf{S}^\top = \mathbf{A} \mathbf{A}^\top\)</span>. This fact gives one way you could actually calculate the SVD. The singular value matrix <span class="math inline">\(\mathbf{\Sigma}\)</span> will just be the eigenvalue matrix of <span class="math inline">\(\mathbf{S}\)</span> (and <span class="math inline">\(\mathbf{S}^\top\)</span>). The left singular matrix <span class="math inline">\(\mathbf{U}\)</span> will be the eigenvector matrix of <span class="math inline">\(\mathbf{S}\)</span>. The right singular matrix <span class="math inline">\(\mathbf{V}\)</span> will be the eigenvector matrix of <span class="math inline">\(\mathbf{S}^\top\)</span>. Very roughly speaking, this is what many SVD algorithms use, e.g.&nbsp;by applying the QR algorithm on both <span class="math inline">\(\mathbf{S}\)</span> and <span class="math inline">\(\mathbf{S}^\top\)</span>.</p>
+<p>Calculating the SVD by hand is much more of a pain than the spectral decomposition is because you have to do it twice, once on <span class="math inline">\(\mathbf{S}\)</span> and once on <span class="math inline">\(\mathbf{S}^\top\)</span>. I’ll spare you the agony of this calculation, and just use numpy to calculate the SVD of the following matrix,</p>
+<p><span class="math display">\[
+\mathbf{A} =
+\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; 0 \\
+1 &amp; -1 \\
+\end{pmatrix}.
+\]</span></p>
+<p>We can use <code>np.linalg.svd(A)</code> to calculate the SVD of <span class="math inline">\(\mathbf{A}\)</span>. It’ll return a triplet of arrays, in order <span class="math inline">\(\mathbf{U}\)</span>, the diagonal of <span class="math inline">\(\mathbf{\Sigma}\)</span>, and <span class="math inline">\(\mathbf{V}^T\)</span>. Note to get the full <span class="math inline">\(\mathbf{\Sigma}\)</span> you can’t just use <code>np.diag</code> since <span class="math inline">\(\mathbf{\Sigma}\)</span> won’t be square here. You have to add a row of zeros after to make the calculation work out. I’ll do this just using a loop and filling in the diagonals manually.</p>
+<p>Notice that the two singular values are positive, <span class="math inline">\(\sigma_0 = \sqrt{3} \approx 1.732\)</span> and <span class="math inline">\(\sigma_1 = \sqrt{2} \approx 1.414\)</span>. In this example, the right singular matrix <span class="math inline">\(\mathbf{V}\)</span> is just <span class="math inline">\(\text{diag}(-1, 1)\)</span>, which is clearly orthogonal. The left singular matrix <span class="math inline">\(\mathbf{U}\)</span> is a little harder to see, but it’s also orthogonal. Finally, the product <span class="math inline">\(\mathbf{U}\mathbf{\Sigma}\mathbf{V}^\top\)</span> indeed gives <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>],</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]])</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>m, n <span class="op">=</span> A.shape</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="bu">min</span>(m, n)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>U, sigma, Vt <span class="op">=</span> np.linalg.svd(A)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>Sigma <span class="op">=</span> np.zeros((m, n))</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k):</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    Sigma[i, i] <span class="op">=</span> sigma[i]</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>USVt <span class="op">=</span> U <span class="op">@</span> Sigma <span class="op">@</span> Vt</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'U = </span><span class="ch">\n</span><span class="sc">{</span>U<span class="sc">.</span><span class="bu">round</span>(<span class="dv">10</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Sigma = </span><span class="ch">\n</span><span class="sc">{</span>Sigma<span class="sc">.</span><span class="bu">round</span>(<span class="dv">10</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'V = </span><span class="ch">\n</span><span class="sc">{</span>Vt<span class="sc">.</span>T<span class="sc">.</span><span class="bu">round</span>(<span class="dv">10</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'U Sigma V^T = </span><span class="ch">\n</span><span class="sc">{</span>USVt<span class="sc">.</span><span class="bu">round</span>(<span class="dv">10</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>U = 
+[[-0.57735027  0.70710678  0.40824829]
+ [-0.57735027  0.         -0.81649658]
+ [-0.57735027 -0.70710678  0.40824829]]
+Sigma = 
+[[1.73205081 0.        ]
+ [0.         1.41421356]
+ [0.         0.        ]]
+V = 
+[[-1.  0.]
+ [-0.  1.]]
+U Sigma V^T = 
+[[ 1.  1.]
+ [ 1.  0.]
+ [ 1. -1.]]</code></pre>
+</div>
+</div>
+<p>To give you an intuition is to what the SVD is doing, suppose <span class="math inline">\(\mathbf{x} \in \mathbb{R}^n\)</span> is some size-<span class="math inline">\(n\)</span> vector. Suppose we want to operate on <span class="math inline">\(\mathbf{x}\)</span> with <span class="math inline">\(\mathbf{A}\)</span> to get a new vector <span class="math inline">\(\mathbf{v} = \mathbf{A}\mathbf{x}\)</span>. Writing <span class="math inline">\(\mathbf{A} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top\)</span>, we can do this operation in a sequence of three successive steps: 1. Calculate <span class="math inline">\(\mathbf{y} = \mathbf{V}^\top \mathbf{x}\)</span>: The output is also a size-<span class="math inline">\(n\)</span> vector <span class="math inline">\(\mathbf{y} \in \mathbb{R}^n\)</span>. Since <span class="math inline">\(\mathbf{V}\)</span> is orthogonal, this action can only rotate (or reflect) <span class="math inline">\(\mathbf{x}\)</span> by some angle in space. 2. Calculate <span class="math inline">\(\mathbf{z} = \mathbf{\Sigma}\mathbf{y}\)</span>: The output is now a size-<span class="math inline">\(k\)</span> vector <span class="math inline">\(\mathbf{z} \in \mathbb{R}^k\)</span>. Since <span class="math inline">\(\mathbf{\Sigma}\)</span> is diagonal, it can only stretch <span class="math inline">\(\mathbf{y}\)</span> along the singular directions of <span class="math inline">\(\mathbf{V}\)</span>, not rotate it. 3. Calculate <span class="math inline">\(\mathbf{v} = \mathbf{U}\mathbf{z}\)</span>: The output is now a size-<span class="math inline">\(m\)</span> vector <span class="math inline">\(\mathbf{v} \in \mathbb{R}^m\)</span>. Since <span class="math inline">\(\mathbf{U}\)</span> is orthogonal, this action can only rotate (or reflect) <span class="math inline">\(\mathbf{z}\)</span> by some angle in space.</p>
+<p>The final output is thus a vector <span class="math inline">\(\mathbf{v} = \mathbf{A}\mathbf{x}\)</span> that first got rotated in <span class="math inline">\(\mathbb{R}^n\)</span>, then scaled in <span class="math inline">\(\mathbb{R}^k\)</span>, then rotated again in <span class="math inline">\(\mathbb{R}^m\)</span>. So you can visualize this better let’s take a specific example. To make everything show up on one plot I’ll choose a <span class="math inline">\(2 \times 2\)</span> matrix, so <span class="math inline">\(m=n=k=2\)</span>, for example</p>
+<p><span class="math display">\[
+\mathbf{A} =
+\begin{pmatrix}
+1 &amp; 2 \\
+1 &amp; 1 \\
+\end{pmatrix}.
+\]</span></p>
+<p>The singular values to this matrix turn out to be <span class="math inline">\(\sigma_0 \approx 2.618\)</span> and <span class="math inline">\(\sigma_1 \approx 0.382\)</span>. What I’m going to do is randomly sample a bunch of unit vectors <span class="math inline">\(\mathbf{x}\)</span>, then apply the successive operations above to each vector. The original vectors <span class="math inline">\(\mathbf{x}\)</span> are shown in red, the vectors <span class="math inline">\(\mathbf{y} = \mathbf{V}^\top \mathbf{x}\)</span> in blue, the vectors <span class="math inline">\(\mathbf{z} = \mathbf{\Sigma}\mathbf{y}\)</span> in green, and finally the vectors <span class="math inline">\(\mathbf{v} = \mathbf{U}\mathbf{z}\)</span> in black. Notice that the red vectors just kind of fill in the unit circle, since they’re all unit vectors of length one. The blue vectors also fill in the unit circle, since <span class="math inline">\(\mathbf{V}^\top\)</span> can only rotate vectors, not stretch them. The green vectors then get stretched out into an elliptical shape due to <span class="math inline">\(\mathbf{\Sigma}\)</span>. The distortion of the ellipse depends on the “distortion ratio” <span class="math inline">\(\frac{\sigma_0}{\sigma_1} \approx 6.85\)</span>. This means one axis gets stretched about <span class="math inline">\(6.85\)</span> times as much as the other. Finally, since <span class="math inline">\(\mathbf{U}\)</span> can only rotate vectors, the black vectors then rotate these stretched vectors into their final position.</p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>],</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">1</span>]])</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>m, n <span class="op">=</span> A.shape</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="bu">min</span>(m, n)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>U, sigma, Vt <span class="op">=</span> np.linalg.svd(A)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>Sigma <span class="op">=</span> np.diag(sigma)</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Sigma = </span><span class="ch">\n</span><span class="sc">{</span>Sigma<span class="sc">.</span><span class="bu">round</span>(<span class="dv">10</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sigma = 
+[[2.61803399 0.        ]
+ [0.         0.38196601]]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>plot_svd(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="matrix-algebra_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The “distortion ratio” <span class="math inline">\(\frac{\sigma_0}{\sigma_1}\)</span> mentioned above can actually be used as a measure of how invertible a matrix is. It’s called the <em>condition number</em>, denoted <span class="math inline">\(\kappa\)</span>. For a general <span class="math inline">\(n \times n\)</span> matrix, the <strong>condition number</strong> is defined as the ratio of the <em>largest</em> to the <em>smallest</em> singular value,</p>
+<p><span class="math display">\[\kappa = \frac{\sigma_0}{\sigma_{k-1}}.\]</span></p>
+<p>The higher the condition number is, the harder it is to invert <span class="math inline">\(\mathbf{A}\)</span>. A condition number of <span class="math inline">\(\kappa=1\)</span> is when the singular values are the same. These are easiest to invert. Matrices with low <span class="math inline">\(\kappa\)</span> are called called <strong>well-conditioned</strong> matrices. The identity matrix has <span class="math inline">\(\kappa=1\)</span>, for example. If one of the singular values is <span class="math inline">\(0\)</span> then <span class="math inline">\(\kappa\)</span> will be infinite, meaning the matrix isn’t invertible at all. Matrices with high <span class="math inline">\(\kappa\)</span> are called <strong>ill-conditioned</strong> matrices. For this reason, the condition number is very often used in calculations when it’s important to make sure that <span class="math inline">\(\mathbf{A}\)</span> isn’t singular or close to singular. In numpy, you can calculate the condition number of a matrix directly by using <code>np.linalg.cond(A)</code>.</p>
+</section>
+<section id="low-rank-approximations" class="level2">
+<h2 class="anchored" data-anchor-id="low-rank-approximations">Low-Rank Approximations</h2>
+<p>The SVD is useful for many reasons. In fact, it’s probably the single most useful factorization in all of applied linear algebra. One reason this is true is because <em>every matrix</em> has one. When in doubt, if you can’t figure out how to do something with a matrix, you can take its SVD and try to work with those three matrices one-by-one. While that’s nice, the more useful application of the SVD to machine learning is that it’s a good way to compress or denoise data. To see why we need to look at the SVD in a slightly different way.</p>
+<p>Suppose <span class="math inline">\(\mathbf{A}\)</span> is some <span class="math inline">\(m \times n\)</span> matrix. Suppose <span class="math inline">\(\mathbf{u}_0, \mathbf{u}_1, \cdots, \mathbf{u}_{m-1}\)</span> are the column vectors of <span class="math inline">\(\mathbf{U}\)</span>, and <span class="math inline">\(\mathbf{v}_0, \mathbf{v}_1, \cdots, \mathbf{v}_{n-1}\)</span> are the column vectors of <span class="math inline">\(\mathbf{V}\)</span>. Suppose <span class="math inline">\(\sigma_0, \sigma_1, \cdots, \sigma_{k-1}\)</span> are the singular values of <span class="math inline">\(\mathbf{A}\)</span>, by convention ordered from largest to smallest. Then writing out the SVD in terms of the column vectors, and multiplying everything out matrix multiplication style, we have</p>
+<p><span class="math display">\[
+\mathbf{A} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top =
+\begin{pmatrix}
+\mathbf{u}_0 &amp; \mathbf{u}_1 &amp; \cdots &amp; \mathbf{u}_{m-1}
+\end{pmatrix}
+\text{diag}\big(\sigma_0, \sigma_1, \cdots, \sigma_{k-1}\big)
+\begin{pmatrix}
+\mathbf{v}_0^\top \\ \mathbf{v}_1^\top \\ \cdots \\ \mathbf{v}_{n-1}^\top
+\end{pmatrix} =
+\sum_{i=0}^{k-1} \sigma_i \mathbf{u}_i \mathbf{v}_i^\top =
+\sigma_0 \mathbf{u}_0 \mathbf{v}_0^\top + \sigma_1 \mathbf{u}_1 \mathbf{v}_1^\top + \cdots + \sigma_{k-1} \mathbf{u}_{k-1} \mathbf{v}_{k-1}^\top.
+\]</span></p>
+<p>That is, we can write <span class="math inline">\(\mathbf{A}\)</span> as a sum of outer products over the singular vectors, each weighted by its singular value. That’s fine. But why is it useful? All I did was re-write the SVD in a different form, after all. The gist of it is that we can use this formula to approximate <span class="math inline">\(\mathbf{A}\)</span> by a lower-dimensional matrix. Supposing we only kept the first <span class="math inline">\(d &lt; k\)</span> terms of the right-hand side and dropped the rest, we’d have</p>
+<p><span class="math display">\[\mathbf{A} \approx \mathbf{U}_d \mathbf{\Sigma}_d \mathbf{V}_d^\top = \sigma_0 \mathbf{u}_0 \mathbf{v}_0^\top + \sigma_1 \mathbf{u}_1 \mathbf{v}_1^\top + \cdots + \sigma_{d-1} \mathbf{u}_{d-1} \mathbf{v}_{d-1}^\top.\]</span></p>
+<p>This approximation will be a rank-<span class="math inline">\(d\)</span> matrix again of size <span class="math inline">\(m \times n\)</span>. It’s rank <span class="math inline">\(d\)</span> because it’s a sum of <span class="math inline">\(d\)</span> “independent” rank-1 matrices. When <span class="math inline">\(d&lt;&lt;k\)</span>, this is called the <strong>low-rank approximation</strong>. While this approximation is low <em>rank</em> it still has size <span class="math inline">\(m \times n\)</span>. It’s the inner dimensions that got cut from <span class="math inline">\(k\)</span> to <span class="math inline">\(d\)</span>, not the outer dimensions. To get a true low-dimensional approximation, we need to multiply both sides by <span class="math inline">\(\mathbf{V}_d\)</span>,</p>
+<p><span class="math display">\[\mathbf{A}_d =  \mathbf{A} \mathbf{V}_d = \mathbf{U}_d \mathbf{\Sigma}_d.\]</span></p>
+<p>We’re now approximating the <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> with an <span class="math inline">\(m \times d\)</span> matrix I’ll call <span class="math inline">\(\mathbf{A}_d\)</span>. Said differently, we’re <em>compressing</em> the <span class="math inline">\(n\)</span> columns of <span class="math inline">\(\mathbf{A}\)</span> down to just <span class="math inline">\(d&lt;&lt;n\)</span> columns. Note that we’re not <em>dropping</em> the last <span class="math inline">\(n-d\)</span> columns, we’re building new columns that best approximate <em>all</em> of the old columns.</p>
+<p>Let’s try to understand why low rank approximations are useful, and that they indeed do give good approximations to large matrices. To do so, consider the following example. I’m going to load some data from a well-known dataset in machine learning called MNIST. It’s a dataset of images of handwritten digits. When the low-rank approximation is applied to data, it’s called <strong>principle components analysis</strong>, or <strong>PCA</strong>. PCA is probably the most fundamental dimension reduction algorithm, a way of compressing high-dimensional data into lower-dimensional data.</p>
+<p>Each image is size <span class="math inline">\(28 \times 28\)</span>, which flatten out into <span class="math inline">\(n = 28 \cdot 28 = 784\)</span> dimensions. I’ll load <span class="math inline">\(m=1000\)</span> random samples from the MNIST dataset. This will create a matrix <span class="math inline">\(\mathbf{A}\)</span> of shape <span class="math inline">\(1000 \times 784\)</span>. I’ll go ahead and calculate the SVD to get <span class="math inline">\(\mathbf{U}\)</span>, <span class="math inline">\(\mathbf{\Sigma}\)</span>, and <span class="math inline">\(\mathbf{V}^\top\)</span>. In this case, <span class="math inline">\(k=\min(m,n)=784\)</span>, so these matrices will have sizes <span class="math inline">\(1000 \times 1000\)</span>, <span class="math inline">\(1000 \times 784\)</span>, and <span class="math inline">\(784 \times 784\)</span> respectively. As I mentioned before, numpy only returns the non-zero diagonals of <span class="math inline">\(\mathbf{\Sigma}\)</span>, which is a size <span class="math inline">\(k=784\)</span> vector of the singular values. Thankfully, that’s all we’ll need here.</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> sample_mnist(size<span class="op">=</span>m)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>U, sigma, Vt <span class="op">=</span> np.linalg.svd(A)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>A.shape, U.shape, sigma.shape, Vt.shape</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A.shape = </span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'U.shape = </span><span class="sc">{</span>U<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'sigma.shape = </span><span class="sc">{</span>sigma<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Vt.shape = </span><span class="sc">{</span>Vt<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A.shape = (1000, 784)
+U.shape = (1000, 1000)
+sigma.shape = (784,)
+Vt.shape = (784, 784)</code></pre>
+</div>
+</div>
+<p>Think of each <em>row</em> of <span class="math inline">\(\mathbf{A}\)</span> as representing a single image in the dataset, and each <em>column</em> of <span class="math inline">\(\mathbf{A}\)</span> as representing a single pixel of the image.</p>
+<p>Since these are images, I might as well show you what they look like. To do that, just pick a random row from the matrix. Each row will be a flattened image. To turn it into an image, we can just reshape the row to have shape <span class="math inline">\(28 \times 28\)</span>, then plot it using <code>plt.imshow</code>. Below, I’m picking off the first row, which turns out to be an image of a handwritten <span class="math inline">\(0\)</span>.</p>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> A[<span class="dv">0</span>, :].reshape(<span class="dv">28</span>, <span class="dv">28</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(img, cmap<span class="op">=</span><span class="st">'Greys'</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="matrix-algebra_files/figure-html/cell-28-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Let’s start by taking <span class="math inline">\(d=2\)</span>. Why? Because when <span class="math inline">\(d=2\)</span> we can plot each image as a point in the xy-plane! This suggests a powerful application of the low-rank approximation, to visualize high-dimensional data. To calculate <span class="math inline">\(\mathbf{A}_d\)</span>, we’ll need to truncate <span class="math inline">\(\mathbf{U}\)</span>, <span class="math inline">\(\mathbf{\Sigma}\)</span>, and <span class="math inline">\(\mathbf{V}^\top\)</span>. To make the shapes come out right, we’ll want to drop the first <span class="math inline">\(d\)</span> <em>columns</em> of <span class="math inline">\(\mathbf{U}\)</span> and the first <span class="math inline">\(d\)</span> <em>rows</em> of <span class="math inline">\(\mathbf{V}^\top\)</span>. Once we’ve got these, we can calculate <span class="math inline">\(\mathbf{A}_d\)</span>, which in this case will be size <span class="math inline">\(1000 \times 2\)</span>.</p>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>U_d, sigma_d, Vt_d <span class="op">=</span> U[:, :d], sigma[:d], Vt[:d, :]</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>A_d <span class="op">=</span> A <span class="op">@</span> Vt_d.T</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'U_d.shape = </span><span class="sc">{</span>U_d<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'sigma_d = </span><span class="sc">{</span>sigma_d<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Vt_d.shape = </span><span class="sc">{</span>Vt_d<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A_d.shape = </span><span class="sc">{</span>A_d<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>U_d.shape = (1000, 2)
+sigma_d = [197.89062659  66.60026657]
+Vt_d.shape = (2, 784)
+A_d.shape = (1000, 2)</code></pre>
+</div>
+</div>
+<p>Now we have <span class="math inline">\(m=1000\)</span> “images”, each with <span class="math inline">\(d=2\)</span> “variables”. This means we can plot them in the xy-plane, taking <span class="math inline">\(x\)</span> to be the first column <code>A_d[:, 0]</code>, and <span class="math inline">\(y\)</span> to be the second column <code>A_d[:, 1]</code>. Here’s a scatter plot of all images projected down to 2 dimensions. I can’t make out any patterns in the plot, and you probably can’t either. But at least we’ve found an interesting and sometimes useful way to visualize high-dimensional data.</p>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(A_d[:, <span class="dv">0</span>], A_d[:, <span class="dv">1</span>], s<span class="op">=</span><span class="dv">1</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'</span><span class="sc">{</span>m<span class="sc">}</span><span class="ss"> MNIST Images'</span>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="matrix-algebra_files/figure-html/cell-30-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>How good is our approximation? We can use the singular values to figure this out. In the low rank approximation, we’re keeping <span class="math inline">\(d\)</span> singular values and dropping the remaining <span class="math inline">\(k-d\)</span>. Throwing away those remaining singular values is throwing away information about our original matrix <span class="math inline">\(\mathbf{A}\)</span>. To figure out how much information we’re keeping in our approximation, we can just look at the ratio of the sum of singular values kept to the total sum of all singular values,</p>
+<p><span class="math display">\[R_d = \frac{\sigma_0 + \sigma_1 + \cdots + \sigma_{d-1}}{\sigma_0 + \sigma_1 + \cdots + \sigma_{k-1}}.\]</span></p>
+<p>This ratio is sometimes called the <strong>explained variance</strong> for reasons I’ll get into in a future lesson.</p>
+<p>In the rank-2 case I just worked out, this ratio turns out to be <span class="math inline">\(R_2 = \frac{\sigma_0 + \sigma_1}{\sum \sigma_i} \approx 0.087\)</span>. That is, this rank-2 approximation is preserving about 8.7% of the information in the original data.</p>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>R_d <span class="op">=</span> np.<span class="bu">sum</span>(sigma_d) <span class="op">/</span> np.<span class="bu">sum</span>(sigma)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'R_d = </span><span class="sc">{</span>R_d<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R_d = 0.08740669535517863</code></pre>
+</div>
+</div>
+<p>That’s pretty bad. We can do better. Let’s take <span class="math inline">\(d=100\)</span> and see how well that does. Of course, we won’t be able to plot the data in the xy-plane anymore, but it’ll better represent the original data. We’re now at <span class="math inline">\(R_d \approx 0.643\)</span>, which means we’re preserving about 64.3% of the information in the original data, and we’re doing it using only <span class="math inline">\(\frac{100}{784} \approx 0.127\)</span>, or 12.7% of the total columns of <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>U_d, sigma_d, Vt_d <span class="op">=</span> U[:, :d], sigma[:d], Vt[:d, :]</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>A_d <span class="op">=</span> A <span class="op">@</span> Vt_d.T</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A_d.shape = </span><span class="sc">{</span>A_d<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A_d.shape = (1000, 100)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>R_d <span class="op">=</span> np.<span class="bu">sum</span>(sigma_d) <span class="op">/</span> np.<span class="bu">sum</span>(sigma)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'R_d = </span><span class="sc">{</span>R_d<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R_d = 0.6433751746962163</code></pre>
+</div>
+</div>
+<p>Another way to see how good our compression is is to “unproject” the compressed images and plot them. To unproject <span class="math inline">\(\mathbf{A}_d\)</span>, just multiply on the right again by <span class="math inline">\(\mathbf{V}^\top\)</span> to get the original <span class="math inline">\(m \times n\)</span> matrix approximation again,</p>
+<p><span class="math display">\[\mathbf{A} \approx \mathbf{A}_d \mathbf{V}^\top.\]</span></p>
+<p>Once I’ve done that, I can just pluck a random row from the approximation, resize it, and plot it using <code>plt.imshow</code>, just like before. Notice this time we can still clearly see the handwritten <span class="math inline">\(0\)</span>, but it’s a bit grainer than it was before. The edges aren’t as sharp. Nevertheless, we can still make out the digit pretty solidly.</p>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> (A_d <span class="op">@</span> Vt_d)[<span class="dv">0</span>, :].reshape(<span class="dv">28</span>, <span class="dv">28</span>)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(img, cmap<span class="op">=</span><span class="st">'Greys'</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="matrix-algebra_files/figure-html/cell-34-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>But why is this approach good for compression anyway? After all, we still have to unproject the rows back into the original <span class="math inline">\(m \times n\)</span> space. Maybe think about it this way. If you just stored the full matrix <span class="math inline">\(\mathbf{A}\)</span>, you’d have tot store <span class="math inline">\(m \cdot n\)</span> total numbers. In this example, that’s <span class="math inline">\(1000 \cdot 784 = 784000\)</span> numbers you’d have to store in memory.</p>
+<p>But suppose now we do the low rank approximation. What we can then do is just store <span class="math inline">\(\mathbf{A}_d\)</span> and <span class="math inline">\(\mathbf{V}\)</span> instead. That means we’d instead store <span class="math inline">\(m \cdot d + d \cdot n\)</span> total numbers. In our example, that comes out to <span class="math inline">\(1000 \cdot 100 + 100 \cdot 784 = 100000 + 78400 = 178400\)</span>, which is only <span class="math inline">\(\frac{178400}{784000} \approx 0.227\)</span> or 22.7% of the numbers we’d have to store otherwise. We’ve thus compressed our data by a factor of about <span class="math inline">\(\frac{1}{0.227} \approx 4.4\)</span>. That’s a 4.4x compression of the original images.</p>
+<p>Now, this kind of PCA compression isn’t <em>perfect</em>, or <strong>lossless</strong>, since we can’t recover the original images <em>exactly</em>. But we can still recover the most fundamental features of the image, which in this case are the handwritten digits. This kind of compression is <strong>lossy</strong>, since it irreversibly throws away some information in the original data. Yet, it still maintains enough information to be useful in many settings.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../notebooks/vector-spaces.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notebooks/multivariate-calculus.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
