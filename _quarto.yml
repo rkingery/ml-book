@@ -3,9 +3,13 @@ project:
   output-dir: docs
 
 book:
-  title: "Machine Learning For The 2020s"
+  title: "Mathematics for Machine Learning"
   author: "Ryan Kingery"
-  date: "2/7/2023"
+  #date: "2/7/2023"
+  page-navigation: true
+  sidebar:
+    style: docked
+    background: light
   chapters:
     - index.qmd
     - notebooks/basic-math.ipynb
@@ -19,13 +23,21 @@ book:
     - notebooks/probability.ipynb
     #- notebooks/multivariate-probability.ipynb
 
-bibliography: references.bib
+#bibliography: references.bib
 
 format:
   html:
     theme: cosmo
+    page-layout: full
+    toc: true
+    toc-location: left
+    toc-depth: 2
+    #toc-title: "Section"
+    number-sections: true
+    code-fold: false
+    fig-align: center
   pdf:
     documentclass: scrreprt
 
-
+jupyter: python3
 

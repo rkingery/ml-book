@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Machine Learning For The 2020s - 2&nbsp; Numerical Computation</title>
+<title>Mathematics for Machine Learning - 2&nbsp; Numerical Computation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,10 +144,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Machine Learning For The 2020s</a> 
+      <a href="../">Mathematics for Machine Learning</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -209,30 +209,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
     </ul>
     </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
-  <li><a href="#integers" id="toc-integers" class="nav-link active" data-scroll-target="#integers">Integers</a>
   <ul class="collapse">
-  <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics">Basics</a></li>
-  <li><a href="#representing-integers" id="toc-representing-integers" class="nav-link" data-scroll-target="#representing-integers">Representing Integers</a></li>
-  </ul></li>
-  <li><a href="#floats" id="toc-floats" class="nav-link" data-scroll-target="#floats">Floats</a>
-  <ul class="collapse">
-  <li><a href="#basics-1" id="toc-basics-1" class="nav-link" data-scroll-target="#basics-1">Basics</a></li>
-  <li><a href="#representing-floats" id="toc-representing-floats" class="nav-link" data-scroll-target="#representing-floats">Representing Floats</a></li>
-  <li><a href="#double-precision" id="toc-double-precision" class="nav-link" data-scroll-target="#double-precision">Double Precision</a></li>
-  <li><a href="#common-floating-point-pitfalls" id="toc-common-floating-point-pitfalls" class="nav-link" data-scroll-target="#common-floating-point-pitfalls">Common Floating Point Pitfalls</a></li>
-  </ul></li>
+  <li><a href="#integers" id="toc-integers" class="nav-link active" data-scroll-target="#integers"><span class="toc-section-number">2.1</span>  Integers</a></li>
+  <li><a href="#floats" id="toc-floats" class="nav-link" data-scroll-target="#floats"><span class="toc-section-number">2.2</span>  Floats</a></li>
   </ul>
 </nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -253,18 +243,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p>In this lesson I’ll discuss the basics of numerical computation, specifically what integers and floating point numbers are and how they’re represented on a computer. This may seem too basic to mention, but it’s actually very important. There’s a lot of subtlety involved. Let’s get started.</p>
 <div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this makes every line of a cell print instead of just the last line</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.core.interactiveshell <span class="im">import</span> InteractiveShell</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>InteractiveShell.ast_node_interactivity <span class="op">=</span> <span class="st">"all"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="integers" class="level1">
-<h1>Integers</h1>
-<section id="basics" class="level2">
-<h2 class="anchored" data-anchor-id="basics">Basics</h2>
+<section id="integers" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="integers"><span class="header-section-number">2.1</span> Integers</h2>
+<section id="basics" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="basics"><span class="header-section-number">2.1.1</span> Basics</h3>
 <p>Recall the <strong>integers</strong> are whole numbers that can be positive, negative, or zero. Examples are 5, 100151, 0, -72, etc. The set of all integers is commonly denoted by the symbol <span class="math inline">\(\mathbb{Z}\)</span>.</p>
 <p>In python, integers (ints for short) are builtin objects of type <code>int</code> that more or less follow the rules that integers in math follow.</p>
 <p>Among other things, the following operations can be performed with integers:</p>
@@ -278,73 +266,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If any of these operations are applied to two integers, the output will itself always be an integer.</p>
 <p>Here are a few examples.</p>
 <div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">-</span> <span class="dv">5</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="op">*</span> <span class="dv">3</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="op">%</span> <span class="dv">3</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">**</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>4</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">-</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>-3</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="op">*</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>9</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="op">%</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>1</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">**</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>8</code></pre>
 </div>
 </div>
 <p>What about division? You can’t always divide two integers and get another integer. What you have to do instead is called integer division. Here you divide the two numbers and then round the answer down to the nearest whole number. Since <span class="math inline">\(5 \div 2 = 2.5\)</span>, the nearest rounded down integer is 2.</p>
 <p>In math, this “nearest rounded down integer” 2 is usually called the <strong>floor</strong> of 2.5, and represented with the funny symbol <span class="math inline">\(\lfloor 2.5 \rfloor.\)</span> Using this notation we can write the above integer division as <span class="math display">\[\big\lfloor \frac{5}{2} \big\rfloor = 2.\]</span></p>
 <p>In python, integer division is done using the <code>//</code> operator, e.g.&nbsp;<code>5 // 2 = 2</code>. I’ll usually write <span class="math inline">\(5 \ // \ 2\)</span> instead of <span class="math inline">\(\big\lfloor \frac{5}{2} \big\rfloor\)</span> when it makes sense, <span class="math display">\[5 \ // \ 2 = \big\lfloor \frac{5}{2} \big\rfloor = 2.\]</span></p>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="op">//</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="op">//</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>2</code></pre>
 </div>
 </div>
 <p>We can also do regular division <code>/</code> with ints, but the output will <em>not</em> be an integer even if the answer should be, e.g.&nbsp;<code>4 / 2</code>. Only integer division is guaranteed to return an integer. I’ll get to this shortly.</p>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="op">/</span> <span class="dv">2</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="dv">4</span> <span class="op">/</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="dv">4</span> <span class="op">/</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>2.0</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>float</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="op">//</span> <span class="dv">2</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> (<span class="dv">4</span> <span class="op">//</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> (<span class="dv">4</span> <span class="op">//</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>2</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>int</code></pre>
 </div>
 </div>
 <p>Division by zero is of course undefined for both division and integer division. In python it will always raise a <code>ZeroDivisionError</code> like so.</p>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="op">/</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="op">/</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>ZeroDivisionError: division by zero</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="op">//</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="op">//</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>ZeroDivisionError: integer division or modulo by zero</code></pre>
 </div>
 </div>
 </section>
-<section id="representing-integers" class="level2">
-<h2 class="anchored" data-anchor-id="representing-integers">Representing Integers</h2>
+<section id="representing-integers" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="representing-integers"><span class="header-section-number">2.1.2</span> Representing Integers</h3>
 <p>Just like every other data type, on a computer integers are actually represented internally as a sequence of bits. A <strong>bit</strong> is a “binary digit”, 0 or 1. A sequence of bits is just a sequence of zeros and ones, e.g.&nbsp;0011001010 or 1001001.</p>
 <p>The number of bits used to represent a piece of data is called its <strong>word size</strong>. If we use a word size of <span class="math inline">\(n\)</span> bits to represent an integer, then there are <span class="math inline">\(2^n\)</span> possible integer values we can represent.</p>
 <p>If integers could only be positive or zero, representing them with bits would be easy. We could just convert them to binary and that’s it. To convert a non-negative integer to binary, we just need to keep dividing it by 2 and recording its remainder (0 or 1) at each step. The binary form is then just the sequence of remainders, written right to left. More generally, the binary sequence of some arbitrary number <span class="math inline">\(x\)</span> is the sequence of coefficients <span class="math inline">\(b_k=0,1\)</span> in the sum</p>
@@ -359,15 +355,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>So the binary representation of <span class="math inline">\(12\)</span> is <span class="math inline">\(1100\)</span>, which is the sequence of coefficients in the sum</p>
 <p><span class="math display">\[12 = 1 \cdot 2^{3} + 1 \cdot 2^{2} + 0 \cdot 2^{1} + 0 \cdot 2^{0}.\]</span></p>
 <p>Rather than keep doing these by hand, you can quickly convert a number to binary in python by using <code>bin</code>. It’ll return a string representing the binary sequence of that number, prepended with the special prefix <code>0b</code>. To get back to the integer from, use <code>int</code>, passing in a base of <code>2</code>.</p>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">bin</span>(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">bin</span>(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>'0b1100'</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(<span class="st">'0b110'</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(<span class="st">'0b110'</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>6</code></pre>
 </div>
 </div>
@@ -500,36 +496,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>It’s worth visualizing what integers look like on the number line, if for nothing else than to compare it with what floats look like later on. Below I’ll plot what a 6-bit signed integer system would look like. Such a system should go from -32 to 31. I’ll to use the helper function <code>plot_number_dist</code> to do the plotting. As you’d expect, you just see a bunch of equally spaced points from -32 to 31.</p>
-<div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>six_bit_ints <span class="op">=</span> <span class="bu">range</span>(<span class="op">-</span><span class="dv">2</span><span class="op">**</span>(n<span class="op">-</span><span class="dv">1</span>), <span class="dv">2</span><span class="op">**</span>(n<span class="op">-</span><span class="dv">1</span>))</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>plot_number_dist(six_bit_ints, title<span class="op">=</span><span class="ss">f'Distribution of </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">-bit Signed Ints'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>six_bit_ints <span class="op">=</span> <span class="bu">range</span>(<span class="op">-</span><span class="dv">2</span><span class="op">**</span>(n<span class="op">-</span><span class="dv">1</span>), <span class="dv">2</span><span class="op">**</span>(n<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>plot_number_dist(six_bit_ints, title<span class="op">=</span><span class="ss">f'Distribution of </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">-bit Signed Ints'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="numerical-computing_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="numerical-computing_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>In python, integers are represented by default using a much bigger word size of <span class="math inline">\(n=64\)</span> bits, called <strong>long</strong> integers, or <strong>int64</strong> for short. This means (using two’s complement) we can represent <span class="math inline">\(2^{64}=18446744073709551616\)</span> possible integer values in the range <span class="math inline">\([-2^{63}, 2^{63}-1]\)</span>.</p>
 <p>You can see from this that 64-bit integers have a minimum integer allowed and a maximum integer allowed, which are</p>
 <p><span class="math display">\[\text{min\_int}=-2^{63}=-9223372036854775808, \qquad \text{max\_int}=2^{63}-1=9223372036854775807.\]</span></p>
 <p>What I’ve said is technically only exactly true in older versions of pythons as well as other programming languages like C. It turns out newer versions of python have a few added tricks that allow you to represent essentially arbitrarily large integers. You can see this by comparing it to numpy’s internal int64 representation, which uses the C version. A numpy int64 outside the valid range will throw an overflow error.</p>
-<div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>min_int <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">**</span> <span class="dv">63</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>max_int <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> <span class="dv">63</span> <span class="op">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>min_int <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">**</span> <span class="dv">63</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>max_int <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> <span class="dv">63</span> <span class="op">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>min_int <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>np.int64(min_int <span class="op">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>min_int <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>np.int64(min_int <span class="op">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>-9223372036854775809</code></pre>
 </div>
 <div class="cell-output cell-output-error">
 <pre><code>OverflowError: Python int too large to convert to C long</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>max_int <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>np.int64(max_int <span class="op">+</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>max_int <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>np.int64(max_int <span class="op">+</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>9223372036854775808</code></pre>
 </div>
 <div class="cell-output cell-output-error">
@@ -538,47 +541,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="floats" class="level1">
-<h1>Floats</h1>
-<section id="basics-1" class="level2">
-<h2 class="anchored" data-anchor-id="basics-1">Basics</h2>
+<section id="floats" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="floats"><span class="header-section-number">2.2</span> Floats</h2>
+<section id="basics-1" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="basics-1"><span class="header-section-number">2.2.1</span> Basics</h3>
 <p>What if we want to represent decimal numbers or fractions instead of whole numbers, like <span class="math inline">\(1.2\)</span> or <span class="math inline">\(0.99999\)</span>, or even irrational numbers like <span class="math inline">\(\pi=3.1415926\dots\)</span>? To do this we need a new system of numbers that I’ll call floating point numbers, or <strong>floats</strong>, for reasons I’ll explain soon. Floats will be a computer’s best attempt to represent the real numbers <span class="math inline">\(\mathbb{R}\)</span>. They’ll represent real numbers only approximately with some specified precision.</p>
 <p>In python, floats are builtin objects of type <code>float</code>. Floats obey pretty much the same operations that integers do with some minor exceptions: - Addition: <span class="math inline">\(1.2 + 4.3 = 5.5\)</span>. - Subtraction: <span class="math inline">\(1.2 - 4.3 = -3.1\)</span>. - Multiplication: <span class="math inline">\(1.2 \times 4.3 = 5.16\)</span>. - Exponentiation: <span class="math inline">\(4.3^2 = 18.49\)</span>. - Remainder (or Modulo): <span class="math inline">\(4.3 \text{ mod } 1.2 = 0.7\)</span>. - Integer Division: <span class="math inline">\(4.3 \ // \ 1.2 = 3.0\)</span>. - Division: <span class="math inline">\(4.3 \div 1.2\)</span>.</p>
 <p>I’ll print these out in python to verify the answers are correct.</p>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.2</span> <span class="op">+</span> <span class="fl">4.3</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1.2</span> <span class="op">-</span> <span class="fl">4.3</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fl">1.2</span> <span class="op">*</span> <span class="fl">4.3</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fl">4.3</span> <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fl">4.3</span> <span class="op">%</span> <span class="fl">1.2</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fl">4.3</span> <span class="op">//</span> <span class="fl">1.2</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fl">4.3</span> <span class="op">/</span> <span class="fl">1.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.2</span> <span class="op">+</span> <span class="fl">4.3</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1.2</span> <span class="op">-</span> <span class="fl">4.3</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fl">1.2</span> <span class="op">*</span> <span class="fl">4.3</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fl">4.3</span> <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fl">4.3</span> <span class="op">%</span> <span class="fl">1.2</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fl">4.3</span> <span class="op">//</span> <span class="fl">1.2</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="fl">4.3</span> <span class="op">/</span> <span class="fl">1.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>5.5</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>-3.0999999999999996</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>5.159999999999999</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>18.49</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>0.7</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>3.0</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>3.5833333333333335</code></pre>
 </div>
 </div>
 <p>Most of them look right. But what the heck is going on with <span class="math inline">\(1.2 - 4.3\)</span> and <span class="math inline">\(1.2 \times 4.3\)</span>? We’re getting some weird trailing nines that shouldn’t be there. This gets to how floats are actually represented on a computer.</p>
 </section>
-<section id="representing-floats" class="level2">
-<h2 class="anchored" data-anchor-id="representing-floats">Representing Floats</h2>
+<section id="representing-floats" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="representing-floats"><span class="header-section-number">2.2.2</span> Representing Floats</h3>
 <p>Representing real numbers on a computer is a lot more subtle than representing integers. Since a computer can only have a finite number of bits, they can’t represent infinitely many digits, e.g.&nbsp;in irrational numbers like <span class="math inline">\(\pi\)</span>. Using finite word sizes will necessarily have to truncate real numbers to some number of decimal places. This truncation will create an error in the calculation called <strong>numerical roundoff</strong>.</p>
 <p>So how should we represent a decimal number using <span class="math inline">\(n\)</span> bits? As an example, let’s imagine we’re trying to represent the number <span class="math inline">\(x=157.208\)</span>. Perhaps the first thing you might think of is to use some number of those bits to represent the integer part, and some number to represent the fractional part. Suppose you have <span class="math inline">\(n=16\)</span> bits available to represent <span class="math inline">\(x\)</span>. Then maybe you can use 8 bits for the integer part <span class="math inline">\(157\)</span>, and 8 bits for the fractional part <span class="math inline">\(0.208\)</span>. Converting both halves to binary, you’d get <span class="math display">\[157 \equiv 10011101, \quad 0.208 \equiv 0011010100111111.\]</span></p>
 <p>Truncating both sequences to 8 bits (from the left), you could thus adopt a convention that <span class="math inline">\(157.208 \equiv 10011101 \ 00110101\)</span>.</p>
@@ -623,8 +626,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 <p>So you can experiment, I wrote a helper function <code>represent_as_float</code> that lets you visualize this for different values of <span class="math inline">\(x\)</span>. Below I show the example I just calculated. I print out both the scientific notation form and its binary representation.</p>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>represent_as_float(<span class="fl">15.25</span>, n<span class="op">=</span><span class="dv">8</span>, n_exp<span class="op">=</span><span class="dv">4</span>, n_man<span class="op">=</span><span class="dv">3</span>, bias<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>represent_as_float(<span class="fl">15.25</span>, n<span class="op">=</span><span class="dv">8</span>, n_exp<span class="op">=</span><span class="dv">4</span>, n_man<span class="op">=</span><span class="dv">3</span>, bias<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>scientific notation: (-1)^0 * (1 + 0.90625) * 2^3
 8-bit floating point representation: 0 1101 111</code></pre>
@@ -639,13 +642,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>So I can illustrate some points about how floating point numbers behave, I’m going to generate <em>all possible</em> <span class="math inline">\(8\)</span>-bit floats (excluding the special numbers) and plot them on a number line, similar to what I did above with the <span class="math inline">\(8\)</span>-bit signed integers. I’ll generate the floats using the using the helper function <code>gen_all_floats</code>, passing in the number of mantissa bits <code>n_man=3</code>, the number of exponent bits <code>n_exp=4</code>, and a bias of <code>bias=10</code>.</p>
 <p>First, I’ll use these numbers to print out some interesting statistics of this 8-bit floating point system.</p>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>eight_bit_floats <span class="op">=</span> gen_all_floats(n<span class="op">=</span><span class="dv">8</span>, n_man<span class="op">=</span><span class="dv">3</span>, n_exp<span class="op">=</span><span class="dv">4</span>, bias<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total number of 8-bit floats: </span><span class="sc">{</span><span class="bu">len</span>(eight_bit_floats)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Most negative float: </span><span class="sc">{</span><span class="bu">min</span>(eight_bit_floats)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Most positive float: </span><span class="sc">{</span><span class="bu">max</span>(eight_bit_floats)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Smallest nonzero float: </span><span class="sc">{</span><span class="bu">min</span>([x <span class="cf">for</span> x <span class="kw">in</span> eight_bit_floats <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>])<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Machine Epsilon: </span><span class="sc">{</span><span class="bu">min</span>([x <span class="cf">for</span> x <span class="kw">in</span> eight_bit_floats <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">1</span>]) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>eight_bit_floats <span class="op">=</span> gen_all_floats(n<span class="op">=</span><span class="dv">8</span>, n_man<span class="op">=</span><span class="dv">3</span>, n_exp<span class="op">=</span><span class="dv">4</span>, bias<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total number of 8-bit floats: </span><span class="sc">{</span><span class="bu">len</span>(eight_bit_floats)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Most negative float: </span><span class="sc">{</span><span class="bu">min</span>(eight_bit_floats)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Most positive float: </span><span class="sc">{</span><span class="bu">max</span>(eight_bit_floats)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Smallest nonzero float: </span><span class="sc">{</span><span class="bu">min</span>([x <span class="cf">for</span> x <span class="kw">in</span> eight_bit_floats <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>])<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Machine Epsilon: </span><span class="sc">{</span><span class="bu">min</span>([x <span class="cf">for</span> x <span class="kw">in</span> eight_bit_floats <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">1</span>]) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Total number of 8-bit floats: 120
 Most negative float: -56.0
@@ -661,17 +664,24 @@ Machine Epsilon: 0.25</code></pre>
 <p>Overflow and underflow errors are some of the most common numerical bugs that occur in deep learning, and usually result from not handling floats correctly to begin with.</p>
 <p>I also printed out a special value called the <strong>machine epsilon</strong>. The machine epsilon, denoted <span class="math inline">\(\varepsilon_m\)</span>, is defined as the smallest value in a floating point system that’s larger than <span class="math inline">\(1\)</span>. In some sense, <span class="math inline">\(\varepsilon_m\)</span> is a proxy for how finely you can represent numbers in a given <span class="math inline">\(n\)</span>-bit floating point system. The smaller <span class="math inline">\(\varepsilon_m\)</span> the more precisely you can represent numbers, i.e.&nbsp;the more decimal places of precision you get access to. In our case, we get <span class="math inline">\(\varepsilon_m=0.25\)</span>. This means numbers in 8-bit floating point tend to be <span class="math inline">\(0.25\)</span> apart from each other on average, which means we can represent numbers in this system only with a measly 2-3 digits of precision.</p>
 <p>With these numbers in hand let’s now plot their distribution on the number line. I’ll use the helper function <code>plot_number_dist</code> function to do this. Compare with the plot of the signed integers I did above.</p>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>plot_number_dist(eight_bit_floats, title<span class="op">=</span><span class="st">'Distribution of 8-bit Floats'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>plot_number_dist(eight_bit_floats, title<span class="op">=</span><span class="st">'Distribution of 8-bit Floats'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="numerical-computing_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="numerical-computing_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Notice how different this plot is from the ones for the signed integers. With the integers, the points were equally spaced. Now points close to <span class="math inline">\(0\)</span> are getting represented much closer together than points far from <span class="math inline">\(0\)</span>. There are <span class="math inline">\(74\)</span> of the <span class="math inline">\(120\)</span> total points showing up just in the range <span class="math inline">\([-1,1]\)</span>. That’s over half!. Meanwhile, only <span class="math inline">\(22\)</span> points total show up in the combined ranges of <span class="math inline">\([-60,-10]\)</span> and <span class="math inline">\([10,60]\)</span>. Very strange.</p>
 <p>Feel free to play around with different floating point systems by using different choices for <code>n</code>, <code>n_man</code>, <code>n_exp</code>, and <code>bias</code>. Be careful, however, not to make <code>n_exp</code> too large or you may crash the kernel…</p>
 </section>
-<section id="double-precision" class="level2">
-<h2 class="anchored" data-anchor-id="double-precision">Double Precision</h2>
+<section id="double-precision" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="double-precision"><span class="header-section-number">2.2.3</span> Double Precision</h3>
 <p>So how does python represent floats? Python by default uses what’s called <strong>double precision</strong> to represent floats, also called <strong>float64</strong>. This means <span class="math inline">\(n=64\)</span> total bits of precision are used, with <span class="math inline">\(n_e=11\)</span>, <span class="math inline">\(n_m=52\)</span>, and bias <span class="math inline">\(b=1023=2^{10}-1\)</span>. Double precision allows for a <em>much</em> larger range of numbers than 8-bit precision does:</p>
 <ul>
 <li>The max value allowed is <span class="math inline">\(2^{2^{n_e}-b} = 2^{1025} \approx 10^{308}\)</span>.</li>
@@ -690,112 +700,114 @@ Machine Epsilon: 0.25</code></pre>
 <li>The special numbers <span class="math inline">\(\pm \infty\)</span>, <span class="math inline">\(\pm 0\)</span>, and <span class="math inline">\(\text{NaN}\)</span> are represented similarly as before, except using 64 bits.</li>
 </ul>
 <p>To illustrate the point regarding numerical roundoff, here’s what happens if we try to use double precision floating point to define the constant <span class="math inline">\(\pi\)</span> to its first <a href="https://www.wolframalpha.com/input?i=pi+to+100+digits">100 digits</a>? Notice it just gets truncated to its first 15 digits. Double precision is unable to keep track of the other 85 digits. They just get lost to numerical roundoff.</p>
-<div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>pi <span class="op">=</span> <span class="fl">3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117068</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>pi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>pi <span class="op">=</span> <span class="fl">3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117068</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>pi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>3.141592653589793</code></pre>
 </div>
 </div>
 <p>Another thing to worry about is adding small numbers to medium to large sized numbers, e.g.&nbsp;<span class="math inline">\(10 + 10^{-16}\)</span>, which will just get rounded down to <span class="math inline">\(10.0\)</span>.</p>
-<div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fl">10.0</span> <span class="op">+</span> <span class="fl">1e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fl">10.0</span> <span class="op">+</span> <span class="fl">1e-16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>10.0</code></pre>
 </div>
 </div>
 <p>Numerical roundoff is often an issue when subtracting two floats. Here’s what happens when we try to subtract two numbers that should be equal, <span class="math inline">\(x=0.1+0.2\)</span> and <span class="math inline">\(y=0.3\)</span>. Instead of <span class="math inline">\(y-x=0\)</span>, we get <span class="math inline">\(y-x \approx -5.55 \cdot 10^{-17}\)</span>. The problem comes from the calculation <span class="math inline">\(x=0.1+0.2\)</span>, which caused a slight loss of precision in <span class="math inline">\(x\)</span>.</p>
-<div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">0.3</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">-</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.2</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">-</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>-5.551115123125783e-17</code></pre>
 </div>
 </div>
 <p>A major implication of these calculations is that you should <em>never</em> test floating points for exact equality because numerical roundoff can mess it up. If you’d tried to test something like <code>(y - x) == 0.0</code>, you’d have gotten the wrong answer. Instead, you want to test that <code>y - x</code> is less than some small number <code>tol</code>, called a <em>tolerance</em>, i.e.&nbsp;<code>abs(y - x) &lt; tol</code>.</p>
-<div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">-</span> x <span class="op">==</span> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">-</span> x <span class="op">==</span> <span class="fl">0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>False</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>tol <span class="op">=</span> <span class="fl">1e-5</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="bu">abs</span>(y <span class="op">-</span> x) <span class="op">&lt;</span> tol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>tol <span class="op">=</span> <span class="fl">1e-5</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="bu">abs</span>(y <span class="op">-</span> x) <span class="op">&lt;</span> tol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>True</code></pre>
 </div>
 </div>
 <p>Numerical roundoff explains why we got the weird results above when subtracting <span class="math inline">\(1.2 - 4.3\)</span>. The imperfect precision in the two numbers resulted in a numerical roundoff error, leading in the trailing <span class="math inline">\(9\)</span>s that should’ve rounded up to <span class="math inline">\(-3.1\)</span> exactly. In general, subtracting floats is one of the most dangerous operations to do, as it tends to lead to the highest loss of precision in calculations. The closer two numbers are to being equal the worse this loss of precision tends to get.</p>
 <p>I mentioned that double precision has a smallest number of <span class="math inline">\(2^{-1022} \approx 10^{-308}\)</span>, but caveated that by saying that, by using a trick called <strong>subordinal numbers</strong>, we can get the smallest number down to about <span class="math inline">\(10^{-324}\)</span>. What did I mean by this? It turns out that the bits where the biased exponent <span class="math inline">\(e'=0\)</span> (i.e.&nbsp;all exponent bits are zero) go mostly unused in the standard version of double precision. By using this zero exponent and allowing the mantissa <span class="math inline">\(m\)</span> to take on all its possible values, we can get about <span class="math inline">\(2^{52}\)</span> more values (since the mantissa has 52 bits). This lets us get all the way down to <span class="math inline">\(2^{-1022} \cdot 2^{-52} = 2^{-1074} \approx 10^{-324}\)</span>.</p>
 <p>Python (and numpy) by default implements double precision with subordinal numbers, as we can see.</p>
-<div class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">**</span> (<span class="op">-</span><span class="dv">1074</span>)</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">**</span> (<span class="op">-</span><span class="dv">1075</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">**</span> (<span class="op">-</span><span class="dv">1074</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
 <pre><code>5e-324</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+</div>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">**</span> (<span class="op">-</span><span class="dv">1075</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
 <pre><code>0.0</code></pre>
 </div>
 </div>
 <p>The special numbers <span class="math inline">\(\pm \infty\)</span>, <span class="math inline">\(\pm 0\)</span>, and <span class="math inline">\(\text{NaN}\)</span> are also defined in double precision. In python (and numpy) they’re given by the following commands, - <span class="math inline">\(\infty\)</span>: <code>float('inf')</code> or <code>np.inf</code>, - <span class="math inline">\(-\infty\)</span>: <code>float('-inf')</code> or <code>-np.inf</code>, - <span class="math inline">\(\pm 0\)</span>: <code>0</code>, - <span class="math inline">\(\text{NaN}\)</span>: <code>float('nan')</code> or <code>np.nan</code>.</p>
-<div class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="st">'inf'</span>)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>np.inf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="st">'inf'</span>)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>np.inf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>inf</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>inf</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>np.inf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>np.inf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>-inf</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>-inf</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>0</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>0</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="st">'nan'</span>)</span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>np.nan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="st">'nan'</span>)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>np.nan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>nan</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="28">
+<div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>nan</code></pre>
 </div>
 </div>
 <p>You may be curious what exactly <span class="math inline">\(\text{NaN}\)</span> (“not a number”) is and where it might show up. Basically, NaNs are used wherever values are undefined. Anytime an operation doesn’t return a sensible value it risks getting converted to NaN. One example is the operation <span class="math inline">\(\infty - \infty = \infty + (-\infty)\)</span>, which mathematically doesn’t make sense. No, it’s not zero…</p>
-<div class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="st">'inf'</span>) <span class="op">+</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>np.inf <span class="op">-</span> np.inf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(<span class="st">'inf'</span>) <span class="op">+</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>np.inf <span class="op">-</span> np.inf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>nan</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>nan</code></pre>
 </div>
 </div>
 <p>I’ll finish this section by mentioning that there are two other floating point representations worth being aware of: <strong>single precision</strong> (or <strong>float32</strong>), and <strong>half precision</strong> (or <strong>float16</strong>). Single precision uses 32 bits to represent a floating point number. Half precision uses 16 bits. It may seem strange to even bother having these less-precise precisions lying around, but they do have their uses. For example, half precision shows up in deep learning as a more efficient way to represent the weights of a neural network. Since half precision floats only take up 25% as many bits as default double precision floats do, using them can yield a 4x reduction in model memory sizes. We’ll see more on this later.</p>
 </section>
-<section id="common-floating-point-pitfalls" class="level2">
-<h2 class="anchored" data-anchor-id="common-floating-point-pitfalls">Common Floating Point Pitfalls</h2>
+<section id="common-floating-point-pitfalls" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="common-floating-point-pitfalls"><span class="header-section-number">2.2.4</span> Common Floating Point Pitfalls</h3>
 <p>To cap this long section on floats, here’s a list of common pitfalls people run into when working with floating point numbers, and some ways to avoid each one. This is probably the most important thing to take away from this section. You may find it helpful to reference later on. See this <a href="https://www.codeproject.com/Articles/29637/Five-Tips-for-Floating-Point-Programming">post</a> for more information.</p>
 <ol type="1">
 <li>Numerical overflow: Letting a number blow up to infinity (or negative infinity)
@@ -973,7 +985,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
       <a href="../notebooks/basic-math.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basic Math</span></span>

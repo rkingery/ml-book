@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Machine Learning For The 2020s - 9&nbsp; Probability Distributions</title>
+<title>Mathematics for Machine Learning - 9&nbsp; Probability Distributions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,7 +127,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -143,10 +143,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Machine Learning For The 2020s</a> 
+      <a href="../">Mathematics for Machine Learning</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -208,54 +208,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
     </ul>
     </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
-  <li><a href="#randomness" id="toc-randomness" class="nav-link active" data-scroll-target="#randomness">Randomness</a>
   <ul class="collapse">
-  <li><a href="#aside-estimating-the-fluctuation-in-bin-counts" id="toc-aside-estimating-the-fluctuation-in-bin-counts" class="nav-link" data-scroll-target="#aside-estimating-the-fluctuation-in-bin-counts">Aside: Estimating the Fluctuation in Bin Counts</a></li>
-  </ul></li>
-  <li><a href="#discrete-probability" id="toc-discrete-probability" class="nav-link" data-scroll-target="#discrete-probability">Discrete Probability</a>
-  <ul class="collapse">
-  <li><a href="#motivation-rolling-a-die" id="toc-motivation-rolling-a-die" class="nav-link" data-scroll-target="#motivation-rolling-a-die">Motivation: Rolling a Die</a></li>
-  <li><a href="#general-case" id="toc-general-case" class="nav-link" data-scroll-target="#general-case">General Case</a></li>
-  <li><a href="#discrete-distributions" id="toc-discrete-distributions" class="nav-link" data-scroll-target="#discrete-distributions">Discrete Distributions</a>
-  <ul class="collapse">
-  <li><a href="#discrete-uniform-distribution" id="toc-discrete-uniform-distribution" class="nav-link" data-scroll-target="#discrete-uniform-distribution">Discrete Uniform Distribution</a></li>
-  <li><a href="#bernoulli-distribution" id="toc-bernoulli-distribution" class="nav-link" data-scroll-target="#bernoulli-distribution">Bernoulli Distribution</a></li>
-  <li><a href="#categorical-distribution" id="toc-categorical-distribution" class="nav-link" data-scroll-target="#categorical-distribution">Categorical Distribution</a></li>
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a></li>
-  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution">Poisson Distribution</a></li>
-  </ul></li>
-  <li><a href="#probabilities-of-multiple-outcomes" id="toc-probabilities-of-multiple-outcomes" class="nav-link" data-scroll-target="#probabilities-of-multiple-outcomes">Probabilities of Multiple Outcomes</a>
-  <ul class="collapse">
-  <li><a href="#application-getting-a-job" id="toc-application-getting-a-job" class="nav-link" data-scroll-target="#application-getting-a-job">Application: Getting a Job</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#continuous-probability" id="toc-continuous-probability" class="nav-link" data-scroll-target="#continuous-probability">Continuous Probability</a>
-  <ul class="collapse">
-  <li><a href="#motivation-rand-again" id="toc-motivation-rand-again" class="nav-link" data-scroll-target="#motivation-rand-again">Motivation: Rand Again</a></li>
-  <li><a href="#general-case-1" id="toc-general-case-1" class="nav-link" data-scroll-target="#general-case-1">General Case</a></li>
-  <li><a href="#continuous-distributions" id="toc-continuous-distributions" class="nav-link" data-scroll-target="#continuous-distributions">Continuous Distributions</a>
-  <ul class="collapse">
-  <li><a href="#uniform-distribution" id="toc-uniform-distribution" class="nav-link" data-scroll-target="#uniform-distribution">Uniform Distribution</a></li>
-  <li><a href="#gaussian-distribution-normal-distribution" id="toc-gaussian-distribution-normal-distribution" class="nav-link" data-scroll-target="#gaussian-distribution-normal-distribution">Gaussian Distribution (Normal Distribution)</a></li>
-  <li><a href="#laplace-distribution" id="toc-laplace-distribution" class="nav-link" data-scroll-target="#laplace-distribution">Laplace Distribution</a></li>
-  </ul></li>
-  <li><a href="#cauchy-distribution" id="toc-cauchy-distribution" class="nav-link" data-scroll-target="#cauchy-distribution">Cauchy Distribution</a>
-  <ul class="collapse">
-  <li><a href="#exponential-distribution" id="toc-exponential-distribution" class="nav-link" data-scroll-target="#exponential-distribution">Exponential Distribution</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#randomness" id="toc-randomness" class="nav-link active" data-scroll-target="#randomness"><span class="toc-section-number">9.1</span>  Randomness</a></li>
+  <li><a href="#discrete-probability" id="toc-discrete-probability" class="nav-link" data-scroll-target="#discrete-probability"><span class="toc-section-number">9.2</span>  Discrete Probability</a></li>
+  <li><a href="#continuous-probability" id="toc-continuous-probability" class="nav-link" data-scroll-target="#continuous-probability"><span class="toc-section-number">9.3</span>  Continuous Probability</a></li>
   </ul>
 </nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -290,8 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="randomness" class="level1">
-<h1>Randomness</h1>
+<section id="randomness" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="randomness"><span class="header-section-number">9.1</span> Randomness</h2>
 <p>Probability is a calculus for modeling random processes. There are things we just can’t predict with certainty given the information we have available. Stuff that we can’t predict with certainty we call <strong>random</strong>, or <strong>noise</strong>, or <strong>non-deterministic</strong>. Stuff we <em>can</em> predict with certainty we call <strong>deterministic</strong> or <strong>certain</strong>. Here are some examples of these two kinds of processes. The questions in the deterministic column have exact answers, while those in the random column do not.</p>
 <table class="table">
 <colgroup>
@@ -406,8 +373,8 @@ x =
 <pre><code>array([1025, 1036,  999,  981, 1037,  989,  956,  996,  976, 1005])</code></pre>
 </div>
 </div>
-<section id="aside-estimating-the-fluctuation-in-bin-counts" class="level3">
-<h3 class="anchored" data-anchor-id="aside-estimating-the-fluctuation-in-bin-counts">Aside: Estimating the Fluctuation in Bin Counts</h3>
+<section id="aside-estimating-the-fluctuation-in-bin-counts" class="level4" data-number="9.1.0.1">
+<h4 data-number="9.1.0.1" class="anchored" data-anchor-id="aside-estimating-the-fluctuation-in-bin-counts"><span class="header-section-number">9.1.0.1</span> Aside: Estimating the Fluctuation in Bin Counts</h4>
 <p>This variation in the bin counts is really due to the fact that we’re only sampling a finite number of values. To get <em>true</em> uniform sampling, where all bins have the same counts, we’d have to sample an infinitely large number of times.</p>
 <p>Here’s a rule of thumb for how much the bin counts should be expected to fluctuate as a function of the sample size. If <span class="math inline">\(N\)</span> is the number of samples, and each bin <span class="math inline">\(k\)</span> contains <span class="math inline">\(N_k\)</span> counts (i.e.&nbsp;its bar height is <span class="math inline">\(N_k\)</span>), then you can expect the counts to fluctuate above and below <span class="math inline">\(N_k\)</span> by about</p>
 <p><span class="math display">\[\sigma_k = \sqrt{N_k\bigg(1 - \frac{N_k}{N}\bigg)}.\]</span></p>
@@ -423,8 +390,8 @@ x =
 <p>I’ll start by talking about the discrete case since it’s easier to understand.</p>
 </section>
 </section>
-<section id="discrete-probability" class="level1">
-<h1>Discrete Probability</h1>
+<section id="discrete-probability" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="discrete-probability"><span class="header-section-number">9.2</span> Discrete Probability</h2>
 <p>Discrete random variables are variables that can only take on a discrete range of values. Usually this range is a finite set like <span class="math inline">\(\{0,1\}\)</span> or <span class="math inline">\(\{1,2,3,4,5,6\}\)</span> or something like that. But they could have an infinite range too, for example the set <span class="math inline">\(\mathbb{N}\)</span> of all non-negative integers. Rand is not an example of a discrete random variable, since there the range is all of the interval <span class="math inline">\([0,1]\)</span>.</p>
 <p>Here are some examples of real life things that can be modeled by a discrete random variable:</p>
 <ul>
@@ -435,8 +402,8 @@ x =
 <li>Modeling the number of heads gotten from flipping a coin a whole bunch of times.</li>
 <li>Modeling the number of people entering a building per hour.</li>
 </ul>
-<section id="motivation-rolling-a-die" class="level2">
-<h2 class="anchored" data-anchor-id="motivation-rolling-a-die">Motivation: Rolling a Die</h2>
+<section id="motivation-rolling-a-die" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="motivation-rolling-a-die"><span class="header-section-number">9.2.1</span> Motivation: Rolling a Die</h3>
 <p>Consider a very simple toy problem: rolling a die (singular of dice). If you’ve never seen dice before, they’re white cubes with black dots on each face of the cube. Each face gets some number of black dots on it between 1 and 6. People like to “roll” these dice in games by shaking and tossing them onto the ground. The person with the highest score, i.e.&nbsp;the most number of dots facing upward, wins that round.</p>
 <br><br>
 <center>
@@ -737,8 +704,8 @@ x =
 </div>
 </div>
 </section>
-<section id="general-case" class="level2">
-<h2 class="anchored" data-anchor-id="general-case">General Case</h2>
+<section id="general-case" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="general-case"><span class="header-section-number">9.2.2</span> General Case</h3>
 <p>Of course, there’s nothing special about a die. We can define probabilities in exactly the same way for any discrete random variable. A random variable <span class="math inline">\(x\)</span> is called <strong>discrete</strong> if it can take on one of <span class="math inline">\(n\)</span> countable values <span class="math inline">\(x_0,x_1,\cdots,x_{n-1}\)</span>. Suppose we run an experiment <span class="math inline">\(n\)</span> times and observe the outcomes of <span class="math inline">\(x\)</span> at each trial. If <span class="math inline">\(x=x_k\)</span> for some number of counts <span class="math inline">\(n_j\)</span>, then the probability <span class="math inline">\(x=x_k\)</span> is given by the limit of running the experiment infinitely many times,</p>
 <p><span class="math display">\[p_k = \mathbb{Pr}(x=k) = \lim_{N \rightarrow \infty} \frac{N_k}{N}.\]</span></p>
 <p>The set of values that <span class="math inline">\(x\)</span> can take on are called the <strong>support</strong> of the random variable. For values outside the support, it’s assumed the probability is zero. As will always be true with probabilities, it’s still the case that each probability must be non-negative, and they must all sum to one,</p>
@@ -762,11 +729,11 @@ p(x) =
 <p>For example, the discrete uniform distribution has two parameters indicating the lowest and highest values in the support, called <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. We could thus express its PMF as <span class="math inline">\(p(x;a,b)\)</span>, which means “the probability of <span class="math inline">\(x\)</span> given <em>known</em> parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>”.</p>
 <p>Using these parameters, it’s also common to use special symbols as a short-hand for common distributions. For example, the discrete uniform distribution with parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> is often shortened to something like <span class="math inline">\(DU(a,b)\)</span>. If we want to say <span class="math inline">\(x\)</span> is a discrete uniform random variable, we’d write <span class="math inline">\(x \sim DU(a,b)\)</span>. You’ll also sometimes see people use the symbol to write the PMF as well, for example <span class="math inline">\(DU(x;a,b)\)</span>.</p>
 </section>
-<section id="discrete-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="discrete-distributions">Discrete Distributions</h2>
+<section id="discrete-distributions" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="discrete-distributions"><span class="header-section-number">9.2.3</span> Discrete Distributions</h3>
 <p>Some discrete probability distributions occur so frequently that they get a special name. Each one tends to occur when modeling certain kinds of phenomena. Here are a few of the most common discrete distributions. I’ll just state them and summarize their properties for future reference.</p>
-<section id="discrete-uniform-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="discrete-uniform-distribution">Discrete Uniform Distribution</h3>
+<section id="discrete-uniform-distribution" class="level4" data-number="9.2.3.1">
+<h4 data-number="9.2.3.1" class="anchored" data-anchor-id="discrete-uniform-distribution"><span class="header-section-number">9.2.3.1</span> Discrete Uniform Distribution</h4>
 <ul>
 <li>Symbol: <span class="math inline">\(DU(a,b)\)</span></li>
 <li>Parameters: Integers <span class="math inline">\(a, b\)</span>, where <span class="math inline">\(a\)</span> is the minimum and <span class="math inline">\(b-1\)</span> is the maximum value in the support</li>
@@ -797,8 +764,8 @@ P(x; a,b) =
 </div>
 </div>
 </section>
-<section id="bernoulli-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="bernoulli-distribution">Bernoulli Distribution</h3>
+<section id="bernoulli-distribution" class="level4" data-number="9.2.3.2">
+<h4 data-number="9.2.3.2" class="anchored" data-anchor-id="bernoulli-distribution"><span class="header-section-number">9.2.3.2</span> Bernoulli Distribution</h4>
 <ul>
 <li>Symbol: <span class="math inline">\(\text{Ber}(\text{p})\)</span></li>
 <li>Parameters: The probability of success <span class="math inline">\(0 \leq \text{p} \leq 1\)</span></li>
@@ -836,8 +803,8 @@ P(x; \text{p}) =
 </div>
 </div>
 </section>
-<section id="categorical-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="categorical-distribution">Categorical Distribution</h3>
+<section id="categorical-distribution" class="level4" data-number="9.2.3.3">
+<h4 data-number="9.2.3.3" class="anchored" data-anchor-id="categorical-distribution"><span class="header-section-number">9.2.3.3</span> Categorical Distribution</h4>
 <ul>
 <li><p>Symbol: <span class="math inline">\(\text{Cat}(p_0,p_1,\cdots,p_{k-1})\)</span> or <span class="math inline">\(\text{Cat}(\mathbf{p})\)</span></p></li>
 <li><p>Parameters: <span class="math inline">\(k\)</span> non-negative real numbers <span class="math inline">\(p_j\)</span> that sum to one, each representing the probability of getting <span class="math inline">\(x_j\)</span></p>
@@ -882,8 +849,8 @@ p_0 + p_1 + p_2 &amp; \text{if } x_2 \leq x \leq x_3 \\
 </div>
 </div>
 </section>
-<section id="binomial-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h3>
+<section id="binomial-distribution" class="level4" data-number="9.2.3.4">
+<h4 data-number="9.2.3.4" class="anchored" data-anchor-id="binomial-distribution"><span class="header-section-number">9.2.3.4</span> Binomial Distribution</h4>
 <ul>
 <li>Symbol: <span class="math inline">\(\text{Bin}(n, \text{p})\)</span></li>
 <li>Parameters: The number of trials <span class="math inline">\(n=1,2,3,\cdots\)</span> and probability <span class="math inline">\(0 \leq \text{p} \leq 1\)</span> of success of each trial</li>
@@ -909,8 +876,8 @@ p_0 + p_1 + p_2 &amp; \text{if } x_2 \leq x \leq x_3 \\
 </div>
 </div>
 </section>
-<section id="poisson-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="poisson-distribution">Poisson Distribution</h3>
+<section id="poisson-distribution" class="level4" data-number="9.2.3.5">
+<h4 data-number="9.2.3.5" class="anchored" data-anchor-id="poisson-distribution"><span class="header-section-number">9.2.3.5</span> Poisson Distribution</h4>
 <ul>
 <li>Symbol: <span class="math inline">\(\text{Poisson}(\lambda)\)</span></li>
 <li>Parameters: A rate parameter <span class="math inline">\(\lambda \geq 0\)</span></li>
@@ -934,8 +901,8 @@ p_0 + p_1 + p_2 &amp; \text{if } x_2 \leq x \leq x_3 \\
 </div>
 </section>
 </section>
-<section id="probabilities-of-multiple-outcomes" class="level2">
-<h2 class="anchored" data-anchor-id="probabilities-of-multiple-outcomes">Probabilities of Multiple Outcomes</h2>
+<section id="probabilities-of-multiple-outcomes" class="level3" data-number="9.2.4">
+<h3 data-number="9.2.4" class="anchored" data-anchor-id="probabilities-of-multiple-outcomes"><span class="header-section-number">9.2.4</span> Probabilities of Multiple Outcomes</h3>
 <p>We’ve seen how to calculate the probabilities of any one outcome. The probability that <span class="math inline">\(x=k\)</span> is given by <span class="math inline">\(\text{Pr}(x=k) = p(k)\)</span>, where <span class="math inline">\(p(k)\)</span> is the PMF. It’s natural to then ask how we can think about probabilities of multiple outcomes. For example, consider again the situation of rolling a fair die. Suppose we were interested in knowing what the probability was of rolling an even number, i.e.&nbsp;<span class="math inline">\(x=2,4,6\)</span>. How would we approach this? Your intuition suggests the right idea. We can just sum the probabilities of each outcome together,</p>
 <p><span class="math display">\[\mathbb{Pr}(x\text{ is even}) = \mathbb{Pr}(x=2,4,6) = p(2) + p(4) + p(6) = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{1}{2}.\]</span></p>
 <p>This same idea extends to any discrete set. Suppose we’re interested in the probability that some discrete random variable <span class="math inline">\(x\)</span> takes on values in some set <span class="math inline">\(E = \{x_0, x_1, \cdots, x_{m-1}\}\)</span>. Then all we need to do is some over the probabilities of all the outcomes in <span class="math inline">\(E\)</span>, i.e.</p>
@@ -947,8 +914,8 @@ p_0 + p_1 + p_2 &amp; \text{if } x_2 \leq x \leq x_3 \\
 <p>But why should we care? It turns out if we know the CDF in some simple form, we can use it to calculate the probability <span class="math inline">\(x\)</span> is in any other interval by differencing the CDF at the endpoints. Suppose we’re interested in the probability <span class="math inline">\(a \leq x \leq b\)</span>. If we know the CDF for a particular distribution in some simple form, we can just difference it to get the probability of being in the interval, i.e.</p>
 <p><span class="math display">\[\mathbb{Pr}(a \leq x \leq b) = \mathbb{Pr}(x \leq b) - \mathbb{Pr}(x \leq a) = P(b) - P(a).\]</span></p>
 <p>This fact is more useful for continuous distributions than discrete ones, since in the discrete case we can always just sum over the values, which is usually pretty quick to do.</p>
-<section id="application-getting-a-job" class="level3">
-<h3 class="anchored" data-anchor-id="application-getting-a-job">Application: Getting a Job</h3>
+<section id="application-getting-a-job" class="level4" data-number="9.2.4.1">
+<h4 data-number="9.2.4.1" class="anchored" data-anchor-id="application-getting-a-job"><span class="header-section-number">9.2.4.1</span> Application: Getting a Job</h4>
 <p>Here’s a useful application where probabilities of multiple outcomes can sometimes come in handy. Suppose you’re applying to a bunch of jobs, and you want to know what is the probability that you’ll get <em>at least one</em> offer. Suppose you’ve applied to <span class="math inline">\(n\)</span> jobs. For simplicity, assume each job has roughly the same probability <span class="math inline">\(\text{p}\)</span> of giving you an offer. Then each job application looks kind of like the situation of flipping a coin. If <span class="math inline">\(x_i=1\)</span> you get an offer, if <span class="math inline">\(x_i=0\)</span> you get rejected. We can thus think of each job application as a Bernoulli random variable <span class="math inline">\(x_i \sim \text{Ber}(\text{p})\)</span>.</p>
 <p>Now, assume that the job applications are all independent of each other, so one company’s decision whether to give you an offer doesn’t affect another company’s decision to give you an offer. This isn’t perfectly true, but it’s reasonably true. In this scenario, the <em>total</em> number of offers <span class="math inline">\(x\)</span> you get out of <span class="math inline">\(n\)</span> job applications will then be binomially distributed, <span class="math inline">\(x \sim \text{Bin}(n, \text{p})\)</span>.</p>
 <p>We can use this fact to answer the question we started out with: What is the probability that you receive at least one offer? It’s equivalent to asking, if <span class="math inline">\(x\)</span> is binomial, what is the probability that <span class="math inline">\(x \geq 1\)</span>? Now, since <span class="math inline">\(x\)</span> is only supported on non-negative values, we have</p>
@@ -1005,8 +972,8 @@ n &amp;= \frac{\log(1 - O)}{\log(1 - p)}.
 </section>
 </section>
 </section>
-<section id="continuous-probability" class="level1">
-<h1>Continuous Probability</h1>
+<section id="continuous-probability" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="continuous-probability"><span class="header-section-number">9.3</span> Continuous Probability</h2>
 <p>So far we’ve covered discrete random variables, ones that take on a finite (or countably infinite) set of values. We can also consider random variables that take on a continuous range of values. For example, a continuous random variable <span class="math inline">\(x\)</span> can take on values in the entire interval <span class="math inline">\([0,1]\)</span>, or the whole real line <span class="math inline">\(\mathbb{R} = (-\infty, \infty)\)</span>. The key difference between continuous variables and discrete variables is that we have to think in terms of calculus now. Instead of points we’ll have infinitesimal areas. Instead of sums we’ll have integrals.</p>
 <p>It may not be obvious to you that there are practical examples where continuous random variables would be useful. Here are some examples:</p>
 <ul>
@@ -1020,8 +987,8 @@ n &amp;= \frac{\log(1 - O)}{\log(1 - p)}.
 <li>Modeling the measured voltage of a car battery at any point in time.</li>
 </ul>
 <p>In fact, any continuous variable you can think of could be treated as random depending on the situation. Even if a variable is completely deterministic, there may be situations where it’s helpful to think of it as random. The whole idea of <em>Monte Carlo methods</em> is based on this idea, in fact.</p>
-<section id="motivation-rand-again" class="level2">
-<h2 class="anchored" data-anchor-id="motivation-rand-again">Motivation: Rand Again</h2>
+<section id="motivation-rand-again" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="motivation-rand-again"><span class="header-section-number">9.3.1</span> Motivation: Rand Again</h3>
 <p>I showed example of a continuous random variable already at the beginning of this lesson, when I introduced the idea of random number generators like rand. Rand is an example of a function that can (approximately) generate samples of a continuous random variable. In particular, it samples uniformly from the interval <span class="math inline">\([0,1]\)</span>. I already showed what its histogram looks like for a large number of samples. Here it is again.</p>
 <div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.rand(<span class="dv">10000</span>)</span>
@@ -1063,8 +1030,8 @@ n &amp;= \frac{\log(1 - O)}{\log(1 - p)}.
 </div>
 </div>
 </section>
-<section id="general-case-1" class="level2">
-<h2 class="anchored" data-anchor-id="general-case-1">General Case</h2>
+<section id="general-case-1" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="general-case-1"><span class="header-section-number">9.3.2</span> General Case</h3>
 <p>The facts I’ve shown about rand extend to more general continuous random variables as well. Suppose <span class="math inline">\(x\)</span> is supported on some interval <span class="math inline">\([a,b]\)</span>. It could even be infinite. Let’s divide this interval up into <span class="math inline">\(M\)</span> tiny sub-intervals of length <span class="math inline">\(dx\)</span>, where <span class="math inline">\(M\)</span> must satisfy <span class="math inline">\(M = \frac{b-a}{dx}\)</span>,</p>
 <p><span class="math display">\[I_0=[a,a+dx], \quad I_1=[a+dx, a+2dx], \quad I_2=[a+2dx, a+3dx], \quad \cdots, \quad I_{M-1}=[a+(M-1)dx, b].\]</span></p>
 <p>Now, run an experiment <span class="math inline">\(N\)</span> times and count how many times outcomes occur, not for each <span class="math inline">\(x\)</span>, but for each <em>subinterval</em> <span class="math inline">\(I_k=[a+kdx, a+(k+1)dx]\)</span>. If <span class="math inline">\(x_0 \in I_k\)</span>, that is, if <span class="math inline">\(a+kdx \leq x_0 \leq a+(k+1)dx\)</span>, then the probability that <span class="math inline">\(x \approx x_0\)</span> is defined by,</p>
@@ -1105,18 +1072,18 @@ x, &amp; 0 \leq x \leq 1 \\
 </div>
 <div class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">100</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> <span class="kw">lambda</span> x: np.clip(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># quick way to define the piecewise CDF shown above</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> <span class="kw">lambda</span> x: np.clip(x, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co">## quick way to define the piecewise CDF shown above</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, P, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>), title<span class="op">=</span><span class="st">'Rand CDF'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="probability_files/figure-html/cell-24-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
-<section id="continuous-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="continuous-distributions">Continuous Distributions</h2>
+<section id="continuous-distributions" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="continuous-distributions"><span class="header-section-number">9.3.3</span> Continuous Distributions</h3>
 <p>As with discrete distributions, some continuous distributions occur so frequently that they get a special name. Here are a few of the most common continuous distributions. I’ll just state them and summarize their properties for future reference.</p>
-<section id="uniform-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="uniform-distribution">Uniform Distribution</h3>
+<section id="uniform-distribution" class="level4" data-number="9.3.3.1">
+<h4 data-number="9.3.3.1" class="anchored" data-anchor-id="uniform-distribution"><span class="header-section-number">9.3.3.1</span> Uniform Distribution</h4>
 <ul>
 <li>Symbol: <span class="math inline">\(U(a,b)\)</span></li>
 <li>Parameters: The minimum <span class="math inline">\(a\)</span> and maximum <span class="math inline">\(b\)</span> values in the support</li>
@@ -1149,8 +1116,8 @@ P(x; a, b) =
 </div>
 </div>
 </section>
-<section id="gaussian-distribution-normal-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="gaussian-distribution-normal-distribution">Gaussian Distribution (Normal Distribution)</h3>
+<section id="gaussian-distribution-normal-distribution" class="level4" data-number="9.3.3.2">
+<h4 data-number="9.3.3.2" class="anchored" data-anchor-id="gaussian-distribution-normal-distribution"><span class="header-section-number">9.3.3.2</span> Gaussian Distribution (Normal Distribution)</h4>
 <ul>
 <li>Symbol: <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span></li>
 <li>Parameters: The mean <span class="math inline">\(\mu \in \mathbb{R}\)</span> and variance <span class="math inline">\(\sigma^2 \geq 0\)</span> of the distribution</li>
@@ -1188,8 +1155,8 @@ P(x; a, b) =
 </div>
 </div>
 </section>
-<section id="laplace-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="laplace-distribution">Laplace Distribution</h3>
+<section id="laplace-distribution" class="level4" data-number="9.3.3.3">
+<h4 data-number="9.3.3.3" class="anchored" data-anchor-id="laplace-distribution"><span class="header-section-number">9.3.3.3</span> Laplace Distribution</h4>
 <ul>
 <li>Symbol: <span class="math inline">\(\text{Laplace}(\mu, s)\)</span></li>
 <li>Parameters: The mean <span class="math inline">\(\mu \in \mathbb{R}\)</span> and scale <span class="math inline">\(s \geq 0\)</span> of the distribution</li>
@@ -1223,8 +1190,8 @@ P(x; \mu , s) =
 </div>
 </section>
 </section>
-<section id="cauchy-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="cauchy-distribution">Cauchy Distribution</h2>
+<section id="cauchy-distribution" class="level3" data-number="9.3.4">
+<h3 data-number="9.3.4" class="anchored" data-anchor-id="cauchy-distribution"><span class="header-section-number">9.3.4</span> Cauchy Distribution</h3>
 <ul>
 <li>Symbol: <span class="math inline">\(\text{Cauchy}(m, s)\)</span></li>
 <li>Parameters: The median <span class="math inline">\(m \in \mathbb{R}\)</span> and scale <span class="math inline">\(s &gt; 0\)</span> of the distribution.</li>
@@ -1251,8 +1218,8 @@ P(x; \mu , s) =
 <p><img src="probability_files/figure-html/cell-29-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<section id="exponential-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="exponential-distribution">Exponential Distribution</h3>
+<section id="exponential-distribution" class="level4" data-number="9.3.4.1">
+<h4 data-number="9.3.4.1" class="anchored" data-anchor-id="exponential-distribution"><span class="header-section-number">9.3.4.1</span> Exponential Distribution</h4>
 <ul>
 <li>Symbol: <span class="math inline">\(\text{Exp}(\lambda)\)</span></li>
 <li>Parameters: A rate parameter <span class="math inline">\(\lambda &gt; 0\)</span></li>
@@ -1416,7 +1383,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
       <a href="../notebooks/multivariate-calculus.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></span>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Machine Learning For The 2020s - 5&nbsp; Systems of Linear Equations</title>
+<title>Mathematics for Machine Learning - 5&nbsp; Systems of Linear Equations</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,10 +144,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Machine Learning For The 2020s</a> 
+      <a href="../">Mathematics for Machine Learning</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -209,31 +209,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
     </ul>
     </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
-  <li><a href="#linear-systems" id="toc-linear-systems" class="nav-link active" data-scroll-target="#linear-systems">Linear Systems</a></li>
-  <li><a href="#matrix-vector-notation" id="toc-matrix-vector-notation" class="nav-link" data-scroll-target="#matrix-vector-notation">Matrix-Vector Notation</a></li>
-  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication">Matrix Multiplication</a>
   <ul class="collapse">
-  <li><a href="#matrix-multiplication-algorithm" id="toc-matrix-multiplication-algorithm" class="nav-link" data-scroll-target="#matrix-multiplication-algorithm">Matrix Multiplication Algorithm</a></li>
-  <li><a href="#multiplying-multiple-matrices" id="toc-multiplying-multiple-matrices" class="nav-link" data-scroll-target="#multiplying-multiple-matrices">Multiplying Multiple Matrices</a></li>
-  <li><a href="#matrix-multiplication-vs-element-wise-multiplication" id="toc-matrix-multiplication-vs-element-wise-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication-vs-element-wise-multiplication">Matrix Multiplication vs Element-Wise Multiplication</a></li>
-  </ul></li>
-  <li><a href="#solving-linear-systems" id="toc-solving-linear-systems" class="nav-link" data-scroll-target="#solving-linear-systems">Solving Linear Systems</a>
-  <ul class="collapse">
-  <li><a href="#square-systems" id="toc-square-systems" class="nav-link" data-scroll-target="#square-systems">Square Systems</a></li>
-  <li><a href="#rectangular-systems" id="toc-rectangular-systems" class="nav-link" data-scroll-target="#rectangular-systems">Rectangular Systems</a></li>
-  </ul></li>
+  <li><a href="#linear-systems" id="toc-linear-systems" class="nav-link active" data-scroll-target="#linear-systems"><span class="toc-section-number">5.1</span>  Linear Systems</a></li>
+  <li><a href="#matrix-vector-notation" id="toc-matrix-vector-notation" class="nav-link" data-scroll-target="#matrix-vector-notation"><span class="toc-section-number">5.2</span>  Matrix-Vector Notation</a></li>
+  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication"><span class="toc-section-number">5.3</span>  Matrix Multiplication</a></li>
+  <li><a href="#solving-linear-systems" id="toc-solving-linear-systems" class="nav-link" data-scroll-target="#solving-linear-systems"><span class="toc-section-number">5.4</span>  Solving Linear Systems</a></li>
   </ul>
 </nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -259,8 +250,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="linear-systems" class="level1">
-<h1>Linear Systems</h1>
+<section id="linear-systems" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="linear-systems"><span class="header-section-number">5.1</span> Linear Systems</h2>
 <p>You’re certainly familiar by now with solving a simple linear equation. Suppose you need to solve the linear equation <span class="math inline">\(ax=b\)</span> for <span class="math inline">\(x\)</span>. Provided <span class="math inline">\(a \neq 0\)</span>, you can divide both sides by <span class="math inline">\(a\)</span> to get</p>
 <p><span class="math display">\[x = \frac{b}{a} = a^{-1} b.\]</span></p>
 <p>Suppose now you need to solve not just one, but 2 linear equations with 1 unknown <span class="math inline">\(x\)</span>,</p>
@@ -287,6 +278,8 @@ y &amp;= \frac{af-ce}{ad-bc}.
 \end{align*}\]</span></p>
 <p>If you don’t believe me, plug these in to check they satisfy the linear system. Or you can solve the linear system by substitution again. Or just ask sympy.</p>
 <div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>a, b, c, d, e, f <span class="op">=</span> sp.symbols(<span class="st">'a b c d e f'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>eq1 <span class="op">=</span> sp.Eq(a <span class="op">*</span> x <span class="op">+</span> b <span class="op">*</span> y, e)</span>
@@ -294,6 +287,7 @@ y &amp;= \frac{af-ce}{ad-bc}.
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> sp.solve((eq1, eq2), (x, y))</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>sol[x]<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>sol[y]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>x = (-b*f + d*e)/(a*d - b*c)
 y = (a*f - c*e)/(a*d - b*c)</code></pre>
@@ -306,6 +300,8 @@ y &amp;= x.
 \end{align*}\]</span></p>
 <p>If we plot these two lines, the point where they intersect is <span class="math inline">\((1,1)\)</span>, i.e.&nbsp;the solution to the system found above. Feel free to play around with different choices of <span class="math inline">\(a,b,c,d,e,f\)</span> to see what happens. What you’re doing is varying the slopes and intercepts of both of the lines. Varying any of these will change the location of the point of intersection, i.e.&nbsp;the solution to the linear system. The special case where both have the same slope is when <span class="math inline">\(ad=bc\)</span>. This is when the two lines are parallel. Since parallel lines don’t intersect, such a system would have no solution.</p>
 <div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a, b, e <span class="op">=</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>c, d, f <span class="op">=</span> <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
@@ -313,8 +309,13 @@ y &amp;= x.
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> <span class="kw">lambda</span> x: <span class="op">-</span>c <span class="op">/</span> d <span class="op">*</span> x <span class="op">+</span> f <span class="op">/</span> d</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f0, f1], xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">3</span>), title<span class="op">=</span><span class="st">'2 Linear Equations, 2 Unknowns'</span>,</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>              labels<span class="op">=</span>[<span class="ss">f'$y=2-x$'</span>, <span class="ss">f'$y=x$'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="linear-systems_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="linear-systems_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Suppose now you have a system of 2 equations with 3 unknowns <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>. For example,</p>
@@ -332,6 +333,8 @@ z=t.
 <p>This fact will be true for any system of 2 equations with 3 unknowns. The system is <em>underdetermined</em>, meaning it has too many variables to solve for. There will always be one that’s <em>free</em>, in the sense that we can set it to be whatever we want.</p>
 <p>Here’s a plot of what this situation looks like. Since there are 3 variables the space is now 3-dimensional, so I’ll have to use a 3D plot. Notice that now we don’t have 2 intersecting <em>lines</em>, but 2 intersecting <em>planes</em>. Two planes intersect at a line, not a point. Any point on this line is a valid solution to this underdetermined linear system.</p>
 <div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.9</span>, <span class="fl">3.9</span>, <span class="dv">100</span>)</span>
@@ -340,8 +343,13 @@ z=t.
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, [f1, f2], azim<span class="op">=</span><span class="dv">30</span>, elev<span class="op">=</span><span class="dv">20</span>, ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>], figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>), zorders<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], dist<span class="op">=</span><span class="dv">11</span>,</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        colors<span class="op">=</span>[<span class="st">'steelblue'</span>, <span class="st">'limegreen'</span>], alpha<span class="op">=</span><span class="fl">0.6</span>, titlepad<span class="op">=-</span><span class="dv">5</span>, labelpad<span class="op">=</span><span class="dv">2</span>, title<span class="op">=</span><span class="st">'2 Equations, 3 Unknowns'</span>,</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        lines<span class="op">=</span>[[<span class="dv">1</span> <span class="op">-</span> t, np.full(<span class="bu">len</span>(t), <span class="dv">1</span>), t]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="linear-systems_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="linear-systems_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Let’s now step up to a system with 3 linear equations and 3 unknowns. For example, take the following,</p>
@@ -359,6 +367,8 @@ z &amp;= 4 .
 \end{align*}\]</span></p>
 <p>We can plot these planes and see if they intersect, and roughly where they intersect. It may be a little hard to visualize, but you should see the planes all intersect at a point, namely the red dot at <span class="math inline">\(x=-\frac{1}{2}\)</span>, <span class="math inline">\(y=1\)</span>, and <span class="math inline">\(z=-\frac{1}{2}\)</span>.</p>
 <div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">2.5</span>, <span class="fl">1.5</span>, <span class="dv">100</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">100</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> <span class="kw">lambda</span> x, y: <span class="op">-</span><span class="dv">3</span> <span class="op">*</span> x <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> y <span class="op">+</span> <span class="dv">0</span></span>
@@ -367,8 +377,13 @@ z &amp;= 4 .
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, [f1, f2, f3], azim<span class="op">=</span><span class="dv">65</span>, elev<span class="op">=</span><span class="dv">25</span>, ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>], figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>), zorders<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                 colors<span class="op">=</span>[<span class="st">'steelblue'</span>, <span class="st">'salmon'</span>, <span class="st">'limegreen'</span>], points<span class="op">=</span>[[<span class="op">-</span><span class="fl">0.5</span>, <span class="dv">1</span>, <span class="op">-</span><span class="fl">0.5</span>]], alpha<span class="op">=</span><span class="fl">0.6</span>, labelpad<span class="op">=</span><span class="dv">3</span>, </span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                 dist<span class="op">=</span><span class="dv">11</span>, title<span class="op">=</span><span class="st">'3 Equations, 3 Unknowns'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="linear-systems_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="linear-systems_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Every linear system of 3 equations with 3 unknowns will look like this. The only time there won’t be a solution is when any two planes are parallel to each other. Note now it only takes any two being parallel for there to be no solution, not all of them.</p>
@@ -380,6 +395,8 @@ z &amp;= 4 .
 \end{alignat*}\]</span></p>
 <p>Here’s what sympy gives as the solution to this system. Notice again that each term depends on the same denominator. When that denominator is zero the system won’t have a solution.</p>
 <div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x, y, z <span class="op">=</span> sp.symbols(<span class="st">'x y z'</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>a, b, c, d, e, f, g, h, i, j, k, l <span class="op">=</span> sp.symbols(<span class="st">'a b c d e f g h i j k l'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>eq1 <span class="op">=</span> sp.Eq(a <span class="op">*</span> x <span class="op">+</span> b <span class="op">*</span> y <span class="op">+</span> c <span class="op">*</span> z, j)</span>
@@ -389,6 +406,7 @@ z &amp;= 4 .
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>sol[x]<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>sol[y]<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = </span><span class="sc">{</span>sol[z]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>x = (b*f*l - b*i*k - c*e*l + c*h*k + e*i*j - f*h*j)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g)
 y = (-a*f*l + a*i*k + c*d*l - c*g*k - d*i*j + f*g*j)/(a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g)
@@ -423,8 +441,8 @@ a_{m-1,0}x_0 &amp; + &amp; a_{m-1,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{m-
 </ul>
 <p>Graphically, a unique solution means that the <span class="math inline">\(n\)</span> <em>hyperplanes</em> defined by the <span class="math inline">\(n\)</span> linear equations all intersect at a single point <span class="math inline">\((x_0, x_1, \cdots, x_n)\)</span> in <span class="math inline">\(\mathbb{R}^n\)</span>. Think of a hyperplane as an <span class="math inline">\(n\)</span>-dimensional generalization of a plane. If any of two hyperplanes are parallel in <span class="math inline">\(\mathbb{R}^n\)</span>, there will be no solution.</p>
 </section>
-<section id="matrix-vector-notation" class="level1">
-<h1>Matrix-Vector Notation</h1>
+<section id="matrix-vector-notation" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="matrix-vector-notation"><span class="header-section-number">5.2</span> Matrix-Vector Notation</h2>
 <p>These systems of linear equations are incredibly tedious to write out and analyze as is for all but the simplest cases of like two or three equations. There’s a cleaner notation for working with these things. Here’s what we can do. We have 3 separate types of objects showing up in these equations:</p>
 <ul>
 <li>The <span class="math inline">\(m \cdot n\)</span> coefficients <span class="math inline">\(a_{0,0}, \ a_{0,1}, \ \cdots, \ a_{m-1,n-1}\)</span>.</li>
@@ -576,8 +594,8 @@ x_0 \mathbf{a}_0 + x_1 \mathbf{a}_1 + \cdots x_{n-1} \mathbf{a}_{n-1}.
 \end{pmatrix} = 1 \cdot \binom{1}{4} + 1 \cdot \binom{2}{5} + 1 \cdot \binom{3}{6} = \binom{1+2+3}{4+5+6} = \binom{6}{15}.
 \]</span></p>
 </section>
-<section id="matrix-multiplication" class="level1">
-<h1>Matrix Multiplication</h1>
+<section id="matrix-multiplication" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="matrix-multiplication"><span class="header-section-number">5.3</span> Matrix Multiplication</h2>
 <p>While I’m on the topic, I’ll go ahead and define <strong>matrix multiplication</strong> for two matrices <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> as well. If <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span> and <span class="math inline">\(\mathbf{B}\)</span> is <span class="math inline">\(n \times p\)</span>, define the matrix product <span class="math inline">\(\mathbf{C}=\mathbf{A}\mathbf{B}\)</span> as the <span class="math inline">\(m \times p\)</span> matrix <span class="math inline">\(\mathbf{C}\)</span> whose elements are given by</p>
 <p><span class="math display">\[C_{i,j} = \sum_{k=0}^{n-1} A_{i,k} B_{k,j} = A_{i,0} B_{0,j} + A_{i,1} B_{1,j} + \cdots + A_{i,n-1} B_{n-1,j}.\]</span></p>
 <p>Matrix multiplication is always expressed symbolically by directly concatenating the two matrix symbols next to each other like <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>. We’d never use a multiplication symbol between them since those are often used to represent other kinds of multiplication schemes like element-wise multiplication or convolutions. Further, matrix multiplication is only defined when the numbers of <em>columns</em> in <span class="math inline">\(\mathbf{A}\)</span> equals the number of <em>rows</em> of <span class="math inline">\(\mathbf{B}\)</span>. We say matrices satisfying this condition are <strong>compatible</strong>. If they can’t be multiplied, they’re called <strong>incompatible</strong>.</p>
@@ -622,8 +640,8 @@ x_0 \mathbf{a}_0 + x_1 \mathbf{a}_1 + \cdots x_{n-1} \mathbf{a}_{n-1}.
 \end{pmatrix}.
 \end{align*}\]</span></p>
 <p>Then the bunch of linear systems we’re trying to solve is just the matrix product <span class="math inline">\(\mathbf{A}\mathbf{X}=\mathbf{B}\)</span>. Each column <span class="math inline">\(\mathbf{A}\mathbf{x}_j=\mathbf{b}_j\)</span> can again be thought of as a linear combination of the columns of <span class="math inline">\(\mathbf{A}\)</span>, but with each column weighted by its own vector <span class="math inline">\(\mathbf{x}_j\)</span>.</p>
-<section id="matrix-multiplication-algorithm" class="level2">
-<h2 class="anchored" data-anchor-id="matrix-multiplication-algorithm">Matrix Multiplication Algorithm</h2>
+<section id="matrix-multiplication-algorithm" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="matrix-multiplication-algorithm"><span class="header-section-number">5.3.1</span> Matrix Multiplication Algorithm</h3>
 <p>Matrix multiplication is perhaps the single most important mathematical operation in machine learning. It’s so important I’m going to write a function to code it from scratch before showing how to do it in numpy. I’ll also analyze the speed of the algorithm in FLOPS and the memory in terms of word size. Algorithmically, all matrix multiplication is doing is looping over every single element of <span class="math inline">\(\mathbf{C}\)</span> and performing the sum-product calculation above for each <span class="math inline">\(C_{i,j}\)</span>. Here’s a function <code>matmul</code> that takes in two numpy arrays <code>A</code> and <code>B</code> and multiplies them, returning the product <code>C</code> if the dimensions are compatible.</p>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matmul(A, B):</span>
@@ -668,8 +686,8 @@ C = AB =
 </div>
 </div>
 </section>
-<section id="multiplying-multiple-matrices" class="level2">
-<h2 class="anchored" data-anchor-id="multiplying-multiple-matrices">Multiplying Multiple Matrices</h2>
+<section id="multiplying-multiple-matrices" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="multiplying-multiple-matrices"><span class="header-section-number">5.3.2</span> Multiplying Multiple Matrices</h3>
 <p>What about multiplying three or more matrices together. I already said matrix multiplication is associative, so we can multiply any two at a time we like and get the same answer. However, there are often computational advantages to multiplying them together in some particular sequence. For example, suppose we wanted to multiply <span class="math inline">\(\mathbf{D} = \mathbf{A}\mathbf{B}\mathbf{C}\)</span>. Suppose, <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, <span class="math inline">\(\mathbf{B}\)</span> is <span class="math inline">\(n \times p\)</span>, and <span class="math inline">\(\mathbf{C}\)</span> is <span class="math inline">\(p \times q\)</span>. No matter which order we do it, the output <span class="math inline">\(\mathbf{D}\)</span> will have size <span class="math inline">\(m \times q\)</span>. But there are two ways we could do this multiplication.</p>
 <ol type="1">
 <li><p><span class="math inline">\(\mathbf{D} = \mathbf{A}(\mathbf{B}\mathbf{C})\)</span>: In this case, the <span class="math inline">\(\mathbf{E}=\mathbf{B}\mathbf{C}\)</span> computation requires <span class="math inline">\(nq(2p-1)\)</span> FLOPS, and then the <span class="math inline">\(\mathbf{A}\mathbf{E}\)</span> computation requires <span class="math inline">\(mq(2n-1)\)</span> FLOPS. The total is thus the sum of these two, i.e. <span class="math display">\[nq(2p-1) + mq(2n-1) = O(npq+mnq) \ \ \text{FLOPS}.\]</span></p></li>
@@ -702,24 +720,24 @@ C = AB =
 <div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit A <span class="op">@</span> (B <span class="op">@</span> C)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>65.5 µs ± 659 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
+<pre><code>65 µs ± 176 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit (A <span class="op">@</span> B) <span class="op">@</span> C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>640 µs ± 137 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
+<pre><code>543 µs ± 31.8 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit np.linalg.multi_dot([A, B, C])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>78.2 µs ± 79 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
+<pre><code>77.5 µs ± 384 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
 </div>
 </div>
 </section>
-<section id="matrix-multiplication-vs-element-wise-multiplication" class="level2">
-<h2 class="anchored" data-anchor-id="matrix-multiplication-vs-element-wise-multiplication">Matrix Multiplication vs Element-Wise Multiplication</h2>
+<section id="matrix-multiplication-vs-element-wise-multiplication" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="matrix-multiplication-vs-element-wise-multiplication"><span class="header-section-number">5.3.3</span> Matrix Multiplication vs Element-Wise Multiplication</h3>
 <p>We’ve already seen a different way we can multiply two matrices (or any array), namely element-wise multiplication. For matrices, element-wise multiplication is sometimes called the <strong>Hadamard product</strong>. I’ll denote element-wise multiplication as <span class="math inline">\(\mathbf{A} \circ \mathbf{B}\)</span>. It’s only defined when the shapes of <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> are <em>equal</em> (or can be broadcasted to be equal).</p>
 <p>It’s important to mind the difference between matrix multiplication and element-wise multiplication of matrices. In general <span class="math inline">\(\mathbf{A} \circ \mathbf{B} \neq \mathbf{A} \mathbf{B}\)</span>. They’re defined completely differently,</p>
 <p><span class="math display">\[
@@ -743,10 +761,10 @@ AB =
 </div>
 </section>
 </section>
-<section id="solving-linear-systems" class="level1">
-<h1>Solving Linear Systems</h1>
-<section id="square-systems" class="level2">
-<h2 class="anchored" data-anchor-id="square-systems">Square Systems</h2>
+<section id="solving-linear-systems" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="solving-linear-systems"><span class="header-section-number">5.4</span> Solving Linear Systems</h2>
+<section id="square-systems" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="square-systems"><span class="header-section-number">5.4.1</span> Square Systems</h3>
 <p>We can use the idea of matrix multiplication to try to solve a linear system of equations. Suppose we have a system of <span class="math inline">\(n\)</span> linear equations with <span class="math inline">\(n\)</span> unknowns (it’s important <span class="math inline">\(m=n\)</span> here),</p>
 <p><span class="math display">\[
 \begin{array}{c&lt;{x_0} c c&lt;{x_1} c c&lt;{\cdots} c c&lt;{x_{n-1}} c l}
@@ -857,8 +875,8 @@ x =
 </div>
 </div>
 </section>
-<section id="rectangular-systems" class="level2">
-<h2 class="anchored" data-anchor-id="rectangular-systems">Rectangular Systems</h2>
+<section id="rectangular-systems" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="rectangular-systems"><span class="header-section-number">5.4.2</span> Rectangular Systems</h3>
 <p>What about when <span class="math inline">\(m \neq n\)</span>? Things become more interesting then. If <span class="math inline">\(m &lt; n\)</span> the linear system is under-determined, and will have infinitely many solutions. In this case, there are infinitely many ways to “invert” <span class="math inline">\(\mathbf{A}\)</span>. We just need to find any one of them that will work. If <span class="math inline">\(m &gt; n\)</span> the linear system is over-determined, and will have no exact solution. We can however find an <em>approximate</em> solution by looking for the <span class="math inline">\(\mathbf{x}\)</span> that most <em>nearly</em> solves the linear system. In both cases, a generalization of the inverse exists, called the <strong>pseudoinverse</strong>.</p>
 <p>Here’s how to find out what the pseudoinverse should be. Let’s define a matrix similar to <span class="math inline">\(\mathbf{A}\)</span>, but with its rows and columns swapped, called the <strong>transpose</strong> of <span class="math inline">\(\mathbf{A}\)</span>. The transpose of <span class="math inline">\(\mathbf{A}\)</span>, denoted by the symbol <span class="math inline">\(\mathbf{A}^\top\)</span>, is defined by the relationship <span class="math inline">\(A_{i,j}^\top = A_{j,i}\)</span>. For example, if <span class="math inline">\(\mathbf{A}\)</span> is the <span class="math inline">\(3 \times 2\)</span> matrix</p>
 <p><span class="math display">\[
@@ -1072,7 +1090,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
       <a href="../notebooks/basic-calculus.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Calculus</span></span>

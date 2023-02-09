@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Machine Learning For The 2020s - 7&nbsp; Matrix Algebra</title>
+<title>Mathematics for Machine Learning - 7&nbsp; Matrix Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,10 +144,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Machine Learning For The 2020s</a> 
+      <a href="../">Mathematics for Machine Learning</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -209,43 +209,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
     </ul>
     </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
-  <li><a href="#properties-of-matrices" id="toc-properties-of-matrices" class="nav-link active" data-scroll-target="#properties-of-matrices">Properties of Matrices</a>
   <ul class="collapse">
-  <li><a href="#matrix-spaces" id="toc-matrix-spaces" class="nav-link" data-scroll-target="#matrix-spaces">Matrix Spaces</a></li>
-  <li><a href="#transposes" id="toc-transposes" class="nav-link" data-scroll-target="#transposes">Transposes</a></li>
-  <li><a href="#inverses" id="toc-inverses" class="nav-link" data-scroll-target="#inverses">Inverses</a></li>
-  <li><a href="#determinant-and-trace" id="toc-determinant-and-trace" class="nav-link" data-scroll-target="#determinant-and-trace">Determinant and Trace</a></li>
-  <li><a href="#linear-independence-and-rank" id="toc-linear-independence-and-rank" class="nav-link" data-scroll-target="#linear-independence-and-rank">Linear Independence and Rank</a></li>
-  <li><a href="#outer-products" id="toc-outer-products" class="nav-link" data-scroll-target="#outer-products">Outer Products</a></li>
-  </ul></li>
-  <li><a href="#special-matrices" id="toc-special-matrices" class="nav-link" data-scroll-target="#special-matrices">Special Matrices</a>
-  <ul class="collapse">
-  <li><a href="#diagonal-matrices" id="toc-diagonal-matrices" class="nav-link" data-scroll-target="#diagonal-matrices">Diagonal Matrices</a></li>
-  <li><a href="#symmetric-matrices" id="toc-symmetric-matrices" class="nav-link" data-scroll-target="#symmetric-matrices">Symmetric Matrices</a></li>
-  <li><a href="#upper-and-lower-triangular-matrices" id="toc-upper-and-lower-triangular-matrices" class="nav-link" data-scroll-target="#upper-and-lower-triangular-matrices">Upper and Lower Triangular Matrices</a></li>
-  <li><a href="#orthogonal-matrices" id="toc-orthogonal-matrices" class="nav-link" data-scroll-target="#orthogonal-matrices">Orthogonal Matrices</a></li>
-  </ul></li>
-  <li><a href="#matrix-factorizations" id="toc-matrix-factorizations" class="nav-link" data-scroll-target="#matrix-factorizations">Matrix Factorizations</a>
-  <ul class="collapse">
-  <li><a href="#lu-factorization" id="toc-lu-factorization" class="nav-link" data-scroll-target="#lu-factorization">LU Factorization</a></li>
-  <li><a href="#qr-factorization" id="toc-qr-factorization" class="nav-link" data-scroll-target="#qr-factorization">QR Factorization</a></li>
-  <li><a href="#spectral-decomposition" id="toc-spectral-decomposition" class="nav-link" data-scroll-target="#spectral-decomposition">Spectral Decomposition</a></li>
-  <li><a href="#positive-definiteness" id="toc-positive-definiteness" class="nav-link" data-scroll-target="#positive-definiteness">Positive Definiteness</a></li>
-  <li><a href="#singular-value-decomposition" id="toc-singular-value-decomposition" class="nav-link" data-scroll-target="#singular-value-decomposition">Singular Value Decomposition</a></li>
-  <li><a href="#low-rank-approximations" id="toc-low-rank-approximations" class="nav-link" data-scroll-target="#low-rank-approximations">Low-Rank Approximations</a></li>
-  </ul></li>
+  <li><a href="#properties-of-matrices" id="toc-properties-of-matrices" class="nav-link active" data-scroll-target="#properties-of-matrices"><span class="toc-section-number">7.1</span>  Properties of Matrices</a></li>
+  <li><a href="#special-matrices" id="toc-special-matrices" class="nav-link" data-scroll-target="#special-matrices"><span class="toc-section-number">7.2</span>  Special Matrices</a></li>
+  <li><a href="#matrix-factorizations" id="toc-matrix-factorizations" class="nav-link" data-scroll-target="#matrix-factorizations"><span class="toc-section-number">7.3</span>  Matrix Factorizations</a></li>
   </ul>
 </nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -273,10 +251,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> (<span class="dv">4</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="properties-of-matrices" class="level1">
-<h1>Properties of Matrices</h1>
-<section id="matrix-spaces" class="level2">
-<h2 class="anchored" data-anchor-id="matrix-spaces">Matrix Spaces</h2>
+<section id="properties-of-matrices" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="properties-of-matrices"><span class="header-section-number">7.1</span> Properties of Matrices</h2>
+<section id="matrix-spaces" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="matrix-spaces"><span class="header-section-number">7.1.1</span> Matrix Spaces</h3>
 <p>Just like vectors, matrices can be thought of as objects in their own <strong>matrix space</strong>. A matrix space is just a vector space, except it has two dimensions <span class="math inline">\(m\)</span> and <span class="math inline">\(n\)</span>. We’ll denote the matrix space of <span class="math inline">\(m \times n\)</span> matrices with the symbol <span class="math inline">\(\mathbb{R}^{m \times n}\)</span>. Just like vector spaces, matrix spaces must be closed under linear combinations. If <span class="math inline">\(\mathbf{A}, \mathbf{B} \in \mathbb{R}^{m \times n}\)</span> are two matrices, then any matrix linear combination <span class="math inline">\(\mathbf{C} = a\mathbf{A} + b\mathbf{B}\)</span> must also be a valid <span class="math inline">\(m \times n\)</span> matrix in <span class="math inline">\(\mathbb{R}^{m \times n}\)</span>. This means matrices behave the same way under addition and scalar multiplication as vectors do.</p>
 <p>While this fact should be kind of obvious by now, here’s an example anyway. I’ll choose <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> to both be <span class="math inline">\(2 \times 2\)</span> here. Adding them together or scalar multiplying them should also obviously give a matrix that’s <span class="math inline">\(2 \times 2\)</span>, since everything is element-wise.</p>
 <div class="cell" data-execution_count="2">
@@ -304,8 +282,8 @@ A + B =
 <p><span class="math display">\[\mathbf{A}\mathbf{B}\mathbf{C} = (\mathbf{A}\mathbf{B})\mathbf{C} = \mathbf{A}(\mathbf{B}\mathbf{C}).\]</span></p>
 <p>Do remember, however, that matrix multiplication (and function composition) doesn’t commute, i.e.&nbsp;<span class="math inline">\(\mathbf{A}\mathbf{B} \neq \mathbf{B}\mathbf{A}\)</span>, even when the two matrices <em>are</em> compatible.</p>
 </section>
-<section id="transposes" class="level2">
-<h2 class="anchored" data-anchor-id="transposes">Transposes</h2>
+<section id="transposes" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="transposes"><span class="header-section-number">7.1.2</span> Transposes</h3>
 <p>Recall that every matrix <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{m \times n}\)</span> has a <strong>transpose</strong> matrix <span class="math inline">\(\mathbf{A}^\top \in \mathbb{R}^{n \times m}\)</span> that’s defined as the same matrix, but with the indices swapped,</p>
 <p><span class="math display">\[(A^\top)_{i,j} = A_{j,i}.\]</span></p>
 <p>Here’s a quick example for a <span class="math inline">\(2 \times 3\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span>.</p>
@@ -344,8 +322,8 @@ B^T A^T =
 </div>
 </div>
 </section>
-<section id="inverses" class="level2">
-<h2 class="anchored" data-anchor-id="inverses">Inverses</h2>
+<section id="inverses" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="inverses"><span class="header-section-number">7.1.3</span> Inverses</h3>
 <p>When a matrix is square, i.e.&nbsp;<span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(n \times n\)</span>, we can think of it as mapping vectors to other vectors in the same vector space <span class="math inline">\(\mathbb{R}^n\)</span>. The identity map (the “do nothing” map) always maps a vector to itself. It corresponds to the <span class="math inline">\(n \times n\)</span> <strong>identity matrix</strong></p>
 <p><span class="math display">\[
 \mathbf{I} =
@@ -433,8 +411,8 @@ d &amp; -b \\
 \end{pmatrix}.
 \]</span></p>
 </section>
-<section id="determinant-and-trace" class="level2">
-<h2 class="anchored" data-anchor-id="determinant-and-trace">Determinant and Trace</h2>
+<section id="determinant-and-trace" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="determinant-and-trace"><span class="header-section-number">7.1.4</span> Determinant and Trace</h3>
 <p>Notice something from this formula. Since <span class="math inline">\(\text{det}(\mathbf{A}) = ad - bc\)</span> in this case, we can evidently write</p>
 <p><span class="math display">\[\mathbf{A}^{-1} = \frac{1}{\text{det}(\mathbf{A})} \mathbf{\tilde A},\]</span></p>
 <p>where <span class="math inline">\(\mathbf{\tilde A}\)</span> is some kind of matrix related to <span class="math inline">\(\mathbf{A}\)</span>. The properties of <span class="math inline">\(\mathbf{\tilde A}\)</span> aren’t important (it’s called the <em>adjugate</em> if you’re curious). But this general fact turns out to be true for any <span class="math inline">\(n \times n\)</span> matrix, except the formula for the determinant gets a lot more complicated. What’s important is that <span class="math inline">\(\mathbf{A}^{-1}\)</span> is <em>inversely proportional</em> to the determinant. That’s why we can’t allow <span class="math inline">\(\text{det}(\mathbf{A}) = 0\)</span>, because then <span class="math inline">\(\mathbf{A}^{-1}\)</span> blows up due to the division by zero.</p>
@@ -506,8 +484,8 @@ tr(BA) = 13</code></pre>
 </div>
 <p>It’s kind of obvious what the determinant is good for. It tells you how invertible a matrix is. But what does the trace tell you? It turns out both the trace and the determinant also tell you something important about the <em>scale</em> of the matrix. We’ll see this in more depth below when we talk about eigenvalues.</p>
 </section>
-<section id="linear-independence-and-rank" class="level2">
-<h2 class="anchored" data-anchor-id="linear-independence-and-rank">Linear Independence and Rank</h2>
+<section id="linear-independence-and-rank" class="level3" data-number="7.1.5">
+<h3 data-number="7.1.5" class="anchored" data-anchor-id="linear-independence-and-rank"><span class="header-section-number">7.1.5</span> Linear Independence and Rank</h3>
 <p>We can always think of a matrix in terms of its <strong>column vectors</strong>. If <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, it has <span class="math inline">\(n\)</span> column vectors <span class="math inline">\(\mathbf{a}_0, \mathbf{a}_1, \cdots, \mathbf{a}_{n-1}\)</span> each of size <span class="math inline">\(m\)</span>. Concatenated together in order, the column vectors form the matrix itself,</p>
 <p><span class="math display">\[
 \mathbf{A} =
@@ -539,6 +517,8 @@ c &amp; \beta c \\
 <p>Graphically, saying the column vectors are linearly dependent is saying they’ll map any vector onto the same subspace. For the <span class="math inline">\(2 \times 2\)</span> case, that means any vector <span class="math inline">\(\mathbf{v}\)</span> hit by <span class="math inline">\(\mathbf{A}\)</span> will get mapped onto the same line, no matter what <span class="math inline">\(\mathbf{v}\)</span> you pick. The matrix is collapsing, or <em>projecting</em>, the vector space down to a lower-dimensional subspace.</p>
 <p>Here’s a plot of this idea. I’ll make <span class="math inline">\(\mathbf{A}\)</span> have two linearly dependent columns, then plot its action on several different vectors, plotted in black. Acting on these by <span class="math inline">\(\mathbf{A}\)</span> will map them to the red vectors, which all lie on the same line in the plane. They’re all collapsing onto the same subspace, evidently the line <span class="math inline">\(y=-x\)</span>.</p>
 <div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="fl">1.5</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>a0 <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>a1 <span class="op">=</span> beta <span class="op">*</span> a0</span>
@@ -551,8 +531,13 @@ c &amp; \beta c \\
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plot_vectors(vectors, colors<span class="op">=</span>[<span class="st">'black'</span>, <span class="st">'red'</span>] <span class="op">*</span> <span class="dv">3</span>, title<span class="op">=</span><span class="st">'Linearly Dependence'</span>,</span>
 <span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>             labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>, <span class="st">'$\mathbf</span><span class="sc">{A}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>] <span class="op">+</span> [<span class="st">''</span>] <span class="op">*</span> <span class="dv">4</span>,</span>
 <span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>             text_offsets<span class="op">=</span>[[<span class="dv">0</span>, <span class="dv">0</span>]] <span class="op">*</span> <span class="dv">6</span>, headwidth<span class="op">=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="matrix-algebra_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="matrix-algebra_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The number of linearly independent column vectors a matrix has is called its <strong>rank</strong>, written <span class="math inline">\(\text{rank}(\mathbf{A})\)</span>. Clearly it’ll always be the case that <span class="math inline">\(\text{rank}(\mathbf{A}) \leq n\)</span>. When <span class="math inline">\(\text{rank}(\mathbf{A}) = n\)</span> exactly the matrix is called <strong>full rank</strong>. Only full rank square matrices are invertible.</p>
@@ -565,8 +550,8 @@ c &amp; \beta c \\
 </div>
 </div>
 </section>
-<section id="outer-products" class="level2">
-<h2 class="anchored" data-anchor-id="outer-products">Outer Products</h2>
+<section id="outer-products" class="level3" data-number="7.1.6">
+<h3 data-number="7.1.6" class="anchored" data-anchor-id="outer-products"><span class="header-section-number">7.1.6</span> Outer Products</h3>
 <p>We’ll frequently be interested in <strong>low rank</strong> matrices, which are matrices whose rank is much much less than the dimension, i.e.&nbsp;<span class="math inline">\(\text{rank}(\mathbf{A}) &lt;&lt; n\)</span>. As we’ll see, low rank matrices are special because they can efficiently compress the information contained in a matrix, which often allows us to represent data more efficiently, or clean up data by denoising away “unnecessary” dimensions. In fact, approximating a matrix with a lower rank matrix is the whole idea behind dimension reduction, one of the core areas of unsupervised learning.</p>
 <p>The most useful low-rank matrices are the outer products of two vectors. If <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> are size <span class="math inline">\(n\)</span> vectors, define their <strong>outer product</strong> by</p>
 <p><span class="math display">\[
@@ -608,6 +593,8 @@ rank(xy^T) = 1</code></pre>
 \end{align*}\]</span></p>
 <p>Applying the outer product <span class="math inline">\(\mathbf{x} \mathbf{y}^\top\)</span> to each <span class="math inline">\(\mathbf{v}_i\)</span> should project each vector onto the space spanned by <span class="math inline">\(\mathbf{x}=(1, 1)\)</span>, which is just the line <span class="math inline">\(y=x\)</span>. Notice the projections are all proportional to <span class="math inline">\((1, 1)\)</span>, as they should be. In the plot below, each vector and its projection have the same color. The outer product vectors <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> are shown in black.</p>
 <div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>vs <span class="op">=</span> [np.array([<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), </span>
@@ -620,17 +607,22 @@ rank(xy^T) = 1</code></pre>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">_0$'</span>, <span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">_1$'</span>, <span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">_2$'</span>] <span class="op">+</span> [<span class="st">''</span>] <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> [<span class="st">'$\mathbf</span><span class="sc">{x}</span><span class="st">$'</span>, <span class="st">'$\mathbf</span><span class="sc">{y}</span><span class="st">$'</span>],</span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    text_offsets <span class="op">=</span> [[<span class="dv">0</span>, <span class="fl">0.2</span>], [<span class="dv">0</span>, <span class="fl">0.2</span>], [<span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.3</span>]] <span class="op">+</span> [[<span class="dv">0</span>,<span class="dv">0</span>]] <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> [[<span class="op">-</span><span class="fl">0.4</span>, <span class="fl">0.15</span>], [<span class="dv">0</span>, <span class="op">-</span><span class="fl">0.3</span>]], ticks_every<span class="op">=</span><span class="dv">1</span>,</span>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Outer Product Projections'</span>, zorders<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">7</span>], xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">3.5</span>, <span class="fl">3.5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">3.5</span>, <span class="fl">3.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="matrix-algebra_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="matrix-algebra_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
 </section>
-<section id="special-matrices" class="level1">
-<h1>Special Matrices</h1>
+<section id="special-matrices" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="special-matrices"><span class="header-section-number">7.2</span> Special Matrices</h2>
 <p>There are many classes of matrices that have various special properties. I’ll quickly introduce a few that’ll be of interest to us in machine learning.</p>
-<section id="diagonal-matrices" class="level2">
-<h2 class="anchored" data-anchor-id="diagonal-matrices">Diagonal Matrices</h2>
+<section id="diagonal-matrices" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="diagonal-matrices"><span class="header-section-number">7.2.1</span> Diagonal Matrices</h3>
 <p>Probably the most basic class of matrices are the diagonal matrices. A <strong>diagonal matrix</strong> is an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{D}\)</span> whose elements are only non-zero on the diagonals, i.e.&nbsp;<span class="math inline">\(D_{i,j} = 0\)</span> if <span class="math inline">\(i \neq j\)</span>. For example, the following <span class="math inline">\(3 \times 3\)</span> matrix is diagonal since its only non-zero values lie on the diagonal,</p>
 <p><span class="math display">\[
 \mathbf{D} =
@@ -687,8 +679,8 @@ Dx = [1 2 3]</code></pre>
 </div>
 </div>
 </section>
-<section id="symmetric-matrices" class="level2">
-<h2 class="anchored" data-anchor-id="symmetric-matrices">Symmetric Matrices</h2>
+<section id="symmetric-matrices" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="symmetric-matrices"><span class="header-section-number">7.2.2</span> Symmetric Matrices</h3>
 <p>Another special class of matrices important to machine learning is the symmetric matrix. A <strong>symmetric matrix</strong> is a square matrix <span class="math inline">\(\mathbf{S}\)</span> that equals its own transpose, i.e.&nbsp;<span class="math inline">\(\mathbf{S}^\top = \mathbf{S}\)</span>. They’re called symmetric matrices because their lower diagonals and upper diagonals are mirror images. Symmetric matrices can be thought of as the matrix equivalent of a real number.</p>
 <p>For example, consider the matrix <span class="math display">\[
 \mathbf{S} =
@@ -713,8 +705,8 @@ Dx = [1 2 3]</code></pre>
 </div>
 </div>
 </section>
-<section id="upper-and-lower-triangular-matrices" class="level2">
-<h2 class="anchored" data-anchor-id="upper-and-lower-triangular-matrices">Upper and Lower Triangular Matrices</h2>
+<section id="upper-and-lower-triangular-matrices" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="upper-and-lower-triangular-matrices"><span class="header-section-number">7.2.3</span> Upper and Lower Triangular Matrices</h3>
 <p>Closely related to diagonal matrices are lower and upper triangular matrices. An <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{L}\)</span> is <strong>lower-triangular</strong> if the entries in its <em>upper</em> diagonal are zero, i.e.&nbsp;<span class="math inline">\(L_{i,j} = 0\)</span> when <span class="math inline">\(i &lt; j\)</span>. Similarly, an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{U}\)</span> is <strong>upper-triangular</strong> if the entries in its <em>lower</em> diagonal are zero, i.e.&nbsp;<span class="math inline">\(U_{i,j} = 0\)</span> when <span class="math inline">\(i &gt; j\)</span>. I’ve already showed an example of these when I covered determinants. Here they are again,</p>
 <p><span class="math display">\[
 \mathbf{L} =
@@ -731,8 +723,8 @@ Dx = [1 2 3]</code></pre>
 \]</span></p>
 <p>Upper and lower triangular (and diagonal) matrices are useful because it’s easy to invert them and calculate their determinants. Just like symmetric matrices, only <span class="math inline">\(\frac{1}{2}n(n+1)\)</span> unique elements are needed to fully specify these matrices since an entire off-diagonal is all zeros.</p>
 </section>
-<section id="orthogonal-matrices" class="level2">
-<h2 class="anchored" data-anchor-id="orthogonal-matrices">Orthogonal Matrices</h2>
+<section id="orthogonal-matrices" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="orthogonal-matrices"><span class="header-section-number">7.2.4</span> Orthogonal Matrices</h3>
 <p>The last class of matrices I’ll introduce are more subtle, but very important geometrically. These are the orthogonal matrices. An <strong>orthogonal matrix</strong> is an <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(\mathbf{Q}\)</span> whose transpose is its inverse, i.e.</p>
 <p><span class="math display">\[\mathbf{Q}^\top = \mathbf{Q}^{-1} \quad \text{or} \quad \mathbf{Q}^\top \mathbf{Q}=\mathbf{I}.\]</span></p>
 <p>As an example, consider the following matrix,</p>
@@ -788,6 +780,8 @@ Dx = [1 2 3]</code></pre>
 <p>where <span class="math inline">\(\theta\)</span> is some angle (expressed in radians). When the right column vector is <span class="math inline">\(\binom{-\sin\theta}{\cos\theta}\)</span>, <span class="math inline">\(\mathbf{Q}\)</span> is a pure <strong>rotation matrix</strong>. It will rotate any vector in the plane by an angle <span class="math inline">\(\theta\)</span>, counterclockwise if <span class="math inline">\(\theta &gt; 0\)</span>, and clockwise if <span class="math inline">\(\theta &lt; 0\)</span>. When the right column vector is <span class="math inline">\(\binom{\sin\theta}{-\cos\theta}\)</span>, <span class="math inline">\(\mathbf{Q}\)</span> becomes a <strong>reflection matrix</strong>; it’ll reflect vectors about the line at an angle <span class="math inline">\(\frac{\theta}{2}\)</span> with the x-axis. The combination of these two together can generate any 2D rotation or reflection.</p>
 <p>Here’s a visual of this idea. I’ll take the unit vector <span class="math inline">\(\mathbf{e}_x=(1,0)\)</span> and use <span class="math inline">\(\mathbf{Q}\)</span> to rotate it by some angle, in this case <span class="math inline">\(\theta = 45^\circ\)</span>. Note the need to convert the angle to radians by multiplying the angle in degrees by <span class="math inline">\(\frac{\pi}{180}\)</span>. You should be able to confirm that the red vector is indeed the black vector <span class="math inline">\(\mathbf{e}_x\)</span> rotated counterclockwise by <span class="math inline">\(45^\circ\)</span> to the new vector <span class="math inline">\(\mathbf{Q}\mathbf{e}_x = 2^{-1/2}(1,1)\)</span>. The factor of <span class="math inline">\(2^{-1/2}\)</span> appears to keep the vector normalized to unit length.</p>
 <div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>theta_degrees <span class="op">=</span> <span class="dv">45</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> theta_degrees <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">180</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> np.array([</span>
@@ -798,8 +792,13 @@ Dx = [1 2 3]</code></pre>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>plot_vectors([ex.flatten(), Qex.flatten()], colors<span class="op">=</span>[<span class="st">'black'</span>, <span class="st">'red'</span>], title<span class="op">=</span><span class="ss">f'$</span><span class="sc">{</span>theta_degrees<span class="sc">}</span><span class="ss">^\circ$ Rotation'</span>,</span>
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>             labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{e}</span><span class="st">_x$'</span>, <span class="st">'$\mathbf</span><span class="sc">{Q}</span><span class="st">\mathbf</span><span class="sc">{e}</span><span class="st">_x$'</span>], text_offsets<span class="op">=</span>[[<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>], [<span class="dv">0</span>, <span class="dv">0</span>]],</span>
 <span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>             ticks_every<span class="op">=</span><span class="dv">1</span>, xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="matrix-algebra_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="matrix-algebra_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>I’ll finish this section by noting that orthogonal matrices always have determinant <span class="math inline">\(\pm 1\)</span>. You can see this by applying the determinant product formula to <span class="math inline">\(\mathbf{Q}^\top \mathbf{Q}=\mathbf{I}\)</span>,</p>
@@ -818,11 +817,11 @@ Dx = [1 2 3]</code></pre>
 </div>
 </section>
 </section>
-<section id="matrix-factorizations" class="level1">
-<h1>Matrix Factorizations</h1>
+<section id="matrix-factorizations" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="matrix-factorizations"><span class="header-section-number">7.3</span> Matrix Factorizations</h2>
 <p>Given any two compatible matrices <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span>, we can get a third matrix <span class="math inline">\(\mathbf{C}\)</span> by matrix multiplication, <span class="math inline">\(\mathbf{C} = \mathbf{A}\mathbf{B}\)</span>. Now suppose we wanted to go the other way. Given a matrix <span class="math inline">\(\mathbf{C}\)</span>, how can we <em>factor</em> it back out into a product <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>? This is the idea behind matrix factorization. In practice, we’re interested in factoring a matrix into a product of special types of matrices that are easier to work with, like symmetric, diagonal, or orthogonal matrices.</p>
-<section id="lu-factorization" class="level2">
-<h2 class="anchored" data-anchor-id="lu-factorization">LU Factorization</h2>
+<section id="lu-factorization" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="lu-factorization"><span class="header-section-number">7.3.1</span> LU Factorization</h3>
 <p>Probably the most basic matrix factorization is the LU Factorization. LU factorization factors an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> into a product of a lower triangular matrix <span class="math inline">\(\mathbf{L}\)</span> and an upper triangular matrix <span class="math inline">\(\mathbf{U}\)</span>, <span class="math display">\[\mathbf{A} = \mathbf{L}\mathbf{U}.\]</span></p>
 <p>The LU factorization is most useful for solving a system of linear equations. If <span class="math inline">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>, we can do an LU factorization of <span class="math inline">\(\mathbf{A}\)</span> and write the system as <span class="math inline">\(\mathbf{LUx} = \mathbf{b}\)</span>. This can then be solved by breaking it into two steps, known as <em>forward substitution</em> and <em>back substitution</em>,</p>
 <ul>
@@ -859,8 +858,8 @@ LU =
 </div>
 </div>
 </section>
-<section id="qr-factorization" class="level2">
-<h2 class="anchored" data-anchor-id="qr-factorization">QR Factorization</h2>
+<section id="qr-factorization" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="qr-factorization"><span class="header-section-number">7.3.2</span> QR Factorization</h3>
 <p>Another useful factorization is to factor a matrix <span class="math inline">\(\mathbf{A}\)</span> into a product of an orthogonal matrix <span class="math inline">\(\mathbf{Q}\)</span> and an upper triangular matrix <span class="math inline">\(\mathbf{R}\)</span>,</p>
 <p><span class="math display">\[\mathbf{A} = \mathbf{QR}.\]</span></p>
 <p>The QR factorization is useful if we want to create an orthonormal basis out of the column vectors of <span class="math inline">\(\mathbf{A}\)</span>, since <span class="math inline">\(\mathbf{Q}\)</span> will give a complete set of basis vectors built from orthogonalizing <span class="math inline">\(\mathbf{A}\)</span>. It’s also useful for calculating other random things of interest. Like LU factorization, it can be used to calculate determinants, since</p>
@@ -888,8 +887,8 @@ QR =
 </div>
 </div>
 </section>
-<section id="spectral-decomposition" class="level2">
-<h2 class="anchored" data-anchor-id="spectral-decomposition">Spectral Decomposition</h2>
+<section id="spectral-decomposition" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="spectral-decomposition"><span class="header-section-number">7.3.3</span> Spectral Decomposition</h3>
 <p>The spectral decomposition is a way to factor a symmetric matrix <span class="math inline">\(\mathbf{S}\)</span> into a product of an orthonormal matrix <span class="math inline">\(\mathbf{X}\)</span> and a diagonal matrix <span class="math inline">\(\mathbf{\Lambda}\)</span>,</p>
 <p><span class="math display">\[\mathbf{S} = \mathbf{X \Lambda X}^\top.\]</span></p>
 <p>The matrix <span class="math inline">\(\mathbf{\Lambda}\)</span> is called the <strong>eigenvalue matrix</strong>, and <span class="math inline">\(\mathbf{X}\)</span> is the <strong>eigenvector matrix</strong>. The diagonal entries of <span class="math inline">\(\mathbf{\Lambda}\)</span> are called the <strong>eigenvalues</strong> of <span class="math inline">\(\mathbf{S}\)</span>, denoted <span class="math inline">\(\lambda_i\)</span>,</p>
@@ -981,6 +980,8 @@ y_1 \\
 <p>You can easily check that <span class="math inline">\(\mathbf{x}_0\)</span> and <span class="math inline">\(\mathbf{x}_1\)</span> are orthogonal. Note the eigenvectors here have been normalized so <span class="math inline">\(||\mathbf{x}_0||=||\mathbf{x}_1||=1\)</span>. This isn’t required, but it’s the most common convention to ensure the eigenvector matrix <span class="math inline">\(\mathbf{X}\)</span> is a properly orthogonal.</p>
 <p>Here’s a plot of what this looks like. I’ll show that <span class="math inline">\(\mathbf{v}_0=\sqrt{2}\mathbf{x}_0=(1,1)\)</span> gets scaled by a factor of <span class="math inline">\(\lambda_0=3\)</span> when acted on by <span class="math inline">\(\mathbf{S}\)</span>. Similarly, I’ll show that <span class="math inline">\(\mathbf{v}_1=\sqrt{2}\mathbf{x}_1=(1,-1)\)</span> gets scaled by a factor of <span class="math inline">\(\lambda_1=1\)</span> (i.e.&nbsp;not at all) when acted on by <span class="math inline">\(\mathbf{S}\)</span>. Importantly, notice that <span class="math inline">\(\mathbf{S}\)</span> doesn’t rotate either vector. They stay along their characteristic lines, or <strong>eigenspaces</strong>, which in this example are the lines <span class="math inline">\(y=\pm x\)</span>.</p>
 <div class="cell" data-execution_count="20">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> np.array([</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">2</span>, <span class="dv">1</span>], </span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>]])</span>
@@ -994,8 +995,13 @@ y_1 \\
 <span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">_0$'</span>, <span class="st">'$\mathbf</span><span class="sc">{S}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st">_0$'</span>, <span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">_1$'</span>, <span class="st">'$\mathbf</span><span class="sc">{S}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st">_1$'</span>],</span>
 <span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    text_offsets<span class="op">=</span>[[<span class="op">-</span><span class="fl">0.45</span>, <span class="fl">0.25</span>], [<span class="fl">0.05</span>, <span class="fl">0.15</span>], [<span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.5</span>], [<span class="fl">0.05</span>, <span class="fl">0.3</span>]], </span>
 <span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Eigenspaces of $\mathbf</span><span class="sc">{S}</span><span class="st">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="matrix-algebra_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="matrix-algebra_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>A result I won’t prove, called the <strong>spectral theorem</strong>, guarantees that the eigenvalues of a symmetric matrix will be real-valued, and that the eigenvectors will form an orthonormal basis for <span class="math inline">\(\mathbb{R}^n\)</span>. This is why <span class="math inline">\(\mathbf{X}\)</span> ends up being an orthogonal matrix. The fact that the eigenvalues have to be real is why we can think of symmetric matrices as the matrix generalization of a real number.</p>
@@ -1071,8 +1077,8 @@ X Lambda X^T =
 </ul>
 <p>Due to the QR factorizations and matrix multiplications, this algorithm will be <span class="math inline">\(O(n^3)\)</span> at each step, which all together gives a time complexity of <span class="math inline">\(O(Tn^3)\)</span>. It’s not at all obvious from what I’ve said why the QR algorithm even works. In fact, to work well it requires a few small <a href="https://en.wikipedia.org/wiki/QR_algorithm">modifications</a> I won’t go into.</p>
 </section>
-<section id="positive-definiteness" class="level2">
-<h2 class="anchored" data-anchor-id="positive-definiteness">Positive Definiteness</h2>
+<section id="positive-definiteness" class="level3" data-number="7.3.4">
+<h3 data-number="7.3.4" class="anchored" data-anchor-id="positive-definiteness"><span class="header-section-number">7.3.4</span> Positive Definiteness</h3>
 <p>The eigenvalues of a symmetric matrix <span class="math inline">\(\mathbf{S}\)</span> are important because they in some sense specify how much <span class="math inline">\(\mathbf{S}\)</span> tends to stretch vectors in different directions. Most important for machine learning purposes though is the <em>sign</em> of the eigenvalues. The sign of the eigenvalues of a symmetric matrix essentially determine how hard it is to optimize a given function. This is especially relevant in machine learning, since training a model is all about optimizing the loss function of a model’s predictions against the data.</p>
 <p>If <span class="math inline">\(\mathbf{S}\)</span> is <span class="math inline">\(n \times n\)</span>, it will have <span class="math inline">\(n\)</span> eigenvalues <span class="math inline">\(\lambda_0, \lambda_1, \cdots, \lambda_{n-1}\)</span>. Ignoring the fact that each eigenvalue can be zero, each one will be either positive or negative. That means the <em>sequence</em> of eigenvalues can have <span class="math inline">\(2^n\)</span> possible arrangements of signs. For example, when <span class="math inline">\(n=3\)</span>, we could have any of the <span class="math inline">\(2^3=8\)</span> possible sign arrangements for the eigenvalues <span class="math inline">\((\lambda_0, \lambda_1, \lambda_2)\)</span>,</p>
 <p><span class="math display">\[(+, +, +), \ (+, +, -), \ (+, -, +), \ (-, +, +), \ (+, -, -), \ (-, +, -), \ (-, -, +), \ (-, -, -).\]</span></p>
@@ -1104,8 +1110,8 @@ X Lambda X^T =
 </div>
 </div>
 </section>
-<section id="singular-value-decomposition" class="level2">
-<h2 class="anchored" data-anchor-id="singular-value-decomposition">Singular Value Decomposition</h2>
+<section id="singular-value-decomposition" class="level3" data-number="7.3.5">
+<h3 data-number="7.3.5" class="anchored" data-anchor-id="singular-value-decomposition"><span class="header-section-number">7.3.5</span> Singular Value Decomposition</h3>
 <p>The spectral decomposition is mostly useful for square symmetric matrices. Yet, the properties of eigenvalues and eigenvectors seem to be incredibly useful for understanding how a matrix behaves. They say something useful about the characteristic scales and directions of a matrix and its underlying linear operator. It turns out we <em>can</em> generalize the spectral decomposition to arbitrary matrices, but with some slight modifications. This modified factorization is called the <strong>singular value decomposition</strong>, or <strong>SVD</strong> for short.</p>
 <p>Suppose <span class="math inline">\(\mathbf{A}\)</span> is some arbitrary <span class="math inline">\(m \times n\)</span> matrix. It turns out we can <em>always</em> factor <span class="math inline">\(\mathbf{A}\)</span> into a product of the form</p>
 <p><span class="math display">\[\mathbf{A} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top,\]</span></p>
@@ -1192,15 +1198,19 @@ U Sigma V^T =
 <div class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>plot_svd(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="matrix-algebra_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="matrix-algebra_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The “distortion ratio” <span class="math inline">\(\frac{\sigma_0}{\sigma_1}\)</span> mentioned above can actually be used as a measure of how invertible a matrix is. It’s called the <em>condition number</em>, denoted <span class="math inline">\(\kappa\)</span>. For a general <span class="math inline">\(n \times n\)</span> matrix, the <strong>condition number</strong> is defined as the ratio of the <em>largest</em> to the <em>smallest</em> singular value,</p>
 <p><span class="math display">\[\kappa = \frac{\sigma_0}{\sigma_{k-1}}.\]</span></p>
 <p>The higher the condition number is, the harder it is to invert <span class="math inline">\(\mathbf{A}\)</span>. A condition number of <span class="math inline">\(\kappa=1\)</span> is when the singular values are the same. These are easiest to invert. Matrices with low <span class="math inline">\(\kappa\)</span> are called called <strong>well-conditioned</strong> matrices. The identity matrix has <span class="math inline">\(\kappa=1\)</span>, for example. If one of the singular values is <span class="math inline">\(0\)</span> then <span class="math inline">\(\kappa\)</span> will be infinite, meaning the matrix isn’t invertible at all. Matrices with high <span class="math inline">\(\kappa\)</span> are called <strong>ill-conditioned</strong> matrices. For this reason, the condition number is very often used in calculations when it’s important to make sure that <span class="math inline">\(\mathbf{A}\)</span> isn’t singular or close to singular. In numpy, you can calculate the condition number of a matrix directly by using <code>np.linalg.cond(A)</code>.</p>
 </section>
-<section id="low-rank-approximations" class="level2">
-<h2 class="anchored" data-anchor-id="low-rank-approximations">Low-Rank Approximations</h2>
+<section id="low-rank-approximations" class="level3" data-number="7.3.6">
+<h3 data-number="7.3.6" class="anchored" data-anchor-id="low-rank-approximations"><span class="header-section-number">7.3.6</span> Low-Rank Approximations</h3>
 <p>The SVD is useful for many reasons. In fact, it’s probably the single most useful factorization in all of applied linear algebra. One reason this is true is because <em>every matrix</em> has one. When in doubt, if you can’t figure out how to do something with a matrix, you can take its SVD and try to work with those three matrices one-by-one. While that’s nice, the more useful application of the SVD to machine learning is that it’s a good way to compress or denoise data. To see why we need to look at the SVD in a slightly different way.</p>
 <p>Suppose <span class="math inline">\(\mathbf{A}\)</span> is some <span class="math inline">\(m \times n\)</span> matrix. Suppose <span class="math inline">\(\mathbf{u}_0, \mathbf{u}_1, \cdots, \mathbf{u}_{m-1}\)</span> are the column vectors of <span class="math inline">\(\mathbf{U}\)</span>, and <span class="math inline">\(\mathbf{v}_0, \mathbf{v}_1, \cdots, \mathbf{v}_{n-1}\)</span> are the column vectors of <span class="math inline">\(\mathbf{V}\)</span>. Suppose <span class="math inline">\(\sigma_0, \sigma_1, \cdots, \sigma_{k-1}\)</span> are the singular values of <span class="math inline">\(\mathbf{A}\)</span>, by convention ordered from largest to smallest. Then writing out the SVD in terms of the column vectors, and multiplying everything out matrix multiplication style, we have</p>
 <p><span class="math display">\[
@@ -1241,12 +1251,19 @@ Vt.shape = (784, 784)</code></pre>
 <p>Think of each <em>row</em> of <span class="math inline">\(\mathbf{A}\)</span> as representing a single image in the dataset, and each <em>column</em> of <span class="math inline">\(\mathbf{A}\)</span> as representing a single pixel of the image.</p>
 <p>Since these are images, I might as well show you what they look like. To do that, just pick a random row from the matrix. Each row will be a flattened image. To turn it into an image, we can just reshape the row to have shape <span class="math inline">\(28 \times 28\)</span>, then plot it using <code>plt.imshow</code>. Below, I’m picking off the first row, which turns out to be an image of a handwritten <span class="math inline">\(0\)</span>.</p>
 <div class="cell" data-execution_count="27">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> A[<span class="dv">0</span>, :].reshape(<span class="dv">28</span>, <span class="dv">28</span>)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(img, cmap<span class="op">=</span><span class="st">'Greys'</span>)</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="matrix-algebra_files/figure-html/cell-28-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="matrix-algebra_files/figure-html/cell-28-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Let’s start by taking <span class="math inline">\(d=2\)</span>. Why? Because when <span class="math inline">\(d=2\)</span> we can plot each image as a point in the xy-plane! This suggests a powerful application of the low-rank approximation, to visualize high-dimensional data. To calculate <span class="math inline">\(\mathbf{A}_d\)</span>, we’ll need to truncate <span class="math inline">\(\mathbf{U}\)</span>, <span class="math inline">\(\mathbf{\Sigma}\)</span>, and <span class="math inline">\(\mathbf{V}^\top\)</span>. To make the shapes come out right, we’ll want to drop the first <span class="math inline">\(d\)</span> <em>columns</em> of <span class="math inline">\(\mathbf{U}\)</span> and the first <span class="math inline">\(d\)</span> <em>rows</em> of <span class="math inline">\(\mathbf{V}^\top\)</span>. Once we’ve got these, we can calculate <span class="math inline">\(\mathbf{A}_d\)</span>, which in this case will be size <span class="math inline">\(1000 \times 2\)</span>.</p>
@@ -1267,13 +1284,20 @@ A_d.shape = (1000, 2)</code></pre>
 </div>
 <p>Now we have <span class="math inline">\(m=1000\)</span> “images”, each with <span class="math inline">\(d=2\)</span> “variables”. This means we can plot them in the xy-plane, taking <span class="math inline">\(x\)</span> to be the first column <code>A_d[:, 0]</code>, and <span class="math inline">\(y\)</span> to be the second column <code>A_d[:, 1]</code>. Here’s a scatter plot of all images projected down to 2 dimensions. I can’t make out any patterns in the plot, and you probably can’t either. But at least we’ve found an interesting and sometimes useful way to visualize high-dimensional data.</p>
 <div class="cell" data-execution_count="29">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(A_d[:, <span class="dv">0</span>], A_d[:, <span class="dv">1</span>], s<span class="op">=</span><span class="dv">1</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>plt.xticks([])</span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span>
 <span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'</span><span class="sc">{</span>m<span class="sc">}</span><span class="ss"> MNIST Images'</span>)</span>
 <span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="matrix-algebra_files/figure-html/cell-30-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="matrix-algebra_files/figure-html/cell-30-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>How good is our approximation? We can use the singular values to figure this out. In the low rank approximation, we’re keeping <span class="math inline">\(d\)</span> singular values and dropping the remaining <span class="math inline">\(k-d\)</span>. Throwing away those remaining singular values is throwing away information about our original matrix <span class="math inline">\(\mathbf{A}\)</span>. To figure out how much information we’re keeping in our approximation, we can just look at the ratio of the sum of singular values kept to the total sum of all singular values,</p>
@@ -1308,12 +1332,19 @@ A_d.shape = (1000, 2)</code></pre>
 <p><span class="math display">\[\mathbf{A} \approx \mathbf{A}_d \mathbf{V}^\top.\]</span></p>
 <p>Once I’ve done that, I can just pluck a random row from the approximation, resize it, and plot it using <code>plt.imshow</code>, just like before. Notice this time we can still clearly see the handwritten <span class="math inline">\(0\)</span>, but it’s a bit grainer than it was before. The edges aren’t as sharp. Nevertheless, we can still make out the digit pretty solidly.</p>
 <div class="cell" data-execution_count="33">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> (A_d <span class="op">@</span> Vt_d)[<span class="dv">0</span>, :].reshape(<span class="dv">28</span>, <span class="dv">28</span>)</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>plt.imshow(img, cmap<span class="op">=</span><span class="st">'Greys'</span>)</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
 <span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<p><img src="matrix-algebra_files/figure-html/cell-34-output-1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="matrix-algebra_files/figure-html/cell-34-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>But why is this approach good for compression anyway? After all, we still have to unproject the rows back into the original <span class="math inline">\(m \times n\)</span> space. Maybe think about it this way. If you just stored the full matrix <span class="math inline">\(\mathbf{A}\)</span>, you’d have tot store <span class="math inline">\(m \cdot n\)</span> total numbers. In this example, that’s <span class="math inline">\(1000 \cdot 784 = 784000\)</span> numbers you’d have to store in memory.</p>
@@ -1458,7 +1489,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
       <a href="../notebooks/vector-spaces.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span>
