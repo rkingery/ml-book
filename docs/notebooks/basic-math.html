@@ -217,7 +217,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#univariate-functions" id="toc-univariate-functions" class="nav-link" data-scroll-target="#univariate-functions"><span class="toc-section-number">1.2</span>  Univariate Functions</a></li>
   <li><a href="#multivariate-functions" id="toc-multivariate-functions" class="nav-link" data-scroll-target="#multivariate-functions"><span class="toc-section-number">1.3</span>  Multivariate Functions</a></li>
   <li><a href="#systems-of-equations" id="toc-systems-of-equations" class="nav-link" data-scroll-target="#systems-of-equations"><span class="toc-section-number">1.4</span>  Systems of Equations</a></li>
-  <li><a href="#greek-alphabet" id="toc-greek-alphabet" class="nav-link" data-scroll-target="#greek-alphabet"><span class="toc-section-number">1.5</span>  Greek Alphabet</a></li>
+  <li><a href="#sums-and-products" id="toc-sums-and-products" class="nav-link" data-scroll-target="#sums-and-products"><span class="toc-section-number">1.5</span>  Sums and Products</a></li>
+  <li><a href="#greek-alphabet" id="toc-greek-alphabet" class="nav-link" data-scroll-target="#greek-alphabet"><span class="toc-section-number">1.6</span>  Greek Alphabet</a></li>
   </ul>
 </nav>
 </nav>
@@ -257,11 +258,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It’s useful in machine learning to be able to read and manipulate basic arithmetic and algebraic equations, particularly when reading research papers, blog posts, or documentation. I won’t go into depth on the basics of high school arithmetic and algebra. I do have to assume <em>some</em> mathematical maturity of the reader, and this seems like a good place to draw the line. I’ll just mention a few key points.</p>
 <p>Recall that numbers can come in several forms. We can have,</p>
 <ul>
-<li>Positive whole numbers <span class="math display">\[0, 1, 2, 3, 4, \cdots\]</span> These are sometimes called the <strong>natural numbers</strong> or the <strong>positive integers</strong>. Note the inclusion of <span class="math inline">\(0\)</span> in this group. Following the computer science convention I’ll tend to do that.</li>
-<li>Whole numbers <span class="math display">\[\cdots, -3, -2, -1, 0, 1, 2, 3, \cdots\]</span> These can be positive <em>or</em> negative. They’re called the <strong>integers</strong>.</li>
-<li>Ratios of whole numbers, for example <span class="math display">\[\frac{1}{2}, \frac{5}{4}, -\frac{3}{4}, \frac{1000}{999}, \cdots\]</span> Any ratio will do, so long as the <em>denominator</em> (the bottom number) is not zero. These are called the <strong>rational numbers</strong>.</li>
-<li>Arbitrary decimal numbers, for example <span class="math display">\[1.00, \ 5.07956, \ -0.99999\dots, \ \pi=3.1415\dots, \ e=2.718\dots, \ \cdots\]</span> These are called the <strong>real numbers</strong>. They include as a special case both the integers and the rational numbers, but also include numbers that can’t be represented as fractions, like <span class="math inline">\(\pi\)</span> and <span class="math inline">\(e\)</span>.</li>
-<li><strong>Complex numbers</strong> like <span class="math inline">\(1 + 2i\)</span> where <span class="math inline">\(i=\sqrt{-1}\)</span> is the imaginary number. Complex numbers include the real numbers as a special case. Since they don’t really show up in machine learning we won’t deal with these after this.</li>
+<li>Positive whole numbers <span class="math inline">\(0, 1, 2, 3, 4, \cdots\)</span>. These are sometimes called the <strong>natural numbers</strong> or the <strong>positive integers</strong>. Note the inclusion of <span class="math inline">\(0\)</span> in this group. Following the computer science convention I’ll tend to do that. The set of all natural numbers is denoted by the symbol <span class="math inline">\(\mathbb{N}\)</span>.</li>
+<li>Whole numbers <span class="math inline">\(\cdots, -2, -1, 0, 1, 2, \cdots\)</span>. These are positive <em>or</em> negative. They’re called the <strong>integers</strong>. The set of all integers is denoted by the symbol <span class="math inline">\(\mathbb{Z}\)</span>.</li>
+<li>Ratios of whole numbers, for example <span class="math display">\[\frac{1}{2}, \frac{5}{4}, -\frac{3}{4}, \frac{1000}{999}, \cdots\]</span> Any ratio will do, so long as the <em>denominator</em> (the bottom number) is not zero. These are called the <strong>rational numbers</strong>.The set of all rational numbers is denoted by the symbol <span class="math inline">\(\mathbb{Q}\)</span>.</li>
+<li>Arbitrary decimal numbers, for example <span class="math display">\[1.00, \ 5.07956, \ -0.99999\dots, \ \pi=3.1415\dots, \ e=2.718\dots, \ \cdots\]</span> These are called the <strong>real numbers</strong>. They include as a special case both the integers and the rational numbers, but also include numbers that can’t be represented as fractions, like <span class="math inline">\(\pi\)</span> and <span class="math inline">\(e\)</span>. The set of all real numbers is denoted by the symbol <span class="math inline">\(\mathbb{R}\)</span>.</li>
+<li><strong>Complex numbers</strong> like <span class="math inline">\(1 + 2i\)</span> where <span class="math inline">\(i=\sqrt{-1}\)</span> is the imaginary number. Complex numbers include the real numbers as a special case. Since they don’t really show up in machine learning we won’t deal with these after this. The set of all complex numbers is denoted by the symbol <span class="math inline">\(\mathbb{C}\)</span>.</li>
 </ul>
 <p>You should be familiar with the usual arithmetic operations defined on these systems of numbers. Things like addition, subtraction, multiplication, and division. You should also at least vaguely recall the order of operations, which defines the order in which complex arithmetic operations with parenthesis are carried out. For example,</p>
 <p><span class="math display">\[(5+1) \cdot \frac{(7-3)^2}{2} = 6 \cdot \frac{4^2}{2} = 6 \cdot \frac{16}{2} = 6 \cdot 8 = 48.\]</span></p>
@@ -282,7 +283,15 @@ x &amp;= \frac{c - b}{a}.
 &amp;= a^2x^2 - abx - abx + b^2 \\
 &amp;= a^2x^2 - 2abx + b^2.
 \end{align*}\]</span></p>
-<p>That’s pretty much it. Just simple variable manipulation.</p>
+<p>It’s also worth recalling what a set is. Briefly, a <strong>set</strong> is a collection of <em>unique</em> <strong>elements</strong>. Usually those elements are numbers. To say that an element <span class="math inline">\(x\)</span> is an element of a set <span class="math inline">\(S\)</span>, we’d write <span class="math inline">\(x \in S\)</span>, read “<span class="math inline">\(x\)</span> is in <span class="math inline">\(S\)</span>”. If <span class="math inline">\(x\)</span> is <em>not</em> in the set, we’d write <span class="math inline">\(x \notin S\)</span>. For example, the set of elements <span class="math inline">\(1, 2, 3\)</span> can be denoted <span class="math inline">\(S = \{1, 2, 3\}\)</span>. Then <span class="math inline">\(1 \in S\)</span>, but <span class="math inline">\(5 \notin S\)</span>.</p>
+<p>I’ve already mentioned the most common sets we’ll care about, namely the natural numbers <span class="math inline">\(\mathbb{N}\)</span>, integers <span class="math inline">\(\mathbb{Z}\)</span>, rational numbers <span class="math inline">\(\mathbb{Q}\)</span>, and real numbers <span class="math inline">\(\mathbb{R}\)</span>. Also of interest will be the <strong>intervals</strong>,</p>
+<ul>
+<li>Open interval: <span class="math inline">\((a, b) = \{x: a &lt; x &lt; b \}\)</span>.</li>
+<li>Half-open left interval: <span class="math inline">\((a, b] = \{x: a &lt; x \leq b \}\)</span>.</li>
+<li>Half-open right interval: <span class="math inline">\([a, b) = \{x: a \leq x &lt; b \}\)</span>.</li>
+<li>Closed interval: <span class="math inline">\([a, b] = \{x: a \leq x \leq b \}\)</span>.</li>
+</ul>
+<p>Think of intervals as representing line segments on the real line, connecting <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span>. I’ll touch on sets more in coming lessons. I just want you to be familiar with the notation, since I’ll occasionally use it.</p>
 <section id="symbolic-computation" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="symbolic-computation"><span class="header-section-number">1.1.1</span> Symbolic Computation</h3>
 <p>There are two fundamental ways to perform mathematical computations: numerical computation, and symbolic computation. You’re familiar with both even though you may not realize it. <strong>Numerical computation</strong> involves crunching numbers. You plug in numbers, and get out numbers. When you type something like <code>10.5 / 12.4</code> in python, it will return a number, like <code>0.8467741935483871</code>. This is numerical computation.</p>
@@ -336,9 +345,18 @@ x &amp;= \frac{c - b}{a}.
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="affine-functions"><span class="header-section-number">1.2.1</span> Affine Functions</h3>
 <p>The most basic functions to be aware of are the straight-line functions: constant functions, linear functions, and affine functions:</p>
 <ul>
-<li>Constant functions <span class="math inline">\(y=c\)</span> or <span class="math inline">\(x=c\)</span>: For example, <span class="math inline">\(y=2\)</span>, <span class="math inline">\(x=1\)</span>.</li>
-<li>Linear functions <span class="math inline">\(y=ax\)</span>: For example, <span class="math inline">\(y=-x\)</span>, <span class="math inline">\(y=5x\)</span>.</li>
-<li>Affine functions <span class="math inline">\(y=ax+b\)</span>: For example, <span class="math inline">\(y=-x+1\)</span>, <span class="math inline">\(y=5x-4\)</span>.</li>
+<li>Constant functions <span class="math inline">\(y=c\)</span> or <span class="math inline">\(x=c\)</span>:
+<ul>
+<li>Examples: <span class="math inline">\(y=2\)</span>, <span class="math inline">\(x=1\)</span></li>
+</ul></li>
+<li>Linear functions <span class="math inline">\(y=ax\)</span>:
+<ul>
+<li>Examples: <span class="math inline">\(y=-x\)</span>, <span class="math inline">\(y=5x\)</span></li>
+</ul></li>
+<li>Affine functions <span class="math inline">\(y=ax+b\)</span>:
+<ul>
+<li>Examples: <span class="math inline">\(y=-x+1\)</span>, <span class="math inline">\(y=5x-4\)</span></li>
+</ul></li>
 </ul>
 <p>All constant functions are affine functions, and all linear functions are affine functions. In the case of affine functions, the value <span class="math inline">\(b\)</span> is called the <strong>intercept</strong>. It corresponds to the value where the function crosses the y-axis. The value <span class="math inline">\(a\)</span> is called the <strong>slope</strong>. It corresponds to the steepness of the curve, i.e.&nbsp;its height over its width (or “rise” over “run”). Notice linear functions are the special case where the intercept is <em>always</em> the origin <span class="math inline">\(x=0, y=0\)</span>.</p>
 <section id="plotting" class="level4" data-number="1.2.1.1">
@@ -370,7 +388,7 @@ x &amp;= \frac{c - b}{a}.
 </div>
 </div>
 </div>
-<p>Unfortunately this plot is pretty ugly. It’s too big, arbitrarily scaled, and doesn’t include any information about what’s being plotted against what. In matplotlib if you want to include all these things to make nice plots you have to include a bunch of extra style commands.</p>
+<p>This plot is pretty ugly. It’s too big, arbitrarily scaled, and doesn’t include any information about what’s being plotted against what. In matplotlib if you want to include all these things to make nice plots you have to include a bunch of extra style commands.</p>
 <p>For this reason, for the rest of the plotting in this lesson I’m going to use a helper function <code>plot_function</code>, which takes in <code>x</code> and <code>y</code>, the range of <code>x</code> values we want to plot, and an optional title. I didn’t think the details of this helper function were worth going into now, so I abstracted it away into the file <code>utils.py</code> in this same directory. It uses matplotlib like I described, but with a good bit of styling to make the plot more readable. If you really want to see the details perhaps the easiest thing to do is create a cell below using <code>ESC-B</code> and type the command <code>??plot_function</code>, which will print the code inside the function as the output.</p>
 <p>Back to it, let’s plot one example each of a constant function <span class="math inline">\(y=2\)</span>, a linear function <span class="math inline">\(y=2x\)</span>, and an affine function <span class="math inline">\(2x-1\)</span>.</p>
 <div class="cell" data-execution_count="10">
@@ -532,60 +550,58 @@ x &amp;= \frac{c - b}{a}.
 <col style="width: 48%">
 <col style="width: 51%">
 </colgroup>
-<thead>
-<tr class="header">
-<th>Rule</th>
-<th>Example</th>
-</tr>
-</thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(x^0 = 1\)</span></td>
-<td><span class="math inline">\(2^0 = 1\)</span></td>
+<td style="text-align: left;"><strong>Rule</strong></td>
+<td style="text-align: left;"><strong>Example</strong></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(x^{m+n} = x^m x^n\)</span></td>
-<td><span class="math inline">\(3^{2+5} = 3^2 3^5 = 3^8 = 6561\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x^0 = 1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(2^0 = 1\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(x^{m-n} = \frac{x^m}{x^n}\)</span></td>
-<td><span class="math inline">\(3^{2-5} = \frac{3^2}{3^5} = 3^{-3} \approx 0.037\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x^{m+n} = x^m x^n\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(3^{2+5} = 3^2 3^5 = 3^8 = 6561\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(x^{mn} = (x^m)^n\)</span></td>
-<td><span class="math inline">\(2^{2 \cdot 5} = (2^2)^5 = 2^{10} = 1024\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x^{m-n} = \frac{x^m}{x^n}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(3^{2-5} = \frac{3^2}{3^5} = 3^{-3} \approx 0.037\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\((xy)^n = x^n y^n\)</span></td>
-<td><span class="math inline">\((2 \cdot 2)^3 = 2^3 2^3 = 4^3 = 2^6 = 64\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x^{mn} = (x^m)^n\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(2^{2 \cdot 5} = (2^2)^5 = 2^{10} = 1024\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(\big(\frac{x}{y}\big)^n = \frac{x^n}{y^n}\)</span></td>
-<td><span class="math inline">\(\big(\frac{2}{4}\big)^3 = \frac{2^3}{4^3} = \frac{1}{8}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((xy)^n = x^n y^n\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((2 \cdot 2)^3 = 2^3 2^3 = 4^3 = 2^6 = 64\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(\big(\frac{x}{y}\big)^{-n} = \frac{y^n}{x^n}\)</span></td>
-<td><span class="math inline">\(\big(\frac{2}{4}\big)^{-3} = \frac{4^3}{2^3} = 2^3 = 8\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\big(\frac{x}{y}\big)^n = \frac{x^n}{y^n}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\big(\frac{2}{4}\big)^3 = \frac{2^3}{4^3} = \frac{1}{8}\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(x^{1/2} = \sqrt{x} = \sqrt[2]{x}\)</span></td>
-<td><span class="math inline">\(4^{1/2} = \sqrt{4} = 2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\big(\frac{x}{y}\big)^{-n} = \frac{y^n}{x^n}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\big(\frac{2}{4}\big)^{-3} = \frac{4^3}{2^3} = 2^3 = 8\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(x^{1/n} = \sqrt[n]{x}\)</span></td>
-<td><span class="math inline">\(3^{1/4} = \sqrt[4]{3} \approx 1.316\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x^{1/2} = \sqrt{x} = \sqrt[2]{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(4^{1/2} = \sqrt{4} = 2\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(x^{m/n} = \sqrt[n]{x^m}\)</span></td>
-<td><span class="math inline">\(3^{3/4} = \sqrt[4]{3^3} = \sqrt[4]{9} \approx 1.732\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x^{1/n} = \sqrt[n]{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(3^{1/4} = \sqrt[4]{3} \approx 1.316\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(\sqrt[n]{xy} = \sqrt[n]{x} \sqrt[n]{y}\)</span></td>
-<td><span class="math inline">\(\sqrt[4]{3 \cdot 2} = \sqrt[4]{3} \sqrt[4]{2} \approx 1.565\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x^{m/n} = \sqrt[n]{x^m}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(3^{3/4} = \sqrt[4]{3^3} = \sqrt[4]{9} \approx 1.732\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(\sqrt[n]{\frac{x}{y}} = \frac{\sqrt[n]{x}}{\sqrt[n]{y}}\)</span></td>
-<td><span class="math inline">\(\sqrt[4]{\frac{3}{2}} = \frac{\sqrt[4]{3}}{\sqrt[4]{2}} \approx 1.107\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sqrt[n]{xy} = \sqrt[n]{x} \sqrt[n]{y}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sqrt[4]{3 \cdot 2} = \sqrt[4]{3} \sqrt[4]{2} \approx 1.565\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\sqrt[n]{\frac{x}{y}} = \frac{\sqrt[n]{x}}{\sqrt[n]{y}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sqrt[4]{\frac{3}{2}} = \frac{\sqrt[4]{3}}{\sqrt[4]{2}} \approx 1.107\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -631,59 +647,57 @@ x &amp;= \frac{c - b}{a}.
 <p>Here are some rules that exponentials and logs obey:</p>
 <table class="table">
 <colgroup>
-<col style="width: 41%">
-<col style="width: 58%">
+<col style="width: 48%">
+<col style="width: 51%">
 </colgroup>
-<thead>
-<tr class="header">
-<th>Rule</th>
-<th>Example</th>
-</tr>
-</thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(e^0 = 1\)</span></td>
-<td></td>
+<td style="text-align: left;"><strong>Rule</strong></td>
+<td style="text-align: left;"><strong>Example</strong></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(\log(1) = 0\)</span></td>
-<td></td>
+<td style="text-align: left;"><span class="math inline">\(e^0 = 1\)</span></td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(\log(e) = 1\)</span></td>
-<td></td>
+<td style="text-align: left;"><span class="math inline">\(\log(1) = 0\)</span></td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(e^{a+b} = e^a e^b\)</span></td>
-<td><span class="math inline">\(e^{2+5} = e^2 e^5 = e^8 \approx 2980.96\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\log(e) = 1\)</span></td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(e^{a-b} = \frac{e^a}{e^b}\)</span></td>
-<td><span class="math inline">\(e^{2-5} = \frac{e^2}{e^5} = e^{-3} \approx 0.0498\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(e^{a+b} = e^a e^b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(e^{2+5} = e^2 e^5 = e^8 \approx 2980.96\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(e^{ab} = (e^a)^b\)</span></td>
-<td><span class="math inline">\(e^{2 \cdot 5} = (e^2)^5 = e^{10} \approx 22026.47\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(e^{a-b} = \frac{e^a}{e^b}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(e^{2-5} = \frac{e^2}{e^5} = e^{-3} \approx 0.0498\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(a^b = e^{b \log(a)}\)</span></td>
-<td><span class="math inline">\(2^3 = e^{3 \log(2)} = 8\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(e^{ab} = (e^a)^b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(e^{2 \cdot 5} = (e^2)^5 = e^{10} \approx 22026.47\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(\log(ab) = \log(a) + \log(b)\)</span></td>
-<td><span class="math inline">\(\log(2 \cdot 5) = \log(2) + \log(5) = \log(10) \approx 2.303\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a^b = e^{b \log(a)}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(2^3 = e^{3 \log(2)} = 8\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(\log\big(\frac{a}{b}\big) = \log(a) - \log(b)\)</span></td>
-<td><span class="math inline">\(\log\big(\frac{2}{5}\big) = \log(2) - \log(5) \approx -0.916\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\log(ab) = \log(a) + \log(b)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\log(2 \cdot 5) = \log(2) + \log(5) = \log(10) \approx 2.303\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(\log(a^b) = b\log(a)\)</span></td>
-<td><span class="math inline">\(\log(5^2) = 2\log(5) \approx 3.219\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\log\big(\frac{a}{b}\big) = \log(a) - \log(b)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\log\big(\frac{2}{5}\big) = \log(2) - \log(5) \approx -0.916\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(\log_a(x) = \frac{\log(x)}{\log(a)}\)</span></td>
-<td><span class="math inline">\(\log_2(5) = \frac{\log(5)}{\log(2)} \approx 2.322\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\log(a^b) = b\log(a)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\log(5^2) = 2\log(5) \approx 3.219\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\log_a(x) = \frac{\log(x)}{\log(a)}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\log_2(5) = \frac{\log(5)}{\log(2)} \approx 2.322\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -1104,8 +1118,87 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 </div>
 </div>
 </section>
-<section id="greek-alphabet" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="greek-alphabet"><span class="header-section-number">1.5</span> Greek Alphabet</h2>
+<section id="sums-and-products" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="sums-and-products"><span class="header-section-number">1.5</span> Sums and Products</h2>
+<p>We typically find ourselves performing operations on large numbers of numbers at a time. By far the most common operation is adding up a bunch of numbers, or <strong>summation</strong>. Suppose we have some <strong>sequence</strong> of <span class="math inline">\(n\)</span> numbers <span class="math inline">\(x_0,x_1,x_2,\cdots,x_{n-1}\)</span>. They could be anything, related by a function, or not. If we wanted to sum them together to get a new number <span class="math inline">\(x\)</span> we could write</p>
+<p><span class="math display">\[x = x_0 + x_1 + x_2 + \cdots + x_{n-1}.\]</span></p>
+<p>But it’s kind of cumbersome to always write like this. For this reason in math there’s a more compact notation to write sums called <strong>summation notation</strong>. We introduce the symbol <span class="math inline">\(\sum\)</span> for “sum”, and write <span class="math display">\[x = \sum_{i=0}^{n-1} x_i.\]</span></p>
+<p>Read this as “the sum of all <span class="math inline">\(x_i\)</span> for <span class="math inline">\(i=0,1,\cdots,n-1\)</span> is <span class="math inline">\(x\)</span>”. The index <span class="math inline">\(i\)</span> being summed over is called a <strong>dummy index</strong>. It can be whatever we want since it never appears on the left-hand side. It gets summed over and then disappears. The lower and upper values <span class="math inline">\(i=0\)</span> and <span class="math inline">\(i=n-1\)</span> are the <strong>limits</strong> of the summation. The limits need not always be <span class="math inline">\(i=0\)</span> and <span class="math inline">\(i=n-1\)</span>. We can choose them to be whatever we like as a matter of convenience.</p>
+<p>Frequently summation notation is paired with some kind of <strong>generating function</strong> <span class="math inline">\(f(i) = x_i\)</span> that generates the sequence. For example, suppose our sequence is generated by the function <span class="math inline">\(f(i) = i\)</span>, and we want to sum from <span class="math inline">\(i=1\)</span> to <span class="math inline">\(i=n\)</span>. We’d have</p>
+<p><span class="math display">\[x = \sum_{i=1}^n x_i = \sum_{i=1}^n i = 1 + 2 + \cdots + n = \frac{1}{2} n(n+1).\]</span></p>
+<p>The right-hand term <span class="math inline">\(\frac{1}{2} n(n-1)\)</span> is not obvious, and only applies to this particular sum. I just wrote it down since it’s sometimes useful to remember. This is a special kind of sum called an <strong>arithmetic series</strong>. Here’s a “proof” of this relationship using sympy.</p>
+<div class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>i, n <span class="op">=</span> sp.symbols(<span class="st">'i n'</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>summation <span class="op">=</span> sp.Sum(i, (i, <span class="dv">1</span>, n)).doit()</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'sum i for i=1,...,n = </span><span class="sc">{</span>summation<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sum i for i=1,...,n = n**2/2 + n/2</code></pre>
+</div>
+</div>
+<p>In the general case when we don’t have nice rules like this we’d have to loop over the entire sum and do the sum incrementally.</p>
+<p>In python, the equivalent of summation notation is the <code>sum</code> function, where we pass in the sequence we want to sum as a list. Here’s the arithmetic sum up to <span class="math inline">\(n=10\)</span>, which should be <span class="math inline">\(\frac{1}{2} 10 \cdot (10+1) = 55\)</span>.</p>
+<div class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<pre><code>55</code></pre>
+</div>
+</div>
+<p>Another useful sum to be aware of is the <strong>geometric series</strong>. A geometric series is a sum over a sequence whose generating function is <span class="math inline">\(f(i) = r^i\)</span> for some real number <span class="math inline">\(r \neq 1\)</span>. Its rule is</p>
+<p><span class="math display">\[x = \sum_{i=0}^{n-1} r^i = r^0 + r^1 + \cdots + r^{n-1} = \frac{1-r^n}{1-r}.\]</span></p>
+<p>For example, if <span class="math inline">\(n=10\)</span> and <span class="math inline">\(r=\frac{1}{2}\)</span>, we have</p>
+<p><span class="math display">\[x = \sum_{i=0}^{9} \bigg(\frac{1}{2}\bigg)^i = \frac{1-\big(\frac{1}{2}\big)^{10}}{1-\big(\frac{1}{2}\big)} = 2\bigg(1-\frac{1}{2^{10}}\bigg) \approx 1.998.\]</span></p>
+<div class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>([r <span class="op">**</span> i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<pre><code>1.998046875</code></pre>
+</div>
+</div>
+<p>Notice how the term <span class="math inline">\(\big(\frac{1}{2}\big)^{10} \approx 0.00098\)</span> is really small. We can practically ignore it. In fact, as <span class="math inline">\(n \rightarrow \infty\)</span> we can completely ignore it, in which case</p>
+<p><span class="math display">\[x = \sum_{i=0}^{\infty} \bigg(\frac{1}{2}\bigg)^i = \frac{1}{1-\big(\frac{1}{2}\big)} = 2.\]</span></p>
+<p>This is an example of the infinite version of the geometric series. If <span class="math inline">\(0 \leq r \leq 1\)</span>, then</p>
+<p><span class="math display">\[x = \sum_{i=0}^{\infty} r^i = r^0 + r^1 + r^2 + \cdots = \frac{1}{1-r}.\]</span></p>
+<p>What happens when <span class="math inline">\(r=1\)</span>? Clearly the rule breaks down at this point, since the denominator becomes infinite. But it’s easy enough to see what it is by writing out the sum,</p>
+<p><span class="math display">\[x = \sum_{i=0}^{n-1} 1^i = 1^0 + 1^1 + \cdots + 1^{n-1} = \underbrace{1 + 1 + \cdots + 1}_{\text{n times}} = n.\]</span></p>
+<p>In this case, if we send <span class="math inline">\(n \rightarrow \infty\)</span>, then <span class="math inline">\(x\)</span> clearly blows up to <span class="math inline">\(\infty\)</span> too. You can see this by plotting the function <span class="math inline">\(y = \frac{1}{1-x}\)</span> and observing it asymptotes at <span class="math inline">\(x=1\)</span>.</p>
+<div class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> x)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">100</span>), ticks_every<span class="op">=</span>[<span class="fl">0.2</span>, <span class="dv">20</span>], title<span class="op">=</span><span class="st">'$y=1/(1-x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="basic-math_files/figure-html/cell-48-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>We can always factor constants <span class="math inline">\(c\)</span> out of sums. This follows naturally from just expanding the sum out,</p>
+<p><span class="math display">\[\sum_{i=0}^{n-1} c x_i = cx_0 + cx_1 + \cdots + cx_{n-1} = c(x_0 + x_1 + \cdots + x_{n-1}) = c\sum_{i=0}^{n-1} x_i.\]</span></p>
+<p>Similarly, we can break sums up into pieces (or join sums together) as long as we’re careful to get the index limits right,</p>
+<p><span class="math display">\[\sum_{i=0}^{n-1} x_i = \sum_{i=0}^{k} x_i + \sum_{i=k+1}^{n-1} x_i.\]</span></p>
+<p>We can have double sums (sums of sums) as well. If <span class="math inline">\(x_{i,j}\)</span> is some 2-index variable where <span class="math inline">\(i=0,\cdots,n-1\)</span> and <span class="math inline">\(j=0,\cdots,m-1\)</span>, we can sum over both sets of indices to get <span class="math inline">\(n \cdot m\)</span> total terms,</p>
+<p><span class="math display">\[\sum_{i=0}^{n-1} \sum_{j=0}^{m-1} x_{i,j} = \sum_{j=0}^{m-1} \sum_{i=0}^{n-1} x_{i,j} = x_{0,0} + x_{0,1} + \cdots x_{0,m-1} + \cdots + x_{n-1,0} + x_{n-1,1} + \cdots x_{n-1,m-1}.\]</span></p>
+<p>Notice the two sums can swap, or <strong>commute</strong>, with each other, <span class="math inline">\(\sum_i \sum_j = \sum_j \sum_i\)</span>. This follows by expanding the terms out like on the right-hand side and noting the must be equal in both cases.</p>
+<p>The notation I’ve covered for sums has an analogue for products, called <strong>product notation</strong>. Suppose we want to multiply <span class="math inline">\(n\)</span> numbers <span class="math inline">\(x_0,x_1,\cdots,x_{n-1}\)</span> together to get some number <span class="math inline">\(x\)</span>. We could write</p>
+<p><span class="math display">\[x = x_0 \cdot x_1 \cdots x_{n-1},\]</span></p>
+<p>but we have a more compact notation for this as well. Using the symbol <span class="math inline">\(\prod\)</span> in analogy to <span class="math inline">\(\sum\)</span>, we can write</p>
+<p><span class="math display">\[x = \prod_{i=0}^{n-1} x_i.\]</span></p>
+<p>Read this as “the product of all <span class="math inline">\(x_i\)</span> for <span class="math inline">\(i=0,1,\cdots,n-1\)</span> is <span class="math inline">\(x\)</span>”.</p>
+<p>Unlike sums, python doesn’t have a native function to calculate products of elements in a sequence, but numpy has one called <code>np.prod</code>. Here’s an example. I’ll calculate the product of all integers between one and ten.</p>
+<p><span class="math display">\[x = \prod_{i=1}^{10} i = 1 \cdot 2 \cdot 3 \cdot 4 \cdot 5 \cdot 6 \cdot 7 \cdot 8 \cdot 9 \cdot 10 = 3628800.\]</span></p>
+<div class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>np.prod([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="48">
+<pre><code>3628800</code></pre>
+</div>
+</div>
+<p>Luckily, there aren’t any common products to remember. It’s just worth being familiar with the notation, since we’ll occasionally use it.</p>
+<p>Products don’t obey quite the same properties sums do, so you have to be careful. When in doubt, just write out the product the long way and make sure what you’re doing makes sense. For example, pulling a factor <span class="math inline">\(c\)</span> out of a product gives a factor of <span class="math inline">\(c^n\)</span>, not <span class="math inline">\(c\)</span>, since there are <span class="math inline">\(c\)</span> total products multiplied together,</p>
+<p><span class="math display">\[x = \prod_{i=0}^{n-1} cx_i = cx_0 \cdot cx_1 \cdots cx_{n-1} = c^n(x_0 \cdot x_1 \cdots x_{n-1}) = c^n \prod_{i=0}^{n-1} x_i.\]</span></p>
+<p>It’s worth noting (because we’ll use this fact), that we can turn products into sums by taking the log of the product,</p>
+<p><span class="math display">\[\log \bigg(\prod_{i=0}^{n-1} x_i \bigg) = \sum_{i=0}^{n-1} \log x_i.\]</span></p>
+<p>This follows from the rule <span class="math inline">\(\log(x \cdot y) = \log x + \log y\)</span>, which extends to arbitrarily many products too.</p>
+</section>
+<section id="greek-alphabet" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="greek-alphabet"><span class="header-section-number">1.6</span> Greek Alphabet</h2>
 <p>Like many other technical fields, machine learning makes heavy use of the Greek alphabet to represent variable names in mathematical equations. While not all Greek characters are used, certain ones are worth being aware of. Below is a <a href="https://howtosaymathematics.files.wordpress.com/2011/08/greek-alphabet2.pdf">table</a> of the Greek letters upper and lower case, as well as a guide on how to pronounce and write them. You don’t need to memorize all of these letters, but they will frequently show up in future lessons, so you may want to reference this table often until you’re comfortable with Greek letters.</p>
 <p><img src="resources/greek.png" width="550"></p>
 

@@ -627,112 +627,110 @@ y_0 (1 - y_0) &amp; -y_0 y_1 &amp; \cdots &amp; -y_0 y_{n-1} \\
 <p>Here are a few common gradient and Jacobian rules. Don’t worry too much about how to derive these. Don’t even try to memorize them. Just scan over them and remember to reference this table in future lessons.</p>
 <table class="table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 39%">
 </colgroup>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Gradient</th>
-<th>Scalar Derivative Equivalent</th>
-</tr>
-</thead>
 <tbody>
 <tr class="odd">
-<td>Constant Rule (scalar-valued)</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} (cy) = c\frac{dy}{d\mathbf{x}}\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx} (cy) = c\frac{dy}{dx}\)</span></td>
+<td style="text-align: left;"><strong>Name</strong></td>
+<td style="text-align: left;"><strong>Gradient</strong></td>
+<td style="text-align: left;"><strong>Scalar Derivative Equivalent</strong></td>
 </tr>
 <tr class="even">
-<td>Constant Rule (vector-valued)</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} (c\mathbf{y}) = c\frac{d\mathbf{y}}{d\mathbf{x}}\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx} (cy) = c\frac{dy}{dx}\)</span></td>
+<td style="text-align: left;">Constant Rule (scalar-valued)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} (cy) = c\frac{dy}{d\mathbf{x}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} (cy) = c\frac{dy}{dx}\)</span></td>
 </tr>
 <tr class="odd">
-<td>Addition Rule (scalar-valued)</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}}(u + v) = \frac{du}{d\mathbf{x}} + \frac{dv}{d\mathbf{x}}\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx}(u + v) = \frac{du}{dx} + \frac{dv}{dx}\)</span></td>
+<td style="text-align: left;">Constant Rule (vector-valued)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} (c\mathbf{y}) = c\frac{d\mathbf{y}}{d\mathbf{x}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} (cy) = c\frac{dy}{dx}\)</span></td>
 </tr>
 <tr class="even">
-<td>Addition Rule (vector-valued)</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}}(\mathbf{u} + \mathbf{v}) = \frac{d\mathbf{u}}{d\mathbf{x}} + \frac{d\mathbf{v}}{d\mathbf{x}}\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx}(u + v) = \frac{du}{dx} + \frac{dv}{dx}\)</span></td>
+<td style="text-align: left;">Addition Rule (scalar-valued)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}}(u + v) = \frac{du}{d\mathbf{x}} + \frac{dv}{d\mathbf{x}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}(u + v) = \frac{du}{dx} + \frac{dv}{dx}\)</span></td>
 </tr>
 <tr class="odd">
-<td>Product Rule (scalar-valued)</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}}(uv) = u\frac{dv}{d\mathbf{x}} + v\frac{du}{d\mathbf{x}}\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx}(uv) = u\frac{dv}{dx} + v\frac{du}{dx}\)</span></td>
+<td style="text-align: left;">Addition Rule (vector-valued)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}}(\mathbf{u} + \mathbf{v}) = \frac{d\mathbf{u}}{d\mathbf{x}} + \frac{d\mathbf{v}}{d\mathbf{x}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}(u + v) = \frac{du}{dx} + \frac{dv}{dx}\)</span></td>
 </tr>
 <tr class="even">
-<td>Product Rule (dot products)</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}}(\mathbf{u}^\top \mathbf{v}) = \mathbf{u}^\top \frac{d\mathbf{v}}{d\mathbf{x}} + \mathbf{v}^\top \frac{d\mathbf{u}}{d\mathbf{x}}\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx}(uv) = u\frac{dv}{dx} + v\frac{du}{dx}\)</span></td>
+<td style="text-align: left;">Product Rule (scalar-valued)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}}(uv) = u\frac{dv}{d\mathbf{x}} + v\frac{du}{d\mathbf{x}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}(uv) = u\frac{dv}{dx} + v\frac{du}{dx}\)</span></td>
 </tr>
 <tr class="odd">
-<td>Chain Rule (both scalar-valued)</td>
-<td><span class="math inline">\(\frac{dz}{d\mathbf{x}} = \frac{dz}{dy} \frac{dy}{d\mathbf{x}}\)</span></td>
-<td><span class="math inline">\(\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}\)</span></td>
+<td style="text-align: left;">Product Rule (dot products)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}}(\mathbf{u}^\top \mathbf{v}) = \mathbf{u}^\top \frac{d\mathbf{v}}{d\mathbf{x}} + \mathbf{v}^\top \frac{d\mathbf{u}}{d\mathbf{x}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}(uv) = u\frac{dv}{dx} + v\frac{du}{dx}\)</span></td>
 </tr>
 <tr class="even">
-<td>Chain Rule (scalar-valued, vector-valued)</td>
-<td><span class="math inline">\(\frac{dz}{d\mathbf{x}} = \big(\frac{dz}{d\mathbf{y}}\big)^\top \frac{d\mathbf{y}}{d\mathbf{x}}\)</span></td>
-<td><span class="math inline">\(\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}\)</span></td>
+<td style="text-align: left;">Chain Rule (both scalar-valued)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dz}{d\mathbf{x}} = \frac{dz}{dy} \frac{dy}{d\mathbf{x}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}\)</span></td>
 </tr>
 <tr class="odd">
-<td>Chain Rule (both vector-valued)</td>
-<td><span class="math inline">\(\frac{d\mathbf{z}}{d\mathbf{x}} = \frac{d\mathbf{z}}{d\mathbf{y}} \frac{d\mathbf{y}}{d\mathbf{x}}\)</span></td>
-<td><span class="math inline">\(\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}\)</span></td>
+<td style="text-align: left;">Chain Rule (scalar-valued, vector-valued)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dz}{d\mathbf{x}} = \big(\frac{dz}{d\mathbf{y}}\big)^\top \frac{d\mathbf{y}}{d\mathbf{x}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}\)</span></td>
 </tr>
 <tr class="even">
-<td>Constant Function (scalar-valued)</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} c = 0\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx} c = 0\)</span></td>
+<td style="text-align: left;">Chain Rule (both vector-valued)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d\mathbf{z}}{d\mathbf{x}} = \frac{d\mathbf{z}}{d\mathbf{y}} \frac{d\mathbf{y}}{d\mathbf{x}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}\)</span></td>
 </tr>
 <tr class="odd">
-<td>Constant Function (vector-valued)</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} \mathbf{c} = \mathbf{0}\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx} c = 0\)</span></td>
+<td style="text-align: left;">Constant Function (scalar-valued)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} c = 0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} c = 0\)</span></td>
 </tr>
 <tr class="even">
-<td>Squared Two-Norm</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} ||\mathbf{x}||_2^2 = \frac{d}{d\mathbf{x}} \mathbf{x}^\top \mathbf{x} = 2 \mathbf{x}\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx} x^2 = 2x\)</span></td>
+<td style="text-align: left;">Constant Function (vector-valued)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} \mathbf{c} = \mathbf{0}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} c = 0\)</span></td>
 </tr>
 <tr class="odd">
-<td>Linear Combination</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} \mathbf{c}^\top \mathbf{x} = \mathbf{c}\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx} cx = c\)</span></td>
+<td style="text-align: left;">Squared Two-Norm</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} ||\mathbf{x}||_2^2 = \frac{d}{d\mathbf{x}} \mathbf{x}^\top \mathbf{x} = 2 \mathbf{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} x^2 = 2x\)</span></td>
 </tr>
 <tr class="even">
-<td>Symmetric Quadratic Form</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} \mathbf{x}^\top \mathbf{S} \mathbf{x} = 2 \mathbf{S} \mathbf{x}\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx} sx^2 = 2sx\)</span></td>
+<td style="text-align: left;">Linear Combination</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} \mathbf{c}^\top \mathbf{x} = \mathbf{c}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} cx = c\)</span></td>
 </tr>
 <tr class="odd">
-<td>Affine Function</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} (\mathbf{A}\mathbf{x} + \mathbf{b}) = \mathbf{A}^\top\)</span> or <span class="math inline">\(\frac{d}{d\mathbf{x}} (\mathbf{x}^\top \mathbf{A} + \mathbf{b}) = \mathbf{A}\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx} (ax+b) = a\)</span></td>
+<td style="text-align: left;">Symmetric Quadratic Form</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} \mathbf{x}^\top \mathbf{S} \mathbf{x} = 2 \mathbf{S} \mathbf{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} sx^2 = 2sx\)</span></td>
 </tr>
 <tr class="even">
-<td>Squared Error Function</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} ||\mathbf{A}\mathbf{x}-\mathbf{b}||_2^2 = 2\mathbf{A}^\top (\mathbf{A}\mathbf{x}-\mathbf{b})\)</span></td>
-<td><span class="math inline">\(\frac{d}{dx} (ax-b)^2 = 2a(ax-b)\)</span></td>
+<td style="text-align: left;">Affine Function</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} (\mathbf{A}\mathbf{x} + \mathbf{b}) = \mathbf{A}^\top\)</span> or <span class="math inline">\(\frac{d}{d\mathbf{x}} (\mathbf{x}^\top \mathbf{A} + \mathbf{b}) = \mathbf{A}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} (ax+b) = a\)</span></td>
 </tr>
 <tr class="odd">
-<td>Cross Entropy Function</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} (-\mathbf{c}^\top \log \mathbf{x}) = -\frac{\mathbf{c}}{\mathbf{x}}\)</span> (element-wise division)</td>
-<td><span class="math inline">\(\frac{d}{dx} (-c \log x) = -\frac{c}{x}\)</span></td>
+<td style="text-align: left;">Squared Error Function</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} ||\mathbf{A}\mathbf{x}-\mathbf{b}||_2^2 = 2\mathbf{A}^\top (\mathbf{A}\mathbf{x}-\mathbf{b})\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} (ax-b)^2 = 2a(ax-b)\)</span></td>
 </tr>
 <tr class="even">
-<td>ReLU Function</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} \max(\mathbf{0}, \mathbf{x}) = \text{diag}(\mathbf{x} \geq \mathbf{0})\)</span> (element-wise <span class="math inline">\(\geq\)</span>)</td>
-<td><span class="math inline">\(\frac{d}{dx} \max(0, x) = \text{$1$ if $x \geq 0$ else $0$}\)</span></td>
+<td style="text-align: left;">Cross Entropy Function</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} (-\mathbf{c}^\top \log \mathbf{x}) = -\frac{\mathbf{c}}{\mathbf{x}}\)</span> (element-wise division)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} (-c \log x) = -\frac{c}{x}\)</span></td>
 </tr>
 <tr class="odd">
-<td>Softmax Function</td>
-<td><span class="math inline">\(\frac{d}{d\mathbf{x}} \text{softmax}(\mathbf{x}) = \text{diag}(\mathbf{y}) - \mathbf{y} \mathbf{y}^\top\)</span> where <span class="math inline">\(\mathbf{y} = \text{softmax}(\mathbf{x})\)</span></td>
-<td></td>
+<td style="text-align: left;">ReLU Function</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} \max(\mathbf{0}, \mathbf{x}) = \text{diag}(\mathbf{x} \geq \mathbf{0})\)</span> (element-wise <span class="math inline">\(\geq\)</span>)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} \max(0, x) = \text{$1$ if $x \geq 0$ else $0$}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Softmax Function</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} \text{softmax}(\mathbf{x}) = \text{diag}(\mathbf{y}) - \mathbf{y} \mathbf{y}^\top\)</span> where <span class="math inline">\(\mathbf{y} = \text{softmax}(\mathbf{x})\)</span></td>
+<td style="text-align: left;"></td>
 </tr>
 </tbody>
 </table>
