@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mathematics for Machine Learning - 4&nbsp; Basic Calculus</title>
+<title>Mathematics for Machine Learning - 3&nbsp; Basic Calculus</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,7 +94,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../notebooks/linear-systems.html" rel="next">
-<link href="../notebooks/vectorization.html" rel="prev">
+<link href="../notebooks/numerical-computing.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Calculus</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Calculus</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -174,37 +174,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/vectorization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arrays and Vectorization</span></a>
+  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Calculus</span></a>
+  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></a>
+  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
+  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
+  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a>
+  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a>
   </div>
 </li>
     </ul>
@@ -213,20 +208,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#infinitesimals" id="toc-infinitesimals" class="nav-link active" data-scroll-target="#infinitesimals"><span class="toc-section-number">4.1</span>  Infinitesimals</a></li>
-  <li><a href="#limits" id="toc-limits" class="nav-link" data-scroll-target="#limits"><span class="toc-section-number">4.2</span>  Limits</a></li>
-  <li><a href="#differentiation" id="toc-differentiation" class="nav-link" data-scroll-target="#differentiation"><span class="toc-section-number">4.3</span>  Differentiation</a>
+  <li><a href="#infinitesimals" id="toc-infinitesimals" class="nav-link active" data-scroll-target="#infinitesimals"><span class="toc-section-number">3.1</span>  Infinitesimals</a></li>
+  <li><a href="#limits" id="toc-limits" class="nav-link" data-scroll-target="#limits"><span class="toc-section-number">3.2</span>  Limits</a></li>
+  <li><a href="#differentiation" id="toc-differentiation" class="nav-link" data-scroll-target="#differentiation"><span class="toc-section-number">3.3</span>  Differentiation</a>
   <ul class="collapse">
-  <li><a href="#derivatives" id="toc-derivatives" class="nav-link" data-scroll-target="#derivatives"><span class="toc-section-number">4.3.1</span>  Derivatives</a></li>
-  <li><a href="#visualizing-derivatives" id="toc-visualizing-derivatives" class="nav-link" data-scroll-target="#visualizing-derivatives"><span class="toc-section-number">4.3.2</span>  Visualizing Derivatives</a></li>
-  <li><a href="#differentiation-rules" id="toc-differentiation-rules" class="nav-link" data-scroll-target="#differentiation-rules"><span class="toc-section-number">4.3.3</span>  Differentiation Rules</a></li>
-  <li><a href="#application-the-sigmoid-function" id="toc-application-the-sigmoid-function" class="nav-link" data-scroll-target="#application-the-sigmoid-function"><span class="toc-section-number">4.3.4</span>  Application: The Sigmoid Function</a></li>
+  <li><a href="#derivatives" id="toc-derivatives" class="nav-link" data-scroll-target="#derivatives"><span class="toc-section-number">3.3.1</span>  Derivatives</a></li>
+  <li><a href="#visualizing-derivatives" id="toc-visualizing-derivatives" class="nav-link" data-scroll-target="#visualizing-derivatives"><span class="toc-section-number">3.3.2</span>  Visualizing Derivatives</a></li>
+  <li><a href="#differentiation-rules" id="toc-differentiation-rules" class="nav-link" data-scroll-target="#differentiation-rules"><span class="toc-section-number">3.3.3</span>  Differentiation Rules</a></li>
+  <li><a href="#application-the-sigmoid-function" id="toc-application-the-sigmoid-function" class="nav-link" data-scroll-target="#application-the-sigmoid-function"><span class="toc-section-number">3.3.4</span>  Application: The Sigmoid Function</a></li>
   </ul></li>
-  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration"><span class="toc-section-number">4.4</span>  Integration</a>
+  <li><a href="#integration" id="toc-integration" class="nav-link" data-scroll-target="#integration"><span class="toc-section-number">3.4</span>  Integration</a>
   <ul class="collapse">
-  <li><a href="#summing-infinitesimals" id="toc-summing-infinitesimals" class="nav-link" data-scroll-target="#summing-infinitesimals"><span class="toc-section-number">4.4.1</span>  Summing Infinitesimals</a></li>
-  <li><a href="#area-under-the-curve" id="toc-area-under-the-curve" class="nav-link" data-scroll-target="#area-under-the-curve"><span class="toc-section-number">4.4.2</span>  Area Under The Curve</a></li>
-  <li><a href="#integration-rules" id="toc-integration-rules" class="nav-link" data-scroll-target="#integration-rules"><span class="toc-section-number">4.4.3</span>  Integration Rules</a></li>
+  <li><a href="#summing-infinitesimals" id="toc-summing-infinitesimals" class="nav-link" data-scroll-target="#summing-infinitesimals"><span class="toc-section-number">3.4.1</span>  Summing Infinitesimals</a></li>
+  <li><a href="#area-under-the-curve" id="toc-area-under-the-curve" class="nav-link" data-scroll-target="#area-under-the-curve"><span class="toc-section-number">3.4.2</span>  Area Under The Curve</a></li>
+  <li><a href="#integration-rules" id="toc-integration-rules" class="nav-link" data-scroll-target="#integration-rules"><span class="toc-section-number">3.4.3</span>  Integration Rules</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -239,7 +234,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Calculus</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Calculus</span></h1>
 </div>
 
 
@@ -275,8 +270,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> (<span class="dv">4</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="infinitesimals" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="infinitesimals"><span class="header-section-number">4.1</span> Infinitesimals</h2>
+<section id="infinitesimals" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="infinitesimals"><span class="header-section-number">3.1</span> Infinitesimals</h2>
 <p>Fundamental to the understanding of calculus is the idea of an “infinitely small” number, called an infinitesimal. An <strong>infinitesimal</strong> is a number that’s not 0 but so close to being 0 that you can’t really tell it isn’t 0. These small numbers are often written in math with letters like <span class="math inline">\(\varepsilon\)</span> or <span class="math inline">\(\delta\)</span>. Think of them as <em>very very</em> tiny numbers, so tiny their square is basically 0: <span class="math display">\[\varepsilon &gt; 0, \quad \varepsilon^2 \approx 0.\]</span></p>
 <p>But what does this even mean? Here it might be helpful to recall our discussion of floating point numbers. Recall that we can’t get infinite precision. In python’s double precision floating point we can only get down to about <span class="math inline">\(5 \cdot 10^{-324}\)</span>, or <code>5e-324</code>. If the square of a small number has a value <em>smaller</em> than about <code>5e-324</code> we’d literally get <code>0.0</code> as far as python is concerned.</p>
 <p>Just for fun let’s look at the really tiny number <span class="math inline">\(10^{-300}\)</span>, or <code>1e-300</code>. That’s 300 decimal places of zeros before the 1 even shows up. Python thinks <code>1e-300</code> is just fine. But what happens if we square it? We should in theory get <span class="math inline">\(10^{-600}\)</span>, or 600 decimal places of zeros followed by a 1. But as far as floating point is concerned, the square is zero.</p>
@@ -313,8 +308,8 @@ N^2 = inf</code></pre>
 <p><span class="math display">\[\delta = f(x+\varepsilon) - f(x) = (x+\varepsilon)^2 - x^2 \approx 2x\varepsilon.\]</span></p>
 <p>That is, if we change <span class="math inline">\(x\)</span> by a small amount <span class="math inline">\(\varepsilon\)</span>, then <span class="math inline">\(y\)</span> itself changes by a small amount <span class="math inline">\(\delta=2x\varepsilon\)</span>. Interestingly, how much <span class="math inline">\(y\)</span> changes actually depends on which <span class="math inline">\(x\)</span> we pick. If <span class="math inline">\(x=1\)</span> then <span class="math inline">\(y\)</span> changes by <span class="math inline">\(2\varepsilon\)</span>, just twice how much <span class="math inline">\(x\)</span> is nudged. If <span class="math inline">\(x=1000\)</span> though, then <span class="math inline">\(y\)</span> changes by <span class="math inline">\(2000\varepsilon\)</span>, a much bigger change, but still infinitesimal. After all, <span class="math inline">\(2000 \cdot 10^{-300} = 2 \cdot 10^{-297}\)</span> is still really, really small.</p>
 </section>
-<section id="limits" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="limits"><span class="header-section-number">4.2</span> Limits</h2>
+<section id="limits" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="limits"><span class="header-section-number">3.2</span> Limits</h2>
 <p>One application of infinitesimals is to look at the nearby behavior of a function around some point. Suppose we have some function <span class="math inline">\(y=f(x)\)</span>. We’d like to look at the nearby behavior of the function around some point <span class="math inline">\(x=x_0\)</span>. Pick a point <span class="math inline">\(x\)</span> that’s infinitesimally close to <span class="math inline">\(x_0\)</span>, so <span class="math inline">\(x \approx x_0\)</span>, yet <span class="math inline">\(x \neq x_0\)</span> exactly. If <span class="math inline">\(f(x) \approx L\)</span>, we say <span class="math inline">\(L\)</span> is the <strong>limit</strong> as <span class="math inline">\(x\)</span> approaches <span class="math inline">\(x_0\)</span>, and write</p>
 <p><span class="math display">\[L = \lim_{x \rightarrow x_0} f(x).\]</span></p>
 <p>More formally, say <span class="math inline">\(L\)</span> is the limit if the difference <span class="math inline">\(|f(x_0+\varepsilon)-L|\)</span> is infinitesimal whenever <span class="math inline">\(\varepsilon\)</span> is infinitesimal. Another notation for the limit is</p>
@@ -411,10 +406,10 @@ x = 148.41   y = 0.0</code></pre>
 <p>for some finite constant <span class="math inline">\(M &gt; 0\)</span>. For example, the function <span class="math inline">\(f(n) = n^3 + 2n^2 - 5n\)</span> is <span class="math inline">\(O(n^3)\)</span> since</p>
 <p><span class="math display">\[\lim_{n \rightarrow \infty} \bigg|\frac{n^3 + 2n^2 - 5n}{n^3}\bigg| =  \lim_{n \rightarrow \infty} \bigg(1 + \frac{2}{n} - \frac{5}{n^2}\bigg) = 1 \leq 1.\]</span></p>
 </section>
-<section id="differentiation" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="differentiation"><span class="header-section-number">4.3</span> Differentiation</h2>
-<section id="derivatives" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="derivatives"><span class="header-section-number">4.3.1</span> Derivatives</h3>
+<section id="differentiation" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="differentiation"><span class="header-section-number">3.3</span> Differentiation</h2>
+<section id="derivatives" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="derivatives"><span class="header-section-number">3.3.1</span> Derivatives</h3>
 <p>Let’s go back to our example before where we looked at first order perturbations to the function <span class="math inline">\(y=x^2\)</span>. When we talk about changing <span class="math inline">\(x\)</span> by a little bit and asking how <span class="math inline">\(y\)</span> changes we use a cleaner notation. Instead of writing <span class="math inline">\(x + \varepsilon\)</span>, we’d write <span class="math inline">\(x + dx\)</span>. Instead of writing <span class="math inline">\(y + \delta\)</span>, we’d write <span class="math inline">\(y + dy\)</span>. These values <span class="math inline">\(dx\)</span> and <span class="math inline">\(dy\)</span> are called <strong>differentials</strong>. Differentials are just like the infinitesimals I defined before, except the differential notation makes it clear what is a small change of what. Writing <span class="math inline">\(dx\)</span> means “a little bit of <span class="math inline">\(x\)</span>”. Writing <span class="math inline">\(dy\)</span> means “a little bit of <span class="math inline">\(y\)</span>”. This is where the term “differentiation” comes from.</p>
 <p>Suppose <span class="math inline">\(x\)</span> gets nudged a little bit to <span class="math inline">\(x+dx\)</span>. Then <span class="math inline">\(y=f(x)\)</span> gets nudged to <span class="math inline">\(y+dy=f(x+dx)\)</span>. In our running example, this is</p>
 <p><span class="math display">\[y + dy = f(x+dx) = (x + dx)^2 = x^2 + 2xdx + (dx)^2 \approx x^2 + 2xdx.\]</span></p>
@@ -467,8 +462,8 @@ dx = 0.0000000000000000      dy/dx = 0.000000    error = -2.000000</code></pre>
 <p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{2(x + dx) - 2x}{dx} = 2.\]</span></p>
 <p>Evidently, the second derivative of <span class="math inline">\(y=x^2\)</span> is just the <em>constant</em> function <span class="math inline">\(\frac{d^2 y}{dx^2}=2\)</span>. Higher-order derivatives can be defined as well by continuing to take derivatives of the second derivative, like third derivatives of fourth derivatives. These show up far less often though, so I won’t discuss them.</p>
 </section>
-<section id="visualizing-derivatives" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="visualizing-derivatives"><span class="header-section-number">4.3.2</span> Visualizing Derivatives</h3>
+<section id="visualizing-derivatives" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="visualizing-derivatives"><span class="header-section-number">3.3.2</span> Visualizing Derivatives</h3>
 <p>The first derivative <span class="math inline">\(\frac{dy}{dx}\)</span> has an interesting and useful geometric interpretation as the <strong>slope</strong> of the curve <span class="math inline">\(y=f(x)\)</span> at the point <span class="math inline">\(x\)</span>. To see this, imagine a right triangle with length <span class="math inline">\(dx\)</span> and height <span class="math inline">\(dy\)</span>. The slope, or “steepness”, of its hypotenuse is just the ratio height over width, i.e.&nbsp;</p>
 <p><span class="math display">\[\text{slope} = \frac{\text{rise}}{\text{run}} = \frac{dy}{dx}.\]</span></p>
 <div class="cell" data-execution_count="9">
@@ -548,8 +543,8 @@ dx = 0.0000000000000000      dy/dx = 0.000000    error = -2.000000</code></pre>
 </div>
 </div>
 </section>
-<section id="differentiation-rules" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="differentiation-rules"><span class="header-section-number">4.3.3</span> Differentiation Rules</h3>
+<section id="differentiation-rules" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="differentiation-rules"><span class="header-section-number">3.3.3</span> Differentiation Rules</h3>
 <p>As we’ve seen, derivatives are also functions in and of themselves, mapping inputs to outputs via <span class="math inline">\(\frac{dy}{dx} = \frac{d}{dx}f(x)\)</span>. For this reason, several rules exist relating derivatives to their original functions.</p>
 <p>Here are the derivatives of some common functions that come up:</p>
 <table class="table">
@@ -685,8 +680,8 @@ v &amp;= i(u), \\
 <p><span class="math display">\[\frac{dv}{dx} = \frac{dv}{du} \frac{du}{dz} \frac{dz}{dy} \frac{dy}{dx}.\]</span></p>
 <p>This arbitrary <em>chaining</em> is what allows us to differentiate complex neural networks, where each <em>layer</em> of the network is just a function in this kind of chain.</p>
 </section>
-<section id="application-the-sigmoid-function" class="level3" data-number="4.3.4">
-<h3 data-number="4.3.4" class="anchored" data-anchor-id="application-the-sigmoid-function"><span class="header-section-number">4.3.4</span> Application: The Sigmoid Function</h3>
+<section id="application-the-sigmoid-function" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="application-the-sigmoid-function"><span class="header-section-number">3.3.4</span> Application: The Sigmoid Function</h3>
 <p>To illustrate how to calculate derivatives I’ll use a relevant example to machine learning, the sigmoid function. Recall the sigmoid function <span class="math inline">\(y=\sigma(x)\)</span> is defined by</p>
 <p><span class="math display">\[y = \frac{1}{1 + e^{-x}}.\]</span></p>
 <p>Its shape looks like an S (hence the name), going from <span class="math inline">\(y=0\)</span> at <span class="math inline">\(x=-\infty\)</span> to <span class="math inline">\(y=1\)</span> at <span class="math inline">\(x=\infty\)</span>.</p>
@@ -743,11 +738,11 @@ d2dx2 = -exp(-x)/(1 + exp(-x))**2 + 2*exp(-2*x)/(1 + exp(-x))**3</code></pre>
 </div>
 </section>
 </section>
-<section id="integration" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="integration"><span class="header-section-number">4.4</span> Integration</h2>
+<section id="integration" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="integration"><span class="header-section-number">3.4</span> Integration</h2>
 <p>Since integration is literally half of the subject of calculus, I owe it to at least briefly mention the topic. This section is only really applicable to the other topics in this book if you want to better understand probability distributions, something I’ll cover in detail in the next lesson. If you don’t mind thinking of probability distributions as histograms with infinitely many samples, you’re free to skip this section and move ahead.</p>
-<section id="summing-infinitesimals" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="summing-infinitesimals"><span class="header-section-number">4.4.1</span> Summing Infinitesimals</h3>
+<section id="summing-infinitesimals" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="summing-infinitesimals"><span class="header-section-number">3.4.1</span> Summing Infinitesimals</h3>
 <p>The other half of calculus is essentially about summing up small things to get big things. By small things of course I mean infinitesimals. Suppose we have a bunch of infinitesimals <span class="math inline">\(\varepsilon_0, \varepsilon_1, \cdots, \varepsilon_{n-1}\)</span>. We can add them together to get a new infinitesimal <span class="math inline">\(\varepsilon_0 + \varepsilon_1 + \cdots + \varepsilon_{n-1}\)</span>.</p>
 <p>Suppose we want to add up the same infinitesimal <span class="math inline">\(\varepsilon\)</span> some number <span class="math inline">\(N\)</span> times, <span class="math display">\[\underbrace{\varepsilon + \varepsilon + \cdots + \varepsilon}_{\text{N times}} = N\varepsilon.\]</span></p>
 <p>If <span class="math inline">\(N\)</span> is any reasonably sized finite number, say a number like <span class="math inline">\(N=1000\)</span>, then the product <span class="math inline">\(N\varepsilon\)</span> will again be infinitesimal, since <span class="math inline">\((N\varepsilon)^2 \approx 0\)</span>. But if we make <span class="math inline">\(N\)</span> <em>infinitely large</em>, then <span class="math inline">\(N\varepsilon\)</span> will be a finite number.</p>
@@ -775,8 +770,8 @@ d2dx2 = -exp(-x)/(1 + exp(-x))**2 + 2*exp(-2*x)/(1 + exp(-x))**3</code></pre>
 </div>
 <p>Thus, if we add up only a <em>finite</em> number of infinitesimals we’ll again get an <em>infinitesimal</em>. But, if we add up an <em>infinitely large</em> number of infinitesimals we’ll get something <em>finite</em>. This is the idea behind integration.</p>
 </section>
-<section id="area-under-the-curve" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="area-under-the-curve"><span class="header-section-number">4.4.2</span> Area Under The Curve</h3>
+<section id="area-under-the-curve" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="area-under-the-curve"><span class="header-section-number">3.4.2</span> Area Under The Curve</h3>
 <p>Let’s do an example. Suppose we’re interested in calculating the area under the curve <span class="math inline">\(y=\sqrt{x}\)</span> between two points, say <span class="math inline">\(x=0\)</span> and <span class="math inline">\(x=10\)</span>. How would we go about this?</p>
 <div class="cell" data-execution_count="17">
 <details>
@@ -870,8 +865,8 @@ N = 100000   dx =   0.0001   A = 21.082009</code></pre>
 <p><span class="math display">\[A = \int_0^{10} \sqrt{x} dx.\]</span></p>
 <p>Of course, this fancy notation doesn’t actually tell us anything new. We’re still just summing up the areas of a bunch of rectangles.</p>
 </section>
-<section id="integration-rules" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="integration-rules"><span class="header-section-number">4.4.3</span> Integration Rules</h3>
+<section id="integration-rules" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="integration-rules"><span class="header-section-number">3.4.3</span> Integration Rules</h3>
 <p>It’s not at all clear from this definition how we’d get the <em>exact</em> answer <span class="math inline">\(A=\frac{20}{3}\sqrt{10}\)</span> shown above. We can get to it approximately by summing rectangle areas, but if we want to get the exact value we’ll need a few integral rules.</p>
 <p>Before doing so I need to talk about the <strong>indefinite integral</strong>, sometimes called the antiderivative. If <span class="math inline">\(f(x)\)</span> is some function, then its indefinite integral is some other function <span class="math inline">\(F(x)\)</span> whose derivative is <span class="math inline">\(f(x)\)</span>, <span class="math display">\[f(x) = \frac{d}{dx} F(x).\]</span></p>
 <p>Typically the indefinite integral is written as an integral, but without limits of integration shown,</p>
@@ -1154,13 +1149,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
-      <a href="../notebooks/vectorization.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arrays and Vectorization</span></span>
+      <a href="../notebooks/numerical-computing.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Numerical Computation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notebooks/linear-systems.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

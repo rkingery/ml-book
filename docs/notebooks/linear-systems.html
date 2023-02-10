@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mathematics for Machine Learning - 5&nbsp; Systems of Linear Equations</title>
+<title>Mathematics for Machine Learning - 4&nbsp; Systems of Linear Equations</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -174,37 +174,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/vectorization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arrays and Vectorization</span></a>
+  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Calculus</span></a>
+  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></a>
+  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
+  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
+  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a>
+  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a>
   </div>
 </li>
     </ul>
@@ -213,18 +208,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#linear-systems" id="toc-linear-systems" class="nav-link active" data-scroll-target="#linear-systems"><span class="toc-section-number">5.1</span>  Linear Systems</a></li>
-  <li><a href="#matrix-vector-notation" id="toc-matrix-vector-notation" class="nav-link" data-scroll-target="#matrix-vector-notation"><span class="toc-section-number">5.2</span>  Matrix-Vector Notation</a></li>
-  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication"><span class="toc-section-number">5.3</span>  Matrix Multiplication</a>
+  <li><a href="#linear-systems" id="toc-linear-systems" class="nav-link active" data-scroll-target="#linear-systems"><span class="toc-section-number">4.1</span>  Linear Systems</a></li>
+  <li><a href="#matrix-vector-notation" id="toc-matrix-vector-notation" class="nav-link" data-scroll-target="#matrix-vector-notation"><span class="toc-section-number">4.2</span>  Matrix-Vector Notation</a></li>
+  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication"><span class="toc-section-number">4.3</span>  Matrix Multiplication</a>
   <ul class="collapse">
-  <li><a href="#matrix-multiplication-algorithm" id="toc-matrix-multiplication-algorithm" class="nav-link" data-scroll-target="#matrix-multiplication-algorithm"><span class="toc-section-number">5.3.1</span>  Matrix Multiplication Algorithm</a></li>
-  <li><a href="#multiplying-multiple-matrices" id="toc-multiplying-multiple-matrices" class="nav-link" data-scroll-target="#multiplying-multiple-matrices"><span class="toc-section-number">5.3.2</span>  Multiplying Multiple Matrices</a></li>
-  <li><a href="#matrix-multiplication-vs-element-wise-multiplication" id="toc-matrix-multiplication-vs-element-wise-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication-vs-element-wise-multiplication"><span class="toc-section-number">5.3.3</span>  Matrix Multiplication vs Element-Wise Multiplication</a></li>
+  <li><a href="#matrix-multiplication-algorithm" id="toc-matrix-multiplication-algorithm" class="nav-link" data-scroll-target="#matrix-multiplication-algorithm"><span class="toc-section-number">4.3.1</span>  Matrix Multiplication Algorithm</a></li>
+  <li><a href="#multiplying-multiple-matrices" id="toc-multiplying-multiple-matrices" class="nav-link" data-scroll-target="#multiplying-multiple-matrices"><span class="toc-section-number">4.3.2</span>  Multiplying Multiple Matrices</a></li>
+  <li><a href="#matrix-multiplication-vs-element-wise-multiplication" id="toc-matrix-multiplication-vs-element-wise-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication-vs-element-wise-multiplication"><span class="toc-section-number">4.3.3</span>  Matrix Multiplication vs Element-Wise Multiplication</a></li>
   </ul></li>
-  <li><a href="#solving-linear-systems" id="toc-solving-linear-systems" class="nav-link" data-scroll-target="#solving-linear-systems"><span class="toc-section-number">5.4</span>  Solving Linear Systems</a>
+  <li><a href="#solving-linear-systems" id="toc-solving-linear-systems" class="nav-link" data-scroll-target="#solving-linear-systems"><span class="toc-section-number">4.4</span>  Solving Linear Systems</a>
   <ul class="collapse">
-  <li><a href="#square-systems" id="toc-square-systems" class="nav-link" data-scroll-target="#square-systems"><span class="toc-section-number">5.4.1</span>  Square Systems</a></li>
-  <li><a href="#rectangular-systems" id="toc-rectangular-systems" class="nav-link" data-scroll-target="#rectangular-systems"><span class="toc-section-number">5.4.2</span>  Rectangular Systems</a></li>
+  <li><a href="#square-systems" id="toc-square-systems" class="nav-link" data-scroll-target="#square-systems"><span class="toc-section-number">4.4.1</span>  Square Systems</a></li>
+  <li><a href="#rectangular-systems" id="toc-rectangular-systems" class="nav-link" data-scroll-target="#rectangular-systems"><span class="toc-section-number">4.4.2</span>  Rectangular Systems</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -237,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></h1>
 </div>
 
 
@@ -259,8 +254,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="linear-systems" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="linear-systems"><span class="header-section-number">5.1</span> Linear Systems</h2>
+<section id="linear-systems" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="linear-systems"><span class="header-section-number">4.1</span> Linear Systems</h2>
 <p>You’re certainly familiar by now with solving a simple linear equation. Suppose you need to solve the linear equation <span class="math inline">\(ax=b\)</span> for <span class="math inline">\(x\)</span>. Provided <span class="math inline">\(a \neq 0\)</span>, you can divide both sides by <span class="math inline">\(a\)</span> to get</p>
 <p><span class="math display">\[x = \frac{b}{a} = a^{-1} b.\]</span></p>
 <p>Suppose now you need to solve not just one, but 2 linear equations with 1 unknown <span class="math inline">\(x\)</span>,</p>
@@ -450,8 +445,8 @@ a_{m-1,0}x_0 &amp; + &amp; a_{m-1,1}x_1 &amp; + &amp; \cdots &amp; + &amp; a_{m-
 </ul>
 <p>Graphically, a unique solution means that the <span class="math inline">\(n\)</span> <em>hyperplanes</em> defined by the <span class="math inline">\(n\)</span> linear equations all intersect at a single point <span class="math inline">\((x_0, x_1, \cdots, x_n)\)</span> in <span class="math inline">\(\mathbb{R}^n\)</span>. Think of a hyperplane as an <span class="math inline">\(n\)</span>-dimensional generalization of a plane. If any of two hyperplanes are parallel in <span class="math inline">\(\mathbb{R}^n\)</span>, there will be no solution.</p>
 </section>
-<section id="matrix-vector-notation" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="matrix-vector-notation"><span class="header-section-number">5.2</span> Matrix-Vector Notation</h2>
+<section id="matrix-vector-notation" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="matrix-vector-notation"><span class="header-section-number">4.2</span> Matrix-Vector Notation</h2>
 <p>These systems of linear equations are incredibly tedious to write out and analyze as is for all but the simplest cases of like two or three equations. There’s a cleaner notation for working with these things. Here’s what we can do. We have 3 separate types of objects showing up in these equations:</p>
 <ul>
 <li>The <span class="math inline">\(m \cdot n\)</span> coefficients <span class="math inline">\(a_{0,0}, \ a_{0,1}, \ \cdots, \ a_{m-1,n-1}\)</span>.</li>
@@ -603,8 +598,8 @@ x_0 \mathbf{a}_0 + x_1 \mathbf{a}_1 + \cdots x_{n-1} \mathbf{a}_{n-1}.
 \end{pmatrix} = 1 \cdot \binom{1}{4} + 1 \cdot \binom{2}{5} + 1 \cdot \binom{3}{6} = \binom{1+2+3}{4+5+6} = \binom{6}{15}.
 \]</span></p>
 </section>
-<section id="matrix-multiplication" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="matrix-multiplication"><span class="header-section-number">5.3</span> Matrix Multiplication</h2>
+<section id="matrix-multiplication" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="matrix-multiplication"><span class="header-section-number">4.3</span> Matrix Multiplication</h2>
 <p>While I’m on the topic, I’ll go ahead and define <strong>matrix multiplication</strong> for two matrices <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> as well. If <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span> and <span class="math inline">\(\mathbf{B}\)</span> is <span class="math inline">\(n \times p\)</span>, define the matrix product <span class="math inline">\(\mathbf{C}=\mathbf{A}\mathbf{B}\)</span> as the <span class="math inline">\(m \times p\)</span> matrix <span class="math inline">\(\mathbf{C}\)</span> whose elements are given by</p>
 <p><span class="math display">\[C_{i,j} = \sum_{k=0}^{n-1} A_{i,k} B_{k,j} = A_{i,0} B_{0,j} + A_{i,1} B_{1,j} + \cdots + A_{i,n-1} B_{n-1,j}.\]</span></p>
 <p>Matrix multiplication is always expressed symbolically by directly concatenating the two matrix symbols next to each other like <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>. We’d never use a multiplication symbol between them since those are often used to represent other kinds of multiplication schemes like element-wise multiplication or convolutions. Further, matrix multiplication is only defined when the numbers of <em>columns</em> in <span class="math inline">\(\mathbf{A}\)</span> equals the number of <em>rows</em> of <span class="math inline">\(\mathbf{B}\)</span>. We say matrices satisfying this condition are <strong>compatible</strong>. If they can’t be multiplied, they’re called <strong>incompatible</strong>.</p>
@@ -649,8 +644,8 @@ x_0 \mathbf{a}_0 + x_1 \mathbf{a}_1 + \cdots x_{n-1} \mathbf{a}_{n-1}.
 \end{pmatrix}.
 \end{align*}\]</span></p>
 <p>Then the bunch of linear systems we’re trying to solve is just the matrix product <span class="math inline">\(\mathbf{A}\mathbf{X}=\mathbf{B}\)</span>. Each column <span class="math inline">\(\mathbf{A}\mathbf{x}_j=\mathbf{b}_j\)</span> can again be thought of as a linear combination of the columns of <span class="math inline">\(\mathbf{A}\)</span>, but with each column weighted by its own vector <span class="math inline">\(\mathbf{x}_j\)</span>.</p>
-<section id="matrix-multiplication-algorithm" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="matrix-multiplication-algorithm"><span class="header-section-number">5.3.1</span> Matrix Multiplication Algorithm</h3>
+<section id="matrix-multiplication-algorithm" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="matrix-multiplication-algorithm"><span class="header-section-number">4.3.1</span> Matrix Multiplication Algorithm</h3>
 <p>Matrix multiplication is perhaps the single most important mathematical operation in machine learning. It’s so important I’m going to write a function to code it from scratch before showing how to do it in numpy. I’ll also analyze the speed of the algorithm in FLOPS and the memory in terms of word size. Algorithmically, all matrix multiplication is doing is looping over every single element of <span class="math inline">\(\mathbf{C}\)</span> and performing the sum-product calculation above for each <span class="math inline">\(C_{i,j}\)</span>. Here’s a function <code>matmul</code> that takes in two numpy arrays <code>A</code> and <code>B</code> and multiplies them, returning the product <code>C</code> if the dimensions are compatible.</p>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matmul(A, B):</span>
@@ -695,8 +690,8 @@ C = AB =
 </div>
 </div>
 </section>
-<section id="multiplying-multiple-matrices" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="multiplying-multiple-matrices"><span class="header-section-number">5.3.2</span> Multiplying Multiple Matrices</h3>
+<section id="multiplying-multiple-matrices" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="multiplying-multiple-matrices"><span class="header-section-number">4.3.2</span> Multiplying Multiple Matrices</h3>
 <p>What about multiplying three or more matrices together. I already said matrix multiplication is associative, so we can multiply any two at a time we like and get the same answer. However, there are often computational advantages to multiplying them together in some particular sequence. For example, suppose we wanted to multiply <span class="math inline">\(\mathbf{D} = \mathbf{A}\mathbf{B}\mathbf{C}\)</span>. Suppose, <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, <span class="math inline">\(\mathbf{B}\)</span> is <span class="math inline">\(n \times p\)</span>, and <span class="math inline">\(\mathbf{C}\)</span> is <span class="math inline">\(p \times q\)</span>. No matter which order we do it, the output <span class="math inline">\(\mathbf{D}\)</span> will have size <span class="math inline">\(m \times q\)</span>. But there are two ways we could do this multiplication.</p>
 <ol type="1">
 <li><p><span class="math inline">\(\mathbf{D} = \mathbf{A}(\mathbf{B}\mathbf{C})\)</span>: In this case, the <span class="math inline">\(\mathbf{E}=\mathbf{B}\mathbf{C}\)</span> computation requires <span class="math inline">\(nq(2p-1)\)</span> FLOPS, and then the <span class="math inline">\(\mathbf{A}\mathbf{E}\)</span> computation requires <span class="math inline">\(mq(2n-1)\)</span> FLOPS. The total is thus the sum of these two, i.e. <span class="math display">\[nq(2p-1) + mq(2n-1) = O(npq+mnq) \ \ \text{FLOPS}.\]</span></p></li>
@@ -745,8 +740,8 @@ C = AB =
 </div>
 </div>
 </section>
-<section id="matrix-multiplication-vs-element-wise-multiplication" class="level3" data-number="5.3.3">
-<h3 data-number="5.3.3" class="anchored" data-anchor-id="matrix-multiplication-vs-element-wise-multiplication"><span class="header-section-number">5.3.3</span> Matrix Multiplication vs Element-Wise Multiplication</h3>
+<section id="matrix-multiplication-vs-element-wise-multiplication" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="matrix-multiplication-vs-element-wise-multiplication"><span class="header-section-number">4.3.3</span> Matrix Multiplication vs Element-Wise Multiplication</h3>
 <p>We’ve already seen a different way we can multiply two matrices (or any array), namely element-wise multiplication. For matrices, element-wise multiplication is sometimes called the <strong>Hadamard product</strong>. I’ll denote element-wise multiplication as <span class="math inline">\(\mathbf{A} \circ \mathbf{B}\)</span>. It’s only defined when the shapes of <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> are <em>equal</em> (or can be broadcasted to be equal).</p>
 <p>It’s important to mind the difference between matrix multiplication and element-wise multiplication of matrices. In general <span class="math inline">\(\mathbf{A} \circ \mathbf{B} \neq \mathbf{A} \mathbf{B}\)</span>. They’re defined completely differently,</p>
 <p><span class="math display">\[
@@ -770,10 +765,10 @@ AB =
 </div>
 </section>
 </section>
-<section id="solving-linear-systems" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="solving-linear-systems"><span class="header-section-number">5.4</span> Solving Linear Systems</h2>
-<section id="square-systems" class="level3" data-number="5.4.1">
-<h3 data-number="5.4.1" class="anchored" data-anchor-id="square-systems"><span class="header-section-number">5.4.1</span> Square Systems</h3>
+<section id="solving-linear-systems" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="solving-linear-systems"><span class="header-section-number">4.4</span> Solving Linear Systems</h2>
+<section id="square-systems" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="square-systems"><span class="header-section-number">4.4.1</span> Square Systems</h3>
 <p>We can use the idea of matrix multiplication to try to solve a linear system of equations. Suppose we have a system of <span class="math inline">\(n\)</span> linear equations with <span class="math inline">\(n\)</span> unknowns (it’s important <span class="math inline">\(m=n\)</span> here),</p>
 <p><span class="math display">\[
 \begin{array}{c&lt;{x_0} c c&lt;{x_1} c c&lt;{\cdots} c c&lt;{x_{n-1}} c l}
@@ -884,8 +879,8 @@ x =
 </div>
 </div>
 </section>
-<section id="rectangular-systems" class="level3" data-number="5.4.2">
-<h3 data-number="5.4.2" class="anchored" data-anchor-id="rectangular-systems"><span class="header-section-number">5.4.2</span> Rectangular Systems</h3>
+<section id="rectangular-systems" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="rectangular-systems"><span class="header-section-number">4.4.2</span> Rectangular Systems</h3>
 <p>What about when <span class="math inline">\(m \neq n\)</span>? Things become more interesting then. If <span class="math inline">\(m &lt; n\)</span> the linear system is under-determined, and will have infinitely many solutions. In this case, there are infinitely many ways to “invert” <span class="math inline">\(\mathbf{A}\)</span>. We just need to find any one of them that will work. If <span class="math inline">\(m &gt; n\)</span> the linear system is over-determined, and will have no exact solution. We can however find an <em>approximate</em> solution by looking for the <span class="math inline">\(\mathbf{x}\)</span> that most <em>nearly</em> solves the linear system. In both cases, a generalization of the inverse exists, called the <strong>pseudoinverse</strong>.</p>
 <p>Here’s how to find out what the pseudoinverse should be. Let’s define a matrix similar to <span class="math inline">\(\mathbf{A}\)</span>, but with its rows and columns swapped, called the <strong>transpose</strong> of <span class="math inline">\(\mathbf{A}\)</span>. The transpose of <span class="math inline">\(\mathbf{A}\)</span>, denoted by the symbol <span class="math inline">\(\mathbf{A}^\top\)</span>, is defined by the relationship <span class="math inline">\(A_{i,j}^\top = A_{j,i}\)</span>. For example, if <span class="math inline">\(\mathbf{A}\)</span> is the <span class="math inline">\(3 \times 2\)</span> matrix</p>
 <p><span class="math display">\[
@@ -1102,12 +1097,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
       <a href="../notebooks/basic-calculus.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Calculus</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Calculus</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notebooks/vector-spaces.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -14,7 +14,6 @@ book:
     - index.qmd
     - notebooks/basic-math.ipynb
     - notebooks/numerical-computing.ipynb
-    - notebooks/vectorization.ipynb
     - notebooks/basic-calculus.ipynb
     - notebooks/linear-systems.ipynb
     - notebooks/vector-spaces.ipynb

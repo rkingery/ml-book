@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mathematics for Machine Learning - 6&nbsp; Vector Spaces</title>
+<title>Mathematics for Machine Learning - 5&nbsp; Vector Spaces</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -174,37 +174,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/vectorization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arrays and Vectorization</span></a>
+  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Calculus</span></a>
+  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></a>
+  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
+  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
+  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a>
+  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a>
   </div>
 </li>
     </ul>
@@ -213,9 +208,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#geometry-of-vectors" id="toc-geometry-of-vectors" class="nav-link active" data-scroll-target="#geometry-of-vectors"><span class="toc-section-number">6.0.1</span>  Geometry of Vectors</a></li>
-  <li><a href="#linear-maps" id="toc-linear-maps" class="nav-link" data-scroll-target="#linear-maps"><span class="toc-section-number">6.0.2</span>  Linear Maps</a></li>
-  <li><a href="#n-dimensional-vector-spaces" id="toc-n-dimensional-vector-spaces" class="nav-link" data-scroll-target="#n-dimensional-vector-spaces"><span class="toc-section-number">6.0.3</span>  <span class="math inline">\(n\)</span>-dimensional Vector Spaces</a></li>
+  <li><a href="#geometry-of-vectors" id="toc-geometry-of-vectors" class="nav-link active" data-scroll-target="#geometry-of-vectors"><span class="toc-section-number">5.0.1</span>  Geometry of Vectors</a></li>
+  <li><a href="#linear-maps" id="toc-linear-maps" class="nav-link" data-scroll-target="#linear-maps"><span class="toc-section-number">5.0.2</span>  Linear Maps</a></li>
+  <li><a href="#n-dimensional-vector-spaces" id="toc-n-dimensional-vector-spaces" class="nav-link" data-scroll-target="#n-dimensional-vector-spaces"><span class="toc-section-number">5.0.3</span>  <span class="math inline">\(n\)</span>-dimensional Vector Spaces</a></li>
   </ul>
 </nav>
 </nav>
@@ -227,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces</span></h1>
 </div>
 
 
@@ -249,11 +244,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="geometry-of-vectors" class="level3" data-number="6.0.1">
-<h3 data-number="6.0.1" class="anchored" data-anchor-id="geometry-of-vectors"><span class="header-section-number">6.0.1</span> Geometry of Vectors</h3>
+<section id="geometry-of-vectors" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="geometry-of-vectors"><span class="header-section-number">5.0.1</span> Geometry of Vectors</h3>
 <p>I’ve introduced matrices and vectors so far kind of organically as the natural way to write and solve systems of linear equations. They’re good for a lot more than solving linear systems, however. For one thing, they possess important geometric properties. I’m now going to re-define the concepts covered so far, but in more geometric terms.</p>
-<section id="visualizing-vectors" class="level4" data-number="6.0.1.1">
-<h4 data-number="6.0.1.1" class="anchored" data-anchor-id="visualizing-vectors"><span class="header-section-number">6.0.1.1</span> Visualizing Vectors</h4>
+<section id="visualizing-vectors" class="level4" data-number="5.0.1.1">
+<h4 data-number="5.0.1.1" class="anchored" data-anchor-id="visualizing-vectors"><span class="header-section-number">5.0.1.1</span> Visualizing Vectors</h4>
 <p>Let’s go back to the simple 2-dimensional case. Imagine you have a point in the xy-plane, call it <span class="math inline">\((x,y)\)</span>. Now, we can think of this as a single point, but we can also imagine it differently. Suppose there was an arrow pointing from the origin <span class="math inline">\((0,0)\)</span> to the point <span class="math inline">\((x,y)\)</span>. For example, if the point was <span class="math inline">\((1,1)\)</span>, this arrow might look like this.</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>point <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>])</span>
@@ -293,8 +288,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{align*}\]</span></p>
 <p>Be careful when working with vectors in code to make sure you’re using the right shapes for the right situation or you’ll get shape mismatch errors (or worse a silent bug).</p>
 </section>
-<section id="vector-operations" class="level4" data-number="6.0.1.2">
-<h4 data-number="6.0.1.2" class="anchored" data-anchor-id="vector-operations"><span class="header-section-number">6.0.1.2</span> Vector Operations</h4>
+<section id="vector-operations" class="level4" data-number="5.0.1.2">
+<h4 data-number="5.0.1.2" class="anchored" data-anchor-id="vector-operations"><span class="header-section-number">5.0.1.2</span> Vector Operations</h4>
 <p>The magnitude, or length, of <span class="math inline">\(\mathbf{v}\)</span> is typically denoted by the symbol <span class="math inline">\(||\mathbf{v}||\)</span>, called a <strong>norm</strong>,</p>
 <p><span class="math display">\[||\mathbf{v}|| = \sqrt{v_x^2 + v_y^2}.\]</span></p>
 <p>In the above example with <span class="math inline">\(\mathbf{v}=(1,1)\)</span>, its norm is <span class="math inline">\(||\mathbf{v}||=\sqrt{1+1}=\sqrt{2} \approx 1.414\)</span>.</p>
@@ -384,8 +379,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="the-dot-product" class="level4" data-number="6.0.1.3">
-<h4 data-number="6.0.1.3" class="anchored" data-anchor-id="the-dot-product"><span class="header-section-number">6.0.1.3</span> The Dot Product</h4>
+<section id="the-dot-product" class="level4" data-number="5.0.1.3">
+<h4 data-number="5.0.1.3" class="anchored" data-anchor-id="the-dot-product"><span class="header-section-number">5.0.1.3</span> The Dot Product</h4>
 <p>It turns out we can understand both the lengths and angles of vectors in terms of a single operation called the <strong>dot product</strong>, also called the inner or scalar product. The dot product is a kind of multiplication between two vectors that returns a scalar. If <span class="math inline">\(\mathbf{v}=(v_x,v_y)\)</span> and <span class="math inline">\(\mathbf{w}=(w_x,w_y)\)</span> are two vectors in the plane, their dot product is defined as</p>
 <p><span class="math display">\[\mathbf{v} \cdot \mathbf{w} = v_x w_x + v_y w_y.\]</span></p>
 <p>That is, the dot product is just the sum of the element-wise products of the two vectors.</p>
@@ -450,8 +445,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="projections" class="level4" data-number="6.0.1.4">
-<h4 data-number="6.0.1.4" class="anchored" data-anchor-id="projections"><span class="header-section-number">6.0.1.4</span> Projections</h4>
+<section id="projections" class="level4" data-number="5.0.1.4">
+<h4 data-number="5.0.1.4" class="anchored" data-anchor-id="projections"><span class="header-section-number">5.0.1.4</span> Projections</h4>
 <p>Let <span class="math inline">\(\mathbf{e}_x=(1,0)\)</span>. It’s the unit vector pointing along the positive x-axis. Notice the dot product between <span class="math inline">\(\mathbf{v}=(v_x, v_y)\)</span> and <span class="math inline">\(\mathbf{e}_x\)</span> is just</p>
 <p><span class="math display">\[\mathbf{v} \cdot \mathbf{e}_x = v_x \cdot 1 + v_y \cdot 0 = v_x.\]</span></p>
 <p>Evidently the dot product <span class="math inline">\(\mathbf{v} \cdot \mathbf{e}_x\)</span> “picks” out the x-component of <span class="math inline">\(\mathbf{v}\)</span>, namely <span class="math inline">\(v_x\)</span>. The vector <span class="math inline">\(v_x \mathbf{e}_x = (v_x,0)\)</span> gotten by rescaling <span class="math inline">\(\mathbf{e}_x\)</span> by <span class="math inline">\(v_x\)</span> is called the <strong>projection</strong> of <span class="math inline">\(\mathbf{v}\)</span> onto the x-axis. It’s the vector you’d get by dropping <span class="math inline">\(\mathbf{v}\)</span> perpendicular to the x-axis.</p>
@@ -480,8 +475,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="linear-independence" class="level4" data-number="6.0.1.5">
-<h4 data-number="6.0.1.5" class="anchored" data-anchor-id="linear-independence"><span class="header-section-number">6.0.1.5</span> Linear Independence</h4>
+<section id="linear-independence" class="level4" data-number="5.0.1.5">
+<h4 data-number="5.0.1.5" class="anchored" data-anchor-id="linear-independence"><span class="header-section-number">5.0.1.5</span> Linear Independence</h4>
 <p>I just showed we can decompose any vector <span class="math inline">\(\mathbf{v} \in \mathbb{R}^2\)</span> into its projections <span class="math inline">\(\mathbf{v} = v_x \mathbf{e}_x + v_y \mathbf{e}_y\)</span>. The fact we can do this is because the unit vectors <span class="math inline">\(\mathbf{e}_x\)</span> and <span class="math inline">\(\mathbf{e}_y\)</span> are special, for a few reasons.</p>
 <p>The first reason these vectors are special is that they don’t lie along the same line in the plane. Said differently, we can’t write one vector as a scalar multiple of the other, <span class="math inline">\(\mathbf{e}_x \neq c \mathbf{e}_y\)</span> for any scalar <span class="math inline">\(c\)</span>. Vectors with this property are called <em>linearly independent</em>.</p>
 <p>More generally, a set of <span class="math inline">\(k\)</span> vectors <span class="math inline">\(\mathbf{v}_0, \mathbf{v}_1, \cdots, \mathbf{v}_{k-1}\)</span> is called <strong>linearly independent</strong> if no one vector <span class="math inline">\(\mathbf{v}_j\)</span> in the set can be written as a linear combination of the rest, i.e.&nbsp;for <em>any</em> choice of scalars <span class="math inline">\(c_i\)</span>,</p>
@@ -519,8 +514,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>For vectors in <span class="math inline">\(\mathbb{R}^2\)</span>, there are only two possibilities, they either lie on the same line, or they span the whole plane. This follows from the fact that any vector <span class="math inline">\(\mathbf{v}\)</span> can be decomposed as <span class="math inline">\(\mathbf{v} = v_x \mathbf{e}_x + v_y \mathbf{e}_y\)</span>. An implication of this fact is that a set of vectors in <span class="math inline">\(\mathbb{R}^2\)</span> can only be linearly independent if it contains only one or two vectors. If it contains a third vector, that vector <em>must</em> be a linear combination of the other two. The maximum number of linearly independent vectors in a set is the <strong>dimension</strong> of the vector space. Since <span class="math inline">\(\mathbb{R}^2\)</span> is 2-dimensional, it can only sustain 2 linearly independent vectors at a time.</p>
 </section>
-<section id="basis-vectors" class="level4" data-number="6.0.1.6">
-<h4 data-number="6.0.1.6" class="anchored" data-anchor-id="basis-vectors"><span class="header-section-number">6.0.1.6</span> Basis Vectors</h4>
+<section id="basis-vectors" class="level4" data-number="5.0.1.6">
+<h4 data-number="5.0.1.6" class="anchored" data-anchor-id="basis-vectors"><span class="header-section-number">5.0.1.6</span> Basis Vectors</h4>
 <p>In <span class="math inline">\(\mathbb{R}^2\)</span>, if we can find any two vectors <span class="math inline">\(\mathbf{a}\)</span> and <span class="math inline">\(\mathbf{b}\)</span> that are linearly independent, then we can write any other vector <span class="math inline">\(\mathbf{v}\)</span> as a linear combination of those two vectors,</p>
 <p><span class="math display">\[\mathbf{v} = v_a \mathbf{a} + v_b \mathbf{b}.\]</span></p>
 <p>The set <span class="math inline">\(\{\mathbf{a}, \mathbf{b}\}\)</span> is called a <em>basis</em>. We can use vectors in this set as a “basis” to write any other vector.</p>
@@ -592,8 +587,8 @@ v_y &amp;= \mathbf{v} \cdot \mathbf{e}_y.
 </div>
 </div>
 </section>
-<section id="cosine-similarity" class="level4" data-number="6.0.1.7">
-<h4 data-number="6.0.1.7" class="anchored" data-anchor-id="cosine-similarity"><span class="header-section-number">6.0.1.7</span> Cosine Similarity</h4>
+<section id="cosine-similarity" class="level4" data-number="5.0.1.7">
+<h4 data-number="5.0.1.7" class="anchored" data-anchor-id="cosine-similarity"><span class="header-section-number">5.0.1.7</span> Cosine Similarity</h4>
 <p>Just like we can express the length of a vector using the dot product, it turns out we can also express the <em>angle</em> between any two vectors in the plane using the dot product. If <span class="math inline">\(\theta\)</span> is the angle between two vectors <span class="math inline">\(\mathbf{v}\)</span> and <span class="math inline">\(\mathbf{w}\)</span>, it turns out the dot product is given by</p>
 <p><span class="math display">\[\mathbf{v} \cdot \mathbf{w} = ||\mathbf{v}|| \cdot ||\mathbf{w}|| \cos \theta.\]</span></p>
 <p>Note that both sides of this equation are scalars since the dot product is a scalar and the product of norms is a scalar. If you’re good at trigonometry, you can convince yourself this formula must be true by projecting <span class="math inline">\(\mathbf{v}\)</span> onto <span class="math inline">\(\mathbf{w}\)</span> similar to the way we did projections onto the x and y axes before. The difference this time is that the component of <span class="math inline">\(\mathbf{v}\)</span> in the direction of <span class="math inline">\(\mathbf{w}\)</span> is not <span class="math inline">\(v_x\)</span> or <span class="math inline">\(v_y\)</span> anymore, but instead <span class="math inline">\(||\mathbf{v}|| \cos \theta\)</span>.</p>
@@ -647,8 +642,8 @@ v_y &amp;= \mathbf{v} \cdot \mathbf{e}_y.
 </div>
 <p><strong>Algorithm Analysis:</strong> Like the dot product, this function uses only <span class="math inline">\(O(n)\)</span> FLOPS. There are three independent dot product operations happening here, each adding <span class="math inline">\(O(n)\)</span> FLOPS. Since the outputs of dot products are scalars, the multiply and divide only add one FLOP each. The square root isn’t obvious, but you can assume it takes some constant number of FLOPS as well. The total must therefore be <span class="math inline">\(O(n)\)</span>.</p>
 </section>
-<section id="other-norms" class="level4" data-number="6.0.1.8">
-<h4 data-number="6.0.1.8" class="anchored" data-anchor-id="other-norms"><span class="header-section-number">6.0.1.8</span> Other Norms</h4>
+<section id="other-norms" class="level4" data-number="5.0.1.8">
+<h4 data-number="5.0.1.8" class="anchored" data-anchor-id="other-norms"><span class="header-section-number">5.0.1.8</span> Other Norms</h4>
 <p>It turns out that the norm I defined above is only <em>one</em> way to measure the length of a vector. It’s the most natural way to do so sense it corresponds to your intuitive notions of length, which itself relates to the Pythagorean Theorem. There are other ways to quantify vector length as well that aren’t as intuitive. Because they do sometimes show up in machine learning I’ll briefly mention a couple of these here.</p>
 <p>The norm I’ve covered is called the <strong>2-norm</strong>. It’s called this because it involves squares and square roots. We can write it in the form</p>
 <p><span class="math display">\[||\mathbf{v}|| = ||\mathbf{v}||_2 = \big(v_x^2 + v_y^2 \big)^{1/2}.\]</span></p>
@@ -681,8 +676,8 @@ Infinity-Norm of v: 2.0</code></pre>
 </div>
 </section>
 </section>
-<section id="linear-maps" class="level3" data-number="6.0.2">
-<h3 data-number="6.0.2" class="anchored" data-anchor-id="linear-maps"><span class="header-section-number">6.0.2</span> Linear Maps</h3>
+<section id="linear-maps" class="level3" data-number="5.0.2">
+<h3 data-number="5.0.2" class="anchored" data-anchor-id="linear-maps"><span class="header-section-number">5.0.2</span> Linear Maps</h3>
 <p>So where do matrices fit into all this vector space stuff? It turns out that matrices correspond to functions between vectors to vectors. These are called <strong>linear maps</strong>. A linear map is a vector-valued function from one vector space to another that preserves the properties of vectors. In <span class="math inline">\(\mathbb{R}^2\)</span>, a linear map is a function between vectors <span class="math inline">\(\mathbf{v}=(v_x,v_y)\)</span> and <span class="math inline">\(\mathbf{w}=(w_x,w_y)\)</span> of the form</p>
 <p><span class="math display">\[\mathbf{w} = (w_x, w_y) = (av_x + bv_y, cv_x + dv_y) = \mathbf{F}(\mathbf{v}).\]</span></p>
 <p>That is, each component of the output vector <span class="math inline">\(\mathbf{w}\)</span> is a linear combination of the input vector <span class="math inline">\(\mathbf{v}\)</span>. Now, if you stare at this function for a little bit, you should see that this kind of looks like a <span class="math inline">\(2 \times 2\)</span> system of linear equations,</p>
@@ -819,8 +814,8 @@ c &amp; d
 </div>
 </div>
 </section>
-<section id="n-dimensional-vector-spaces" class="level3" data-number="6.0.3">
-<h3 data-number="6.0.3" class="anchored" data-anchor-id="n-dimensional-vector-spaces"><span class="header-section-number">6.0.3</span> <span class="math inline">\(n\)</span>-dimensional Vector Spaces</h3>
+<section id="n-dimensional-vector-spaces" class="level3" data-number="5.0.3">
+<h3 data-number="5.0.3" class="anchored" data-anchor-id="n-dimensional-vector-spaces"><span class="header-section-number">5.0.3</span> <span class="math inline">\(n\)</span>-dimensional Vector Spaces</h3>
 <p>It may seem like everything I’ve said is special for the case of <span class="math inline">\(n=2\)</span> dimensions, but it’s really not. Every single thing I’ve said extends exactly how you’d expect to vectors of arbitrary size <span class="math inline">\(n\)</span>. The only difference now is that you can’t visualize the stuff anymore. You just have to trust the math. I’ll restate all of the definitions from above here, but for <span class="math inline">\(n\)</span>-dimensional vector spaces instead.</p>
 <p>A <strong>vector</strong> of size <span class="math inline">\(n\)</span> can be defined as a 1-dimensional array of real numbers <span class="math inline">\(x_0,x_1,x_2,\cdots,x_{n-1}\)</span>,</p>
 <p><span class="math display">\[\mathbf{x} = (x_0,x_1,x_2,\cdots,x_{n-1}).\]</span></p>
@@ -1067,12 +1062,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
       <a href="../notebooks/linear-systems.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notebooks/matrix-algebra.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

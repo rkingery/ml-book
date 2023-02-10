@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mathematics for Machine Learning - 7&nbsp; Matrix Algebra</title>
+<title>Mathematics for Machine Learning - 6&nbsp; Matrix Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -174,37 +174,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/vectorization.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arrays and Vectorization</span></a>
+  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Basic Calculus</span></a>
+  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></a>
+  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
+  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
+  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a>
+  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a>
   </div>
 </li>
     </ul>
@@ -213,30 +208,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#properties-of-matrices" id="toc-properties-of-matrices" class="nav-link active" data-scroll-target="#properties-of-matrices"><span class="toc-section-number">7.1</span>  Properties of Matrices</a>
+  <li><a href="#properties-of-matrices" id="toc-properties-of-matrices" class="nav-link active" data-scroll-target="#properties-of-matrices"><span class="toc-section-number">6.1</span>  Properties of Matrices</a>
   <ul class="collapse">
-  <li><a href="#matrix-spaces" id="toc-matrix-spaces" class="nav-link" data-scroll-target="#matrix-spaces"><span class="toc-section-number">7.1.1</span>  Matrix Spaces</a></li>
-  <li><a href="#transposes" id="toc-transposes" class="nav-link" data-scroll-target="#transposes"><span class="toc-section-number">7.1.2</span>  Transposes</a></li>
-  <li><a href="#inverses" id="toc-inverses" class="nav-link" data-scroll-target="#inverses"><span class="toc-section-number">7.1.3</span>  Inverses</a></li>
-  <li><a href="#determinant-and-trace" id="toc-determinant-and-trace" class="nav-link" data-scroll-target="#determinant-and-trace"><span class="toc-section-number">7.1.4</span>  Determinant and Trace</a></li>
-  <li><a href="#linear-independence-and-rank" id="toc-linear-independence-and-rank" class="nav-link" data-scroll-target="#linear-independence-and-rank"><span class="toc-section-number">7.1.5</span>  Linear Independence and Rank</a></li>
-  <li><a href="#outer-products" id="toc-outer-products" class="nav-link" data-scroll-target="#outer-products"><span class="toc-section-number">7.1.6</span>  Outer Products</a></li>
+  <li><a href="#matrix-spaces" id="toc-matrix-spaces" class="nav-link" data-scroll-target="#matrix-spaces"><span class="toc-section-number">6.1.1</span>  Matrix Spaces</a></li>
+  <li><a href="#transposes" id="toc-transposes" class="nav-link" data-scroll-target="#transposes"><span class="toc-section-number">6.1.2</span>  Transposes</a></li>
+  <li><a href="#inverses" id="toc-inverses" class="nav-link" data-scroll-target="#inverses"><span class="toc-section-number">6.1.3</span>  Inverses</a></li>
+  <li><a href="#determinant-and-trace" id="toc-determinant-and-trace" class="nav-link" data-scroll-target="#determinant-and-trace"><span class="toc-section-number">6.1.4</span>  Determinant and Trace</a></li>
+  <li><a href="#linear-independence-and-rank" id="toc-linear-independence-and-rank" class="nav-link" data-scroll-target="#linear-independence-and-rank"><span class="toc-section-number">6.1.5</span>  Linear Independence and Rank</a></li>
+  <li><a href="#outer-products" id="toc-outer-products" class="nav-link" data-scroll-target="#outer-products"><span class="toc-section-number">6.1.6</span>  Outer Products</a></li>
   </ul></li>
-  <li><a href="#special-matrices" id="toc-special-matrices" class="nav-link" data-scroll-target="#special-matrices"><span class="toc-section-number">7.2</span>  Special Matrices</a>
+  <li><a href="#special-matrices" id="toc-special-matrices" class="nav-link" data-scroll-target="#special-matrices"><span class="toc-section-number">6.2</span>  Special Matrices</a>
   <ul class="collapse">
-  <li><a href="#diagonal-matrices" id="toc-diagonal-matrices" class="nav-link" data-scroll-target="#diagonal-matrices"><span class="toc-section-number">7.2.1</span>  Diagonal Matrices</a></li>
-  <li><a href="#symmetric-matrices" id="toc-symmetric-matrices" class="nav-link" data-scroll-target="#symmetric-matrices"><span class="toc-section-number">7.2.2</span>  Symmetric Matrices</a></li>
-  <li><a href="#upper-and-lower-triangular-matrices" id="toc-upper-and-lower-triangular-matrices" class="nav-link" data-scroll-target="#upper-and-lower-triangular-matrices"><span class="toc-section-number">7.2.3</span>  Upper and Lower Triangular Matrices</a></li>
-  <li><a href="#orthogonal-matrices" id="toc-orthogonal-matrices" class="nav-link" data-scroll-target="#orthogonal-matrices"><span class="toc-section-number">7.2.4</span>  Orthogonal Matrices</a></li>
+  <li><a href="#diagonal-matrices" id="toc-diagonal-matrices" class="nav-link" data-scroll-target="#diagonal-matrices"><span class="toc-section-number">6.2.1</span>  Diagonal Matrices</a></li>
+  <li><a href="#symmetric-matrices" id="toc-symmetric-matrices" class="nav-link" data-scroll-target="#symmetric-matrices"><span class="toc-section-number">6.2.2</span>  Symmetric Matrices</a></li>
+  <li><a href="#upper-and-lower-triangular-matrices" id="toc-upper-and-lower-triangular-matrices" class="nav-link" data-scroll-target="#upper-and-lower-triangular-matrices"><span class="toc-section-number">6.2.3</span>  Upper and Lower Triangular Matrices</a></li>
+  <li><a href="#orthogonal-matrices" id="toc-orthogonal-matrices" class="nav-link" data-scroll-target="#orthogonal-matrices"><span class="toc-section-number">6.2.4</span>  Orthogonal Matrices</a></li>
   </ul></li>
-  <li><a href="#matrix-factorizations" id="toc-matrix-factorizations" class="nav-link" data-scroll-target="#matrix-factorizations"><span class="toc-section-number">7.3</span>  Matrix Factorizations</a>
+  <li><a href="#matrix-factorizations" id="toc-matrix-factorizations" class="nav-link" data-scroll-target="#matrix-factorizations"><span class="toc-section-number">6.3</span>  Matrix Factorizations</a>
   <ul class="collapse">
-  <li><a href="#lu-factorization" id="toc-lu-factorization" class="nav-link" data-scroll-target="#lu-factorization"><span class="toc-section-number">7.3.1</span>  LU Factorization</a></li>
-  <li><a href="#qr-factorization" id="toc-qr-factorization" class="nav-link" data-scroll-target="#qr-factorization"><span class="toc-section-number">7.3.2</span>  QR Factorization</a></li>
-  <li><a href="#spectral-decomposition" id="toc-spectral-decomposition" class="nav-link" data-scroll-target="#spectral-decomposition"><span class="toc-section-number">7.3.3</span>  Spectral Decomposition</a></li>
-  <li><a href="#positive-definiteness" id="toc-positive-definiteness" class="nav-link" data-scroll-target="#positive-definiteness"><span class="toc-section-number">7.3.4</span>  Positive Definiteness</a></li>
-  <li><a href="#singular-value-decomposition" id="toc-singular-value-decomposition" class="nav-link" data-scroll-target="#singular-value-decomposition"><span class="toc-section-number">7.3.5</span>  Singular Value Decomposition</a></li>
-  <li><a href="#low-rank-approximations" id="toc-low-rank-approximations" class="nav-link" data-scroll-target="#low-rank-approximations"><span class="toc-section-number">7.3.6</span>  Low-Rank Approximations</a></li>
+  <li><a href="#lu-factorization" id="toc-lu-factorization" class="nav-link" data-scroll-target="#lu-factorization"><span class="toc-section-number">6.3.1</span>  LU Factorization</a></li>
+  <li><a href="#qr-factorization" id="toc-qr-factorization" class="nav-link" data-scroll-target="#qr-factorization"><span class="toc-section-number">6.3.2</span>  QR Factorization</a></li>
+  <li><a href="#spectral-decomposition" id="toc-spectral-decomposition" class="nav-link" data-scroll-target="#spectral-decomposition"><span class="toc-section-number">6.3.3</span>  Spectral Decomposition</a></li>
+  <li><a href="#positive-definiteness" id="toc-positive-definiteness" class="nav-link" data-scroll-target="#positive-definiteness"><span class="toc-section-number">6.3.4</span>  Positive Definiteness</a></li>
+  <li><a href="#singular-value-decomposition" id="toc-singular-value-decomposition" class="nav-link" data-scroll-target="#singular-value-decomposition"><span class="toc-section-number">6.3.5</span>  Singular Value Decomposition</a></li>
+  <li><a href="#low-rank-approximations" id="toc-low-rank-approximations" class="nav-link" data-scroll-target="#low-rank-approximations"><span class="toc-section-number">6.3.6</span>  Low-Rank Approximations</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -249,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></h1>
 </div>
 
 
@@ -273,10 +268,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> (<span class="dv">4</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="properties-of-matrices" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="properties-of-matrices"><span class="header-section-number">7.1</span> Properties of Matrices</h2>
-<section id="matrix-spaces" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="matrix-spaces"><span class="header-section-number">7.1.1</span> Matrix Spaces</h3>
+<section id="properties-of-matrices" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="properties-of-matrices"><span class="header-section-number">6.1</span> Properties of Matrices</h2>
+<section id="matrix-spaces" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="matrix-spaces"><span class="header-section-number">6.1.1</span> Matrix Spaces</h3>
 <p>Just like vectors, matrices can be thought of as objects in their own <strong>matrix space</strong>. A matrix space is just a vector space, except it has two dimensions <span class="math inline">\(m\)</span> and <span class="math inline">\(n\)</span>. We’ll denote the matrix space of <span class="math inline">\(m \times n\)</span> matrices with the symbol <span class="math inline">\(\mathbb{R}^{m \times n}\)</span>. Just like vector spaces, matrix spaces must be closed under linear combinations. If <span class="math inline">\(\mathbf{A}, \mathbf{B} \in \mathbb{R}^{m \times n}\)</span> are two matrices, then any matrix linear combination <span class="math inline">\(\mathbf{C} = a\mathbf{A} + b\mathbf{B}\)</span> must also be a valid <span class="math inline">\(m \times n\)</span> matrix in <span class="math inline">\(\mathbb{R}^{m \times n}\)</span>. This means matrices behave the same way under addition and scalar multiplication as vectors do.</p>
 <p>While this fact should be kind of obvious by now, here’s an example anyway. I’ll choose <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> to both be <span class="math inline">\(2 \times 2\)</span> here. Adding them together or scalar multiplying them should also obviously give a matrix that’s <span class="math inline">\(2 \times 2\)</span>, since everything is element-wise.</p>
 <div class="cell" data-execution_count="2">
@@ -304,8 +299,8 @@ A + B =
 <p><span class="math display">\[\mathbf{A}\mathbf{B}\mathbf{C} = (\mathbf{A}\mathbf{B})\mathbf{C} = \mathbf{A}(\mathbf{B}\mathbf{C}).\]</span></p>
 <p>Do remember, however, that matrix multiplication (and function composition) doesn’t commute, i.e.&nbsp;<span class="math inline">\(\mathbf{A}\mathbf{B} \neq \mathbf{B}\mathbf{A}\)</span>, even when the two matrices <em>are</em> compatible.</p>
 </section>
-<section id="transposes" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="transposes"><span class="header-section-number">7.1.2</span> Transposes</h3>
+<section id="transposes" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="transposes"><span class="header-section-number">6.1.2</span> Transposes</h3>
 <p>Recall that every matrix <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{m \times n}\)</span> has a <strong>transpose</strong> matrix <span class="math inline">\(\mathbf{A}^\top \in \mathbb{R}^{n \times m}\)</span> that’s defined as the same matrix, but with the indices swapped,</p>
 <p><span class="math display">\[(A^\top)_{i,j} = A_{j,i}.\]</span></p>
 <p>Here’s a quick example for a <span class="math inline">\(2 \times 3\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span>.</p>
@@ -344,8 +339,8 @@ B^T A^T =
 </div>
 </div>
 </section>
-<section id="inverses" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="inverses"><span class="header-section-number">7.1.3</span> Inverses</h3>
+<section id="inverses" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="inverses"><span class="header-section-number">6.1.3</span> Inverses</h3>
 <p>When a matrix is square, i.e.&nbsp;<span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(n \times n\)</span>, we can think of it as mapping vectors to other vectors in the same vector space <span class="math inline">\(\mathbb{R}^n\)</span>. The identity map (the “do nothing” map) always maps a vector to itself. It corresponds to the <span class="math inline">\(n \times n\)</span> <strong>identity matrix</strong></p>
 <p><span class="math display">\[
 \mathbf{I} =
@@ -433,8 +428,8 @@ d &amp; -b \\
 \end{pmatrix}.
 \]</span></p>
 </section>
-<section id="determinant-and-trace" class="level3" data-number="7.1.4">
-<h3 data-number="7.1.4" class="anchored" data-anchor-id="determinant-and-trace"><span class="header-section-number">7.1.4</span> Determinant and Trace</h3>
+<section id="determinant-and-trace" class="level3" data-number="6.1.4">
+<h3 data-number="6.1.4" class="anchored" data-anchor-id="determinant-and-trace"><span class="header-section-number">6.1.4</span> Determinant and Trace</h3>
 <p>Notice something from this formula. Since <span class="math inline">\(\text{det}(\mathbf{A}) = ad - bc\)</span> in this case, we can evidently write</p>
 <p><span class="math display">\[\mathbf{A}^{-1} = \frac{1}{\text{det}(\mathbf{A})} \mathbf{\tilde A},\]</span></p>
 <p>where <span class="math inline">\(\mathbf{\tilde A}\)</span> is some kind of matrix related to <span class="math inline">\(\mathbf{A}\)</span>. The properties of <span class="math inline">\(\mathbf{\tilde A}\)</span> aren’t important (it’s called the <em>adjugate</em> if you’re curious). But this general fact turns out to be true for any <span class="math inline">\(n \times n\)</span> matrix, except the formula for the determinant gets a lot more complicated. What’s important is that <span class="math inline">\(\mathbf{A}^{-1}\)</span> is <em>inversely proportional</em> to the determinant. That’s why we can’t allow <span class="math inline">\(\text{det}(\mathbf{A}) = 0\)</span>, because then <span class="math inline">\(\mathbf{A}^{-1}\)</span> blows up due to the division by zero.</p>
@@ -506,8 +501,8 @@ tr(BA) = 13</code></pre>
 </div>
 <p>It’s kind of obvious what the determinant is good for. It tells you how invertible a matrix is. But what does the trace tell you? It turns out both the trace and the determinant also tell you something important about the <em>scale</em> of the matrix. We’ll see this in more depth below when we talk about eigenvalues.</p>
 </section>
-<section id="linear-independence-and-rank" class="level3" data-number="7.1.5">
-<h3 data-number="7.1.5" class="anchored" data-anchor-id="linear-independence-and-rank"><span class="header-section-number">7.1.5</span> Linear Independence and Rank</h3>
+<section id="linear-independence-and-rank" class="level3" data-number="6.1.5">
+<h3 data-number="6.1.5" class="anchored" data-anchor-id="linear-independence-and-rank"><span class="header-section-number">6.1.5</span> Linear Independence and Rank</h3>
 <p>We can always think of a matrix in terms of its <strong>column vectors</strong>. If <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, it has <span class="math inline">\(n\)</span> column vectors <span class="math inline">\(\mathbf{a}_0, \mathbf{a}_1, \cdots, \mathbf{a}_{n-1}\)</span> each of size <span class="math inline">\(m\)</span>. Concatenated together in order, the column vectors form the matrix itself,</p>
 <p><span class="math display">\[
 \mathbf{A} =
@@ -572,8 +567,8 @@ c &amp; \beta c \\
 </div>
 </div>
 </section>
-<section id="outer-products" class="level3" data-number="7.1.6">
-<h3 data-number="7.1.6" class="anchored" data-anchor-id="outer-products"><span class="header-section-number">7.1.6</span> Outer Products</h3>
+<section id="outer-products" class="level3" data-number="6.1.6">
+<h3 data-number="6.1.6" class="anchored" data-anchor-id="outer-products"><span class="header-section-number">6.1.6</span> Outer Products</h3>
 <p>We’ll frequently be interested in <strong>low rank</strong> matrices, which are matrices whose rank is much much less than the dimension, i.e.&nbsp;<span class="math inline">\(\text{rank}(\mathbf{A}) &lt;&lt; n\)</span>. As we’ll see, low rank matrices are special because they can efficiently compress the information contained in a matrix, which often allows us to represent data more efficiently, or clean up data by denoising away “unnecessary” dimensions. In fact, approximating a matrix with a lower rank matrix is the whole idea behind dimension reduction, one of the core areas of unsupervised learning.</p>
 <p>The most useful low-rank matrices are the outer products of two vectors. If <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> are size <span class="math inline">\(n\)</span> vectors, define their <strong>outer product</strong> by</p>
 <p><span class="math display">\[
@@ -640,11 +635,11 @@ rank(xy^T) = 1</code></pre>
 </div>
 </section>
 </section>
-<section id="special-matrices" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="special-matrices"><span class="header-section-number">7.2</span> Special Matrices</h2>
+<section id="special-matrices" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="special-matrices"><span class="header-section-number">6.2</span> Special Matrices</h2>
 <p>There are many classes of matrices that have various special properties. I’ll quickly introduce a few that’ll be of interest to us in machine learning.</p>
-<section id="diagonal-matrices" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="diagonal-matrices"><span class="header-section-number">7.2.1</span> Diagonal Matrices</h3>
+<section id="diagonal-matrices" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="diagonal-matrices"><span class="header-section-number">6.2.1</span> Diagonal Matrices</h3>
 <p>Probably the most basic class of matrices are the diagonal matrices. A <strong>diagonal matrix</strong> is an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{D}\)</span> whose elements are only non-zero on the diagonals, i.e.&nbsp;<span class="math inline">\(D_{i,j} = 0\)</span> if <span class="math inline">\(i \neq j\)</span>. For example, the following <span class="math inline">\(3 \times 3\)</span> matrix is diagonal since its only non-zero values lie on the diagonal,</p>
 <p><span class="math display">\[
 \mathbf{D} =
@@ -701,8 +696,8 @@ Dx = [1 2 3]</code></pre>
 </div>
 </div>
 </section>
-<section id="symmetric-matrices" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="symmetric-matrices"><span class="header-section-number">7.2.2</span> Symmetric Matrices</h3>
+<section id="symmetric-matrices" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="symmetric-matrices"><span class="header-section-number">6.2.2</span> Symmetric Matrices</h3>
 <p>Another special class of matrices important to machine learning is the symmetric matrix. A <strong>symmetric matrix</strong> is a square matrix <span class="math inline">\(\mathbf{S}\)</span> that equals its own transpose, i.e.&nbsp;<span class="math inline">\(\mathbf{S}^\top = \mathbf{S}\)</span>. They’re called symmetric matrices because their lower diagonals and upper diagonals are mirror images. Symmetric matrices can be thought of as the matrix equivalent of a real number.</p>
 <p>For example, consider the matrix <span class="math display">\[
 \mathbf{S} =
@@ -727,8 +722,8 @@ Dx = [1 2 3]</code></pre>
 </div>
 </div>
 </section>
-<section id="upper-and-lower-triangular-matrices" class="level3" data-number="7.2.3">
-<h3 data-number="7.2.3" class="anchored" data-anchor-id="upper-and-lower-triangular-matrices"><span class="header-section-number">7.2.3</span> Upper and Lower Triangular Matrices</h3>
+<section id="upper-and-lower-triangular-matrices" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="upper-and-lower-triangular-matrices"><span class="header-section-number">6.2.3</span> Upper and Lower Triangular Matrices</h3>
 <p>Closely related to diagonal matrices are lower and upper triangular matrices. An <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{L}\)</span> is <strong>lower-triangular</strong> if the entries in its <em>upper</em> diagonal are zero, i.e.&nbsp;<span class="math inline">\(L_{i,j} = 0\)</span> when <span class="math inline">\(i &lt; j\)</span>. Similarly, an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{U}\)</span> is <strong>upper-triangular</strong> if the entries in its <em>lower</em> diagonal are zero, i.e.&nbsp;<span class="math inline">\(U_{i,j} = 0\)</span> when <span class="math inline">\(i &gt; j\)</span>. I’ve already showed an example of these when I covered determinants. Here they are again,</p>
 <p><span class="math display">\[
 \mathbf{L} =
@@ -745,8 +740,8 @@ Dx = [1 2 3]</code></pre>
 \]</span></p>
 <p>Upper and lower triangular (and diagonal) matrices are useful because it’s easy to invert them and calculate their determinants. Just like symmetric matrices, only <span class="math inline">\(\frac{1}{2}n(n+1)\)</span> unique elements are needed to fully specify these matrices since an entire off-diagonal is all zeros.</p>
 </section>
-<section id="orthogonal-matrices" class="level3" data-number="7.2.4">
-<h3 data-number="7.2.4" class="anchored" data-anchor-id="orthogonal-matrices"><span class="header-section-number">7.2.4</span> Orthogonal Matrices</h3>
+<section id="orthogonal-matrices" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="orthogonal-matrices"><span class="header-section-number">6.2.4</span> Orthogonal Matrices</h3>
 <p>The last class of matrices I’ll introduce are more subtle, but very important geometrically. These are the orthogonal matrices. An <strong>orthogonal matrix</strong> is an <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(\mathbf{Q}\)</span> whose transpose is its inverse, i.e.</p>
 <p><span class="math display">\[\mathbf{Q}^\top = \mathbf{Q}^{-1} \quad \text{or} \quad \mathbf{Q}^\top \mathbf{Q}=\mathbf{I}.\]</span></p>
 <p>As an example, consider the following matrix,</p>
@@ -839,11 +834,11 @@ Dx = [1 2 3]</code></pre>
 </div>
 </section>
 </section>
-<section id="matrix-factorizations" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="matrix-factorizations"><span class="header-section-number">7.3</span> Matrix Factorizations</h2>
+<section id="matrix-factorizations" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="matrix-factorizations"><span class="header-section-number">6.3</span> Matrix Factorizations</h2>
 <p>Given any two compatible matrices <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span>, we can get a third matrix <span class="math inline">\(\mathbf{C}\)</span> by matrix multiplication, <span class="math inline">\(\mathbf{C} = \mathbf{A}\mathbf{B}\)</span>. Now suppose we wanted to go the other way. Given a matrix <span class="math inline">\(\mathbf{C}\)</span>, how can we <em>factor</em> it back out into a product <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>? This is the idea behind matrix factorization. In practice, we’re interested in factoring a matrix into a product of special types of matrices that are easier to work with, like symmetric, diagonal, or orthogonal matrices.</p>
-<section id="lu-factorization" class="level3" data-number="7.3.1">
-<h3 data-number="7.3.1" class="anchored" data-anchor-id="lu-factorization"><span class="header-section-number">7.3.1</span> LU Factorization</h3>
+<section id="lu-factorization" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="lu-factorization"><span class="header-section-number">6.3.1</span> LU Factorization</h3>
 <p>Probably the most basic matrix factorization is the LU Factorization. LU factorization factors an <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> into a product of a lower triangular matrix <span class="math inline">\(\mathbf{L}\)</span> and an upper triangular matrix <span class="math inline">\(\mathbf{U}\)</span>, <span class="math display">\[\mathbf{A} = \mathbf{L}\mathbf{U}.\]</span></p>
 <p>The LU factorization is most useful for solving a system of linear equations. If <span class="math inline">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>, we can do an LU factorization of <span class="math inline">\(\mathbf{A}\)</span> and write the system as <span class="math inline">\(\mathbf{LUx} = \mathbf{b}\)</span>. This can then be solved by breaking it into two steps, known as <em>forward substitution</em> and <em>back substitution</em>,</p>
 <ul>
@@ -880,8 +875,8 @@ LU =
 </div>
 </div>
 </section>
-<section id="qr-factorization" class="level3" data-number="7.3.2">
-<h3 data-number="7.3.2" class="anchored" data-anchor-id="qr-factorization"><span class="header-section-number">7.3.2</span> QR Factorization</h3>
+<section id="qr-factorization" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="qr-factorization"><span class="header-section-number">6.3.2</span> QR Factorization</h3>
 <p>Another useful factorization is to factor a matrix <span class="math inline">\(\mathbf{A}\)</span> into a product of an orthogonal matrix <span class="math inline">\(\mathbf{Q}\)</span> and an upper triangular matrix <span class="math inline">\(\mathbf{R}\)</span>,</p>
 <p><span class="math display">\[\mathbf{A} = \mathbf{QR}.\]</span></p>
 <p>The QR factorization is useful if we want to create an orthonormal basis out of the column vectors of <span class="math inline">\(\mathbf{A}\)</span>, since <span class="math inline">\(\mathbf{Q}\)</span> will give a complete set of basis vectors built from orthogonalizing <span class="math inline">\(\mathbf{A}\)</span>. It’s also useful for calculating other random things of interest. Like LU factorization, it can be used to calculate determinants, since</p>
@@ -909,8 +904,8 @@ QR =
 </div>
 </div>
 </section>
-<section id="spectral-decomposition" class="level3" data-number="7.3.3">
-<h3 data-number="7.3.3" class="anchored" data-anchor-id="spectral-decomposition"><span class="header-section-number">7.3.3</span> Spectral Decomposition</h3>
+<section id="spectral-decomposition" class="level3" data-number="6.3.3">
+<h3 data-number="6.3.3" class="anchored" data-anchor-id="spectral-decomposition"><span class="header-section-number">6.3.3</span> Spectral Decomposition</h3>
 <p>The spectral decomposition is a way to factor a symmetric matrix <span class="math inline">\(\mathbf{S}\)</span> into a product of an orthonormal matrix <span class="math inline">\(\mathbf{X}\)</span> and a diagonal matrix <span class="math inline">\(\mathbf{\Lambda}\)</span>,</p>
 <p><span class="math display">\[\mathbf{S} = \mathbf{X \Lambda X}^\top.\]</span></p>
 <p>The matrix <span class="math inline">\(\mathbf{\Lambda}\)</span> is called the <strong>eigenvalue matrix</strong>, and <span class="math inline">\(\mathbf{X}\)</span> is the <strong>eigenvector matrix</strong>. The diagonal entries of <span class="math inline">\(\mathbf{\Lambda}\)</span> are called the <strong>eigenvalues</strong> of <span class="math inline">\(\mathbf{S}\)</span>, denoted <span class="math inline">\(\lambda_i\)</span>,</p>
@@ -1099,8 +1094,8 @@ X Lambda X^T =
 </ul>
 <p>Due to the QR factorizations and matrix multiplications, this algorithm will be <span class="math inline">\(O(n^3)\)</span> at each step, which all together gives a time complexity of <span class="math inline">\(O(Tn^3)\)</span>. It’s not at all obvious from what I’ve said why the QR algorithm even works. In fact, to work well it requires a few small <a href="https://en.wikipedia.org/wiki/QR_algorithm">modifications</a> I won’t go into.</p>
 </section>
-<section id="positive-definiteness" class="level3" data-number="7.3.4">
-<h3 data-number="7.3.4" class="anchored" data-anchor-id="positive-definiteness"><span class="header-section-number">7.3.4</span> Positive Definiteness</h3>
+<section id="positive-definiteness" class="level3" data-number="6.3.4">
+<h3 data-number="6.3.4" class="anchored" data-anchor-id="positive-definiteness"><span class="header-section-number">6.3.4</span> Positive Definiteness</h3>
 <p>The eigenvalues of a symmetric matrix <span class="math inline">\(\mathbf{S}\)</span> are important because they in some sense specify how much <span class="math inline">\(\mathbf{S}\)</span> tends to stretch vectors in different directions. Most important for machine learning purposes though is the <em>sign</em> of the eigenvalues. The sign of the eigenvalues of a symmetric matrix essentially determine how hard it is to optimize a given function. This is especially relevant in machine learning, since training a model is all about optimizing the loss function of a model’s predictions against the data.</p>
 <p>If <span class="math inline">\(\mathbf{S}\)</span> is <span class="math inline">\(n \times n\)</span>, it will have <span class="math inline">\(n\)</span> eigenvalues <span class="math inline">\(\lambda_0, \lambda_1, \cdots, \lambda_{n-1}\)</span>. Ignoring the fact that each eigenvalue can be zero, each one will be either positive or negative. That means the <em>sequence</em> of eigenvalues can have <span class="math inline">\(2^n\)</span> possible arrangements of signs. For example, when <span class="math inline">\(n=3\)</span>, we could have any of the <span class="math inline">\(2^3=8\)</span> possible sign arrangements for the eigenvalues <span class="math inline">\((\lambda_0, \lambda_1, \lambda_2)\)</span>,</p>
 <p><span class="math display">\[(+, +, +), \ (+, +, -), \ (+, -, +), \ (-, +, +), \ (+, -, -), \ (-, +, -), \ (-, -, +), \ (-, -, -).\]</span></p>
@@ -1132,8 +1127,8 @@ X Lambda X^T =
 </div>
 </div>
 </section>
-<section id="singular-value-decomposition" class="level3" data-number="7.3.5">
-<h3 data-number="7.3.5" class="anchored" data-anchor-id="singular-value-decomposition"><span class="header-section-number">7.3.5</span> Singular Value Decomposition</h3>
+<section id="singular-value-decomposition" class="level3" data-number="6.3.5">
+<h3 data-number="6.3.5" class="anchored" data-anchor-id="singular-value-decomposition"><span class="header-section-number">6.3.5</span> Singular Value Decomposition</h3>
 <p>The spectral decomposition is mostly useful for square symmetric matrices. Yet, the properties of eigenvalues and eigenvectors seem to be incredibly useful for understanding how a matrix behaves. They say something useful about the characteristic scales and directions of a matrix and its underlying linear operator. It turns out we <em>can</em> generalize the spectral decomposition to arbitrary matrices, but with some slight modifications. This modified factorization is called the <strong>singular value decomposition</strong>, or <strong>SVD</strong> for short.</p>
 <p>Suppose <span class="math inline">\(\mathbf{A}\)</span> is some arbitrary <span class="math inline">\(m \times n\)</span> matrix. It turns out we can <em>always</em> factor <span class="math inline">\(\mathbf{A}\)</span> into a product of the form</p>
 <p><span class="math display">\[\mathbf{A} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top,\]</span></p>
@@ -1231,8 +1226,8 @@ U Sigma V^T =
 <p><span class="math display">\[\kappa = \frac{\sigma_0}{\sigma_{k-1}}.\]</span></p>
 <p>The higher the condition number is, the harder it is to invert <span class="math inline">\(\mathbf{A}\)</span>. A condition number of <span class="math inline">\(\kappa=1\)</span> is when the singular values are the same. These are easiest to invert. Matrices with low <span class="math inline">\(\kappa\)</span> are called called <strong>well-conditioned</strong> matrices. The identity matrix has <span class="math inline">\(\kappa=1\)</span>, for example. If one of the singular values is <span class="math inline">\(0\)</span> then <span class="math inline">\(\kappa\)</span> will be infinite, meaning the matrix isn’t invertible at all. Matrices with high <span class="math inline">\(\kappa\)</span> are called <strong>ill-conditioned</strong> matrices. For this reason, the condition number is very often used in calculations when it’s important to make sure that <span class="math inline">\(\mathbf{A}\)</span> isn’t singular or close to singular. In numpy, you can calculate the condition number of a matrix directly by using <code>np.linalg.cond(A)</code>.</p>
 </section>
-<section id="low-rank-approximations" class="level3" data-number="7.3.6">
-<h3 data-number="7.3.6" class="anchored" data-anchor-id="low-rank-approximations"><span class="header-section-number">7.3.6</span> Low-Rank Approximations</h3>
+<section id="low-rank-approximations" class="level3" data-number="6.3.6">
+<h3 data-number="6.3.6" class="anchored" data-anchor-id="low-rank-approximations"><span class="header-section-number">6.3.6</span> Low-Rank Approximations</h3>
 <p>The SVD is useful for many reasons. In fact, it’s probably the single most useful factorization in all of applied linear algebra. One reason this is true is because <em>every matrix</em> has one. When in doubt, if you can’t figure out how to do something with a matrix, you can take its SVD and try to work with those three matrices one-by-one. While that’s nice, the more useful application of the SVD to machine learning is that it’s a good way to compress or denoise data. To see why we need to look at the SVD in a slightly different way.</p>
 <p>Suppose <span class="math inline">\(\mathbf{A}\)</span> is some <span class="math inline">\(m \times n\)</span> matrix. Suppose <span class="math inline">\(\mathbf{u}_0, \mathbf{u}_1, \cdots, \mathbf{u}_{m-1}\)</span> are the column vectors of <span class="math inline">\(\mathbf{U}\)</span>, and <span class="math inline">\(\mathbf{v}_0, \mathbf{v}_1, \cdots, \mathbf{v}_{n-1}\)</span> are the column vectors of <span class="math inline">\(\mathbf{V}\)</span>. Suppose <span class="math inline">\(\sigma_0, \sigma_1, \cdots, \sigma_{k-1}\)</span> are the singular values of <span class="math inline">\(\mathbf{A}\)</span>, by convention ordered from largest to smallest. Then writing out the SVD in terms of the column vectors, and multiplying everything out matrix multiplication style, we have</p>
 <p><span class="math display">\[
@@ -1514,12 +1509,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
       <a href="../notebooks/vector-spaces.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notebooks/multivariate-calculus.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
