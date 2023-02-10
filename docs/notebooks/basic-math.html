@@ -724,7 +724,7 @@ x &amp;\approx 0.3 \cdot n.
 </section>
 <section id="trigonometric-functions" class="level3" data-number="1.2.6">
 <h3 data-number="1.2.6" class="anchored" data-anchor-id="trigonometric-functions"><span class="header-section-number">1.2.6</span> Trigonometric Functions</h3>
-<p>Other textbook functions typically covered in math courses are the trig functions: sine, cosine, tangent, cosine, cosecant, and cotangent. Of these functions, the most important to know are the sine function <span class="math inline">\(y=\sin x\)</span>, and the cosine function <span class="math inline">\(y = \cos x\)</span>.</p>
+<p>Other textbook functions typically covered in math courses are the trig functions: sine, cosine, tangent, cosine, cosecant, and cotangent. Of these functions, the most important to know are the sine function <span class="math inline">\(y=\sin x\)</span>, the cosine function <span class="math inline">\(y = \cos x\)</span>, and <em>sometimes</em> the tangent function <span class="math inline">\(y = \tan x\)</span>.</p>
 <p>Here’s what their plots look like. They’re both waves that repeat themselves, in the sense <span class="math inline">\(f(x + 2\pi) = f(x)\)</span>. The length for the function to repeat itself is called the <em>period</em>, in this case <span class="math inline">\(2\pi \approx 6.28\)</span>. Note that the cosine is just a sine function that’s shifted right by <span class="math inline">\(\frac{\pi}{2} \approx 1.57\)</span>.</p>
 <div class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
@@ -751,12 +751,43 @@ x &amp;\approx 0.3 \cdot n.
 </div>
 </div>
 <p>Trig functions don’t really show up that much in machine learning, so I won’t remind you of all those obscure trig rules you’ve forgotten. I’ll just mention that we can define all the other trig functions using the sine and cosine as follows,</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align*}
 &amp;\tan x = \frac{\sin x}{\cos x}, \\
 &amp;\csc x = \frac{1}{\sin x}, \\
 &amp;\sec x = \frac{1}{\cos x}, \\
 &amp;\cot x = \frac{1}{\tan x} = \frac{\cos x}{\sin x}.
-\end{align}\]</span></p>
+\end{align*}\]</span></p>
+<p>We can talk about the <em>inverse</em> of trig functions as well. These are just the functions that undo the trig operations and give you back the angle (in radians). Since none of the trig functions are monotonic, we can’t invert them on the whole real line, but only on a given range.</p>
+<p>Below I’ll just list the inverse sine, cosine, and tangent functions and their defined input and output ranges. Note by historical convention, these inverse functions are usually called the <strong>arcsine</strong>, <strong>arccosine</strong>, and <strong>arctangent</strong> respectfully.</p>
+<table class="table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Inverse Function</strong></td>
+<td style="text-align: left;"><strong>Input Range</strong></td>
+<td style="text-align: left;"><strong>Output Range</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = \arcsin x = \sin^{-1} x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(-1 \leq x \leq 1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(-90^\circ \leq y \leq 90^\circ\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = \arccos x = \cos^{-1} x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(-1 \leq x \leq 1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0^\circ \leq y \leq 180^\circ\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = \arctan x = \tan^{-1} x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(-\infty &lt; x &lt; \infty\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(-90^\circ \leq y \leq 90^\circ\)</span></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="piecewise-functions" class="level3" data-number="1.2.7">
 <h3 data-number="1.2.7" class="anchored" data-anchor-id="piecewise-functions"><span class="header-section-number">1.2.7</span> Piecewise Functions</h3>

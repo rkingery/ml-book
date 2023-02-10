@@ -229,7 +229,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="toc-section-number">2.4.1</span>  Motivation</a></li>
   <li><a href="#broadcasting-rules" id="toc-broadcasting-rules" class="nav-link" data-scroll-target="#broadcasting-rules"><span class="toc-section-number">2.4.2</span>  Broadcasting Rules</a></li>
   </ul></li>
-  <li><a href="#computational-performance" id="toc-computational-performance" class="nav-link" data-scroll-target="#computational-performance"><span class="toc-section-number">2.5</span>  Computational Performance</a></li>
   </ul>
 </nav>
 </nav>
@@ -880,8 +879,6 @@ Machine Epsilon: 0.25</code></pre>
 <p>In machine learning and most of scientific computing we’re not interested in operating on just single numbers at a time, but many numbers at a time. This is done using <em>array operations</em>. The most popular library in python for doing numerical computation on arrays is numpy.</p>
 <p>Why not just do numerical computations in base python? After all, if we have large arrays of data we can just put them in a list. Consider the following example. Suppose we have two tables of data, <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span>. Each table has <span class="math inline">\(m=5\)</span> rows and <span class="math inline">\(n=3\)</span> columns. The rows represent samples, e.g.&nbsp;measured in a lab, and the columns represent the variables, or <em>features</em>, being measured, call them <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>, if you like. I’ll define these two tables using python lists <code>A</code> and <code>B</code> below.</p>
 <div class="cell" data-execution_count="37">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> [[<span class="fl">3.5</span>, <span class="fl">18.1</span>, <span class="fl">0.3</span>],</span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>     [<span class="op">-</span><span class="fl">8.7</span>, <span class="fl">3.2</span>, <span class="fl">0.5</span>],</span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>     [<span class="op">-</span><span class="fl">1.3</span>, <span class="fl">8.4</span>, <span class="fl">0.2</span>],</span>
@@ -893,7 +890,6 @@ Machine Epsilon: 0.25</code></pre>
 <span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>     [<span class="op">-</span><span class="fl">1.6</span>, <span class="fl">3.7</span>, <span class="fl">0.7</span>],</span>
 <span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a>     [<span class="fl">2.3</span>, <span class="fl">19.3</span>, <span class="fl">0.9</span>],</span>
 <span id="cb76-11"><a href="#cb76-11" aria-hidden="true" tabindex="-1"></a>     [<span class="fl">8.2</span>, <span class="fl">9.7</span>, <span class="fl">0.2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>Suppose we wanted to add the elements in these two tables together, index by index, like this,</p>
 <p><span class="math display">\[
@@ -918,27 +914,18 @@ A[4][0] + B[4][0], &amp; A[4][1] + B[4][1], &amp; A[4][2] + B[4][2] \\
 <span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>        C.append(row)</span>
 <span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> C</span>
 <span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> add_arrays(A, B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="39">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>np.array(C).<span class="bu">round</span>(<span class="dv">2</span>).tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="39">
-<pre><code>[[-6.2, 30.6, 0.4],
- [-13.8, 17.3, 1.1],
- [-2.9, 12.1, 0.9],
- [7.9, 32.2, 1.8],
- [1.4, 29.4, 0.9]]</code></pre>
+<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> add_arrays(A, B)</span>
+<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C = </span><span class="sc">{</span>np<span class="sc">.</span>array(C)<span class="sc">.</span><span class="bu">round</span>(<span class="dv">2</span>)<span class="sc">.</span>tolist()<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>C = [[-6.2, 30.6, 0.4], [-13.8, 17.3, 1.1], [-2.9, 12.1, 0.9], [7.9, 32.2, 1.8], [1.4, 29.4, 0.9]]</code></pre>
 </div>
 </div>
 <p>Numpy makes this far easier to do. It implements <em>element-wise</em> array operatations, which allow us to operate on arrays with far fewer lines of code. In numpy, to perform the same adding operation we just did, we’d just add the two arrays together directly, <span class="math inline">\(\mathbf{A}+\mathbf{B}\)</span>.</p>
 <p>To use numpy operations we have to convert data into the native numpy data type, the numpy array. Do this by wrapping lists inside the function <code>np.array</code>. Once we’ve done this, we can just add them together in one line. This will simultaneously element-wise add the elements in the array so we don’t have to loop over anything.</p>
-<div class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array(A)</span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array(B)</span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="op">+</span>B<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array(A)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array(B)</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="op">+</span>B<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>C = 
 [[ -6.2  30.6   0.4]
@@ -951,9 +938,9 @@ A[4][0] + B[4][0], &amp; A[4][1] + B[4][1], &amp; A[4][2] + B[4][2] \\
 <p>This is really nice. We’ve managed to reduce a double foor loop of 8 lines of code down to just 1 line with no loops at all. Of course, there <em>are</em> loops happening in the background inside the numpy code, we just don’t see them.</p>
 <p>Numpy lets us do this with pretty much any arithmetic operation we can think of. We can element-wise add, subtract, multiply, or divide the two arrays. We can raise them to powers, exponentiate them, take their logarithms, etc. Just like we would do so with single numbers. In numpy, arrays become first class citizens, treated on the same footing as the simpler numerical data types <code>int</code> and <code>float</code>. This is called <strong>vectorization</strong>.</p>
 <p>Here are a few examples of different vectorized functions we can call on <code>A</code> and <code>B</code>. All of these functions are done element-wise.</p>
-<div class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">-</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="41">
+<div class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">-</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
 <pre><code>array([[ 13.2,   5.6,   0.2],
        [ -3.6, -10.9,  -0.1],
        [  0.3,   4.7,  -0.5],
@@ -961,9 +948,9 @@ A[4][0] + B[4][0], &amp; A[4][1] + B[4][1], &amp; A[4][2] + B[4][2] \\
        [-15. ,  10. ,   0.5]])</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">/</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="42">
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">/</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
 <pre><code>array([[-0.36082474,  1.448     ,  3.        ],
        [ 1.70588235,  0.22695035,  0.83333333],
        [ 0.8125    ,  2.27027027,  0.28571429],
@@ -971,9 +958,9 @@ A[4][0] + B[4][0], &amp; A[4][1] + B[4][1], &amp; A[4][2] + B[4][2] \\
        [-0.82926829,  2.03092784,  3.5       ]])</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">**</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="43">
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">**</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="42">
 <pre><code>array([[5.27885788e-06, 5.25995690e+15, 8.86568151e-01],
        [           nan, 1.32621732e+07, 6.59753955e-01],
        [           nan, 2.62925893e+03, 3.24131319e-01],
@@ -981,9 +968,9 @@ A[4][0] + B[4][0], &amp; A[4][1] + B[4][1], &amp; A[4][2] + B[4][2] \\
        [           nan, 3.60016490e+12, 9.31149915e-01]])</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>np.sin(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="44">
+<div class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>np.sin(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="43">
 <pre><code>array([[-0.35078323, -0.68131377,  0.29552021],
        [-0.66296923, -0.05837414,  0.47942554],
        [-0.96355819,  0.85459891,  0.19866933],
@@ -992,50 +979,50 @@ A[4][0] + B[4][0], &amp; A[4][1] + B[4][1], &amp; A[4][2] + B[4][2] \\
 </div>
 </div>
 <p>If vectorization just made code easier to read it would be a nice to have. But it’s more than this. In fact, vectorization also makes your code run much faster in many cases. Let’s see an example of this. I’ll again run the same operations above to add two arrays, but this time I’m going to <strong>profile</strong> the code in each case. That is, I’m going to time each operation over several runs and average the times. The ones with the lowest average time is faster than the slower one, obviously. To profile in a notebook, the easiest way is to use the <code>%timeit</code> magic command, which will do all this for you.</p>
+<div class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> A.tolist()</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> B.tolist()</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit C <span class="op">=</span> add_arrays(A, B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2.61 µs ± 8.21 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)</code></pre>
+</div>
+</div>
 <div class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> A.tolist()</span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> B.tolist()</span>
-<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit C <span class="op">=</span> add_arrays(A, B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array(A)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array(B)</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit C <span class="op">=</span> A <span class="op">+</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>2.59 µs ± 8.64 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="46">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array(A)</span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array(B)</span>
-<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit C <span class="op">=</span> A <span class="op">+</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>425 ns ± 0.779 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)</code></pre>
+<pre><code>411 ns ± 0.75 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)</code></pre>
 </div>
 </div>
 <p>Even with these small arrays the numpy vectorized array addition is almost 10 times faster than the python loop array addition. This difference becomes much more pronounced when arrays are larger. The arrays just considered are only of shape <span class="math inline">\((10,3)\)</span>. We can easily confirm this in numpy using the methods <code>A.shape</code> and <code>B.shape</code>.</p>
-<div class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A.shape = </span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B.shape = </span><span class="sc">{</span>B<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A.shape = </span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B.shape = </span><span class="sc">{</span>B<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A.shape = (5, 3)
 B.shape = (5, 3)</code></pre>
 </div>
 </div>
 <p>Let’s try to run the add operations on much larger arrays of shape <span class="math inline">\((10000,100)\)</span>. To do this quickly I’ll use <code>np.random.rand(shape)</code>, which will sample an array with shape <code>shape</code> whose values are uniformly between 0 and 1. More on sampling in a future lesson. Running the profiling, we’re now running about 100 times faster using numpy vectorization compared to python loops.</p>
+<div class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.random.rand(<span class="dv">10000</span>, <span class="dv">100</span>)</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> np.random.rand(<span class="dv">10000</span>, <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="cell" data-execution_count="48">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.random.rand(<span class="dv">10000</span>, <span class="dv">100</span>)</span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> np.random.rand(<span class="dv">10000</span>, <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> D.tolist()</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> E.tolist()</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit F <span class="op">=</span> add_arrays(D, E)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>119 ms ± 517 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)</code></pre>
+</div>
 </div>
 <div class="cell" data-execution_count="49">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> D.tolist()</span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> E.tolist()</span>
-<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit F <span class="op">=</span> add_arrays(D, E)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.array(D)</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> np.array(E)</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit F <span class="op">=</span> D <span class="op">+</span> E</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>119 ms ± 369 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.array(D)</span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> np.array(E)</span>
-<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit F <span class="op">=</span> D <span class="op">+</span> E</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1.33 ms ± 41.4 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
+<pre><code>1.35 ms ± 60.2 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
 </div>
 </div>
 <p>So why is numpy vectorization so much faster than using native python loops? Because it turns out that numpy by and large doesn’t actually perform array operations in python! When array operations are done, numpy compiles them down to low-level C code and runs the operations there, where things are much faster.</p>
@@ -1050,26 +1037,26 @@ B.shape = (5, 3)</code></pre>
 <li>An array of dimension or rank 3 or higher is called a <strong>tensor</strong>. These are arrays with multiple matrices.</li>
 </ul>
 <p>More on these when we get to linear algebra. Here are some examples so you can see what they look like. Note I’m using <code>dtype=np.float64</code> to explicitly cast the values as float64 when defining the arrays. Numpy’s vectorization operations work for all of these arrays regardless of their shape.</p>
-<div class="cell" data-execution_count="51">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>scalar <span class="op">=</span> np.float64(<span class="dv">5</span>)</span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>scalar <span class="co"># 0-dimensional</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="51">
+<div class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>scalar <span class="op">=</span> np.float64(<span class="dv">5</span>)</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>scalar <span class="co"># 0-dimensional</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
 <pre><code>5.0</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="52">
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>vector <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], dtype<span class="op">=</span>np.float64)</span>
-<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'vector.shape = </span><span class="sc">{</span>vector<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'vector = </span><span class="sc">{</span>vector<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>vector <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], dtype<span class="op">=</span>np.float64)</span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'vector.shape = </span><span class="sc">{</span>vector<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'vector = </span><span class="sc">{</span>vector<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>vector.shape = (3,)
 vector = [1. 2. 3.]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="53">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]], dtype<span class="op">=</span>np.float64)</span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'matrix.shape = </span><span class="sc">{</span>matrix<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'matrix = </span><span class="ch">\n</span><span class="sc">{</span>matrix<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]], dtype<span class="op">=</span>np.float64)</span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'matrix.shape = </span><span class="sc">{</span>matrix<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'matrix = </span><span class="ch">\n</span><span class="sc">{</span>matrix<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>matrix.shape = (2, 3)
 matrix = 
@@ -1077,10 +1064,10 @@ matrix =
  [4. 5. 6.]]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="54">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>tensor <span class="op">=</span> np.array([[[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]], [[<span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>]]], dtype<span class="op">=</span>np.float64)</span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'tensor.shape = </span><span class="sc">{</span>tensor<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'tensor = </span><span class="ch">\n</span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>tensor <span class="op">=</span> np.array([[[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]], [[<span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>]]], dtype<span class="op">=</span>np.float64)</span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'tensor.shape = </span><span class="sc">{</span>tensor<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'tensor = </span><span class="ch">\n</span><span class="sc">{</span>tensor<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tensor.shape = (2, 2, 2)
 tensor = 
@@ -1092,11 +1079,11 @@ tensor =
 </div>
 </div>
 <p>Numpy also supports array aggregation operations as well. Suppose you have a matrix <code>A</code> and want to get the sum of the values in each row of <code>A</code>. To do this, you could use <code>np.sum(A, axis=1)</code>, where <code>axis</code> is the index of the dimension you want to sum over (the columns in this case). This will return a vector where the value at index <span class="math inline">\(i\)</span> is the sum of elements in row <span class="math inline">\(i\)</span>. To sum over <em>all</em> elements in the array, don’t pass anything to <code>axis</code>.</p>
-<div class="cell" data-execution_count="55">
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>], [<span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>]], dtype<span class="op">=</span>np.float64)</span>
-<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'sum over all A = </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(A)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'row sums of A = </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(A, axis<span class="op">=</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>], [<span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>]], dtype<span class="op">=</span>np.float64)</span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'sum over all A = </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(A)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'row sums of A = </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(A, axis<span class="op">=</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A = 
 [[ 1.  2.  3.]
@@ -1107,15 +1094,15 @@ row sums of A = [ 6. -6.  0.]</code></pre>
 </div>
 </div>
 <p>Indexing into numpy arrays like <code>A</code> is more powerful than with python lists. Instead of having to awkwardly index like <code>A[1][0]</code>, write <code>A[1, 0]</code>. To get all values in column index <code>1</code>, write <code>A[:, 1]</code>. To get just the first and last row, we could just pass the index we want in as a list like this, <code>A[[0, -1], :]</code>.</p>
-<div class="cell" data-execution_count="56">
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A[1, 0] = </span><span class="sc">{</span>A[<span class="dv">1</span>][<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>A[<span class="dv">1</span>, <span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A[1, 0] = </span><span class="sc">{</span>A[<span class="dv">1</span>][<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>A[<span class="dv">1</span>, <span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A[1, 0] = -1.0 = -1.0</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="57">
-<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'col 1 of A = </span><span class="sc">{</span>A[:, <span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'rows 0 and -1 of A = </span><span class="ch">\n</span><span class="sc">{</span>A[[<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>], :]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'col 1 of A = </span><span class="sc">{</span>A[:, <span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'rows 0 and -1 of A = </span><span class="ch">\n</span><span class="sc">{</span>A[[<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>], :]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>col 1 of A = [ 2. -2.  0.]
 rows 0 and -1 of A = 
@@ -1124,9 +1111,9 @@ rows 0 and -1 of A =
 </div>
 </div>
 <p>Numpy also supports Boolean masks as indexes. Suppose we want to get all the positive elements <code>x &gt;= 0</code> in <code>A</code>. We could create a mask <code>A &gt; 0</code>, and pass that into <code>A</code> as an index to pick out the positive elements only.</p>
-<div class="cell" data-execution_count="58">
-<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'mask of (A &gt;= 0) = </span><span class="ch">\n</span><span class="sc">{</span>(A <span class="op">&gt;=</span> <span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'elements of (A &gt;= 0) = </span><span class="ch">\n</span><span class="sc">{</span>A[A <span class="op">&gt;=</span> <span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'mask of (A &gt;= 0) = </span><span class="ch">\n</span><span class="sc">{</span>(A <span class="op">&gt;=</span> <span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'elements of (A &gt;= 0) = </span><span class="ch">\n</span><span class="sc">{</span>A[A <span class="op">&gt;=</span> <span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>mask of (A &gt;= 0) = 
 [[ True  True  True]
@@ -1144,30 +1131,30 @@ elements of (A &gt;= 0) =
 <section id="motivation" class="level3" data-number="2.4.1">
 <h3 data-number="2.4.1" class="anchored" data-anchor-id="motivation"><span class="header-section-number">2.4.1</span> Motivation</h3>
 <p>Let’s start with a simple example. Suppose we have an array of floats defined below. We’d like to add 1 to every number in the array. How can we do it? One “pythonic” way might be to use a list comprehension like so. This will work just fine, but it requires going back and forth between arrays and lists.</p>
-<div class="cell" data-execution_count="59">
-<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">1.</span>, <span class="fl">2.</span>, <span class="fl">3.</span>, <span class="fl">4.</span>, <span class="fl">5.</span>])</span>
-<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a>x_plus_1 <span class="op">=</span> np.array([val <span class="op">+</span> <span class="dv">1</span> <span class="cf">for</span> val <span class="kw">in</span> x])</span>
-<span id="cb117-5"><a href="#cb117-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + 1 = </span><span class="sc">{</span>x_plus_1<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="58">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">1.</span>, <span class="fl">2.</span>, <span class="fl">3.</span>, <span class="fl">4.</span>, <span class="fl">5.</span>])</span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>x_plus_1 <span class="op">=</span> np.array([val <span class="op">+</span> <span class="dv">1</span> <span class="cf">for</span> val <span class="kw">in</span> x])</span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + 1 = </span><span class="sc">{</span>x_plus_1<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x = [1. 2. 3. 4. 5.]
 x + 1 = [2. 3. 4. 5. 6.]</code></pre>
 </div>
 </div>
 <p>What if we didn’t want to go back and forth like that? It is slow after all. Anytime numpy has to handoff back to python or vice versa it’s going to slow things down. Another thing we could try is to make a vector of ones of the same size as <code>x</code>, then add it to <code>x</code>. This is also fine, but it requires defining this extra array of ones just to add 1 to the original array.</p>
-<div class="cell" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>ones <span class="op">=</span> np.ones(<span class="bu">len</span>(x))</span>
-<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>x_plus_1 <span class="op">=</span> x <span class="op">+</span> ones</span>
-<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + 1 = </span><span class="sc">{</span>x_plus_1<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>ones <span class="op">=</span> np.ones(<span class="bu">len</span>(x))</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>x_plus_1 <span class="op">=</span> x <span class="op">+</span> ones</span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + 1 = </span><span class="sc">{</span>x_plus_1<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x + 1 = [2. 3. 4. 5. 6.]</code></pre>
 </div>
 </div>
 <p>We’d <em>like</em> to be able to just add 1 to the array like we would with numbers. If <code>x</code> were a single number we’d just write <code>x + 1</code> to add one to it, right? But technically we can’t do this if <code>x</code> is an array, since <code>x</code> has shape <code>(5,)</code> and 1 is just a number with no shape. This is where broadcasting comes in. Broadcasting says let’s <em>define</em> the operation <code>x + 1</code> so that it <em>means</em> add 1 to every element of <code>x</code>.</p>
-<div class="cell" data-execution_count="61">
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>x_plus_1 <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + 1 = </span><span class="sc">{</span>x_plus_1<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>x_plus_1 <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + 1 = </span><span class="sc">{</span>x_plus_1<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x + 1 = [2. 3. 4. 5. 6.]</code></pre>
 </div>
@@ -1201,15 +1188,15 @@ C &amp;:&amp; 2, &amp; &amp; 2, &amp; &amp; 3 \\
 <li>The shapes of A and B are now equal. The output array <code>C</code> will have shape <code>(2, 2, 3)</code>.</li>
 </ul>
 <p>Let’s verify this is true on two simple arrays of ones. Let’s also print out what <code>C</code> looks like. Since only copying is taking place we should just be adding 2 arrays of ones, hence the output should sum 2 arrays of ones, giving one array <code>C</code> of twos.</p>
-<div class="cell" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.ones((<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
-<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.ones(<span class="dv">3</span>,)</span>
-<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A.shape = </span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B.shape = </span><span class="sc">{</span>B<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb123-5"><a href="#cb123-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-6"><a href="#cb123-6" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">+</span> B</span>
-<span id="cb123-7"><a href="#cb123-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C.shape = </span><span class="sc">{</span>C<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb123-8"><a href="#cb123-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C = </span><span class="ch">\n</span><span class="sc">{</span>C<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.ones((<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.ones(<span class="dv">3</span>,)</span>
+<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A.shape = </span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B.shape = </span><span class="sc">{</span>B<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb122-5"><a href="#cb122-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-6"><a href="#cb122-6" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">+</span> B</span>
+<span id="cb122-7"><a href="#cb122-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C.shape = </span><span class="sc">{</span>C<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb122-8"><a href="#cb122-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C = </span><span class="ch">\n</span><span class="sc">{</span>C<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A.shape = (2, 2, 3)
 B.shape = (3,)
@@ -1238,14 +1225,14 @@ C &amp;:&amp; 8, &amp; &amp; 7, &amp; &amp; 6, &amp; &amp; 5 \\
 <li>The shapes of <code>A</code> and <code>B</code> are now equal. The output <code>C</code> thus has shape <code>(8, 7, 6, 5)</code>.</li>
 </ul>
 <p>Here again is an example on two arrays of ones. Verify that the shapes come out right.</p>
-<div class="cell" data-execution_count="63">
-<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.ones((<span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>))</span>
-<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.ones((<span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">5</span>))</span>
-<span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A.shape = </span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb125-4"><a href="#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B.shape = </span><span class="sc">{</span>B<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb125-5"><a href="#cb125-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb125-6"><a href="#cb125-6" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">/</span> B</span>
-<span id="cb125-7"><a href="#cb125-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C.shape = </span><span class="sc">{</span>C<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.ones((<span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>))</span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.ones((<span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">5</span>))</span>
+<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A.shape = </span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B.shape = </span><span class="sc">{</span>B<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb124-5"><a href="#cb124-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-6"><a href="#cb124-6" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">/</span> B</span>
+<span id="cb124-7"><a href="#cb124-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C.shape = </span><span class="sc">{</span>C<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A.shape = (8, 1, 6, 1)
 B.shape = (7, 1, 5)
@@ -1254,69 +1241,9 @@ C.shape = (8, 7, 6, 5)</code></pre>
 </div>
 <p>That’s pretty much all there is to broadcasting. It’s a systematic way of trying to copy the dimensions in each array until they both have the same shape. All this broadcasting is done under the hood for you when you try to operate on two arrays of different shapes. You don’t need to do anything but understand <em>how</em> the arrays get broadcast together so you can avoid errors in your calculations, sometimes very subtle errors.</p>
 <p>This can be a bit confusing to understand if you’re not used to it. We’ll practice broadcasting a good bit so you can get the hang of it.</p>
-</section>
-</section>
-<section id="computational-performance" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="computational-performance"><span class="header-section-number">2.5</span> Computational Performance</h2>
-<p>We’re usually interested in writing functions that run not just correctly, but efficiently. We want them to run as quickly as possible, and using as little memory as possible. When dealing with numbers, particularly floats, the usual way to measure how quickly a function will run is by counting <strong>floating point operations</strong>, or <strong>FLOPS</strong> for short. Memory is measured by counting the number of “words” each element in the function takes up.</p>
-<p>Consider a simple example. Suppose we want to element-wise multiply two 1D arrays <code>x</code> and <code>y</code> each of size <span class="math inline">\(n\)</span> using the following function,</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.</span> <span class="kw">def</span> element_wise_multiply(x, y):</span>
-<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2.</span>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
-<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a><span class="fl">3.</span>    z <span class="op">=</span> [x[i] <span class="op">*</span> y[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)]</span>
-<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a><span class="fl">4.</span>    <span class="cf">return</span> z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Let’s ask two questions about this function:</p>
-<ol type="1">
-<li>How many FLOPs is the function doing? That is, how many arithmetic operations <code>+, -, *, /, //, %</code> did this function execute?</li>
-<li>How many words of memory does the function use, ignoring the inputs, assuming each word has the same word size (e.g.&nbsp;64 bits)?</li>
-</ol>
-<p>Starting with (1), let’s look at this function and see how many arithmetic operations, or FLOPs, each line is doing.</p>
-<ol type="1">
-<li>The function signature isn’t doing any arithmetic, so <span class="math inline">\(0\)</span> FLOPs</li>
-<li>Getting the length of an array isn’t doing any arithmetic, so <span class="math inline">\(0\)</span> FLOPs</li>
-<li>Here we’re looping over <span class="math inline">\(n\)</span> terms. Each term has a single multiply. So there are <span class="math inline">\(n\)</span> total FLOPs.</li>
-<li>The return statement isn’t doing any arithmetic, so <span class="math inline">\(0\)</span> FLOPs</li>
-</ol>
-<p>What about (2)? Let’s count how many words are being stored by each line of the function.</p>
-<ol type="1">
-<li>We’ll generally assume the function signature fits in <span class="math inline">\(1\)</span> word of memory. This isn’t exactly true, but it’s a decent abstraction.</li>
-<li>The length of an array is a single integer that’s pre-computed. Since an integer takes one word to store, this line is using <span class="math inline">\(1\)</span> word of memory.</li>
-<li>This line is using a list comprehension to create an array of <code>n</code> elements. Since each element is a single number (each of word size <span class="math inline">\(1\)</span>) the array takes up <span class="math inline">\(n\)</span> words of memory.</li>
-<li>This line is just returning the variable <code>z</code>, which we’ve already counted, so no extra memory is being used.</li>
-</ol>
-<p>Putting it all together, the function is doing <span class="math inline">\(0+0+n+0=n\)</span> total FLOPs and using <span class="math inline">\(1 + 1 + n + 0=n+2\)</span> words of memory when inputs are size <span class="math inline">\(n\)</span>.</p>
-<p>Typically, we imagine <span class="math inline">\(n\)</span> to be very large, say <span class="math inline">\(n=10000\)</span> or something like that. When <span class="math inline">\(n\)</span> gets large, the leading term tends to dominate the rest. So for example <span class="math inline">\(n + 2 \approx n\)</span>. Since it’s the dominant term that determines almost of all of the function’s performance, we typically just drop the other terms and only keep the dominant term, while also ignoring any constant multiples. To indicate this is what we’re doing, it’s common to use what’s called <strong>asymptotic</strong> or <strong>big-O</strong> notation to represent performance. To indicate the leading term of <span class="math inline">\(g(n)\)</span> is of order <span class="math inline">\(f(n)\)</span>, we’d write <span class="math inline">\(O(f(n))\)</span>. This is called the algorithmic <strong>complexity</strong> of the function. Here are some examples so you can get an idea of how to use this notation:</p>
-<ul>
-<li><span class="math inline">\(n+2\)</span>: The dominant term when <span class="math inline">\(n\)</span> gets large is is <span class="math inline">\(n\)</span>, so the total complexity is <span class="math inline">\(O(n)\)</span>.</li>
-<li><span class="math inline">\(10n^3 + n^2 + 7\)</span>: The dominant term is <span class="math inline">\(10n^3\)</span>. Dropping constant multiples gets this down to <span class="math inline">\(n^3\)</span>. So <span class="math inline">\(O(n^3)\)</span> is the total complexity.</li>
-<li><span class="math inline">\(1 + 5n\log n\)</span>: The dominant term here is <span class="math inline">\(5n\log n\)</span>. Dropping constants gives <span class="math inline">\(O(n \log n)\)</span> total complexity.</li>
-<li><span class="math inline">\(2^n + 1000n^{1000}\log n\)</span>: The dominant term is the exponential <span class="math inline">\(2^n\)</span>, so the total complexity is <span class="math inline">\(O(2^n)\)</span>.</li>
-</ul>
-<p>Here’s a general rule of thumb for calculating complexities quickly. Terms on the left will always dominate terms to their right when <span class="math inline">\(n\)</span> is large.</p>
-<p><span class="math display">\[\text{factorials} &gt;&gt; \text{exponents} &gt;&gt; \text{polynomials} &gt;&gt; \text{logarithms} &gt;&gt; \text{constants}.\]</span></p>
-<p>In the above example of element-wise multiplication, both FLOPs and memory are <span class="math inline">\(O(n)\)</span>. In general, element-wise operations will always be <span class="math inline">\(O(n)\)</span> FLOPS and memory when the inputs are size <span class="math inline">\(n\)</span>. This is also true for multi-dimensional arrays containing <span class="math inline">\(n\)</span> <em>total</em> elements. For example, element-wise adding two 2D arrays of shape <span class="math inline">\((m,m)\)</span> will use <span class="math inline">\(O(m^2)\)</span> FLOPs and memory since the arrays contain <span class="math inline">\(n=m \cdot m\)</span> total elements.</p>
-<p>As a rough rule of thumb, complexities below <span class="math inline">\(O(n^3)\)</span> are considered efficient. Complexities above <span class="math inline">\(O(n^3)\)</span> are considered slow. The worst case of all is when it’s exponential or larger, like <span class="math inline">\(O(2^n)\)</span> or <span class="math inline">\(O(n!)\)</span>. In general, we want to make complexities be as low as possible by using a more efficient algorithm that minimizes FLOPs and memory usage. Using FLOPS and memory complexity will allow us to estimate how efficiently machine learning algorithms are running in future lessons.</p>
-<p>Before finishing up, I’ll mention that notions like FLOPs and words of memory are only abstractions to the real things we care about, how long a function <em>actually</em> takes to run (like in seconds), and how much memory is <em>actually</em> being used (like in bytes). When in doubt, if a function is running too slow, your best bet will be to run a <strong>profiler</strong> on the function to see how long it’s taking and how much memory it’s using. In jupyter, you can profile your code using one of the following magic commands:</p>
-<ul>
-<li><code>%timeit</code>: Runs the code a bunch of times and returns the average time it takes for the line to run. This is useful when you just want to get an idea how long something takes to run.</li>
-<li><code>%prun</code>: Runs a profiler on the code and reports various timing statistics on the entire function.</li>
-<li><code>%lprun</code>: Runs a profiler on the code, but reports timing statistics line-by-line, so you can see which lines of code are running slow.
-<ul>
-<li>This is the most useful profiler in my opinion since you can see which actual lines are running slow.</li>
-<li>Need to install the <code>line_profiler</code> library first and load in the notebook with <code>%load_ext line_profiler</code></li>
-</ul></li>
-<li><code>%memit</code>: Runs a memory profiler on the code, returning statistics on how much memory is being taken up.
-<ul>
-<li>Need to install the <code>memory_profiler</code> library first and load in the notebook with <code>%load_ext memory_profiler</code></li>
-</ul></li>
-<li><code>%mprun</code>: Runs a memory profiler on the code, giving line-by-line statistics on how much memory each line is taking up.
-<ul>
-<li>Annoyingly, this only works for functions defined from a python script, not from a notebook</li>
-<li>Need to install the <code>memory_profiler</code> library first and load in the notebook with<code>%load_ext memory_profiler</code></li>
-</ul></li>
-</ul>
-<p>I’ll run each of these profilers on the above function <code>element_wise_multiply</code> so you can see how they work. To run it, you first need to pass in some inputs. I’ll define some reasonably large arrays for this. Notice, as you’d expect, it’s the line defining <code>z</code> that’s the worst offender. This is the idea that FLOPs and memory complexity already were capturing.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
