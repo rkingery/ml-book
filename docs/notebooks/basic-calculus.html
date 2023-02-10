@@ -276,9 +276,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>But what does this even mean? Here it might be helpful to recall our discussion of floating point numbers. Recall that we can’t get infinite precision. In python’s double precision floating point we can only get down to about <span class="math inline">\(5 \cdot 10^{-324}\)</span>, or <code>5e-324</code>. If the square of a small number has a value <em>smaller</em> than about <code>5e-324</code> we’d literally get <code>0.0</code> as far as python is concerned.</p>
 <p>Just for fun let’s look at the really tiny number <span class="math inline">\(10^{-300}\)</span>, or <code>1e-300</code>. That’s 300 decimal places of zeros before the 1 even shows up. Python thinks <code>1e-300</code> is just fine. But what happens if we square it? We should in theory get <span class="math inline">\(10^{-600}\)</span>, or 600 decimal places of zeros followed by a 1. But as far as floating point is concerned, the square is zero.</p>
 <div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> np.float64(<span class="fl">1e-300</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'epsilon = </span><span class="sc">{</span>epsilon<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'epsilon^2 = </span><span class="sc">{</span>epsilon <span class="op">**</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>epsilon = 1e-300
 epsilon^2 = 0.0</code></pre>
@@ -292,9 +295,12 @@ epsilon^2 = 0.0</code></pre>
 <p><span class="math display">\[N = \frac{1}{\varepsilon}, \quad \varepsilon = \frac{1}{N}.\]</span></p>
 <p>If <span class="math inline">\(10^{-300}\)</span> is a good rule of thumb for an infinitesimal, then <span class="math inline">\(10^{300}\)</span> is a good rule of thumb for an infinitely large number.</p>
 <div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> np.float64(<span class="fl">1e300</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'N = </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'N^2 = </span><span class="sc">{</span>N <span class="op">**</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>N = 1e+300
 N^2 = inf</code></pre>
@@ -313,15 +319,13 @@ N^2 = inf</code></pre>
 <section id="derivatives" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="derivatives"><span class="header-section-number">3.2.1</span> Derivatives</h3>
 <p>When we talk about changing <span class="math inline">\(x\)</span> by a little bit and asking how <span class="math inline">\(y\)</span> changes we use a cleaner notation. Instead of writing <span class="math inline">\(x + \varepsilon\)</span>, we’d write <span class="math inline">\(x + dx\)</span>. Instead of writing <span class="math inline">\(y + \delta\)</span>, we’d write <span class="math inline">\(y + dy\)</span>. These values <span class="math inline">\(dx\)</span> and <span class="math inline">\(dy\)</span> are called <strong>differentials</strong>. Differentials are just like the infinitesimals I defined before, except the differential notation makes it clear what is a small change of what. Writing <span class="math inline">\(dx\)</span> means “a little bit of <span class="math inline">\(x\)</span>”. Writing <span class="math inline">\(dy\)</span> means “a little bit of <span class="math inline">\(y\)</span>”. This is where the term “differentiation” comes from.</p>
-<p>Suppose <span class="math inline">\(x\)</span> gets nudged a little bit to <span class="math inline">\(x+dx\)</span>. Then <span class="math inline">\(y=f(x)\)</span> gets nudged to <span class="math inline">\(y+dy=f(x+dx)\)</span>. In our running example, this is</p>
-<p><span class="math display">\[y + dy = f(x+dx) = (x + dx)^2 = x^2 + 2xdx + (dx)^2 \approx x^2 + 2xdx.\]</span></p>
-<p>The amount that <span class="math inline">\(y\)</span> gets nudged is just <span class="math inline">\(dy\)</span>. Let’s solve for <span class="math inline">\(dy\)</span>. Subtracting both sides by <span class="math inline">\(y=x^2\)</span> just gives <span class="math inline">\(dy = 2xdx\)</span>. Dividing both sides by <span class="math inline">\(dx\)</span>, we get</p>
+<p>Suppose <span class="math inline">\(x\)</span> gets nudged a little bit to <span class="math inline">\(x+dx\)</span>. Then <span class="math inline">\(y=f(x)\)</span> gets nudged to <span class="math inline">\(y+dy=f(x+dx)\)</span>. Since <span class="math inline">\(dy=f(x+dx)-f(x)\)</span>, evidently differentials can be thought of as the difference of two values infinitesimally close to each other. Anyway, re-expressing our example in terms of differentials, we get</p>
+<p><span class="math display">\[y + dy = f(x+dx) = (x + dx)^2 = x^2 + 2xdx + (dx)^2 \approx x^2 + 2xdx,\]</span></p>
+<p>or <span class="math inline">\(dy=2xdx\)</span>. This is how much <span class="math inline">\(y\)</span> changes in response to the perturbation <span class="math inline">\(x+dx\)</span>. Just for the hell of it, let’s divide both sides by <span class="math inline">\(dx\)</span>. Then we get</p>
 <p><span class="math display">\[\frac{dy}{dx} = 2x.\]</span></p>
-<p>This ratio of differentials <span class="math inline">\(\frac{dy}{dx}\)</span> is called the <em>derivative</em> of the function <span class="math inline">\(y=x^2\)</span>, usually just pronounced “dydx”. Notice there’s no differential on the right-hand side, hence the derivative is not itself infinitesimal. It’s a finite <em>ratio</em> of infinitesimals.</p>
+<p>This ratio of differentials is called the <em>derivative</em> of the function <span class="math inline">\(y=x^2\)</span>. It’s often pronounced “dydx” or “the derivative of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span>”. Notice there’s no differential on the right-hand side, hence the derivative is not itself infinitesimal. It’s a finite <em>ratio</em> of infinitesimals.</p>
 <p>We can talk about any reasonably well-behaved function <span class="math inline">\(y=f(x)\)</span> having a derivative. If we change <span class="math inline">\(x\)</span> by an infinitesimal amount <span class="math inline">\(dx\)</span>, then <span class="math inline">\(y\)</span> changes by an amount <span class="math inline">\(dy=f(x+dx)-f(x)\)</span>. The <strong>derivative</strong> is just the ratio of these differential changes,</p>
 <p><span class="math display">\[\frac{dy}{dx} = \frac{f(x+dx)-f(x)}{dx}.\]</span></p>
-<p>What do I mean when I say the function <span class="math inline">\(f(x)\)</span> needs to be reasonably well behaved? For one thing, the function needs to be <strong>continuous</strong>. Informally, you can think of a univariate function as being continuous if you can draw its graph on a piece of paper without lifting your pen. There are no jumps or holes anywhere in the functions’ curve. More formally, a function is continuous at <span class="math inline">\(x_0\)</span> if <span class="math inline">\(f(x) \rightarrow f(x_0)\)</span> as <span class="math inline">\(x \rightarrow x_0\)</span>. That is, all the limits are what they should be. There are no holes or jumps in the graph.</p>
-<p>Continuity is just <em>one</em> condition necessary for <span class="math inline">\(f(x)\)</span> to be differentiable. It also can’t be too jagged in some sense. Derivatives don’t make sense at points where there are kinks in the graph. In practice, however, this isn’t a huge problem. We can just extend the derivative to be what’s called a <a href="https://en.wikipedia.org/wiki/Subderivative">subderivative</a>. With a subderivative, you can roughly speaking take whatever value for the derivative you want at these kinks and it won’t make a difference. This is how we in practice calculate the derivatives of neural networks. Typically, a neural network <em>does</em> have kinks, and lots of them. At these kinks, we just pick an arbitrary value for the derivative, usually <span class="math inline">\(0\)</span>, and go on about our day.</p>
 <p>Practically speaking, you can think of the derivative as a <em>rate</em> or a speed. It’s the rate that <span class="math inline">\(y\)</span> changes per unit <span class="math inline">\(x\)</span>. Roughly speaking, if <span class="math inline">\(x\)</span> changes by one unit, then <span class="math inline">\(y\)</span> will change by <span class="math inline">\(\frac{dy}{dx}\)</span> units. When the derivative is large, <span class="math inline">\(y\)</span> will change a lot in response to small changes in <span class="math inline">\(x\)</span>. When the derivative is small, <span class="math inline">\(y\)</span> will barely change at all in response to small changes in <span class="math inline">\(x\)</span>. The <em>sign</em> of the derivative indicates whether the change is up or down.</p>
 <p>Notice that the derivative is also itself a function, since it maps inputs <span class="math inline">\(x\)</span> to outputs <span class="math inline">\(\frac{dy}{dx}\)</span>. To indicate this functional relationship people sometimes write</p>
 <p><span class="math display">\[\frac{dy}{dx}=\frac{d}{dx}f(x) \quad \text{ or } \quad \frac{dy}{dx}=f'(x)\]</span></p>
@@ -332,7 +336,7 @@ N^2 = inf</code></pre>
 <p><span class="math display">\[\frac{dy}{dx}\bigg|_{x=1} = \frac{(x+dx)^2 - x^2}{dx}\bigg|_{x=1} = \frac{(1+dx)^2 - 1}{dx}.\]</span></p>
 <p><strong>Notation:</strong> Read the expression <span class="math inline">\(|_{x=1}\)</span> as “evaluated at <span class="math inline">\(x=1\)</span>”. It’s a common shorthand. Another way to write the same thing is <span class="math inline">\(f'(1)\)</span> or <span class="math inline">\(\frac{d}{dx}f(1)\)</span>.</p>
 <p>The output of this result will depend on what value of <span class="math inline">\(dx\)</span> we choose. If <span class="math inline">\(dx\)</span> were <em>exactly</em> infinitesimal, we already know the right answer should be <span class="math inline">\(\frac{dy}{dx}\big|_{x=1} = 2 \cdot 1 = 2\)</span>. Let’s see what happens to our calculation for different choices of <span class="math inline">\(dx\)</span> ranging from <span class="math inline">\(dx=1\)</span> all the way down to <span class="math inline">\(dx=10^{-200}\)</span>. I’ll also calculate the <em>error</em>, which is the predicted value <span class="math inline">\(2\)</span> minus the calculated value. Smaller error is better, obviously.</p>
-<div class="cell" data-cold-fold="true" data-execution_count="8">
+<div class="cell" data-cold-fold="true" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>dydx_exact <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> x0</span>
@@ -355,20 +359,30 @@ dx = 0.0000000000000000      dy/dx = 0.000000    error = -2.000000</code></pre>
 <p>Starting with <span class="math inline">\(dx=1\)</span> is a bad choice, with a huge error of <span class="math inline">\(1.0\)</span>. We’re way off. Shrinking to <span class="math inline">\(dx=0.1\)</span> puts us in the ball park with a value <span class="math inline">\(\frac{dy}{dx}=2.1\)</span>. You can see that making <span class="math inline">\(dx\)</span> successively smaller and smaller makes the error successively smaller, in this case by a factor of 10 each time.</p>
 <p>The error is getting smaller all the way down to about <span class="math inline">\(dx=10^{-10}\)</span> before creeping up again as we make <span class="math inline">\(dx\)</span> even smaller than that. This is due to the numerical roundoff of floating point numbers. We’re subtracting two numbers <span class="math inline">\((1+dx)^2 - 1\)</span> that are very close to each other when <span class="math inline">\(dx\)</span> is really small, which as you’ll recall is one of the pitfalls to avoid when working with floating point numbers.</p>
 <p>This method we just used to calculate the derivative is, with some minor tweeks, exactly how derivatives are usually calculated on a computer. The process of calculating the derivative this way, directly from its definition essentially, is called <strong>numerical differentiation</strong>. We choose a small value of <span class="math inline">\(dx\)</span> and just apply the formula above, with some minor tweaks to get better accuracy in fewer steps. It’s common in practice to choose “less small” values for <span class="math inline">\(dx\)</span> when calculating derivatives numerically like this, e.g.&nbsp;<code>1e-5</code>.</p>
+<p>What did I mean when I say the function <span class="math inline">\(f(x)\)</span> needs to be “reasonably well behaved” in order to have a derivative? For one thing, the function needs to be <strong>continuous</strong>. Informally, you can think of a univariate function as being continuous if you can draw its graph on a piece of paper without lifting your pen. There are no jumps or holes anywhere in the functions’ curve. A better way to say this is that <span class="math inline">\(y=f(x)\)</span> is continuous at a point <span class="math inline">\(x_0\)</span> provided <span class="math inline">\(f(x) \approx f(x_0)\)</span> whenever <span class="math inline">\(x \approx x_0\)</span>.</p>
+<p>Continuity is just <em>one</em> condition necessary for <span class="math inline">\(f(x)\)</span> to be differentiable. It also can’t be too jagged in some sense. Derivatives don’t make sense at points where there are kinks in the graph. In practice, however, this isn’t a huge problem. We can just extend the derivative to be what’s called a <a href="https://en.wikipedia.org/wiki/Subderivative">subderivative</a>. With a subderivative, you can roughly speaking take whatever value for the derivative you want at these kinks and it won’t make a difference. This is how we in practice calculate the derivatives of neural networks. Typically, a neural network <em>does</em> have kinks, and lots of them. At these kinks, we just pick an arbitrary value for the derivative and go on about our day.</p>
 <p>Since derivatives are themselves functions, we can take the derivative of the derivative too. If <span class="math inline">\(\frac{d}{dx}f(x)\)</span> is the derivative function, then the derivative of the derivative is just</p>
 <p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{d}{dx} \bigg(\frac{d}{dx} f(x)\bigg).\]</span></p>
-<p>This is called a <strong>second derivative</strong>. The left-hand notation <span class="math inline">\(\frac{d^2 y}{dx^2}\)</span> is the most common way to express the second derivative. Other ways are <span class="math inline">\(f''(x)\)</span> or <span class="math inline">\(\frac{d^2}{dx^2} f(x)\)</span>. If you do some algebra, you can show that the second derivative is given by the following ratio of differentials,</p>
-<p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{f(x+2dx) - 2f(x+dx) + f(x)}{dx^2}.\]</span></p>
-<p>Note <span class="math inline">\(dx^2\)</span> is shorthand for <span class="math inline">\((dx)^2\)</span>. Just as you can think of a first derivative as a rate or speed, you can think of the second derivative as a rate of a rate, or an acceleration. When the second derivative is large, the function is accelerating quickly, and the derivative is rapidly changing. When it’s small, the function is barely accelerating at all, and the derivative is roughly constant.</p>
+<p>This is called a <strong>second derivative</strong>. Other ways to write the same thing are <span class="math inline">\(f''(x)\)</span> or <span class="math inline">\(\frac{d^2}{dx^2} f(x)\)</span>.</p>
 <p>As a quick example, the second derivative of our running function <span class="math inline">\(y=x^2\)</span> is the first derivative of <span class="math inline">\(2x\)</span>, which is</p>
 <p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{2(x + dx) - 2x}{dx} = 2.\]</span></p>
-<p>Evidently, the second derivative of <span class="math inline">\(y=x^2\)</span> is just the <em>constant</em> function <span class="math inline">\(\frac{d^2 y}{dx^2}=2\)</span>. Higher-order derivatives can be defined as well by continuing to take derivatives of the second derivative, like third derivatives of fourth derivatives. These show up far less often though, so I won’t discuss them.</p>
+<p>Evidently, the second derivative of <span class="math inline">\(y=x^2\)</span> is just the <em>constant</em> function <span class="math inline">\(\frac{d^2 y}{dx^2}=2\)</span>.</p>
+<p>Just as you can think of a first derivative as a rate or speed, you can think of the second derivative as a rate of a rate, or an acceleration. When the second derivative is large, the function is accelerating quickly, and the derivative or speed is rapidly changing. When the second derivative small, the function is barely accelerating at all, and the derivative or speed is roughly constant.</p>
+<p><strong>Aside:</strong> Just as I derived an explicit formula for the first derivative, I can do the same for the second derivative. The key is to introduce the <em>second differentials</em> <span class="math inline">\(d^2y = d(dy)\)</span> and <span class="math inline">\(dx^2=(dx)^2\)</span>. Think of these as squared infinitesimals, or differences of differences. Since <span class="math inline">\(dy = df(x) = f(x+dx) - f(x)\)</span>, we have</p>
+<p><span class="math display">\[\begin{align*}
+d^2 y &amp;= d(dy) = d\big(f(x+dx) - f(x)\big) = d\big(f(x+dx)\big) - df(x) \\
+&amp;= \big(f((x+dx)+dx)-f(x+dx)\big) - \big(f(x+dx)-f(x)\big) \\
+&amp;= f(x+2dx)-2f(x+dx)-f(x).
+\end{align*}\]</span></p>
+<p>Dividing both sides by <span class="math inline">\(dx^2=(dx)^2\)</span>, we finally have an expression for the second derivative as a ratio of second differentials,</p>
+<p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{f(x+2dx) - 2f(x+dx) + f(x)}{dx^2}.\]</span></p>
+<p>Higher-order derivatives can be defined as well by continuing to take derivatives of the second derivative, like third derivatives of fourth derivatives. These show up far less often though, so I won’t discuss them.</p>
 </section>
 <section id="visualizing-derivatives" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="visualizing-derivatives"><span class="header-section-number">3.2.2</span> Visualizing Derivatives</h3>
 <p>The first derivative <span class="math inline">\(\frac{dy}{dx}\)</span> has an interesting and useful geometric interpretation as the <strong>slope</strong> of the curve <span class="math inline">\(y=f(x)\)</span> at the point <span class="math inline">\(x\)</span>. To see this, imagine a right triangle with length <span class="math inline">\(dx\)</span> and height <span class="math inline">\(dy\)</span>. The slope, or “steepness”, of its hypotenuse is just the ratio height over width, i.e.&nbsp;</p>
 <p><span class="math display">\[\text{slope} = \frac{\text{rise}}{\text{run}} = \frac{dy}{dx}.\]</span></p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plot_right_triangle()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -388,7 +402,7 @@ dx = 0.0000000000000000      dy/dx = 0.000000    error = -2.000000</code></pre>
 <p>so the equation for the tangent line of <span class="math inline">\(y=x^2\)</span> at <span class="math inline">\(x_0=2\)</span> is</p>
 <p><span class="math display">\[y = 4 + 4(x - 2) = 4x -4.\]</span></p>
 <p>The code below implements this calculation. I’ll define the function <code>f</code> that gives <code>y = f(x)</code> along with the derivative <code>dydx = dfdx(x)</code>, and then use these two define a function <code>f_line</code> to calculate the tangent line, which also depends on a specified point <code>x0</code>.</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span>
@@ -423,7 +437,7 @@ dx = 0.0000000000000000      dy/dx = 0.000000    error = -2.000000</code></pre>
 <p>Here’s a more general example where the second derivative isn’t constant, <span class="math inline">\(y = \sin x\)</span>. In this case, <span class="math inline">\(\frac{dy}{dx} = \cos x\)</span> and <span class="math inline">\(\frac{d^2y}{dx^2} = -\sin x\)</span>. Suppose we want to get the tangent parabola at the point <span class="math inline">\(x_0=-\frac{\pi}{2}\)</span>, so <span class="math inline">\(f(x_0)=-1\)</span>, <span class="math inline">\(\frac{d}{dx}f(x_0)=0\)</span> and <span class="math inline">\(\frac{d^2}{dx^2}f(x_0)=1\)</span>. Then the tangent parabola is given by the equation</p>
 <p><span class="math display">\[y = -1 + 0 \cdot \bigg(x + \frac{\pi}{2}\bigg) + \bigg(x + \frac{\pi}{2}\bigg)^2 = \bigg(x + \frac{\pi}{2}\bigg)^2 - 1.\]</span></p>
 <p>This is an upward-sloping parabola with vertex at <span class="math inline">\(\big(\frac{\pi}{2}, -1\big)\)</span>. Here’s a plot of this idea using the same helper function, but passing in <code>f_parabola</code> instead of <code>f_tangent</code>. Notice how the parabola approximates the function pretty well around the point <span class="math inline">\(\big(\frac{\pi}{2}, -1\big)\)</span>, but gets less and less accurate as we get away from that point. The fact that <span class="math inline">\(a=1\)</span> here says that we should expect an upward sloping parabola with “unit curvature”, which is what we see.</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.sin(x)</span>
@@ -587,7 +601,7 @@ v &amp;= i(u), \\
 <p>To illustrate how to calculate derivatives I’ll use a relevant example to machine learning, the sigmoid function. Recall the sigmoid function <span class="math inline">\(y=\sigma(x)\)</span> is defined by</p>
 <p><span class="math display">\[y = \frac{1}{1 + e^{-x}}.\]</span></p>
 <p>Its shape looks like an S (hence the name), going from <span class="math inline">\(y=0\)</span> at <span class="math inline">\(x=-\infty\)</span> to <span class="math inline">\(y=1\)</span> at <span class="math inline">\(x=\infty\)</span>.</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
@@ -624,7 +638,9 @@ v &amp;= i(u), \\
 <p>The sigmoid function shows up in machine learning when doing binary classification. If a problem can be classified into two classes, <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>, the sigmoid can be used to model the probability of the input being in class <span class="math inline">\(1\)</span>. The closer the sigmoid is to <span class="math inline">\(1\)</span>, or equivalently the larger <span class="math inline">\(x\)</span> is, the more likely the input is a <span class="math inline">\(1\)</span>. More on this in a future lesson.</p>
 <p>To calculate the derivative of a function in sympy, use <code>y.diff(x)</code>, which means “differentiate <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span>”.</p>
 <p>Here is a calculation of the derivative of the sigmoid function. I’ll also calculate the second derivative to show you how easy it is to do relative to the torture of trying to do it by hand.</p>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> sp.exp(<span class="op">-</span>x))</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>dydx <span class="op">=</span> y.diff(x)</span>
@@ -632,6 +648,7 @@ v &amp;= i(u), \\
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'dydx = </span><span class="sc">{</span>dydx<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'd2dx2 = </span><span class="sc">{</span>d2dx2<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>y = 1/(1 + exp(-x))
 dydx = exp(-x)/(1 + exp(-x))**2
@@ -649,24 +666,23 @@ d2dx2 = -exp(-x)/(1 + exp(-x))**2 + 2*exp(-2*x)/(1 + exp(-x))**3</code></pre>
 <p>Suppose we want to add up the same infinitesimal <span class="math inline">\(\varepsilon\)</span> some number <span class="math inline">\(N\)</span> times, <span class="math display">\[\underbrace{\varepsilon + \varepsilon + \cdots + \varepsilon}_{\text{N times}} = N\varepsilon.\]</span></p>
 <p>If <span class="math inline">\(N\)</span> is any reasonably sized finite number, say a number like <span class="math inline">\(N=1000\)</span>, then the product <span class="math inline">\(N\varepsilon\)</span> will again be infinitesimal, since <span class="math inline">\((N\varepsilon)^2 \approx 0\)</span>. But if we make <span class="math inline">\(N\)</span> <em>infinitely large</em>, then <span class="math inline">\(N\varepsilon\)</span> will be a finite number.</p>
 <p>Here’s how this might look when adopting our informal convention that infinitesimals equal <span class="math inline">\(10^{-300}\)</span> and infinitely large numbers equal <span class="math inline">\(10^{300}\)</span>. For <span class="math inline">\(N=1000\)</span> the square <span class="math inline">\((N\varepsilon)^2 \approx 0\)</span>. But it’s not when we take <span class="math inline">\(N=10^{300}\)</span>. It’s finite, with <span class="math inline">\((N\varepsilon)^2=1\)</span>.</p>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">1e-300</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'N = </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'(N * epsilon)^2 = </span><span class="sc">{</span>(N <span class="op">*</span> epsilon) <span class="op">**</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">1e-300</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'N = </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'(N * epsilon)^2 = </span><span class="sc">{</span>(N <span class="op">*</span> epsilon) <span class="op">**</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="fl">1e300</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'N = </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'(N * epsilon)^2 = </span><span class="sc">{</span>(N <span class="op">*</span> epsilon) <span class="op">**</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>N = 1000
-(N * epsilon)^2 = 0.0</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="fl">1e300</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'N = </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'(N * epsilon)^2 = </span><span class="sc">{</span>(N <span class="op">*</span> epsilon) <span class="op">**</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>N = 1e+300
+(N * epsilon)^2 = 0.0
+N = 1e+300
 (N * epsilon)^2 = 1.0</code></pre>
 </div>
 </div>
@@ -675,18 +691,18 @@ d2dx2 = -exp(-x)/(1 + exp(-x))**2 + 2*exp(-2*x)/(1 + exp(-x))**3</code></pre>
 <section id="area-under-the-curve" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="area-under-the-curve"><span class="header-section-number">3.3.2</span> Area Under The Curve</h3>
 <p>Let’s do an example. Suppose we’re interested in calculating the area under the curve <span class="math inline">\(y=\sqrt{x}\)</span> between two points, say <span class="math inline">\(x=0\)</span> and <span class="math inline">\(x=10\)</span>. How would we go about this?</p>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="11">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.sqrt(x)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="dv">0</span>, <span class="dv">10</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plot_function_with_area(x, f, a<span class="op">=</span>a, b<span class="op">=</span>b, title<span class="op">=</span><span class="st">'Area Under $y=\sqrt</span><span class="sc">{x}</span><span class="st">$ Between $0 \leq x \leq 10$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.sqrt(x)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="dv">0</span>, <span class="dv">10</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>plot_function_with_area(x, f, a<span class="op">=</span>a, b<span class="op">=</span>b, title<span class="op">=</span><span class="st">'Area Under $y=\sqrt</span><span class="sc">{x}</span><span class="st">$ Between $0 \leq x \leq 10$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="basic-calculus_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="basic-calculus_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -700,10 +716,10 @@ A &amp;\approx f(1)dx + f(2)dx + f(3)dx + \cdots + f(10)dx \\
 &amp;\approx 22.468
 \end{align}\]</span></p>
 <p>It’s helpful to visualize what’s going on. I’ll plot this area approximation scheme by using the helper function <code>plot_approximating_rectangles</code>, which will show the plot of the curve and its approximating rectangles. It also prints out the approximating area calculated above.</p>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="12">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plot_approximating_rectangles(x, f, dx<span class="op">=</span><span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plot_approximating_rectangles(x, f, dx<span class="op">=</span><span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Approximate Area: 22.468278186204103</code></pre>
@@ -711,17 +727,17 @@ A &amp;\approx f(1)dx + f(2)dx + f(3)dx + \cdots + f(10)dx \\
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="basic-calculus_files/figure-html/cell-15-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="basic-calculus_files/figure-html/cell-13-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>If you stare at the plot you can see our area estimate is okay but not great. The rectangles are <em>overestimating</em> the area under the curve since they all have segments of area lying above the curve.</p>
 <p>The problem was that the rectangles we used were too coarse. It’s better to use narrower rectangles, and more of them. What we need to do is make <span class="math inline">\(dx\)</span> smaller by making <span class="math inline">\(N\)</span> bigger. Let’s try using <span class="math inline">\(N=50\)</span> rectangles of width <span class="math inline">\(dx=0.2\)</span> instead and see how much the result improves.</p>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="13">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plot_approximating_rectangles(x, f, dx<span class="op">=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plot_approximating_rectangles(x, f, dx<span class="op">=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Approximate Area: 21.380011968222313</code></pre>
@@ -729,7 +745,7 @@ A &amp;\approx f(1)dx + f(2)dx + f(3)dx + \cdots + f(10)dx \\
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="basic-calculus_files/figure-html/cell-16-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="basic-calculus_files/figure-html/cell-14-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -739,16 +755,16 @@ A &amp;\approx f(1)dx + f(2)dx + f(3)dx + \cdots + f(10)dx \\
 <p><span class="math display">\[A = \frac{20}{3}\sqrt{10} \approx 21.082.\]</span></p>
 <p>This will be the case when the rectangles are infinitesimally thin, so thin that the errors disappear and the area calculation becomes exact.</p>
 <p>Let’s try to calculate the approximating areas using smaller and smaller rectangles and see how close we can get to the exact answer. To do this, I’ll use a loop to calculate the area for successively smaller values of <span class="math inline">\(dx\)</span>.</p>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="14">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.sqrt(x)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dx <span class="kw">in</span> [<span class="dv">1</span>, <span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="fl">0.001</span>, <span class="fl">0.0001</span>]:</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="bu">int</span>(<span class="dv">10</span> <span class="op">/</span> dx)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    xs <span class="op">=</span> np.cumsum(dx <span class="op">*</span> np.ones(N))</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    area <span class="op">=</span> np.<span class="bu">sum</span>([f(x)<span class="op">*</span>dx <span class="cf">for</span> x <span class="kw">in</span> xs])</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'N = </span><span class="sc">{</span>N<span class="sc">:6d}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> dx = </span><span class="sc">{</span>dx<span class="sc">:8.4f}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> A = </span><span class="sc">{</span>area<span class="sc">:4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.sqrt(x)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dx <span class="kw">in</span> [<span class="dv">1</span>, <span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="fl">0.001</span>, <span class="fl">0.0001</span>]:</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="bu">int</span>(<span class="dv">10</span> <span class="op">/</span> dx)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    xs <span class="op">=</span> np.cumsum(dx <span class="op">*</span> np.ones(N))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    area <span class="op">=</span> np.<span class="bu">sum</span>([f(x)<span class="op">*</span>dx <span class="cf">for</span> x <span class="kw">in</span> xs])</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'N = </span><span class="sc">{</span>N<span class="sc">:6d}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> dx = </span><span class="sc">{</span>dx<span class="sc">:8.4f}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> A = </span><span class="sc">{</span>area<span class="sc">:4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>N =     10   dx =   1.0000   A = 22.468278
@@ -893,16 +909,16 @@ N = 100000   dx =   0.0001   A = 21.082009</code></pre>
 <p>Just as with derivatives, sympy can evaluate integrals for you, both definite and indefinite integrals. Below I’ll use <code>y.integrate((x, 0, 10))</code> to calculate the area under the curve problem I did before,</p>
 <p><span class="math display">\[A = \int_0^{10} \sqrt{x} dx = \frac{20}{3} \sqrt{10}.\]</span></p>
 <p>Sympy can of course handle indefinite integrals too by leaving off the limits of integration.</p>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="15">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> sp.sqrt(x)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> y.integrate((x, <span class="dv">0</span>, <span class="dv">10</span>))</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>y_int <span class="op">=</span> y.integrate(x)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A = </span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'int y dx = </span><span class="sc">{</span>y<span class="sc">.</span>integrate(x)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> sp.sqrt(x)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> y.integrate((x, <span class="dv">0</span>, <span class="dv">10</span>))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>y_int <span class="op">=</span> y.integrate(x)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A = </span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'int y dx = </span><span class="sc">{</span>y<span class="sc">.</span>integrate(x)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>y = sqrt(x)
@@ -930,25 +946,25 @@ x^2 &amp; x \neq 0.
 \end{cases}
 \]</span></p>
 <p>Here’s what it looks like. It’s just a parabola <span class="math inline">\(y=x^2\)</span>, but with a hole at <span class="math inline">\(x=0\)</span> since <span class="math inline">\(f(0)=1\neq 0^2\)</span>.</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="16">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>f_neq_0 <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f_neq_0(x), color<span class="op">=</span><span class="st">'red'</span>, zorder<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(<span class="dv">0</span>, <span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'o'</span>, s<span class="op">=</span><span class="dv">20</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(<span class="dv">0</span>, <span class="dv">0</span>, c<span class="op">=</span><span class="st">'white'</span>, edgecolors<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'o'</span>, s<span class="op">=</span><span class="dv">20</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'y'</span>)</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'$y = 1$ if $x = 0$ else $x^2$'</span>)</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>f_neq_0 <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f_neq_0(x), color<span class="op">=</span><span class="st">'red'</span>, zorder<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>plt.scatter(<span class="dv">0</span>, <span class="dv">1</span>, color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'o'</span>, s<span class="op">=</span><span class="dv">20</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(<span class="dv">0</span>, <span class="dv">0</span>, c<span class="op">=</span><span class="st">'white'</span>, edgecolors<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'o'</span>, s<span class="op">=</span><span class="dv">20</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'y'</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'$y = 1$ if $x = 0$ else $x^2$'</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="basic-calculus_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="basic-calculus_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -962,26 +978,29 @@ x^2 &amp; x \neq 0.
 <p>In my experience, the only real place limits seem to come up in machine learning is the infinite limit case when <span class="math inline">\(x \rightarrow \infty\)</span>,</p>
 <p><span class="math display">\[\lim_{x \rightarrow \infty} f(x) \approx f(N),\]</span></p>
 <p>where <span class="math inline">\(N\)</span> is an infinitely large large number. The easiest way to figure these limits out is to plug in a large values for <span class="math inline">\(x\)</span> and see what <span class="math inline">\(f(x)\)</span> is tending towards as <span class="math inline">\(x\)</span> gets large. As an example, let’s try to find the limit of <span class="math inline">\(y=e^{-x}\)</span> as <span class="math inline">\(x \rightarrow \infty\)</span>. Here’s what the function looks like. It seems to rapidly decay to <span class="math inline">\(0\)</span> as <span class="math inline">\(x\)</span> gets large. Not even large. It’s basically at <span class="math inline">\(y \approx 0\)</span> by the time <span class="math inline">\(x=10\)</span>.</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="17">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x:  np.exp(<span class="op">-</span>x)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="dv">10</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>), ticks_every<span class="op">=</span><span class="va">None</span>, title<span class="op">=</span><span class="st">'$y=e^{-x}$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x:  np.exp(<span class="op">-</span>x)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="dv">10</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>), ticks_every<span class="op">=</span><span class="va">None</span>, title<span class="op">=</span><span class="st">'$y=e^{-x}$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="basic-calculus_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="basic-calculus_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Let’s pick successively large values of <span class="math inline">\(x\)</span> and see if we can identify the limit numerically. I’ll choose <span class="math inline">\(x=e^0, e^1, \cdots, e^5\)</span>. You can see that numerically speaking <span class="math inline">\(y=e^{-x}\)</span> is pretty much <span class="math inline">\(0\)</span> by the time <span class="math inline">\(x=20\)</span>. This suggests the limit is <span class="math inline">\(L=0\)</span> as <span class="math inline">\(x \rightarrow \infty\)</span>. While this isn’t a “proof”, it should be pretty convincing.</p>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> np.exp(<span class="bu">range</span>(<span class="dv">6</span>)):</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.exp(<span class="op">-</span>x)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">.</span><span class="bu">round</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> y = </span><span class="sc">{</span>y<span class="sc">.</span><span class="bu">round</span>(<span class="dv">8</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> np.exp(<span class="bu">range</span>(<span class="dv">6</span>)):</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.exp(<span class="op">-</span>x)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">.</span><span class="bu">round</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> y = </span><span class="sc">{</span>y<span class="sc">.</span><span class="bu">round</span>(<span class="dv">8</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>x = 1.0      y = 0.36787944
 x = 2.72     y = 0.06598804
@@ -992,11 +1011,14 @@ x = 148.41   y = 0.0</code></pre>
 </div>
 </div>
 <p>If you like, you can also use sympy to evaluate the infinite limit symbolically.</p>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">'x'</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> sp.exp(<span class="op">-</span>x)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>limit <span class="op">=</span> sp.limit(y, x, sp.oo)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'lim e^(-x) as x -&gt; infinity = </span><span class="sc">{</span>limit<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="19">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">'x'</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> sp.exp(<span class="op">-</span>x)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>limit <span class="op">=</span> sp.limit(y, x, sp.oo)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'lim e^(-x) as x -&gt; infinity = </span><span class="sc">{</span>limit<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>lim e^(-x) as x -&gt; infinity = 0</code></pre>
 </div>
