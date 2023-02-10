@@ -562,11 +562,13 @@ x + 1 = [2. 3. 4. 5. 6.]</code></pre>
 <blockquote class="blockquote">
 <p><strong>Numpy Documentation</strong><br><br>When operating on two arrays, numpy compares their shapes element-wise. It starts with the trailing (i.e.&nbsp;rightmost) dimensions and works its way left. Two dimensions are <strong>compatible</strong> when <br><br>1. they are equal, or<br>2. one of them is 1 <br><br>If these conditions are not met, a <code>ValueError: operands could not be broadcast together</code> exception is thrown, indicating that the arrays have <strong>incompatible</strong> shapes. The size of the resulting array is the size that is not 1 along each axis of the inputs.</p>
 </blockquote>
-<p>Let’s look at an example. First, suppose <code>A</code> has shape <code>(2, 2, 3)</code> and <code>B</code> has shape <code>(3,)</code>. Let’s suppose for simplicity that they’re both arrays of all ones.</p>
-<pre><code>A: 2 , 2 , 3
-B:         3
-------------
-C: 2 , 2 , 3</code></pre>
+<p>Let’s look at an example. First, suppose <code>A</code> has shape <code>(2, 2, 3)</code> and <code>B</code> has shape <code>(3,)</code>. Suppose for simplicity that they’re both arrays of all ones. Here’s what this looks like, with <code>B</code> aligned to the right.</p>
+<p><span class="math display">\[\begin{align*}
+A &amp;:&amp; 2, &amp; &amp; 2, &amp; &amp; 3 \\
+B &amp;:&amp;   &amp; &amp;   &amp; &amp; 3 \\
+\hline
+C &amp;:&amp; 2, &amp; &amp; 2, &amp; &amp; 3 \\
+\end{align*}\]</span></p>
 <p>Here are the broadcasting steps that will take place. Note that only <code>B</code> will change in this example. <code>A</code> will stay fixed.</p>
 <ul>
 <li>Numpy will start in the rightmost dimension, checking if they’re equal.</li>
@@ -586,14 +588,14 @@ C: 2 , 2 , 3</code></pre>
 </ul>
 <p>Let’s verify this is true on two simple arrays of ones. Let’s also print out what <code>C</code> looks like. Since only copying is taking place we should just be adding 2 arrays of ones, hence the output should sum 2 arrays of ones, giving one array <code>C</code> of twos.</p>
 <div class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.ones((<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.ones(<span class="dv">3</span>,)</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A.shape = </span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B.shape = </span><span class="sc">{</span>B<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">+</span> B</span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C.shape = </span><span class="sc">{</span>C<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C = </span><span class="ch">\n</span><span class="sc">{</span>C<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.ones((<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.ones(<span class="dv">3</span>,)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A.shape = </span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B.shape = </span><span class="sc">{</span>B<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">+</span> B</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C.shape = </span><span class="sc">{</span>C<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C = </span><span class="ch">\n</span><span class="sc">{</span>C<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A.shape = (2, 2, 3)
 B.shape = (3,)
@@ -606,11 +608,13 @@ C =
   [2. 2. 2.]]]</code></pre>
 </div>
 </div>
-<p>Let’s do one more example. Suppose now that <code>A</code> has shape <code>(8, 1, 6, 1)</code> and <code>B</code> has shape <code>(7, 1, 5)</code>.</p>
-<pre><code>A: 8 , 1 , 6 , 1
-B:     7 , 1 , 5
-----------------
-C: 8 , 7 , 6 , 5</code></pre>
+<p>Let’s do one more example. Suppose now that <code>A</code> has shape <code>(8, 1, 6, 1)</code> and <code>B</code> has shape <code>(7, 1, 5)</code>. Here’s a table of this case, again with <code>B</code> aligned to the right since it has the fewest dimensions.</p>
+<p><span class="math display">\[\begin{align*}
+A &amp;:&amp; 8, &amp; &amp; 1, &amp; &amp; 6, &amp; &amp; 1 \\
+B &amp;:&amp;    &amp; &amp; 7, &amp; &amp; 1, &amp; &amp; 5 \\
+\hline
+C &amp;:&amp; 8, &amp; &amp; 7, &amp; &amp; 6, &amp; &amp; 5 \\
+\end{align*}\]</span></p>
 <p>Here are the broadcasting steps that will take place.</p>
 <ul>
 <li>Starting again from the right, dimensions <code>1</code> and <code>5</code> don’t match. But since <code>A</code> has a <code>1</code> rule (2) applies, so <code>A</code> will broadcast itself (i.e.&nbsp;copy its values) 5 times in this dimension to match <code>B</code>.</li>
@@ -621,13 +625,13 @@ C: 8 , 7 , 6 , 5</code></pre>
 </ul>
 <p>Here again is an example on two arrays of ones. Verify that the shapes come out right.</p>
 <div class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.ones((<span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>))</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.ones((<span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">5</span>))</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A.shape = </span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B.shape = </span><span class="sc">{</span>B<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">/</span> B</span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C.shape = </span><span class="sc">{</span>C<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.ones((<span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>))</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.ones((<span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">5</span>))</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A.shape = </span><span class="sc">{</span>A<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'B.shape = </span><span class="sc">{</span>B<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">/</span> B</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'C.shape = </span><span class="sc">{</span>C<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A.shape = (8, 1, 6, 1)
 B.shape = (7, 1, 5)
@@ -642,10 +646,10 @@ C.shape = (8, 7, 6, 5)</code></pre>
 <h2 data-number="3.3" class="anchored" data-anchor-id="computational-performance"><span class="header-section-number">3.3</span> Computational Performance</h2>
 <p>We’re usually interested in writing functions that run not just correctly, but efficiently. We want them to run as quickly as possible, and using as little memory as possible. When dealing with numbers, particularly floats, the usual way to measure how quickly a function will run is by counting <strong>floating point operations</strong>, or <strong>FLOPS</strong> for short. Memory is measured by counting the number of “words” each element in the function takes up.</p>
 <p>Consider a simple example. Suppose we want to element-wise multiply two 1D arrays <code>x</code> and <code>y</code> each of size <span class="math inline">\(n\)</span> using the following function,</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.</span> <span class="kw">def</span> element_wise_multiply(x, y):</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2.</span>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fl">3.</span>    z <span class="op">=</span> [x[i] <span class="op">*</span> y[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)]</span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fl">4.</span>    <span class="cf">return</span> z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.</span> <span class="kw">def</span> element_wise_multiply(x, y):</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2.</span>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fl">3.</span>    z <span class="op">=</span> [x[i] <span class="op">*</span> y[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)]</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fl">4.</span>    <span class="cf">return</span> z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s ask two questions about this function:</p>
 <ol type="1">
 <li>How many FLOPs is the function doing? That is, how many arithmetic operations <code>+, -, *, /, //, %</code> did this function execute?</li>
@@ -697,29 +701,6 @@ C.shape = (8, 7, 6, 5)</code></pre>
 </ul></li>
 </ul>
 <p>I’ll run each of these profilers on the above function <code>element_wise_multiply</code> so you can see how they work. To run it, you first need to pass in some inputs. I’ll define some reasonably large arrays for this. Notice, as you’d expect, it’s the line defining <code>z</code> that’s the worst offender. This is the idea that FLOPs and memory complexity already were capturing.</p>
-<div class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># def element_wise_multiply(x, y):</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     n = len(x)</span></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     z = [x[i] * y[i] for i in range(n)]</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     return z</span></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co"># n = 10000</span></span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="co"># x = np.ones(n).tolist()</span></span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="co"># y = np.ones(n).tolist()</span></span>
-<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a><span class="co"># %load_ext line_profiler</span></span>
-<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="co"># %load_ext memory_profiler</span></span>
-<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a><span class="co"># %timeit element_wise_multiply</span></span>
-<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a><span class="co"># a = %prun -r -s tottime element_wise_multiply(x, y);</span></span>
-<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a><span class="co"># a.print_stats()</span></span>
-<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a><span class="co"># a = %lprun -r -f element_wise_multiply element_wise_multiply(x, y);</span></span>
-<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a><span class="co"># a.print_stats()</span></span>
-<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a><span class="co"># %memit element_wise_multiply(x, y);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 
 
 </section>
