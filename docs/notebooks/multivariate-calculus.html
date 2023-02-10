@@ -212,9 +212,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
+  <ul>
+  <li><a href="#multivariate-differentiation" id="toc-multivariate-differentiation" class="nav-link active" data-scroll-target="#multivariate-differentiation"><span class="toc-section-number">8.1</span>  Multivariate Differentiation</a>
   <ul class="collapse">
-  <li><a href="#multivariate-differentiation" id="toc-multivariate-differentiation" class="nav-link active" data-scroll-target="#multivariate-differentiation"><span class="toc-section-number">8.1</span>  Multivariate Differentiation</a></li>
-  <li><a href="#multivariate-integration" id="toc-multivariate-integration" class="nav-link" data-scroll-target="#multivariate-integration"><span class="toc-section-number">8.2</span>  Multivariate Integration</a></li>
+  <li><a href="#the-gradient" id="toc-the-gradient" class="nav-link" data-scroll-target="#the-gradient"><span class="toc-section-number">8.1.1</span>  The Gradient</a></li>
+  <li><a href="#visualizing-gradients" id="toc-visualizing-gradients" class="nav-link" data-scroll-target="#visualizing-gradients"><span class="toc-section-number">8.1.2</span>  Visualizing Gradients</a></li>
+  <li><a href="#the-hessian" id="toc-the-hessian" class="nav-link" data-scroll-target="#the-hessian"><span class="toc-section-number">8.1.3</span>  The Hessian</a></li>
+  <li><a href="#differentiation-in-n-dimensions" id="toc-differentiation-in-n-dimensions" class="nav-link" data-scroll-target="#differentiation-in-n-dimensions"><span class="toc-section-number">8.1.4</span>  Differentiation in <span class="math inline">\(n\)</span> Dimensions</a></li>
+  <li><a href="#the-jacobian" id="toc-the-jacobian" class="nav-link" data-scroll-target="#the-jacobian"><span class="toc-section-number">8.1.5</span>  The Jacobian</a></li>
+  <li><a href="#application-the-softmax-function" id="toc-application-the-softmax-function" class="nav-link" data-scroll-target="#application-the-softmax-function"><span class="toc-section-number">8.1.6</span>  Application: The Softmax Function</a></li>
+  <li><a href="#gradient-and-jacobian-rules" id="toc-gradient-and-jacobian-rules" class="nav-link" data-scroll-target="#gradient-and-jacobian-rules"><span class="toc-section-number">8.1.7</span>  Gradient and Jacobian Rules</a></li>
+  </ul></li>
+  <li><a href="#multivariate-integration" id="toc-multivariate-integration" class="nav-link" data-scroll-target="#multivariate-integration"><span class="toc-section-number">8.2</span>  Multivariate Integration</a>
+  <ul class="collapse">
+  <li><a href="#integration-in-2-dimensions" id="toc-integration-in-2-dimensions" class="nav-link" data-scroll-target="#integration-in-2-dimensions"><span class="toc-section-number">8.2.1</span>  Integration in 2 Dimensions</a></li>
+  <li><a href="#application-integrating-the-gaussian" id="toc-application-integrating-the-gaussian" class="nav-link" data-scroll-target="#application-integrating-the-gaussian"><span class="toc-section-number">8.2.2</span>  Application: Integrating the Gaussian</a></li>
+  <li><a href="#integration-in-n-dimensions" id="toc-integration-in-n-dimensions" class="nav-link" data-scroll-target="#integration-in-n-dimensions"><span class="toc-section-number">8.2.3</span>  Integration in <span class="math inline">\(n\)</span> Dimensions</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -624,7 +638,7 @@ y_0 (1 - y_0) &amp; -y_0 y_1 &amp; \cdots &amp; -y_0 y_{n-1} \\
 </section>
 <section id="gradient-and-jacobian-rules" class="level3" data-number="8.1.7">
 <h3 data-number="8.1.7" class="anchored" data-anchor-id="gradient-and-jacobian-rules"><span class="header-section-number">8.1.7</span> Gradient and Jacobian Rules</h3>
-<p>Here are a few common gradient and Jacobian rules. Don’t worry too much about how to derive these. Don’t even try to memorize them. Just scan over them and remember to reference this table in future lessons.</p>
+<p>Here are a few common gradient and Jacobian rules. I’ll state them assuming a vector-valued function with a vector input unless the scalar-valued form looks different, in which case I’ll state it explicitly. Don’t worry too much about how to derive these. Don’t even try to memorize them. This is just a reference.</p>
 <table class="table">
 <colgroup>
 <col style="width: 30%">
@@ -634,26 +648,16 @@ y_0 (1 - y_0) &amp; -y_0 y_1 &amp; \cdots &amp; -y_0 y_{n-1} \\
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><strong>Name</strong></td>
-<td style="text-align: left;"><strong>Gradient</strong></td>
-<td style="text-align: left;"><strong>Scalar Derivative Equivalent</strong></td>
+<td style="text-align: left;"><strong>Gradient or Jacobian</strong></td>
+<td style="text-align: left;"><strong>Scalar Equivalent</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Constant Rule (scalar-valued)</td>
-<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} (cy) = c\frac{dy}{d\mathbf{x}}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} (cy) = c\frac{dy}{dx}\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Constant Rule (vector-valued)</td>
+<td style="text-align: left;">Constant Rule</td>
 <td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} (c\mathbf{y}) = c\frac{d\mathbf{y}}{d\mathbf{x}}\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} (cy) = c\frac{dy}{dx}\)</span></td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">Addition Rule (scalar-valued)</td>
-<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}}(u + v) = \frac{du}{d\mathbf{x}} + \frac{dv}{d\mathbf{x}}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}(u + v) = \frac{du}{dx} + \frac{dv}{dx}\)</span></td>
-</tr>
 <tr class="odd">
-<td style="text-align: left;">Addition Rule (vector-valued)</td>
+<td style="text-align: left;">Addition Rule</td>
 <td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}}(\mathbf{u} + \mathbf{v}) = \frac{d\mathbf{u}}{d\mathbf{x}} + \frac{d\mathbf{v}}{d\mathbf{x}}\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}(u + v) = \frac{du}{dx} + \frac{dv}{dx}\)</span></td>
 </tr>
@@ -668,33 +672,23 @@ y_0 (1 - y_0) &amp; -y_0 y_1 &amp; \cdots &amp; -y_0 y_{n-1} \\
 <td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}(uv) = u\frac{dv}{dx} + v\frac{du}{dx}\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Chain Rule (both scalar-valued)</td>
-<td style="text-align: left;"><span class="math inline">\(\frac{dz}{d\mathbf{x}} = \frac{dz}{dy} \frac{dy}{d\mathbf{x}}\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}\)</span></td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">Chain Rule (scalar-valued, vector-valued)</td>
 <td style="text-align: left;"><span class="math inline">\(\frac{dz}{d\mathbf{x}} = \big(\frac{dz}{d\mathbf{y}}\big)^\top \frac{d\mathbf{y}}{d\mathbf{x}}\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Chain Rule (both vector-valued)</td>
 <td style="text-align: left;"><span class="math inline">\(\frac{d\mathbf{z}}{d\mathbf{x}} = \frac{d\mathbf{z}}{d\mathbf{y}} \frac{d\mathbf{y}}{d\mathbf{x}}\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}\)</span></td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Constant Function (scalar-valued)</td>
-<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} c = 0\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} c = 0\)</span></td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">Constant Function (vector-valued)</td>
+<td style="text-align: left;">Constant Function</td>
 <td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} \mathbf{c} = \mathbf{0}\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} c = 0\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Squared Two-Norm</td>
-<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} ||\mathbf{x}||_2^2 = \frac{d}{d\mathbf{x}} \mathbf{x}^\top \mathbf{x} = 2 \mathbf{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} ||\mathbf{x}||^2 = \frac{d}{d\mathbf{x}} \mathbf{x}^\top \mathbf{x} = 2 \mathbf{x}\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} x^2 = 2x\)</span></td>
 </tr>
 <tr class="even">
@@ -714,7 +708,7 @@ y_0 (1 - y_0) &amp; -y_0 y_1 &amp; \cdots &amp; -y_0 y_{n-1} \\
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Squared Error Function</td>
-<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} ||\mathbf{A}\mathbf{x}-\mathbf{b}||_2^2 = 2\mathbf{A}^\top (\mathbf{A}\mathbf{x}-\mathbf{b})\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{d\mathbf{x}} ||\mathbf{A}\mathbf{x}-\mathbf{b}||^2 = 2\mathbf{A}^\top (\mathbf{A}\mathbf{x}-\mathbf{b})\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} (ax-b)^2 = 2a(ax-b)\)</span></td>
 </tr>
 <tr class="even">
@@ -734,7 +728,7 @@ y_0 (1 - y_0) &amp; -y_0 y_1 &amp; \cdots &amp; -y_0 y_{n-1} \\
 </tr>
 </tbody>
 </table>
-<p>You <em>can</em> calculate gradients and Jacobians in sympy, though in my opinion it can be kind of painful except in the simplest cases. Here’s an example, where I’ll calculate the Jacobian of the squared error function <span class="math inline">\(||\mathbf{A}\mathbf{x}-\mathbf{b}||_2^2\)</span>.</p>
+<p>You <em>can</em> calculate gradients and Jacobians in sympy, though in my opinion it can be kind of painful except in the simplest cases. Here’s an example, where I’ll calculate the Jacobian of the squared error function <span class="math inline">\(||\mathbf{A}\mathbf{x}-\mathbf{b}||^2\)</span>.</p>
 <p><strong>Aside:</strong> There is also a nice online <a href="https://www.matrixcalculus.org/">tool</a> that lets you do this somewhat more easily.</p>
 <div class="cell" data-execution_count="10">
 <details>
