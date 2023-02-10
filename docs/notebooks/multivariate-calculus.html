@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Calculus</span></a>
+  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -339,7 +339,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="visualizing-gradients" class="level3" data-number="7.1.2">
 <h3 data-number="7.1.2" class="anchored" data-anchor-id="visualizing-gradients"><span class="header-section-number">7.1.2</span> Visualizing Gradients</h3>
 <p>In the case of the ordinary univariate derivative <span class="math inline">\(\frac{dy}{dx}\)</span>, we could think of it geometrically as the slope of the tangent line to <span class="math inline">\(y=f(x)\)</span> at a point <span class="math inline">\((x_0,y_0)\)</span>. We can do something similar for the gradient <span class="math inline">\(\frac{dz}{d\mathbf{x}}\)</span> by thinking of it as the vector of slopes defining a tangent plane to <span class="math inline">\(z=f(\mathbf{x})\)</span> at a point <span class="math inline">\((\mathbf{x}_0, z_0)\)</span>.</p>
-<p>Suppose <span class="math inline">\(z=f(x,y)\)</span>. Let <span class="math inline">\((x_0,y_0,z_0) \in \mathbb{R}^3\)</span> be a point in 3D space, with <span class="math inline">\(z_0=f(x_0,y_0)\)</span>. This is just a point on the 2D surface of <span class="math inline">\(z=f(x,y)\)</span>. Now, it doesn’t make much sense to talk about a single <em>line</em> that hugs this point, since there can now be infinitely many lines that hug that point. What we instead want to do is think about a <em>plane</em> that hugs the surface. This will be called the <strong>tangent plane</strong>. It’s given by the first order perturbation</p>
+<p>Suppose <span class="math inline">\(z=f(x,y)\)</span>. Let <span class="math inline">\((x_0,y_0,z_0) \in \mathbb{R}^3\)</span> be a point in 3D space, with <span class="math inline">\(z_0=f(x_0,y_0)\)</span>. This is just a point on the 2D surface of <span class="math inline">\(z=f(x,y)\)</span>. Now, it doesn’t make much sense to talk about a single <em>line</em> that hugs this point, since there can now be infinitely many lines that hug that point. What we instead want to do is think about a <em>plane</em> that hugs the surface. This will be called the <strong>tangent plane</strong>. It’s given by</p>
 <p><span class="math display">\[z = z_0 + \frac{\partial}{\partial x}f(x_0,y_0) (x - x_0) + \frac{\partial}{\partial y}f(x_0,y_0) (y - y_0),\]</span></p>
 <p>or in vector notation just, <span class="math display">\[z = z_0 + \frac{d}{d\mathbf{x}} f(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0), \quad \text{or} \quad z = z_0 + \mathbf{g}(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0).\]</span></p>
 <p>This tangent plane will hug the surface of the function at the point <span class="math inline">\((x_0,y_0,z_0)\)</span>.</p>
@@ -404,7 +404,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{pmatrix}.
 \]</span></p>
 <p>The Hessian is the multivariate generalization of the full second derivative, just as the gradient vector is the generalization of the full first derivative. I’ll often write the Hessian matrix with the symbol <span class="math inline">\(\mathbf{H}\)</span> or <span class="math inline">\(\mathbf{H}(\mathbf{x})\)</span> for brevity.</p>
-<p>Just as the second derivative of a univariate function can be interpreted geometrically as representing the curvature of the <em>curve</em> <span class="math inline">\(y=f(x)\)</span>, the Hessian of a multivariate function represents the curvature of the <em>surface</em> <span class="math inline">\(z=f(x,y)\)</span>. This comes from looking at the multivariate <strong>second-order perturbation</strong></p>
+<p>Just as the second derivative of a univariate function can be interpreted geometrically as representing the curvature of the <em>curve</em> <span class="math inline">\(y=f(x)\)</span>, the Hessian of a multivariate function represents the curvature of the <em>surface</em> <span class="math inline">\(z=f(x,y)\)</span>. This comes from looking at the multivariate tangent parabola</p>
 <p><span class="math display">\[z = z_0 + \mathbf{g}(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0) + \frac{1}{2}(\mathbf{x} - \mathbf{x}_0)^\top \mathbf{H}(\mathbf{x}_0) (\mathbf{x} - \mathbf{x}_0).\]</span></p>
 <p>The curvature of the function can be obtained by looking at the eigenvalues of the Hessian at <span class="math inline">\(\mathbf{x}= \mathbf{x}_0\)</span>. Large eigenvalues represent steep curvature, while small eigenvalues represent shallow curvature. The sign of the eigenvalues indicate whether the function</p>
 <ol type="1">
@@ -486,6 +486,9 @@ grad =
  2.00001]</code></pre>
 </div>
 </div>
+<p>Just like with univariate functions, we can use the tangent plane to approximate the behavior of a multivariate function <span class="math inline">\(f(\mathbf{x})\)</span> near a point <span class="math inline">\(\mathbf{x}_0\)</span>. This gives the <strong>first order approximation</strong></p>
+<p><span class="math display">\[f(\mathbf{x}) \approx f(\mathbf{x}_0) + \frac{d}{d\mathbf{x}} f(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0).\]</span></p>
+<p>The error in this approximation will again be quadratic in the distance between the two vectors, <span class="math inline">\(||\mathbf{x} - \mathbf{x}_0||^2\)</span>.</p>
 <p>The Hessian matrix of second partial derivatives also extends to <span class="math inline">\(n\)</span> dimensional scalar-valued functions <span class="math inline">\(y = f(\mathbf{x})\)</span>. The difference is that instead of just <span class="math inline">\(2^2=4\)</span> second partials, we now have <span class="math inline">\(n^2\)</span> possible second partials. These can be organized into an <span class="math inline">\(n \times n\)</span> matrix</p>
 <p><span class="math display">\[
 \mathbf{H} = \frac{d^2 y}{d\mathbf{x}^2} =
@@ -497,6 +500,9 @@ grad =
 \end{pmatrix}.
 \]</span></p>
 <p>The mixed partials again typically all commute, which means <span class="math inline">\(\mathbf{H}\)</span> is a symmetric matrix, i.e.&nbsp;<span class="math inline">\(\mathbf{H}^\top = \mathbf{H}\)</span>. The eigenvalues of <span class="math inline">\(\mathbf{H}\)</span> again determine the curvature of the function at any point <span class="math inline">\(\mathbf{x}=\mathbf{x}_0\)</span>. If the eigenvalues of the Hessian are all non-negative, <span class="math inline">\(\mathbf{H}\)</span> will be positive semi-definite, i.e.&nbsp;<span class="math inline">\(\mathbf{H} \succcurlyeq 0\)</span>. In the case, the function <span class="math inline">\(f(\mathbf{x})\)</span> will be a convex function and hence bowl upwards. If the Hessian isn’t positive semidefinite it’ll usually have saddlepoints, usually far more saddlepoints than minima or maxima in fact.</p>
+<p>We can use the Hessian to define a <strong>second-order approximation</strong> to a multivariate function <span class="math inline">\(f(\mathbf{x})\)</span> near a point <span class="math inline">\(\mathbf{x}_0\)</span>,</p>
+<p><span class="math display">\[f(\mathbf{x}) \approx f(\mathbf{x}_0) + \mathbf{g}(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0) + \frac{1}{2}(\mathbf{x} - \mathbf{x}_0)^\top \mathbf{H}(\mathbf{x}_0) (\mathbf{x} - \mathbf{x}_0).\]</span></p>
+<p>The error in this approximation will be cubic in the distance between the two vectors, <span class="math inline">\(||\mathbf{x} - \mathbf{x}_0||^3\)</span>.</p>
 </section>
 <section id="the-jacobian" class="level3" data-number="7.1.5">
 <h3 data-number="7.1.5" class="anchored" data-anchor-id="the-jacobian"><span class="header-section-number">7.1.5</span> The Jacobian</h3>
