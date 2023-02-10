@@ -31,7 +31,7 @@ format:
     page-layout: full
     toc: true
     toc-location: left
-    toc-depth: 2
+    toc-depth: 3
     #toc-title: "Section"
     number-sections: true
     code-fold: false
