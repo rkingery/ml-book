@@ -1,2 +1,2 @@
-# Machine Learning Book
+# Mathematics for Machine Learning
 A book I'm writing. Check back soon.
