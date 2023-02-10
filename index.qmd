@@ -1,3 +1,3 @@
 # Preface {.unnumbered}
 
-This is my book Machine Learning For The 2020s.
+This is my book Mathematics for Machine Learning.
