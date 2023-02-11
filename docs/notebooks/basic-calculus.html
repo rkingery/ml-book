@@ -289,6 +289,8 @@ epsilon^2 = 0.0</code></pre>
 </div>
 <p>Of course, you could argue that we could just go to a higher precision then. Use more bits. But eventually, if we keep making <span class="math inline">\(\varepsilon\)</span> small enough we’ll hit a point where <span class="math inline">\(\varepsilon^2 = 0\)</span>. Thus, if it makes you feel better, when you see an infinitesimal just think “<span class="math inline">\(10^{-300}\)</span> in double precision”.</p>
 <p><strong>Aside:</strong> If you want to be <em>really</em> pedantic, you might say that it shouldn’t matter what a computer does, since any positive number <span class="math inline">\(\varepsilon\)</span> squared must still be greater than zero, no matter how small <span class="math inline">\(\varepsilon\)</span> is. This is true for <em>real numbers</em> <span class="math inline">\(\mathbb{R}\)</span>. But it turns out infinitesimals aren’t real numbers at all. They lie in an extension of the real number line called the <strong>hyperreal numbers</strong>, denoted <span class="math inline">\(\mathbb{R}^*\)</span>. In my opinion, this isn’t an important distinction to worry about in applied calculus.</p>
+<section id="infinitely-large-numbers" class="level4" data-number="3.1.0.1">
+<h4 data-number="3.1.0.1" class="anchored" data-anchor-id="infinitely-large-numbers"><span class="header-section-number">3.1.0.1</span> Infinitely Large Numbers</h4>
 <p>Similar to infinitesimals being numbers that can be really, really small, we can also talk about numbers being really, really big. These are called <strong>infinitely large</strong> numbers. In analogy to infinitesimals, infinitely large numbers are positive numbers <span class="math inline">\(N\)</span> whose square is basically infinite,</p>
 <p><span class="math display">\[N &gt; 0, \quad N^2 \approx \infty.\]</span></p>
 <p>We can get infinitely large numbers by inverting infinitesimals, and vice versa,</p>
@@ -306,6 +308,9 @@ epsilon^2 = 0.0</code></pre>
 N^2 = inf</code></pre>
 </div>
 </div>
+</section>
+<section id="first-order-perturbations" class="level4" data-number="3.1.0.2">
+<h4 data-number="3.1.0.2" class="anchored" data-anchor-id="first-order-perturbations"><span class="header-section-number">3.1.0.2</span> First-Order Perturbations</h4>
 <p>Infinitesimals are especially interesting when added to regular numbers. These are called <strong>first order perturbations</strong>. For example, consider some finite number <span class="math inline">\(x\)</span>. It could be <span class="math inline">\(2\)</span> or <span class="math inline">\(-100\)</span> or whatever you want. Suppose now we add to it an infinitesimal number <span class="math inline">\(\varepsilon\)</span>. Now suppose we have an output <span class="math inline">\(y\)</span> that depends on <span class="math inline">\(x\)</span> through a function <span class="math inline">\(y=f(x)=x^2\)</span>. What happens to <span class="math inline">\(y\)</span> if we perturb <span class="math inline">\(x\)</span> to <span class="math inline">\(x+\varepsilon\)</span>? That is, what is <span class="math inline">\(f(x + \varepsilon)=(x+\varepsilon)^2\)</span>? Expanding the square, we have</p>
 <p><span class="math display">\[f(x + \varepsilon) = (x + \varepsilon)^2 = x^2 + 2x\varepsilon + \varepsilon^2.\]</span></p>
 <p>But since <span class="math inline">\(\varepsilon^2 \approx 0\)</span>,</p>
@@ -313,6 +318,7 @@ N^2 = inf</code></pre>
 <p>Okay, but what does this mean? Well, I can reformulate the question as follows: “If I change <span class="math inline">\(x\)</span> by a little bit, how much does the function <span class="math inline">\(y\)</span> change”? Call this change <span class="math inline">\(\delta\)</span>, the change in <span class="math inline">\(y\)</span> due to <span class="math inline">\(x\)</span> getting changed by <span class="math inline">\(\varepsilon\)</span>. Since <span class="math inline">\(\delta = f(x+\varepsilon) - f(x)\)</span> by definition, we’d have</p>
 <p><span class="math display">\[\delta = f(x+\varepsilon) - f(x) = (x+\varepsilon)^2 - x^2 \approx 2x\varepsilon.\]</span></p>
 <p>That is, if we change <span class="math inline">\(x\)</span> by a small amount <span class="math inline">\(\varepsilon\)</span>, then <span class="math inline">\(y\)</span> itself changes by a small amount <span class="math inline">\(\delta=2x\varepsilon\)</span>. Interestingly, how much <span class="math inline">\(y\)</span> changes actually depends on which <span class="math inline">\(x\)</span> we pick. If <span class="math inline">\(x=1\)</span> then <span class="math inline">\(y\)</span> changes by <span class="math inline">\(2\varepsilon\)</span>, just twice how much <span class="math inline">\(x\)</span> is nudged. If <span class="math inline">\(x=1000\)</span> though, then <span class="math inline">\(y\)</span> changes by <span class="math inline">\(2000\varepsilon\)</span>, a much bigger change, but still infinitesimal. After all, <span class="math inline">\(2000 \cdot 10^{-300} = 2 \cdot 10^{-297}\)</span> is still really, really small.</p>
+</section>
 </section>
 <section id="differentiation" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="differentiation"><span class="header-section-number">3.2</span> Differentiation</h2>
@@ -330,6 +336,8 @@ N^2 = inf</code></pre>
 <p>Notice that the derivative is also itself a function, since it maps inputs <span class="math inline">\(x\)</span> to outputs <span class="math inline">\(\frac{dy}{dx}\)</span>. To indicate this functional relationship people sometimes write</p>
 <p><span class="math display">\[\frac{dy}{dx}=\frac{d}{dx}f(x) \quad \text{ or } \quad \frac{dy}{dx}=f'(x)\]</span></p>
 <p>to make this functional relationship clear.</p>
+<section id="numerical-differentiation" class="level4" data-number="3.2.1.1">
+<h4 data-number="3.2.1.1" class="anchored" data-anchor-id="numerical-differentiation"><span class="header-section-number">3.2.1.1</span> Numerical Differentiation</h4>
 <p>Now, how do we actually <em>calculate</em> a derivative? Perhaps the easiest thing to do is this: Suppose you have some function <span class="math inline">\(y=f(x)\)</span>, and you want to find its derivative at a point <span class="math inline">\(x\)</span>. Choose a small value <span class="math inline">\(dx\)</span>. Then just take the ratio</p>
 <p><span class="math display">\[\frac{dy}{dx} = \frac{f(x+dx) - f(x)}{dx}.\]</span></p>
 <p>Suppose we wanted to find the derivative of <span class="math inline">\(y=x^2\)</span> at the point <span class="math inline">\(x=1\)</span>. This will return a numerical <em>value</em>, not a function, since we’re plugging in a particular value of <span class="math inline">\(x\)</span>. Expanding terms exactly, we’d have</p>
@@ -341,9 +349,10 @@ N^2 = inf</code></pre>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>dydx_exact <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> x0</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dx <span class="kw">in</span> [<span class="dv">1</span>, <span class="fl">0.1</span>, <span class="fl">0.01</span>, <span class="fl">0.001</span>, <span class="fl">1e-4</span>, <span class="fl">1e-5</span>, <span class="fl">1e-10</span>, <span class="fl">1e-100</span>, <span class="fl">1e-200</span>]:</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    dydx <span class="op">=</span> (f(x0 <span class="op">+</span> dx) <span class="op">-</span> f(x0)) <span class="op">/</span> dx</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    error <span class="op">=</span> dydx <span class="op">-</span> dydx_exact</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'dx = </span><span class="sc">{</span>dx<span class="sc">:8.16f}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> dy/dx = </span><span class="sc">{</span>dydx<span class="sc">:4f}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> error = </span><span class="sc">{</span>error<span class="sc">:4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    dy <span class="op">=</span> f(x0 <span class="op">+</span> dx) <span class="op">-</span> f(x0)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    dydx <span class="op">=</span> dy <span class="op">/</span> dx</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    error <span class="op">=</span> dydx <span class="op">-</span> dydx_exact</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'dx = </span><span class="sc">{</span>dx<span class="sc">:8.16f}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> dy/dx = </span><span class="sc">{</span>dydx<span class="sc">:4f}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> error = </span><span class="sc">{</span>error<span class="sc">:4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>dx = 1.0000000000000000      dy/dx = 3.000000    error = 1.000000
 dx = 0.1000000000000000      dy/dx = 2.100000    error = 0.100000
@@ -357,10 +366,17 @@ dx = 0.0000000000000000      dy/dx = 0.000000    error = -2.000000</code></pre>
 </div>
 </div>
 <p>Starting with <span class="math inline">\(dx=1\)</span> is a bad choice, with a huge error of <span class="math inline">\(1.0\)</span>. We’re way off. Shrinking to <span class="math inline">\(dx=0.1\)</span> puts us in the ball park with a value <span class="math inline">\(\frac{dy}{dx}=2.1\)</span>. You can see that making <span class="math inline">\(dx\)</span> successively smaller and smaller makes the error successively smaller, in this case by a factor of 10 each time.</p>
-<p>The error is getting smaller all the way down to about <span class="math inline">\(dx=10^{-10}\)</span> before creeping up again as we make <span class="math inline">\(dx\)</span> even smaller than that. This is due to the numerical roundoff of floating point numbers. We’re subtracting two numbers <span class="math inline">\((1+dx)^2 - 1\)</span> that are very close to each other when <span class="math inline">\(dx\)</span> is really small, which as you’ll recall is one of the pitfalls to avoid when working with floating point numbers.</p>
-<p>This method we just used to calculate the derivative is, with some minor tweeks, exactly how derivatives are usually calculated on a computer. The process of calculating the derivative this way, directly from its definition essentially, is called <strong>numerical differentiation</strong>. We choose a small value of <span class="math inline">\(dx\)</span> and just apply the formula above, with some minor tweaks to get better accuracy in fewer steps. It’s common in practice to choose “less small” values for <span class="math inline">\(dx\)</span> when calculating derivatives numerically like this, e.g.&nbsp;<code>1e-5</code>.</p>
-<p>What did I mean when I say the function <span class="math inline">\(f(x)\)</span> needs to be “reasonably well behaved” in order to have a derivative? For one thing, the function needs to be <strong>continuous</strong>. Informally, you can think of a univariate function as being continuous if you can draw its graph on a piece of paper without lifting your pen. There are no jumps or holes anywhere in the functions’ curve. A better way to say this is that <span class="math inline">\(y=f(x)\)</span> is continuous at a point <span class="math inline">\(x_0\)</span> provided <span class="math inline">\(f(x) \approx f(x_0)\)</span> whenever <span class="math inline">\(x \approx x_0\)</span>.</p>
+<p>The error is getting smaller all the way down to about <span class="math inline">\(dx=10^{-10}\)</span> before creeping up again as we make <span class="math inline">\(dx\)</span> even smaller than that. This is due to the numerical roundoff of floating point numbers. We’re subtracting two numbers <span class="math inline">\((1+dx)^2 - 1\)</span> that are very close to each other when <span class="math inline">\(dx\)</span> is really small, which as you’ll recall is one of the pitfalls to avoid when working with floating point numbers. For this reason, it’s common in practice to choose “less small” values for <span class="math inline">\(dx\)</span> when calculating derivatives numerically like this, e.g.&nbsp;<span class="math inline">\(dx=10^{-5}\)</span>.</p>
+<p>This method we just used to calculate the derivative is, with some minor tweeks, exactly how derivatives are usually calculated on a computer. The process of calculating the derivative this way, directly from its definition essentially, is called <strong>numerical differentiation</strong>. We choose a small value of <span class="math inline">\(dx\)</span> and just apply the formula for the derivative directly, with some minor tweaks to get better accuracy.</p>
+<p><strong>Aside:</strong> When calculating derivatives numerically, you can improve the error a lot by instead taking <span class="math inline">\(dy=\frac{1}{2}\big(f\big(x+\frac{dx}{2}\big)-f\big(x-\frac{dx}{2}\big)\big)\)</span>. This is called the <em>central difference method</em>. It’s equivalent when <span class="math inline">\(dx\)</span> is infinitesimal. For more details, see this article on <a href="https://en.wikipedia.org/wiki/Finite_difference">finite difference methods</a>.</p>
+</section>
+<section id="existence-of-the-derivative" class="level4" data-number="3.2.1.2">
+<h4 data-number="3.2.1.2" class="anchored" data-anchor-id="existence-of-the-derivative"><span class="header-section-number">3.2.1.2</span> Existence of the Derivative</h4>
+<p>What exactly did I mean when I say the function <span class="math inline">\(f(x)\)</span> needs to be “reasonably well behaved” in order to have a derivative? For one thing, the function needs to be <strong>continuous</strong>. Informally, you can think of a univariate function as being continuous if you can draw its graph on a piece of paper without lifting your pen. There are no jumps or holes anywhere in the functions’ curve. A better way to say this is that <span class="math inline">\(y=f(x)\)</span> is continuous at a point <span class="math inline">\(x_0\)</span> provided <span class="math inline">\(f(x) \approx f(x_0)\)</span> whenever <span class="math inline">\(x \approx x_0\)</span>.</p>
 <p>Continuity is just <em>one</em> condition necessary for <span class="math inline">\(f(x)\)</span> to be differentiable. It also can’t be too jagged in some sense. Derivatives don’t make sense at points where there are kinks in the graph. In practice, however, this isn’t a huge problem. We can just extend the derivative to be what’s called a <a href="https://en.wikipedia.org/wiki/Subderivative">subderivative</a>. With a subderivative, you can roughly speaking take whatever value for the derivative you want at these kinks and it won’t make a difference. This is how we in practice calculate the derivatives of neural networks. Typically, a neural network <em>does</em> have kinks, and lots of them. At these kinks, we just pick an arbitrary value for the derivative and go on about our day.</p>
+</section>
+<section id="second-derivatives" class="level4" data-number="3.2.1.3">
+<h4 data-number="3.2.1.3" class="anchored" data-anchor-id="second-derivatives"><span class="header-section-number">3.2.1.3</span> Second Derivatives</h4>
 <p>Since derivatives are themselves functions, we can take the derivative of the derivative too. If <span class="math inline">\(\frac{d}{dx}f(x)\)</span> is the derivative function, then the derivative of the derivative is just</p>
 <p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{d}{dx} \bigg(\frac{d}{dx} f(x)\bigg).\]</span></p>
 <p>This is called a <strong>second derivative</strong>. Other ways to write the same thing are <span class="math inline">\(f''(x)\)</span> or <span class="math inline">\(\frac{d^2}{dx^2} f(x)\)</span>.</p>
@@ -377,6 +393,7 @@ d^2 y &amp;= d(dy) = d\big(f(x+dx) - f(x)\big) = d\big(f(x+dx)\big) - df(x) \\
 <p>Dividing both sides by <span class="math inline">\(dx^2=(dx)^2\)</span>, we finally have an expression for the second derivative as a ratio of second differentials,</p>
 <p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{f(x+2dx) - 2f(x+dx) + f(x)}{dx^2}.\]</span></p>
 <p>Higher-order derivatives can be defined as well by continuing to take derivatives of the second derivative, like third derivatives of fourth derivatives. These show up far less often though, so I won’t discuss them.</p>
+</section>
 </section>
 <section id="visualizing-derivatives" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="visualizing-derivatives"><span class="header-section-number">3.2.2</span> Visualizing Derivatives</h3>
@@ -395,6 +412,8 @@ d^2 y &amp;= d(dy) = d\big(f(x+dx) - f(x)\big) = d\big(f(x+dx)\big) - df(x) \\
 </div>
 </div>
 </div>
+<section id="tangent-lines" class="level4" data-number="3.2.2.1">
+<h4 data-number="3.2.2.1" class="anchored" data-anchor-id="tangent-lines"><span class="header-section-number">3.2.2.1</span> Tangent Lines</h4>
 <p>Now, imagine placing this triangle on the graph of some function. Suppose the bottom left point is placed at the point <span class="math inline">\((x_0,y_0)\)</span> of some function <span class="math inline">\(y=f(x)\)</span>. Then the bottom right point will be <span class="math inline">\(x_0+dx\)</span>, and the top right point will be <span class="math inline">\(y_0+dy\)</span>. Now imagine extending the hypotenuse in both directions. This will create a <strong>tangent line</strong> that hugs the graph of the function at the point <span class="math inline">\((x_0,y_0)\)</span>. We can solve for what this tangent line has to be. The line should have the form <span class="math inline">\(y=mx+b\)</span>, pass through <span class="math inline">\((x_0,y_0)\)</span>, and have slope <span class="math inline">\(m=\frac{d}{dx}f(x_0)\)</span>, where <span class="math inline">\(y_0=f(x_0)\)</span>. Solving this equation for the intercept and gives the line</p>
 <p><span class="math display">\[y = y_0 + \frac{d}{dx}f(x_0)(x - x_0).\]</span></p>
 <p>Here’s an example. I’ll plot the function <span class="math inline">\(y=x^2\)</span> and its tangent at a point <span class="math inline">\(x_0=2\)</span> on the x-axis. The corresponding <span class="math inline">\(y\)</span> at <span class="math inline">\(x=2\)</span> is just <span class="math inline">\(y_0=x_0^2=4\)</span>. As we derived above, its derivative (and hence slope) at <span class="math inline">\(x_0=2\)</span> is</p>
@@ -427,6 +446,9 @@ d^2 y &amp;= d(dy) = d\big(f(x+dx) - f(x)\big) = d\big(f(x+dx)\big) - df(x) \\
 <p>The tangent line can be used to approximate the function <span class="math inline">\(y=f(x)\)</span> when <span class="math inline">\(x\)</span> is close to <span class="math inline">\(x_0\)</span>. When <span class="math inline">\(x \approx x_0\)</span>, we can write</p>
 <p><span class="math display">\[f(x) \approx f(x_0) + \frac{d}{dx}f(x_0)(x - x_0).\]</span></p>
 <p>This is called a <strong>first order approximation</strong>, or the <strong>best linear approximation</strong> to the function near <span class="math inline">\(x=x_0\)</span>. It turns out the errors of this approximation are on the order of <span class="math inline">\((x-x_0)^2\)</span>, which will usually be small provided <span class="math inline">\(x \approx x_0\)</span>.</p>
+</section>
+<section id="tangent-parabolas" class="level4" data-number="3.2.2.2">
+<h4 data-number="3.2.2.2" class="anchored" data-anchor-id="tangent-parabolas"><span class="header-section-number">3.2.2.2</span> Tangent Parabolas</h4>
 <p>The second derivative has a geometric interpretation as well. It captures information about the <em>curvature</em> of the function. To see why this is true we need to look at <strong>second order approximations</strong>, which extend first order approximations by adding a quadratic term (shown in red),</p>
 <p><span class="math display">\[f(x) \approx f(x_0) + \frac{d}{dx}f(x_0) (x-x_0) + \color{red}{\frac{1}{2}\frac{d^2}{dx^2}f(x_0) (x-x_0)^2}.\]</span></p>
 <p>It seems weird there’s a <span class="math inline">\(\frac{1}{2}\)</span> in front of the quadratic term. I won’t go into detail on how this comes out. It relates to the fact that differentiating <span class="math inline">\((x-x_0)^2\)</span> brings a <span class="math inline">\(2\)</span> out front, which kills the <span class="math inline">\(\frac{1}{2}\)</span>. What’s important is that this new term depends on the second derivative at <span class="math inline">\(x=x_0\)</span>. This formula gives the <strong>best quadratic approximation</strong> to <span class="math inline">\(y=f(x)\)</span> near the point <span class="math inline">\(x=x_0\)</span>. Note the error to this approximation turns out to be of the order of <span class="math inline">\((x-x_0)^3\)</span>.</p>
@@ -436,7 +458,7 @@ d^2 y &amp;= d(dy) = d\big(f(x+dx) - f(x)\big) = d\big(f(x+dx)\big) - df(x) \\
 <p>Since <span class="math inline">\(a=2&gt;0\)</span>, the function <span class="math inline">\(y=x^2\)</span> “bowls upward” everywhere. Functions that “bowl upward” everywhere like this are called <strong>convex function</strong>. If instead <span class="math inline">\(a &lt; 0\)</span> everywhere, e.g.&nbsp;like it would be for <span class="math inline">\(y=-x^2\)</span>, the function would “bowl downward” everywhere. These are called <strong>convave functions</strong>. Convex (and concave) functions are very important for machine learning and optimization more generally since they’re guaranteed to have a unique global minimum (or maximum). More on this in a future lesson.</p>
 <p>Here’s a more general example where the second derivative isn’t constant, <span class="math inline">\(y = \sin x\)</span>. In this case, <span class="math inline">\(\frac{dy}{dx} = \cos x\)</span> and <span class="math inline">\(\frac{d^2y}{dx^2} = -\sin x\)</span>. Suppose we want to get the tangent parabola at the point <span class="math inline">\(x_0=-\frac{\pi}{2}\)</span>, so <span class="math inline">\(f(x_0)=-1\)</span>, <span class="math inline">\(\frac{d}{dx}f(x_0)=0\)</span> and <span class="math inline">\(\frac{d^2}{dx^2}f(x_0)=1\)</span>. Then the tangent parabola is given by the equation</p>
 <p><span class="math display">\[y = -1 + 0 \cdot \bigg(x + \frac{\pi}{2}\bigg) + \bigg(x + \frac{\pi}{2}\bigg)^2 = \bigg(x + \frac{\pi}{2}\bigg)^2 - 1.\]</span></p>
-<p>This is an upward-sloping parabola with vertex at <span class="math inline">\(\big(\frac{\pi}{2}, -1\big)\)</span>. Here’s a plot of this idea using the same helper function, but passing in <code>f_parabola</code> instead of <code>f_tangent</code>. Notice how the parabola approximates the function pretty well around the point <span class="math inline">\(\big(\frac{\pi}{2}, -1\big)\)</span>, but gets less and less accurate as we get away from that point. The fact that <span class="math inline">\(a=1\)</span> here says that we should expect an upward sloping parabola with “unit curvature”, which is what we see.</p>
+<p>This is an upward-sloping parabola with vertex at <span class="math inline">\(\big(\frac{\pi}{2}, -1\big)\)</span>. Here’s a plot of this idea. Notice how the parabola approximates the function pretty well around the point <span class="math inline">\(\big(\frac{\pi}{2}, -1\big)\)</span>, but gets less and less accurate as we get away from that point. The fact that <span class="math inline">\(a=1\)</span> here says that we should expect an upward sloping parabola with “unit curvature”, which is what we see.</p>
 <div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
@@ -458,6 +480,7 @@ d^2 y &amp;= d(dy) = d\big(f(x+dx) - f(x)\big) = d\big(f(x+dx)\big) - df(x) \\
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="differentiation-rules" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3" class="anchored" data-anchor-id="differentiation-rules"><span class="header-section-number">3.2.3</span> Differentiation Rules</h3>
@@ -577,7 +600,9 @@ d^2 y &amp;= d(dy) = d\big(f(x+dx) - f(x)\big) = d\big(f(x+dx)\big) - df(x) \\
 </tr>
 </tbody>
 </table>
-<p><strong>Aside:</strong> These rules are simple to derive using infinitesimals. For example, here’s a derivation of the all important chain rule. Suppose we have a composite function of two differentiable functions <span class="math inline">\(z=f(y)\)</span> and <span class="math inline">\(y=g(x)\)</span>. That is, <span class="math inline">\(z=f(g(x))\)</span>. Perturb <span class="math inline">\(x\)</span> by some infinitesimal <span class="math inline">\(dx\)</span>. Then <span class="math inline">\(y + dy = g(x + dx)\)</span>, so</p>
+<section id="the-chain-rule" class="level4" data-number="3.2.3.1">
+<h4 data-number="3.2.3.1" class="anchored" data-anchor-id="the-chain-rule"><span class="header-section-number">3.2.3.1</span> The Chain Rule</h4>
+<p>These rules are simple to derive using infinitesimals. For example, here’s a derivation of the all important chain rule. Suppose we have a composite function of two differentiable functions <span class="math inline">\(z=f(y)\)</span> and <span class="math inline">\(y=g(x)\)</span>. That is, <span class="math inline">\(z=f(g(x))\)</span>. Perturb <span class="math inline">\(x\)</span> by some infinitesimal <span class="math inline">\(dx\)</span>. Then <span class="math inline">\(y + dy = g(x + dx)\)</span>, so</p>
 <p><span class="math display">\[dy = g(x+dx)-g(x) = \frac{g(x+dx)-g(x)}{dx} dx = \frac{dy}{dx} dx.\]</span></p>
 <p>Since <span class="math inline">\(dy\)</span> is also infinitesimal, perturbing <span class="math inline">\(y\)</span> by <span class="math inline">\(dy\)</span> will do the same thing to <span class="math inline">\(z=f(y)\)</span>, since <span class="math inline">\(z + dz = f(y + dy)\)</span>, and</p>
 <p><span class="math display">\[dz = f(y+dy)-f(y) = \frac{f(y+dy)-f(y)}{dy} dy = \frac{dz}{dy} dy,\]</span></p>
@@ -595,6 +620,7 @@ v &amp;= i(u), \\
 <p>the chain rule would say</p>
 <p><span class="math display">\[\frac{dv}{dx} = \frac{dv}{du} \frac{du}{dz} \frac{dz}{dy} \frac{dy}{dx}.\]</span></p>
 <p>This arbitrary <em>chaining</em> is what allows us to differentiate complex neural networks, where each <em>layer</em> of the network is just a function in this kind of chain.</p>
+</section>
 </section>
 <section id="application-the-sigmoid-function" class="level3" data-number="3.2.4">
 <h3 data-number="3.2.4" class="anchored" data-anchor-id="application-the-sigmoid-function"><span class="header-section-number">3.2.4</span> Application: The Sigmoid Function</h3>
@@ -715,7 +741,7 @@ A &amp;\approx f(1)dx + f(2)dx + f(3)dx + \cdots + f(10)dx \\
 &amp;= \big(\sqrt{1} + \sqrt{2} + \sqrt{3} + \cdots + \sqrt{10}\big)\cdot 1 \\
 &amp;\approx 22.468
 \end{align}\]</span></p>
-<p>It’s helpful to visualize what’s going on. I’ll plot this area approximation scheme by using the helper function <code>plot_approximating_rectangles</code>, which will show the plot of the curve and its approximating rectangles. It also prints out the approximating area calculated above.</p>
+<p>Let’s visualize what’s going on. This plot shows both the curve and its approximating rectangles. It also prints out the approximating area calculated above.</p>
 <div class="cell" data-execution_count="12">
 <details>
 <summary>Code</summary>
@@ -936,6 +962,8 @@ int y dx = 2*x**(3/2)/3</code></pre>
 <p><span class="math display">\[L = \lim_{x \rightarrow x_0} f(x).\]</span></p>
 <p>More formally, say <span class="math inline">\(L\)</span> is the limit if the difference <span class="math inline">\(|f(x_0+\varepsilon)-L|\)</span> is infinitesimal whenever <span class="math inline">\(\varepsilon\)</span> is infinitesimal. Another notation for the limit is</p>
 <p><span class="math display">\[y \rightarrow L \text{ as } x \rightarrow x_0.\]</span></p>
+<section id="continuity" class="level4" data-number="3.4.0.1">
+<h4 data-number="3.4.0.1" class="anchored" data-anchor-id="continuity"><span class="header-section-number">3.4.0.1</span> Continuity</h4>
 <p>This all seems kind of pedantic if you think about it. It seems like we’re doing a bunch of extra work just to evaluate the function at <span class="math inline">\(x_0\)</span>, which of course would imply <span class="math inline">\(L=f(x_0)\)</span>. In most practical cases this is true, but not <em>always</em>.</p>
 <p>A classic example is a function with a hole in it. Suppose we have a function <span class="math inline">\(y=f(x)\)</span> like this</p>
 <p><span class="math display">\[
@@ -975,6 +1003,9 @@ x^2 &amp; x \neq 0.
 <p>A function that <em>is</em> well-behaved in this sense that it has no holes or jumps is called <strong>continuous</strong>. Continuous functions satisfy the very nice property that the limit can be pulled inside the function,</p>
 <p><span class="math display">\[\lim_{x \rightarrow x_0} f(x) = f\bigg(\lim_{x \rightarrow x_0} x\bigg) = f(x_0).\]</span></p>
 <p>Since almost every function we work with in practice is continuous, we can by and large take for granted that we can do this, keeping in mind that exceptions do occur and you sometimes have to be careful.</p>
+</section>
+<section id="infinite-limits" class="level4" data-number="3.4.0.2">
+<h4 data-number="3.4.0.2" class="anchored" data-anchor-id="infinite-limits"><span class="header-section-number">3.4.0.2</span> Infinite Limits</h4>
 <p>In my experience, the only real place limits seem to come up in machine learning is the infinite limit case when <span class="math inline">\(x \rightarrow \infty\)</span>,</p>
 <p><span class="math display">\[\lim_{x \rightarrow \infty} f(x) \approx f(N),\]</span></p>
 <p>where <span class="math inline">\(N\)</span> is an infinitely large large number. The easiest way to figure these limits out is to plug in a large values for <span class="math inline">\(x\)</span> and see what <span class="math inline">\(f(x)\)</span> is tending towards as <span class="math inline">\(x\)</span> gets large. As an example, let’s try to find the limit of <span class="math inline">\(y=e^{-x}\)</span> as <span class="math inline">\(x \rightarrow \infty\)</span>. Here’s what the function looks like. It seems to rapidly decay to <span class="math inline">\(0\)</span> as <span class="math inline">\(x\)</span> gets large. Not even large. It’s basically at <span class="math inline">\(y \approx 0\)</span> by the time <span class="math inline">\(x=10\)</span>.</p>
@@ -1033,6 +1064,7 @@ x = 148.41   y = 0.0</code></pre>
 <p><span class="math display">\[\lim_{n \rightarrow \infty} \bigg|\frac{n^3 + 2n^2 - 5n}{n^3}\bigg| =  \lim_{n \rightarrow \infty} \bigg(1 + \frac{2}{n} - \frac{5}{n^2}\bigg) = 1 \leq 1 = C.\]</span></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

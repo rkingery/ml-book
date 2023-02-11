@@ -518,7 +518,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>It’s worth visualizing what integers look like on the number line, if for nothing else than to compare it with what floats look like later on. Below I’ll plot what a 6-bit signed integer system would look like. Such a system should go from -32 to 31. I’ll to use the helper function <code>plot_number_dist</code> to do the plotting. As you’d expect, you just see a bunch of equally spaced points from -32 to 31.</p>
+<p>It’s worth visualizing what integers look like on the number line, if for nothing else than to compare it with what floats look like later on. Below I’ll plot what a 6-bit signed integer system would look like. Such a system should go from -32 to 31. As you’d expect, we get a bunch of equally spaced points from -32 to 31.</p>
 <div class="cell" data-execution_count="15">
 <details>
 <summary>Code</summary>
@@ -645,7 +645,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The final representation is thus <span class="math inline">\(x \equiv 0 \ 1101 \ 111\)</span>.</li>
 </ul></li>
 </ul>
-<p>So you can experiment, I wrote a helper function <code>represent_as_float</code> that lets you visualize this for different values of <span class="math inline">\(x\)</span>. Below I show the example I just calculated. I print out both the scientific notation form and its binary representation.</p>
+<p>Below I show the example I just calculated. I print out both the scientific notation form and its binary representation.</p>
 <div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>represent_as_float(<span class="fl">15.25</span>, n<span class="op">=</span><span class="dv">8</span>, n_exp<span class="op">=</span><span class="dv">4</span>, n_man<span class="op">=</span><span class="dv">3</span>, bias<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -683,7 +683,7 @@ Machine Epsilon: 0.25</code></pre>
 <p>What happens when you try to input a float smaller than the smallest value, in this case <span class="math inline">\(0.001953125\)</span>? In this case, the number is said to <strong>undeflow</strong>. Usually underflow won’t raise an error. The number will pretty much always just get set to <span class="math inline">\(+0\)</span> (or <span class="math inline">\(-0\)</span>). This is again something you have to worry about, especially if you’re dealing with small numbers in denominators, where they can lead to division by zero errors which <em>do</em> get raised.</p>
 <p>Overflow and underflow errors are some of the most common numerical bugs that occur in deep learning, and usually result from not handling floats correctly to begin with.</p>
 <p>I also printed out a special value called the <strong>machine epsilon</strong>. The machine epsilon, denoted <span class="math inline">\(\varepsilon_m\)</span>, is defined as the smallest value in a floating point system that’s larger than <span class="math inline">\(1\)</span>. In some sense, <span class="math inline">\(\varepsilon_m\)</span> is a proxy for how finely you can represent numbers in a given <span class="math inline">\(n\)</span>-bit floating point system. The smaller <span class="math inline">\(\varepsilon_m\)</span> the more precisely you can represent numbers, i.e.&nbsp;the more decimal places of precision you get access to. In our case, we get <span class="math inline">\(\varepsilon_m=0.25\)</span>. This means numbers in 8-bit floating point tend to be <span class="math inline">\(0.25\)</span> apart from each other on average, which means we can represent numbers in this system only with a measly 2-3 digits of precision.</p>
-<p>With these numbers in hand let’s now plot their distribution on the number line. I’ll use the helper function <code>plot_number_dist</code> function to do this. Compare with the plot of the signed integers I did above.</p>
+<p>With these numbers in hand let’s now plot their distribution on the number line. Compare with the plot of the signed integers I did above.</p>
 <div class="cell" data-execution_count="24">
 <details>
 <summary>Code</summary>

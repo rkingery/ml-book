@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#elementary-arithmetic-and-algebra" id="toc-elementary-arithmetic-and-algebra" class="nav-link active" data-scroll-target="#elementary-arithmetic-and-algebra"><span class="toc-section-number">1.1</span>  Elementary Arithmetic and Algebra</a>
+  <li><a href="#elementary-math" id="toc-elementary-math" class="nav-link active" data-scroll-target="#elementary-math"><span class="toc-section-number">1.1</span>  Elementary Math</a>
   <ul class="collapse">
   <li><a href="#symbolic-vs-numerical-computation" id="toc-symbolic-vs-numerical-computation" class="nav-link" data-scroll-target="#symbolic-vs-numerical-computation"><span class="toc-section-number">1.1.1</span>  Symbolic vs Numerical Computation</a></li>
   </ul></li>
@@ -226,7 +226,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#multivariate-functions" id="toc-multivariate-functions" class="nav-link" data-scroll-target="#multivariate-functions"><span class="toc-section-number">1.3</span>  Multivariate Functions</a></li>
   <li><a href="#systems-of-equations" id="toc-systems-of-equations" class="nav-link" data-scroll-target="#systems-of-equations"><span class="toc-section-number">1.4</span>  Systems of Equations</a></li>
-  <li><a href="#sums-and-products" id="toc-sums-and-products" class="nav-link" data-scroll-target="#sums-and-products"><span class="toc-section-number">1.5</span>  Sums and Products</a></li>
+  <li><a href="#sums-and-products" id="toc-sums-and-products" class="nav-link" data-scroll-target="#sums-and-products"><span class="toc-section-number">1.5</span>  Sums and Products</a>
+  <ul class="collapse">
+  <li><a href="#sums" id="toc-sums" class="nav-link" data-scroll-target="#sums"><span class="toc-section-number">1.5.1</span>  Sums</a></li>
+  <li><a href="#products" id="toc-products" class="nav-link" data-scroll-target="#products"><span class="toc-section-number">1.5.2</span>  Products</a></li>
+  </ul></li>
   <li><a href="#greek-alphabet" id="toc-greek-alphabet" class="nav-link" data-scroll-target="#greek-alphabet"><span class="toc-section-number">1.6</span>  Greek Alphabet</a></li>
   </ul>
 </nav>
@@ -262,9 +266,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="elementary-arithmetic-and-algebra" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="elementary-arithmetic-and-algebra"><span class="header-section-number">1.1</span> Elementary Arithmetic and Algebra</h2>
+<section id="elementary-math" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="elementary-math"><span class="header-section-number">1.1</span> Elementary Math</h2>
 <p>It’s useful in machine learning to be able to read and manipulate basic arithmetic and algebraic equations, particularly when reading research papers, blog posts, or documentation. I won’t go into depth on the basics of high school arithmetic and algebra. I do have to assume <em>some</em> mathematical maturity of the reader, and this seems like a good place to draw the line. I’ll just mention a few key points.</p>
+<section id="numbers" class="level4" data-number="1.1.0.1">
+<h4 data-number="1.1.0.1" class="anchored" data-anchor-id="numbers"><span class="header-section-number">1.1.0.1</span> Numbers</h4>
 <p>Recall that numbers can come in several forms. We can have,</p>
 <ul>
 <li><strong>Natural Numbers:</strong> These are positive whole numbers <span class="math inline">\(0, 1, 2, 3, 4, \cdots\)</span>. Note the inclusion of <span class="math inline">\(0\)</span> in this group. Following the computer science convention I’ll tend to do that. The set of all natural numbers is denoted by the symbol <span class="math inline">\(\mathbb{N}\)</span>.</li>
@@ -273,6 +279,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Real Numbers:</strong> These are any arbitrary decimal numbers on the number line, for example <span class="math display">\[1.00, \ 5.07956, \ -0.99999\dots, \ \pi=3.1415\dots, \ e=2.718\dots, \ \cdots.\]</span> They include as a special case both the integers and the rational numbers, but also include numbers that can’t be represented as fractions, like <span class="math inline">\(\pi\)</span> and <span class="math inline">\(e\)</span>. The set of all real numbers is denoted by the symbol <span class="math inline">\(\mathbb{R}\)</span>.</li>
 <li><strong>Complex numbers:</strong> These are numbers with both real and imaginary parts, like <span class="math inline">\(1 + 2i\)</span> where <span class="math inline">\(i=\sqrt{-1}\)</span>. Complex numbers include the real numbers as a special case. Since they don’t really show up in machine learning we won’t deal with these after this. The set of all complex numbers is denoted by the symbol <span class="math inline">\(\mathbb{C}\)</span>.</li>
 </ul>
+</section>
+<section id="basic-algebra" class="level4" data-number="1.1.0.2">
+<h4 data-number="1.1.0.2" class="anchored" data-anchor-id="basic-algebra"><span class="header-section-number">1.1.0.2</span> Basic Algebra</h4>
 <p>You should be familiar with the usual arithmetic operations defined on these systems of numbers. Things like addition, subtraction, multiplication, and division. You should also at least vaguely recall the order of operations, which defines the order in which complex arithmetic operations with parenthesis are carried out. For example,</p>
 <p><span class="math display">\[(5+1) \cdot \frac{(7-3)^2}{2} = 6 \cdot \frac{4^2}{2} = 6 \cdot \frac{16}{2} = 6 \cdot 8 = 48.\]</span></p>
 <p>You should be able to manipulate and simplify simple fractions by hand. For example,</p>
@@ -292,6 +301,9 @@ x &amp;= \frac{c - b}{a}.
 &amp;= a^2x^2 - abx - abx + b^2 \\
 &amp;= a^2x^2 - 2abx + b^2.
 \end{align*}\]</span></p>
+</section>
+<section id="sets-and-intervals" class="level4" data-number="1.1.0.3">
+<h4 data-number="1.1.0.3" class="anchored" data-anchor-id="sets-and-intervals"><span class="header-section-number">1.1.0.3</span> Sets and Intervals</h4>
 <p>It’s also worth recalling what a set is. Briefly, a <strong>set</strong> is a collection of <em>unique</em> <strong>elements</strong>. Usually those elements are numbers. To say that an element <span class="math inline">\(x\)</span> is an element of a set <span class="math inline">\(S\)</span>, we’d write <span class="math inline">\(x \in S\)</span>, read “<span class="math inline">\(x\)</span> is in <span class="math inline">\(S\)</span>”. If <span class="math inline">\(x\)</span> is <em>not</em> in the set, we’d write <span class="math inline">\(x \notin S\)</span>. For example, the set of elements <span class="math inline">\(1, 2, 3\)</span> can be denoted <span class="math inline">\(S = \{1, 2, 3\}\)</span>. Then <span class="math inline">\(1 \in S\)</span>, but <span class="math inline">\(5 \notin S\)</span>.</p>
 <p>I’ve already mentioned the most common sets we’ll care about, namely the natural numbers <span class="math inline">\(\mathbb{N}\)</span>, integers <span class="math inline">\(\mathbb{Z}\)</span>, rational numbers <span class="math inline">\(\mathbb{Q}\)</span>, and real numbers <span class="math inline">\(\mathbb{R}\)</span>. Also of interest will be the <strong>intervals</strong>,</p>
 <ul>
@@ -301,6 +313,7 @@ x &amp;= \frac{c - b}{a}.
 <li>Closed interval: <span class="math inline">\([a, b] = \{x: a \leq x \leq b \}\)</span>.</li>
 </ul>
 <p>Think of intervals as representing line segments on the real line, connecting <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span>. I’ll touch on sets more in coming lessons. I just want you to be familiar with the notation, since I’ll occasionally use it.</p>
+</section>
 <section id="symbolic-vs-numerical-computation" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="symbolic-vs-numerical-computation"><span class="header-section-number">1.1.1</span> Symbolic vs Numerical Computation</h3>
 <p>There are two fundamental ways to perform mathematical computations: numerical computation, and symbolic computation. You’re familiar with both even though you may not realize it. <strong>Numerical computation</strong> involves crunching numbers. You plug in numbers, and get out numbers. When you type something like <code>10.5 / 12.4</code> in python, it will return a number, like <code>0.8467741935483871</code>. This is numerical computation.</p>
@@ -868,12 +881,12 @@ x &amp; \text{if } x \ge 0 \\
 <p>Math folks often write an abstract compositional function as a function applied to another function, like <span class="math inline">\(y=f(g(x))\)</span> or <span class="math inline">\(y=(f \circ g)(x)\)</span>. These can be chained arbitrarily many times, not just two. Neural networks do just that, often hundreds or thousands of times.</p>
 <p>Consider, for example, the function composition done by applying the following functions in sequence:</p>
 <ul>
-<li>an affine function <span class="math inline">\(y=wx+b\)</span></li>
-<li>followed by a linear function <span class="math inline">\(y=-x\)</span></li>
-<li>followed by an exponential function <span class="math inline">\(y=e^x\)</span></li>
-<li>followed by a rational function <span class="math inline">\(y=\frac{1}{x}\)</span></li>
+<li>an affine function <span class="math inline">\(f(x) = wx+b\)</span></li>
+<li>followed by a linear function <span class="math inline">\(g(x) = -x\)</span></li>
+<li>followed by an exponential function <span class="math inline">\(h(x)=e^x\)</span></li>
+<li>followed by a rational function <span class="math inline">\(r(x)=\frac{1}{x}\)</span></li>
 </ul>
-<p>to get the full function <span class="math display">\[y = \frac{1}{1 + e^{-(wx+b)}}.\]</span></p>
+<p>to get the full function <span class="math display">\[y = r(h(g(x))) = \frac{1}{1 + e^{-(wx+b)}}.\]</span></p>
 <p>Here’s a plot of what this function looks like for the “standard form” where <span class="math inline">\(w=1, b=0\)</span>. Notice that <span class="math inline">\(0 \leq y \leq 1\)</span>. The values of <span class="math inline">\(x\)</span> get “squashed” to values between 0 and 1 after the function is applied.</p>
 <div class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
@@ -887,8 +900,8 @@ x &amp; \text{if } x \ge 0 \\
 </div>
 </div>
 </div>
-<p>This function is called the <strong>sigmoid</strong> function. The sigmoid is very important in machine learning since it in essence creates probabilities. We’ll see it a lot more. The standard form sigmoid function, usually written</p>
-<p><span class="math inline">\(\sigma(x)\)</span>, is given by <span class="math display">\[\sigma(x) = \frac{1}{1 + e^{-x}}.\]</span></p>
+<p>This function is called the <strong>sigmoid</strong> function. The sigmoid is very important in machine learning since it in essence creates probabilities. We’ll see it a lot more. The standard form sigmoid function, usually written <span class="math inline">\(\sigma(x)\)</span>, is given by</p>
+<p><span class="math display">\[\sigma(x) = \frac{1}{1 + e^{-x}}.\]</span></p>
 <p>Arbitrary affine transformations of the standard form would then be written as <span class="math inline">\(\sigma(wx+b)\)</span>.</p>
 <p>A similar looking function shows up sometimes as well called the <strong>hyperbolic tangent</strong> or <strong>tanh</strong> function, which has the (standard) form</p>
 <p><span class="math display">\[\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}.\]</span></p>
@@ -995,7 +1008,7 @@ x &amp; \text{if } x \ge 0 \\
 <p>Simply put, a multivariate function is a function of multiple variables. Instead of a single variable <span class="math inline">\(x\)</span>, we might have several variables, e.g.&nbsp;<span class="math inline">\(x_0, x_1, x_2, x_3, x_4, x_5\)</span>,</p>
 <p><span class="math display">\[y = f(x_0, x_1, x_2, x_3, x_4, x_5).\]</span></p>
 <p>If you think about mathematical functions analogously to python functions it shouldn’t be surprising functions can have multiple arguments. They usually do, in fact.</p>
-<p>Here’s an example of a function that takes two arguments <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> and produces a single output <span class="math inline">\(z\)</span>, more often written as <span class="math inline">\(z=f(x,y)\)</span>. The function we’ll look at is <span class="math inline">\(z = x^2 + y^2\)</span>. I’ll evaluate the function at three points:</p>
+<p>Here’s an example of a function that takes two arguments <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> and produces a single output <span class="math inline">\(z\)</span>, more often written as a <em>bivariate function</em> <span class="math inline">\(z=f(x,y)\)</span>. The example I’ll look at is <span class="math inline">\(z = x^2 + y^2\)</span>. I’ll evaluate the function at three points:</p>
 <ul>
 <li><span class="math inline">\(x=0\)</span>, <span class="math inline">\(y=0\)</span>,</li>
 <li><span class="math inline">\(x=1\)</span>, <span class="math inline">\(y=-1\)</span>,</li>
@@ -1004,13 +1017,13 @@ x &amp; \text{if } x \ge 0 \\
 <p>The main thing to notice is the function does exactly what you think it does. If you plug in 2 values, you get out 1 value.</p>
 <div class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> y <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = </span><span class="sc">{</span>f(<span class="dv">0</span>, <span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = </span><span class="sc">{</span>f(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = </span><span class="sc">{</span>f(<span class="dv">0</span>, <span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = f</span><span class="sc">{</span>(<span class="dv">0</span>, <span class="dv">0</span>)<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>f(<span class="dv">0</span>, <span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = f</span><span class="sc">{</span>(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>f(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = f</span><span class="sc">{</span>(<span class="dv">0</span>, <span class="dv">1</span>)<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>f(<span class="dv">0</span>, <span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>z = 0
-z = 2
-z = 1</code></pre>
+<pre><code>z = f(0, 0) = 0
+z = f(1, -1) = 2
+z = f(0, 1) = 1</code></pre>
 </div>
 </div>
 <p>We can also have functions that map multiple inputs to multiple outputs. Suppose we have a function that takes in 2 values <span class="math inline">\(x_0, x_1\)</span> and outputs 2 values <span class="math inline">\(y_0, y_1\)</span>. We’d write this as <span class="math inline">\((y_0, y_1) = f(x_0, x_1)\)</span>.</p>
@@ -1154,6 +1167,8 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 </section>
 <section id="sums-and-products" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="sums-and-products"><span class="header-section-number">1.5</span> Sums and Products</h2>
+<section id="sums" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="sums"><span class="header-section-number">1.5.1</span> Sums</h3>
 <p>We typically find ourselves performing operations on large numbers of numbers at a time. By far the most common operation is adding up a bunch of numbers, or <strong>summation</strong>. Suppose we have some <strong>sequence</strong> of <span class="math inline">\(n\)</span> numbers <span class="math inline">\(x_0,x_1,x_2,\cdots,x_{n-1}\)</span>. They could be anything, related by a function, or not. If we wanted to sum them together to get a new number <span class="math inline">\(x\)</span> we could write</p>
 <p><span class="math display">\[x = x_0 + x_1 + x_2 + \cdots + x_{n-1}.\]</span></p>
 <p>But it’s kind of cumbersome to always write like this. For this reason in math there’s a more compact notation to write sums called <strong>summation notation</strong>. We introduce the symbol <span class="math inline">\(\sum\)</span> for “sum”, and write <span class="math display">\[x = \sum_{i=0}^{n-1} x_i.\]</span></p>
@@ -1211,6 +1226,9 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 <p>We can have double sums (sums of sums) as well. If <span class="math inline">\(x_{i,j}\)</span> is some 2-index variable where <span class="math inline">\(i=0,\cdots,n-1\)</span> and <span class="math inline">\(j=0,\cdots,m-1\)</span>, we can sum over both sets of indices to get <span class="math inline">\(n \cdot m\)</span> total terms,</p>
 <p><span class="math display">\[\sum_{i=0}^{n-1} \sum_{j=0}^{m-1} x_{i,j} = \sum_{j=0}^{m-1} \sum_{i=0}^{n-1} x_{i,j} = x_{0,0} + x_{0,1} + \cdots x_{0,m-1} + \cdots + x_{n-1,0} + x_{n-1,1} + \cdots x_{n-1,m-1}.\]</span></p>
 <p>Notice the two sums can swap, or <strong>commute</strong>, with each other, <span class="math inline">\(\sum_i \sum_j = \sum_j \sum_i\)</span>. This follows by expanding the terms out like on the right-hand side and noting the must be equal in both cases.</p>
+</section>
+<section id="products" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="products"><span class="header-section-number">1.5.2</span> Products</h3>
 <p>The notation I’ve covered for sums has an analogue for products, called <strong>product notation</strong>. Suppose we want to multiply <span class="math inline">\(n\)</span> numbers <span class="math inline">\(x_0,x_1,\cdots,x_{n-1}\)</span> together to get some number <span class="math inline">\(x\)</span>. We could write</p>
 <p><span class="math display">\[x = x_0 \cdot x_1 \cdots x_{n-1},\]</span></p>
 <p>but we have a more compact notation for this as well. Using the symbol <span class="math inline">\(\prod\)</span> in analogy to <span class="math inline">\(\sum\)</span>, we can write</p>
@@ -1231,9 +1249,10 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 <p><span class="math display">\[\log \bigg(\prod_{i=0}^{n-1} x_i \bigg) = \sum_{i=0}^{n-1} \log x_i.\]</span></p>
 <p>This follows from the rule <span class="math inline">\(\log(x \cdot y) = \log x + \log y\)</span>, which extends to arbitrarily many products too.</p>
 </section>
+</section>
 <section id="greek-alphabet" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="greek-alphabet"><span class="header-section-number">1.6</span> Greek Alphabet</h2>
-<p>Like many other technical fields, machine learning makes heavy use of the Greek alphabet to represent variable names in mathematical equations. While not all Greek characters are used, certain ones are worth being aware of. Below is a <a href="https://howtosaymathematics.files.wordpress.com/2011/08/greek-alphabet2.pdf">table</a> of the Greek letters upper and lower case, as well as a guide on how to pronounce and write them. You don’t need to memorize all of these letters, but they will frequently show up in future lessons, so you may want to reference this table often until you’re comfortable with Greek letters.</p>
+<p>Like many other technical fields, machine learning makes heavy use of the Greek alphabet to represent variable names in mathematical equations. While not all Greek characters are used, certain ones are worth being aware of. Below is a <a href="https://howtosaymathematics.files.wordpress.com/2011/08/greek-alphabet2.pdf">table</a> of the Greek letters. You don’t need to memorize all of these letters, but it’s worth referencing this table whenever you encounter a symbol you don’t recognize.</p>
 <p><img src="resources/greek.png" width="550"></p>
 
 
