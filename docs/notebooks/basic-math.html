@@ -318,7 +318,10 @@ x &amp;= \frac{c - b}{a}.
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="symbolic-vs-numerical-computation"><span class="header-section-number">1.1.1</span> Symbolic vs Numerical Computation</h3>
 <p>There are two fundamental ways to perform mathematical computations: numerical computation, and symbolic computation. You’re familiar with both even though you may not realize it. <strong>Numerical computation</strong> involves crunching numbers. You plug in numbers, and get out numbers. When you type something like <code>10.5 / 12.4</code> in python, it will return a number, like <code>0.8467741935483871</code>. This is numerical computation.</p>
 <div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fl">10.5</span> <span class="op">/</span> <span class="fl">12.4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>0.8467741935483871</code></pre>
 </div>
@@ -328,30 +331,42 @@ x &amp;= \frac{c - b}{a}.
 <p>To use sympy, I’ll import <code>sympy</code> with the alias <code>sp</code>. Before defining a function to operate on, we first have to encode all the symbols in the problem as sympy <code>Symbol</code> objects. Once that’s done, we can create equations out of them and perform mathematical operations.</p>
 <p>Here’s an example of using sympy to expand the equation above, <span class="math inline">\((ax-b)^2\)</span>.</p>
 <div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> sp.Symbol(<span class="st">'a'</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> sp.Symbol(<span class="st">'b'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>a, b, x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>(a, b, x)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>equation <span class="op">=</span> (a <span class="op">*</span> x <span class="op">-</span> b) <span class="op">**</span> <span class="dv">2</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>expanded <span class="op">=</span> sp.expand(equation, x)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'expanded equation: </span><span class="sc">{</span>expanded<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>expanded equation: a**2*x**2 - 2*a*b*x + b**2</code></pre>
 </div>
 </div>
 <p>We can also use sympy to solve equations. Here’s an example of solving the quadratic equation <span class="math inline">\(x^2 = 6\)</span> for its two roots, <span class="math inline">\(x = \pm \sqrt{6}\)</span>.</p>
 <div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>equation <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">6</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>solutions <span class="op">=</span> sp.solve(equation, x)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'solutions = </span><span class="sc">{</span>solutions<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>solutions = [-sqrt(6), sqrt(6)]</code></pre>
 </div>
@@ -394,14 +409,20 @@ x &amp;= \frac{c - b}{a}.
 <p>Note step (2) requires another library called <code>numpy</code> to create the grid of points. You don’t <em>have</em> to use numpy for this, but it’s typically easiest. Usually numpy is imported with the alias <code>np</code>. Numpy is python’s main library for working with numerical arrays. We’ll cover it in much more detail in future lessons.</p>
 <p>Let me go ahead and load these libraries. I’ll also show a simple example of a plot. What I’ll do is define a grid <code>x</code> of 100 equally spaced points between -10 and 10, and plot the function <span class="math inline">\(y=x-1\)</span> using the method described above.</p>
 <div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x <span class="op">-</span> <span class="dv">1</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -414,9 +435,12 @@ x &amp;= \frac{c - b}{a}.
 <p>For this reason, for the rest of the plotting in this lesson I’m going to use a helper function <code>plot_function</code>, which takes in <code>x</code> and <code>y</code>, the range of <code>x</code> values we want to plot, and an optional title. I didn’t think the details of this helper function were worth going into now, so I abstracted it away into the file <code>utils.py</code> in this same directory. It uses matplotlib like I described, but with a good bit of styling to make the plot more readable. If you really want to see the details perhaps the easiest thing to do is create a cell below using <code>ESC-B</code> and type the command <code>??plot_function</code>, which will print the code inside the function as the output.</p>
 <p>Back to it, let’s plot one example each of a constant function <span class="math inline">\(y=2\)</span>, a linear function <span class="math inline">\(y=2x\)</span>, and an affine function <span class="math inline">\(2x-1\)</span>.</p>
 <div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">2</span> <span class="op">*</span> np.ones(<span class="bu">len</span>(x))</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Constant Function: $y=2$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -426,9 +450,12 @@ x &amp;= \frac{c - b}{a}.
 </div>
 </div>
 <div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">2</span> <span class="op">*</span> x</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Linear Function: $y=2x$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -438,9 +465,12 @@ x &amp;= \frac{c - b}{a}.
 </div>
 </div>
 <div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">2</span> <span class="op">*</span> x <span class="op">-</span> <span class="dv">1</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Affine Function: $y=2x-1$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -456,9 +486,12 @@ x &amp;= \frac{c - b}{a}.
 <p>Polynomial functions are just sums of positive integer powers of <span class="math inline">\(x\)</span>, e.g.&nbsp;something like <span class="math inline">\(y=3x^2+5x+1\)</span> or <span class="math inline">\(y=x^{10}-x^{3}+4\)</span>. The highest power that shows up in the function is called the <strong>degree</strong> of the polynomial. For example, the above examples have degrees 2 and 10 respectively. Polynomial functions tend to look like lines, bowls, or roller coasters that turn up and down some number of times.</p>
 <p>A major example is the quadratic function <span class="math inline">\(y=x^2\)</span>, which is just an upward-shaped bowl. Its bowl-shaped curve is called a <strong>parabola</strong>. We can get a downward-shaped bowl by flipping the sign to <span class="math inline">\(y=-x^2\)</span>.</p>
 <div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Quadratic Function: $y=x^2$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -469,9 +502,12 @@ x &amp;= \frac{c - b}{a}.
 </div>
 <p>The next one up is the cubic function <span class="math inline">\(y=x^3\)</span>. The cubic looks completely different from the bowl-shaped parabola.</p>
 <div class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">3</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Cubic Function: $y=x^3$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -483,9 +519,12 @@ x &amp;= \frac{c - b}{a}.
 <p>Polynomials can take on much more interesting shapes than this. Here’s a more interesting polynomial degree 10,</p>
 <p><span class="math display">\[y = (x^2 - 1)^5 - 5(x^2 - 1)^4 + 10(x^2 - 1)^3 - 10(x^2 - 1)^2 + 5(x^2 - 1) - 1.\]</span></p>
 <div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">5</span> <span class="op">-</span> <span class="dv">5</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">10</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>) <span class="op">-</span> <span class="dv">1</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">40</span>, <span class="dv">40</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">10</span>], title<span class="op">=</span><span class="st">'Arbitrary Polynomial'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -504,9 +543,12 @@ x &amp;= \frac{c - b}{a}.
 <p><span class="math display">\[y=\frac{x^3+x+1}{x^2-1}.\]</span></p>
 <p>Notice how weird it looks. There are asymptotes (the vertical lines) where the function blows up at <span class="math inline">\(\pm 1\)</span>, which is where the denominator <span class="math inline">\(x^2-1=0\)</span>.</p>
 <div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.01</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: (x <span class="op">**</span> <span class="dv">3</span> <span class="op">+</span> x <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> (x <span class="op">**</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Rational Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -517,9 +559,12 @@ x &amp;= \frac{c - b}{a}.
 </div>
 <p>Here’s a plot of <span class="math inline">\(y=\frac{1}{x}\)</span>. There’s an asymptote at <span class="math inline">\(x=0\)</span>. When <span class="math inline">\(x &gt; 0\)</span> it starts at <span class="math inline">\(+\infty\)</span> and tapers down to <span class="math inline">\(0\)</span> as <span class="math inline">\(x\)</span> gets large. When <span class="math inline">\(x &lt; 0\)</span> it does the same thing, except flipped across the origin <span class="math inline">\(x=y=0\)</span>. This is an example of an <strong>odd function</strong>, a function that looks like <span class="math inline">\(f(x)=-f(x)\)</span>, which is clear in this case since <span class="math inline">\(1/(-x)=-1/x\)</span>. Functions like the linear function <span class="math inline">\(y=x\)</span> and the cubic function <span class="math inline">\(y=x^3\)</span> are also odd functions.</p>
 <div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">1</span> <span class="op">/</span> x</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Odd Function: $y=1/x$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -530,9 +575,12 @@ x &amp;= \frac{c - b}{a}.
 </div>
 <p>A related function is <span class="math inline">\(y=\frac{1}{|x|}\)</span>. The difference here is that <span class="math inline">\(|x|\)</span> can never be negative. This means <span class="math inline">\(f(x)=f(-x)\)</span>. This is called an <strong>even function</strong>. Functions like this are symmetric across the y-axis. The quadratic function <span class="math inline">\(y=x^2\)</span> is also an even function.</p>
 <div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">1</span> <span class="op">/</span> np.<span class="bu">abs</span>(x)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Even Function: $y=1/|x|$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -549,9 +597,12 @@ x &amp;= \frac{c - b}{a}.
 <p>The general class of functions of the form <span class="math inline">\(y=x^p\)</span> for some arbitrary real number <span class="math inline">\(p\)</span> are often called <strong>power functions</strong>.</p>
 <p>Here’s a plot of what the square root function looks like. Here <span class="math inline">\(y\)</span> grows slower than a linear function, but still grows arbitrarily large with <span class="math inline">\(x\)</span>.</p>
 <div class="cell" data-execution_count="19">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.sqrt(x)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Square Root: $y=\sqrt</span><span class="sc">{x}</span><span class="st">=x^{1/2}$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -635,9 +686,12 @@ x &amp;= \frac{c - b}{a}.
 <p>Here are some plots of what the exponential and logarithm functions look like. The exponential function is a function that blows up very, very quickly. The log function grows very, very slowly (much more slowly than the square root does).</p>
 <p>Note the log function is only defined for positive-valued numbers <span class="math inline">\(x \geq 0\)</span>, with <span class="math inline">\(\log(+0)=-\infty\)</span>. This is dual to the exponential function only taking on <span class="math inline">\(y \geq 0\)</span>.</p>
 <div class="cell" data-execution_count="20">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="fl">0.1</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.exp(x)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="st">'Exponential Function: $y=\exp(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -647,9 +701,12 @@ x &amp;= \frac{c - b}{a}.
 </div>
 </div>
 <div class="cell" data-execution_count="21">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="fl">0.01</span>, <span class="dv">5</span>, <span class="fl">0.1</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.log(x)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Logarithm Function: $y=\log(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -727,9 +784,12 @@ x &amp;\approx 0.3 \cdot n.
 \end{align}\]</span></p>
 <p>For example, you can use this formula to show that 52 bits of floating point precision translates to about 15 to 16 digits of precision. In numpy, the function <code>np.log</code> function calculates the (base-<span class="math inline">\(e\)</span>) log of a number.</p>
 <div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">52</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.log(<span class="dv">2</span>) <span class="op">/</span> np.log(<span class="dv">10</span>) <span class="op">*</span> n</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>x = 15.65355977452702</code></pre>
 </div>
@@ -740,9 +800,12 @@ x &amp;\approx 0.3 \cdot n.
 <p>Other textbook functions typically covered in math courses are the trig functions: sine, cosine, tangent, cosine, cosecant, and cotangent. Of these functions, the most important to know are the sine function <span class="math inline">\(y=\sin x\)</span>, the cosine function <span class="math inline">\(y = \cos x\)</span>, and <em>sometimes</em> the tangent function <span class="math inline">\(y = \tan x\)</span>.</p>
 <p>Here’s what their plots look like. They’re both waves that repeat themselves, in the sense <span class="math inline">\(f(x + 2\pi) = f(x)\)</span>. The length for the function to repeat itself is called the <em>period</em>, in this case <span class="math inline">\(2\pi \approx 6.28\)</span>. Note that the cosine is just a sine function that’s shifted right by <span class="math inline">\(\frac{\pi}{2} \approx 1.57\)</span>.</p>
 <div class="cell" data-execution_count="23">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.sin(x)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>),  ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], title<span class="op">=</span><span class="st">'Sine Function: $y=\sin(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -752,9 +815,12 @@ x &amp;\approx 0.3 \cdot n.
 </div>
 </div>
 <div class="cell" data-execution_count="24">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.cos(x)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], title<span class="op">=</span><span class="st">'Cosine Function: $y=\cos(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -819,9 +885,12 @@ y =
 <p>which means exactly the same thing as the piecewise definition, since <span class="math inline">\(x \geq 0\)</span> is only true when (you guessed it), <span class="math inline">\(x \geq 0\)</span>.</p>
 <p>Here’s a plot of this function. Note the discontinuous jump at <span class="math inline">\(x=0\)</span>.</p>
 <div class="cell" data-execution_count="25">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.01</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x:  (x <span class="op">&gt;=</span> <span class="dv">0</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], title<span class="op">=</span><span class="st">'Unit Step Function: $y=u(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -843,9 +912,12 @@ x &amp; x \geq 0.
 <p>In machine learning it’s more common to write the ramp function using the <span class="math inline">\(\max\)</span> function as <span class="math inline">\(y = \max(0,x)\)</span>. This means, for each <span class="math inline">\(x\)</span>, take that value and compare it with <span class="math inline">\(0\)</span>, and take the maximum of those two. That is, if <span class="math inline">\(x\)</span> is negative take <span class="math inline">\(y=0\)</span>, otherwise take <span class="math inline">\(y=x\)</span>. It’s also more common to call this function a <strong>rectified linear unit</strong>, or <strong>ReLU</strong> for short. It’s an ugly, unintuitive name, but unfortunately it’s stuck in the field.</p>
 <p>Here’s a plot of the ramp or ReLU function. Notice how it stays at <span class="math inline">\(y=0\)</span> for a while, then suddenly “ramps upward” at <span class="math inline">\(x=0\)</span>.</p>
 <div class="cell" data-execution_count="26">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x:  x <span class="op">*</span> (x <span class="op">&gt;=</span> <span class="dv">0</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'ReLU Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -863,9 +935,12 @@ x &amp; \text{if } x \ge 0 \\
 \]</span></p>
 <p>The absolute value just ignores negative signs and makes everything positive. The function looks like the usual line <span class="math inline">\(y=x\)</span> when positive, but like the negative-sloped line <span class="math inline">\(y=-x\)</span> when negative. At <span class="math inline">\(x=0\)</span> the two lines meet, creating a distinctive v-shape. To get the absolute value function in python, use <code>abs</code> or <code>np.abs</code>.</p>
 <div class="cell" data-execution_count="27">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="fl">0.1</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="bu">abs</span>(x)</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Absolute Value Function: $y=|x|$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -889,9 +964,12 @@ x &amp; \text{if } x \ge 0 \\
 <p>to get the full function <span class="math display">\[y = r(h(g(x))) = \frac{1}{1 + e^{-(wx+b)}}.\]</span></p>
 <p>Here’s a plot of what this function looks like for the “standard form” where <span class="math inline">\(w=1, b=0\)</span>. Notice that <span class="math inline">\(0 \leq y \leq 1\)</span>. The values of <span class="math inline">\(x\)</span> get “squashed” to values between 0 and 1 after the function is applied.</p>
 <div class="cell" data-execution_count="28">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x:  <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>x))</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>), ticks_every<span class="op">=</span>[<span class="dv">2</span>, <span class="fl">0.2</span>], title<span class="op">=</span><span class="st">'Sigmoid Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -908,9 +986,12 @@ x &amp; \text{if } x \ge 0 \\
 <p>The tanh function looks pretty much the same as the sigmoid except it’s rescaled vertically so that <span class="math inline">\(-1 \leq y \leq 1\)</span>.</p>
 <p>Here’s a plot of the tanh function. Notice how similar it looks to the sigmoid with the exception of the scale of the y-axis.</p>
 <div class="cell" data-execution_count="29">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: (np.exp(x) <span class="op">-</span> np.exp(<span class="op">-</span>x)) <span class="op">/</span> (np.exp(x) <span class="op">+</span> np.exp(<span class="op">-</span>x))</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], title<span class="op">=</span><span class="st">'Tanh Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -932,13 +1013,19 @@ x &amp; \text{if } x \ge 0 \\
 <p>Here’s an example of how these work. Consider the function <span class="math inline">\(f(x)=x^2\)</span>. We’re going to apply each of these transformations one by one to show what they do to the graph of <span class="math inline">\(f(x)\)</span>.</p>
 <p>First, let’s look at the transformation <span class="math inline">\(g(x) = \frac{1}{2} f(x) = \frac{1}{2} x^2\)</span>. Here <span class="math inline">\(a=\frac{1}{2}\)</span> and the rest are zero. I’ll plot it along side the original graph (the blue curve). Notice the graph gets flattened vertically by a factor of two (the orange curve).</p>
 <div class="cell" data-execution_count="30">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="31">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">2</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x: a <span class="op">*</span> x <span class="op">**</span> <span class="dv">2</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="ss">f'$a=</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -951,9 +1038,12 @@ x &amp; \text{if } x \ge 0 \\
 <p><span class="math display">\[g(x) = f\big(\frac{1}{2} x\big) = \bigg(\frac{1}{2} x \bigg)^2.\]</span></p>
 <p>Here <span class="math inline">\(b=\frac{1}{2}\)</span> and the rest are zero. Notice the graph again gets flattened but in a slightly different way.</p>
 <div class="cell" data-execution_count="32">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">2</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x: (b <span class="op">*</span> x) <span class="op">**</span> <span class="dv">2</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="ss">f'$b=</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -964,9 +1054,12 @@ x &amp; \text{if } x \ge 0 \\
 </div>
 <p>Next, consider the transformation <span class="math inline">\(g(x) = f(x-1) = (x-1)^2.\)</span> Here <span class="math inline">\(c=1\)</span> and the rest are zero. Notice the graph’s shape doesn’t change. It just gets shifted <em>right</em> by <span class="math inline">\(c=1\)</span> since <span class="math inline">\(c\)</span> is negative.</p>
 <div class="cell" data-execution_count="33">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x: (x <span class="op">+</span> c) <span class="op">**</span> <span class="dv">2</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">7</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="ss">f'$c=</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -977,9 +1070,12 @@ x &amp; \text{if } x \ge 0 \\
 </div>
 <p>Finally, let’s look at the transformation <span class="math inline">\(g(x) = f(x) + 2 = x^2 + 2\)</span>. Here <span class="math inline">\(d=2\)</span> and the rest are zero. Notice again the graph’s shape doesn’t change. It just gets shifted <em>up</em> by <span class="math inline">\(d=2\)</span> units.</p>
 <div class="cell" data-execution_count="34">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> d</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">8</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="ss">f'$d=</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -990,8 +1086,11 @@ x &amp; \text{if } x \ge 0 \\
 </div>
 <p>Let’s now put them all together to see what happens. We should see rescaling in both directions and shifts in both directions. It’s hard to see in the plot, but it’s all there if you zoom in. The vertex of the parabola is at the point <span class="math inline">\(x=c=1, y=d=2\)</span>. And the stretching factors due to <span class="math inline">\(a=b=1/2\)</span> are both acting to flatten the parabola.</p>
 <div class="cell" data-execution_count="35">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x: a <span class="op">*</span> (b <span class="op">*</span> (x <span class="op">+</span> c)) <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> d</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">8</span>, <span class="dv">8</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="ss">f'$a=</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">, b=</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">, c=</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">, d=</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1016,10 +1115,13 @@ x &amp; \text{if } x \ge 0 \\
 </ul>
 <p>The main thing to notice is the function does exactly what you think it does. If you plug in 2 values, you get out 1 value.</p>
 <div class="cell" data-execution_count="36">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> y <span class="op">**</span> <span class="dv">2</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = f</span><span class="sc">{</span>(<span class="dv">0</span>, <span class="dv">0</span>)<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>f(<span class="dv">0</span>, <span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = f</span><span class="sc">{</span>(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>f(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = f</span><span class="sc">{</span>(<span class="dv">0</span>, <span class="dv">1</span>)<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>f(<span class="dv">0</span>, <span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>z = f(0, 0) = 0
 z = f(1, -1) = 2
@@ -1033,8 +1135,11 @@ z = f(0, 1) = 1</code></pre>
 <p><span class="math display">\[y_0 = f_1(x_0, x_1) = x_0+x_1,\]</span> <span class="math display">\[y_1 = f_2(x_0, x_1) = x_0-x_1.\]</span></p>
 <p>Here’s this function defined and evaluated at the point <span class="math inline">\(x_0=1\)</span>, <span class="math inline">\(x_1=1\)</span>.</p>
 <div class="cell" data-execution_count="37">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x0, x1: (x0 <span class="op">+</span> x1, x0 <span class="op">-</span> x1)</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'(y0, y1) = </span><span class="sc">{</span>f(<span class="dv">1</span>, <span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(y0, y1) = (2, 0)</code></pre>
 </div>
@@ -1047,12 +1152,18 @@ z = f(0, 1) = 1</code></pre>
 <p>One thing that sometimes help to visualize high dimension functions is to pretend they’re functions of two variables, like <span class="math inline">\(z=f(x,y)\)</span>. In this special case we can visualize the inputs as an xy-plane, and the output as a third axis sticking out perpendicular to the xy-plane from the origin. Each <span class="math inline">\(x,y\)</span> pair will map to one unique <span class="math inline">\(z\)</span> value. Done this way, we won’t get a graph of a <em>curve</em> as before, but a <em>surface</em>.</p>
 <p>Here’s an example of what this might look like for the simple function <span class="math inline">\(z=x^2+y^2\)</span>. I’ll plot the function on the domain <span class="math inline">\(-10 \leq x \leq 10\)</span> and <span class="math inline">\(-10 \leq y \leq 10\)</span> using the helper function <code>plot_3d</code>. It takes in two lists of values <code>x</code> and <code>y</code>. I’ll use <code>np.linspace</code> to sample 100 points from -10 to 10 for each. Then I’ll define a lambda function that maps <code>x</code> and <code>y</code> to the output <code>z</code>. Passing these three arguments into the helper function gives us our 3D plot.</p>
 <div class="cell" data-execution_count="38">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="39">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, f, title<span class="op">=</span><span class="st">'3D Plot: $z=x^2+y^2$'</span>, ticks_every<span class="op">=</span>[<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">50</span>], labelpad<span class="op">=</span><span class="dv">5</span>, dist<span class="op">=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1074,7 +1185,10 @@ z = f(0, 1) = 1</code></pre>
 <p>Doing this will give a family of curves on one 2D plot, with each curve representing some value of <span class="math inline">\(z\)</span>. In our example, these curves are all circles of radius <span class="math inline">\(z^2\)</span>. Each curve is called a <strong>level curve</strong> or <strong>level set</strong>.</p>
 <p>These kinds of plots are called <strong>contour plots</strong>. A contour map can be thought of as looking at the surface from the top down, where each level set corresponds to slicing the function <span class="math inline">\(z=f(x,y)\)</span> horizontally for different values of <span class="math inline">\(z\)</span>. This trick is often used in topographical maps to visualize 3D terrain on a 2D sheet of paper. Here is a contour plot for <span class="math inline">\(z=x^2+y^2\)</span> using the above level curves.</p>
 <div class="cell" data-execution_count="40">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>plot_countour(x, y, f, title<span class="op">=</span><span class="st">'Countour Plot: $z=x^2+y^2$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1107,12 +1221,15 @@ y &amp;= -\frac{3}{5}.
 <p>With <span class="math inline">\(y\)</span> in hand, we can now solve for <span class="math inline">\(x\)</span>, <span class="math inline">\(x = 2 - y = 2 + \frac{3}{5} = \frac{13}{5}\)</span>. Thus, the pair <span class="math inline">\(x=\frac{13}{5}\)</span>, <span class="math inline">\(y=-\frac{3}{5}\)</span> is the solution that solves both of these coupled equations simultaneously.</p>
 <p>Here’s sympy’s solution to the same system. It should of course agree with what I just got, which it does.</p>
 <div class="cell" data-execution_count="41">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>eq1 <span class="op">=</span> sp.Eq(x <span class="op">+</span> y, <span class="dv">2</span>)</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>eq2 <span class="op">=</span> sp.Eq(<span class="dv">2</span> <span class="op">*</span> x <span class="op">-</span> <span class="dv">3</span> <span class="op">*</span> y, <span class="dv">7</span>)</span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> sp.solve((eq1, eq2), (x, y))</span>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>sol[x]<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>sol[y]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>x = 13/5
 y = -3/5</code></pre>
@@ -1141,12 +1258,15 @@ x &amp;\approx 0.581, \ 1.722.
 <p>It’s interesting how symmetric these two solutions are. They’re basically the same with <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> swapped. This is because the system has symmetry. You can swap <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> in the system above and not change the equation, which means the solutions must be the same up to permutation of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>!</p>
 <p>Here’s sympy’s attempt to solve this system.</p>
 <div class="cell" data-execution_count="42">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>eq1 <span class="op">=</span> sp.Eq(sp.exp(x <span class="op">+</span> y), <span class="dv">10</span>)</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>eq2 <span class="op">=</span> sp.Eq(x <span class="op">*</span> y, <span class="dv">1</span>)</span>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>sol <span class="op">=</span> sp.solve((eq1, eq2), (x, y))</span>
 <span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x1 = </span><span class="sc">{</span>sol[<span class="dv">0</span>][<span class="dv">0</span>]<span class="sc">.</span><span class="bu">round</span>(<span class="dv">5</span>)<span class="sc">}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> y1 = </span><span class="sc">{</span>sol[<span class="dv">0</span>][<span class="dv">1</span>]<span class="sc">.</span><span class="bu">round</span>(<span class="dv">5</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x2 = </span><span class="sc">{</span>sol[<span class="dv">1</span>][<span class="dv">0</span>]<span class="sc">.</span><span class="bu">round</span>(<span class="dv">5</span>)<span class="sc">}</span><span class="ss"> </span><span class="ch">\t</span><span class="ss"> y2 = </span><span class="sc">{</span>sol[<span class="dv">1</span>][<span class="dv">1</span>]<span class="sc">.</span><span class="bu">round</span>(<span class="dv">5</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>x1 = 0.58079     y1 = 1.72180
 x2 = 1.72180     y2 = 0.58079</code></pre>
@@ -1155,11 +1275,14 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 <p>In general, it’s not even possible to solve a system of nonlinear equations except using numerical methods. The example I gave was rigged so I could solve it by hand. General purpose <strong>root-finding</strong> algorithms exist that can solve arbitrary systems of equations like this numerically, no matter how nonlinear they are.</p>
 <p>To solve a nonlinear system like this numerically, you can use the scipy function <code>scipy.optimize.fsolve</code>. Scipy is an extension of numpy that includes a lot of algorithms for working with non-linear functions. To use <code>fsolve</code>, you have to define the system as a function mapping a list of variables to a list of equations. You also have to specify a starting point <code>x0</code> for the root finder. This tells it where to start looking for the root. Since nonlinear equations have multiple solutions, picking a different <code>x0</code> can and will often give you a different root. I won’t dwell on all this since we don’t really need to deal with root finding much in machine learning.</p>
 <div class="cell" data-execution_count="43">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> fsolve</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>system <span class="op">=</span> <span class="kw">lambda</span> xy: [np.exp(xy[<span class="dv">0</span>] <span class="op">+</span> xy[<span class="dv">1</span>]) <span class="op">-</span> <span class="dv">10</span>, xy[<span class="dv">0</span>] <span class="op">*</span> xy[<span class="dv">1</span>] <span class="op">-</span> <span class="dv">1</span>]</span>
 <span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> fsolve(system, x0<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
 <span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'solution = </span><span class="sc">{</span>solution<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>solution = [0.5807888 1.7217963]</code></pre>
 </div>
@@ -1177,9 +1300,12 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 <p><span class="math display">\[x = \sum_{i=1}^n x_i = \sum_{i=1}^n i = 1 + 2 + \cdots + n = \frac{1}{2} n(n+1).\]</span></p>
 <p>The right-hand term <span class="math inline">\(\frac{1}{2} n(n-1)\)</span> is not obvious, and only applies to this particular sum. I just wrote it down since it’s sometimes useful to remember. This is a special kind of sum called an <strong>arithmetic series</strong>. Here’s a “proof” of this relationship using sympy.</p>
 <div class="cell" data-execution_count="44">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>i, n <span class="op">=</span> sp.symbols(<span class="st">'i n'</span>)</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>summation <span class="op">=</span> sp.Sum(i, (i, <span class="dv">1</span>, n)).doit()</span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'sum i for i=1,...,n = </span><span class="sc">{</span>summation<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>sum i for i=1,...,n = n**2/2 + n/2</code></pre>
 </div>
@@ -1187,7 +1313,10 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 <p>In the general case when we don’t have nice rules like this we’d have to loop over the entire sum and do the sum incrementally.</p>
 <p>In python, the equivalent of summation notation is the <code>sum</code> function, where we pass in the sequence we want to sum as a list. Here’s the arithmetic sum up to <span class="math inline">\(n=10\)</span>, which should be <span class="math inline">\(\frac{1}{2} 10 \cdot (10+1) = 55\)</span>.</p>
 <div class="cell" data-execution_count="45">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="45">
 <pre><code>55</code></pre>
 </div>
@@ -1197,9 +1326,12 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 <p>For example, if <span class="math inline">\(n=10\)</span> and <span class="math inline">\(r=\frac{1}{2}\)</span>, we have</p>
 <p><span class="math display">\[x = \sum_{i=0}^{9} \bigg(\frac{1}{2}\bigg)^i = \frac{1-\big(\frac{1}{2}\big)^{10}}{1-\big(\frac{1}{2}\big)} = 2\bigg(1-\frac{1}{2^{10}}\bigg) \approx 1.998.\]</span></p>
 <div class="cell" data-execution_count="46">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">2</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>([r <span class="op">**</span> i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="46">
 <pre><code>1.998046875</code></pre>
 </div>
@@ -1212,9 +1344,12 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 <p><span class="math display">\[x = \sum_{i=0}^{n-1} 1^i = 1^0 + 1^1 + \cdots + 1^{n-1} = \underbrace{1 + 1 + \cdots + 1}_{\text{n times}} = n.\]</span></p>
 <p>In this case, if we send <span class="math inline">\(n \rightarrow \infty\)</span>, then <span class="math inline">\(x\)</span> clearly blows up to <span class="math inline">\(\infty\)</span> too. You can see this by plotting the function <span class="math inline">\(y = \frac{1}{1-x}\)</span> and observing it asymptotes at <span class="math inline">\(x=1\)</span>.</p>
 <div class="cell" data-execution_count="47">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> x)</span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">100</span>), ticks_every<span class="op">=</span>[<span class="fl">0.2</span>, <span class="dv">20</span>], title<span class="op">=</span><span class="st">'$y=1/(1-x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="basic-math_files/figure-html/cell-48-output-1.png" class="img-fluid"></p>
 </div>
@@ -1237,7 +1372,10 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 <p>Unlike sums, python doesn’t have a native function to calculate products of elements in a sequence, but numpy has one called <code>np.prod</code>. Here’s an example. I’ll calculate the product of all integers between one and ten.</p>
 <p><span class="math display">\[x = \prod_{i=1}^{10} i = 1 \cdot 2 \cdot 3 \cdot 4 \cdot 5 \cdot 6 \cdot 7 \cdot 8 \cdot 9 \cdot 10 = 3628800.\]</span></p>
 <div class="cell" data-execution_count="48">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>np.prod([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="48">
 <pre><code>3628800</code></pre>
 </div>

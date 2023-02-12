@@ -424,9 +424,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>that is, the Hessian of this function is constant, since no elements depend on <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span>.</p>
 <p>The eigenvalues of this Hessian are <span class="math inline">\(\lambda=4,0\)</span>, both of which are non-negative. Since the Hessian is constant, this means the function bowls upward at <em>all</em> points <span class="math inline">\((x,y)\)</span>. This also means this Hessian matrix is positive semi-definite.</p>
 <div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> sp.Matrix([[<span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">2</span>, <span class="dv">2</span>]])</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>eigs <span class="op">=</span> H.eigenvals()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'eigenvalues = </span><span class="sc">{</span><span class="bu">list</span>(eigs.keys())<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>eigenvalues = [4, 0]</code></pre>
 </div>
@@ -624,8 +627,11 @@ y_0 (1 - y_0) &amp; -y_0 y_1 &amp; \cdots &amp; -y_0 y_{n-1} \\
 <p>If you play with this expression a little bit, you’ll see we can write this softmax Jacobian efficiently as <span class="math inline">\(\mathbf{J} = \text{diag}(\mathbf{y}) - \mathbf{y} \mathbf{y}^\top\)</span>.</p>
 <p>Here’s the Jacobian for the above example where <span class="math inline">\(n=5\)</span>, which I’ll call <code>grad</code>. It’s common in machine learning to blur the distinction between Jacobians and gradients and just call everything a gradient. Notice <code>grad</code> is a <span class="math inline">\(5 \times 5\)</span> matrix.</p>
 <div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>grad <span class="op">=</span> np.diag(y) <span class="op">-</span> y <span class="op">@</span> y.T</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'grad = </span><span class="ch">\n</span><span class="sc">{</span>grad<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>grad = 
 [[ 0.00841128 -0.26767389 -0.26767389 -0.26767389 -0.26767389]

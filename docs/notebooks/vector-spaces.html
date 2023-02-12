@@ -249,10 +249,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p>In this lesson I’ll continue on the topic of linear algebra by discussing vector spaces. Vector spaces are essential for abstracting linear algebra away from systems of equations and for visualizing linear algebra objects like vectors and matrices. Let’s get started.</p>
 <div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <section id="geometry-of-vectors" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="geometry-of-vectors"><span class="header-section-number">5.1</span> Geometry of Vectors</h2>
@@ -261,8 +264,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="visualizing-vectors"><span class="header-section-number">5.1.1</span> Visualizing Vectors</h3>
 <p>Let’s go back to the simple 2-dimensional case. Imagine you have a point in the xy-plane, call it <span class="math inline">\((x,y)\)</span>. Now, we can think of this as a single point, but we can also imagine it differently. Suppose there was an arrow pointing from the origin <span class="math inline">\((0,0)\)</span> to the point <span class="math inline">\((x,y)\)</span>. For example, if the point was <span class="math inline">\((1,1)\)</span>, this arrow might look like this.</p>
 <div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>point <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>])</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plot_vectors(point, title<span class="op">=</span><span class="ss">f'Arrow From $(0,0)$ To $(1,1)$'</span>, ticks_every<span class="op">=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -275,8 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In the example plotted, the length is <span class="math inline">\(r=\sqrt{1+1}=\sqrt{2}\)</span>, and the angle is <span class="math inline">\(\theta = \tan^{-1}(1) = 45^\circ\)</span>. These two values uniquely specify the arrow, assuming it starts at the origin. If we know the length and direction, we know exactly which arrow we’re talking about.</p>
 <p>What I’ve just shown is another way to define a vector. A <strong>vector</strong> is an arrow in the plane. Said differently, a vector is just a point that’s also been endowed with a length (or magnitude) and a direction. The x and y values are called <strong>components</strong> of a vector. Usually we’ll write a vector in bold-face and its components in regular type but with subscripts indicating which component. For example, <span class="math inline">\(\mathbf{v}=(v_x,v_y)\)</span>. Here’s the same arrow I plotted above, but explicitly labeled as a vector <span class="math inline">\(\mathbf{v}=(1,1)\)</span>. Its components are <span class="math inline">\(v_x=1\)</span> and <span class="math inline">\(v_y=1\)</span>.</p>
 <div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plot_vectors(v, title<span class="op">=</span><span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">=(1,1)$'</span>, labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>], ticks_every<span class="op">=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -397,10 +406,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In terms of vectorized numpy code, the dot product is just the operation <code>np.sum(v * w)</code>. Numpy also has a convenience function <code>np.dot(v, w)</code> that calculates it directly. Here’s the calculation of the dot product between the two vectors <span class="math inline">\(\mathbf{v}=(5,-1)\)</span> and <span class="math inline">\(\mathbf{w}=(2,4)\)</span>. The answer should be</p>
 <p><span class="math display">\[\mathbf{v} \cdot \mathbf{w} = 5 \cdot 2 + (-1) \cdot 4 = 10 - 4 = 6.\]</span></p>
 <div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">5</span>, <span class="op">-</span><span class="dv">1</span>])</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">4</span>])</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'v . w = </span><span class="sc">{</span>np<span class="sc">.</span>dot(v, w)<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(v <span class="op">*</span> w) <span class="op">==</span> np.dot(v, w)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>v . w = 6</code></pre>
 </div>
@@ -642,10 +654,13 @@ v_y &amp;= \mathbf{v} \cdot \mathbf{e}_y.
 <p>Note the cosine similarity is just a normalized dot product, since dividing by the norms forces <span class="math inline">\(-1 \leq \cos(\mathbf{v},\mathbf{w}) \leq 1\)</span>. It thus captures the same idea of similarity that the dot product does, but it’s more useful when the lengths of vectors get out of control. This is particularly likely to happen in high dimensions, when <span class="math inline">\(n &gt;&gt; 2\)</span>. This is the so-called “curse of dimensionality”. We’ll come back to this idea in future lessons.</p>
 <p>Here’s a quick implementation of the cosine similarity function using numpy. There’s no built-in function to do it, but it’s easy enough to implement by making judicious use of the <code>np.dot</code> function. It should give the same answer found above for <span class="math inline">\(\cos \theta\)</span>, which is <span class="math inline">\(-\frac{1}{\sqrt{2}} \approx -0.707\)</span>.</p>
 <div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cosine_similarity(v, w):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.dot(v, w) <span class="op">/</span> np.sqrt(np.dot(v, v) <span class="op">*</span> np.dot(w, w))</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'cos(v, w) = </span><span class="sc">{</span>cosine_similarity(v, w)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>cos(v, w) = -0.7071067811865475</code></pre>
 </div>
@@ -674,10 +689,13 @@ v_y &amp;= \mathbf{v} \cdot \mathbf{e}_y.
 <p>It’s a little hard right now to describe why these norms are useful in machine learning since we don’t currently have the context. Just know that these norms do come up sometimes. I’ll go into more depth on the uses of these different norms as we apply them. In practice though, we’ll probably work with the regular 2-norm maybe 90% of the time.</p>
 <p>In numpy, you can calculate any <span class="math inline">\(p\)</span>-norm using the function <code>np.linalg.norm(v, ord=p)</code>. Here’s an example.</p>
 <div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>])</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'1-Norm of v: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(v, <span class="bu">ord</span><span class="op">=</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'2-Norm of v: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(v, <span class="bu">ord</span><span class="op">=</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Infinity-Norm of v: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(v, <span class="bu">ord</span><span class="op">=</span>np.inf)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>1-Norm of v: 3.0
 2-Norm of v: 2.23606797749979
@@ -833,10 +851,13 @@ c &amp; d
 <p><span class="math display">\[\mathbf{x} + \mathbf{y} = (x_0+y_0, x_1+y_1, \cdots, x_{n-1}+y_{n-1}).\]</span></p>
 <p>To keep a running example through this section, I’ll use numpy to create two vectors <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> each of size <span class="math inline">\(n=10\)</span>. Here’s their vector sum.</p>
 <div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>])</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>])</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + y = </span><span class="sc">{</span>x <span class="op">+</span> y<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>x + y = [2 2 2 4 6 5 3 3 3 1]</code></pre>
 </div>
@@ -844,8 +865,11 @@ c &amp; d
 <p>Scalar multiplication is defined similarly. If <span class="math inline">\(c \in \mathbb{R}\)</span> is some scalar and <span class="math inline">\(\mathbf{x}\)</span> is some vector, then</p>
 <p><span class="math display">\[c\mathbf{x} = (cx_0,cx_1,\cdots,cx_{n-1}).\]</span></p>
 <div class="cell" data-execution_count="23">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'c * x = </span><span class="sc">{</span>c <span class="op">*</span> x<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>c * x = [ 5 10 15 20 25 25 20 15 10  5]</code></pre>
 </div>
@@ -854,7 +878,10 @@ c &amp; d
 <p>The <strong>dot product</strong> or <strong>inner product</strong> between two vectors <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> of size <span class="math inline">\(n\)</span> is defined as their sum product, i.e.</p>
 <p><span class="math display">\[\mathbf{x} \cdot \mathbf{y} = x_0y_0 + x_1y_1 + \cdots + x_{n-1}y_{n-1}.\]</span></p>
 <div class="cell" data-execution_count="24">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x . y = </span><span class="sc">{</span>np<span class="sc">.</span>dot(x, y)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>x . y = 1</code></pre>
 </div>
@@ -868,9 +895,12 @@ c &amp; d
 \end{align*}\]</span></p>
 <p>It will always be the case that <span class="math inline">\(||\mathbf{x}||_1 \geq ||\mathbf{x}||_2 \geq ||\mathbf{x}||_\infty\)</span>.</p>
 <div class="cell" data-execution_count="25">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'1-Norm of x: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(x, <span class="bu">ord</span><span class="op">=</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'2-Norm of x: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(x, <span class="bu">ord</span><span class="op">=</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Infinity-Norm of x: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(x, <span class="bu">ord</span><span class="op">=</span>np.inf)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>1-Norm of x: 30.0
 2-Norm of x: 10.488088481701515
@@ -885,7 +915,10 @@ Infinity-Norm of x: 5.0</code></pre>
 <p><span class="math display">\[\cos(\mathbf{x}, \mathbf{y}) = \frac{\mathbf{x} \cdot \mathbf{y}}{||\mathbf{x}|| \cdot ||\mathbf{y}||}.\]</span></p>
 <p>The dot product is a measure of how similar two vectors are, and the cosine similarity is a <em>normalized</em> measure of how similar two vectors are, since dividing by the norms forces <span class="math inline">\(-1 \leq \cos \theta \leq 1\)</span>.</p>
 <div class="cell" data-execution_count="26">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'cos(x, y) = </span><span class="sc">{</span>cosine_similarity(x, y)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>cos(x, y) = 0.04264014327112208</code></pre>
 </div>
@@ -910,12 +943,15 @@ Infinity-Norm of x: 5.0</code></pre>
 \]</span></p>
 <p><strong>Notation:</strong> The symbol <span class="math inline">\(\delta_{ij}\)</span> is called the <strong>Kronecker delta</strong>. It’s just a shorthand way of writing something is <span class="math inline">\(1\)</span> if <span class="math inline">\(i=j\)</span> and <span class="math inline">\(0\)</span> if <span class="math inline">\(i \neq j\)</span>.</p>
 <div class="cell" data-execution_count="27">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> [ei.flatten().astype(<span class="bu">int</span>) <span class="cf">for</span> ei <span class="kw">in</span> np.eye(n)]</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e3 = </span><span class="sc">{</span>e[<span class="dv">3</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e8 = </span><span class="sc">{</span>e[<span class="dv">8</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e3 . e3 = </span><span class="sc">{</span>np<span class="sc">.</span>dot(e[<span class="dv">3</span>], e[<span class="dv">3</span>])<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e3 . e8 = </span><span class="sc">{</span>np<span class="sc">.</span>dot(e[<span class="dv">3</span>], e[<span class="dv">8</span>])<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>e3 = [0 0 0 1 0 0 0 0 0 0]
 e8 = [0 0 0 0 0 0 0 0 1 0]

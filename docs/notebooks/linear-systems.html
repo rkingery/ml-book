@@ -249,10 +249,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p>In this lesson I’ll introduce the basics of linear algebra, particularly vectors and matrices. Linear algebra at its most basic level is about the study of systems of linear equations. Let’s get started.</p>
 <div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <section id="linear-systems" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="linear-systems"><span class="header-section-number">4.1</span> Linear Systems</h2>
@@ -648,6 +651,8 @@ x_0 \mathbf{a}_0 + x_1 \mathbf{a}_1 + \cdots x_{n-1} \mathbf{a}_{n-1}.
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="matrix-multiplication-algorithm"><span class="header-section-number">4.3.1</span> Matrix Multiplication Algorithm</h3>
 <p>Matrix multiplication is perhaps the single most important mathematical operation in machine learning. It’s so important I’m going to write a function to code it from scratch before showing how to do it in numpy. I’ll also analyze the speed of the algorithm in FLOPS and the memory in terms of word size. Algorithmically, all matrix multiplication is doing is looping over every single element of <span class="math inline">\(\mathbf{C}\)</span> and performing the sum-product calculation above for each <span class="math inline">\(C_{i,j}\)</span>. Here’s a function <code>matmul</code> that takes in two numpy arrays <code>A</code> and <code>B</code> and multiplies them, returning the product <code>C</code> if the dimensions are compatible.</p>
 <div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matmul(A, B):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> A.shape[<span class="dv">1</span>] <span class="op">==</span> B.shape[<span class="dv">0</span>]</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    m, n, p <span class="op">=</span> A.shape[<span class="dv">0</span>], A.shape[<span class="dv">1</span>], B.shape[<span class="dv">1</span>]</span>
@@ -657,11 +662,15 @@ x_0 \mathbf{a}_0 + x_1 \mathbf{a}_1 + \cdots x_{n-1} \mathbf{a}_{n-1}.
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n):</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                C[i, j] <span class="op">+=</span> A[i, k] <span class="op">*</span> B[k, j]</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'A = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">6</span>, <span class="dv">5</span>], [<span class="dv">4</span>, <span class="dv">3</span>], [<span class="dv">2</span>, <span class="dv">1</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'B = </span><span class="ch">\n</span><span class="sc">{</span>B<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> matmul(A, B)<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'C = AB = </span><span class="ch">\n</span><span class="sc">{</span>C<span class="sc">.</span>astype(A.dtype)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>A = 
 [[1 2 3]
@@ -682,7 +691,10 @@ C = AB =
 <p>Cubic time may seem fast, but it’s really not unless the matrices are relatively small (say <span class="math inline">\(n \leq 1000\)</span> or so). For this reason, a lot of effort has gone into making matrix multiplication run highly efficiently on hardware, mostly by parallelizing the function above, optimizing blocks to take advantage of meory, and compiling operations down to low-level C or FORTRAN code. In fact, it’s no exaggeration to say that the entire reason the deep learning revolution over the past decade happened because people found ways to multiply matrices much faster by using GPUs.</p>
 <p>Anyway, we’d never want to implement matrix multiplication natively in python like this. It’s far too slow. In practice we’d use <code>np.matmul(A, B)</code> to matrix multiply. A cleaner notation is to use the special <code>@</code> symbol for matrix multiplication, in which case we can just write <code>A @ B</code>.</p>
 <div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">@</span> B</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>array([[20, 14],
        [56, 41],
@@ -703,6 +715,8 @@ C = AB =
 <p><span class="math display">\[mq(2p-1) + mp(2n-1) = 20200000 \ \ \text{FLOPS}.\]</span></p>
 <p>It would thus behoove us in this case to multiply the matrices in the first order to save on computation, <span class="math inline">\(\mathbf{D} = \mathbf{A}(\mathbf{B}\mathbf{C})\)</span>. Here’s a programmatic way to see this.</p>
 <div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">1000</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">100</span></span>
@@ -710,6 +724,7 @@ C = AB =
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A(BC): </span><span class="sc">{</span>m <span class="op">*</span> q <span class="op">*</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> n <span class="op">*</span> q <span class="op">*</span> (<span class="dv">2</span> <span class="op">*</span> p <span class="op">-</span> <span class="dv">1</span>)<span class="sc">}</span><span class="ss"> FLOPS'</span>)</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'(AB)C: </span><span class="sc">{</span>m <span class="op">*</span> p <span class="op">*</span> (<span class="dv">2</span> <span class="op">*</span> n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> m <span class="op">*</span> q <span class="op">*</span> (<span class="dv">2</span> <span class="op">*</span> p <span class="op">-</span> <span class="dv">1</span>)<span class="sc">}</span><span class="ss"> FLOPS'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>A(BC): 339800 FLOPS
 (AB)C: 20200000 FLOPS</code></pre>
@@ -717,24 +732,36 @@ C = AB =
 </div>
 <p>The same issues extend to multiplying together arbitrarily many matrices. You can save <em>a lot</em> of compute by first taking time to find the optimal order to multiply them together before doing the computation. Don’t just naively multiply them in order. Numpy has a function <code>np.linalg.multi_dot</code> that can do this for you. If you pass in a list of matrices, it’ll multiply them together in the most efficient order to help save on computation. Here’s an example. I’ll profile the different ways we can do the <span class="math inline">\(\mathbf{A}\mathbf{B}\mathbf{C}\)</span> example above. Notice that indeed <span class="math inline">\(\mathbf{A}(\mathbf{B}\mathbf{C})\)</span> is much faster than <span class="math inline">\((\mathbf{A}\mathbf{B})\mathbf{C}\)</span>. The <code>multi_dot</code> solution is roughly as fast as the <span class="math inline">\(\mathbf{A}(\mathbf{B}\mathbf{C})\)</span> solution, but it does take slightly longer because it first calculates the optimal ordering, which adds a little bit of time.</p>
 <div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.rand(m, n)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.random.rand(n, p)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.random.rand(p, q)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit A <span class="op">@</span> (B <span class="op">@</span> C)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>65 µs ± 176 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit (A <span class="op">@</span> B) <span class="op">@</span> C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>543 µs ± 31.8 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit np.linalg.multi_dot([A, B, C])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>77.5 µs ± 384 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
 </div>
@@ -750,10 +777,13 @@ C = AB =
 \]</span></p>
 <p>In numpy we’ll use <code>A * B</code> for element-wise multiplication and <code>A @ B</code> for matrix multiplication. To make it clear the two kinds of multiplication aren’t the same thing here’s an example.</p>
 <div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">1</span>]])</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A*B = </span><span class="ch">\n</span><span class="sc">{</span>A <span class="op">*</span> B<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'AB = </span><span class="ch">\n</span><span class="sc">{</span>A <span class="op">@</span> B<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>A*B = 
 [[1 0]
@@ -860,9 +890,12 @@ c &amp; d
 <p>If we’d like to solve the system <span class="math inline">\(\mathbf{A}\mathbf{x} = \mathbf{b}\)</span>, we could find the inverse of <span class="math inline">\(\mathbf{A}\)</span> somehow, and then get the solution <span class="math inline">\(\mathbf{x}\)</span> by writing <span class="math inline">\(\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}\)</span>, provided its determinant <span class="math inline">\(\text{det}(\mathbf{A}) \neq 0\)</span>. A matrix with non-zero determinant is called <strong>invertible</strong>. Invertible matrices have inverses. A matrix with zero determinant are called <strong>singular</strong>. Singular matrices can’t be inverted.</p>
 <p>Of course, it’s no longer obvious at all how to even find <span class="math inline">\(\mathbf{A}^{-1}\)</span> or <span class="math inline">\(\text{det}(\mathbf{A})\)</span> when <span class="math inline">\(n&gt;2\)</span>. Thankfully we don’t need to cover this for machine learning purposes. I’ll just mention that there are efficient algorithms for solving large linear systems like this. You can use <code>np.linalg.solve(A, b)</code> to do this, provided <span class="math inline">\(\mathbf{A}\)</span> can be inverted. Here’s an example of solving a <span class="math inline">\(3 \times 3\)</span> linear system. You can also get the inverse directly by using <code>np.linalg.inv(A)</code>, though you’d rarely actually want to do this. It turns out matrix inversion is a very numerically unstable operation. Try to avoid explicitly calculating matrix inverses if you can.</p>
 <div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'A = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([[<span class="dv">1</span>], [<span class="dv">1</span>], [<span class="dv">1</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'b = </span><span class="ch">\n</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linalg.solve(A, b)<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'x = </span><span class="ch">\n</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>A = 
 [[1 2 3]
@@ -899,10 +932,13 @@ x =
 <p>is its transpose. The key thing to notice is that if <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, then <span class="math inline">\(\mathbf{A}^\top\)</span> is <span class="math inline">\(n \times m\)</span>. This means that the <em>product</em> of the two is square since <span class="math inline">\(\mathbf{A} \mathbf{A}^\top\)</span> is <span class="math inline">\(m \times m\)</span>. Note a <strong>square</strong> matrix is a matrix with the same number of rows as columns, i.e.&nbsp;with <span class="math inline">\(m=n\)</span>. The product in the opposite order is square too since <span class="math inline">\(\mathbf{A}^\top \mathbf{A}\)</span> is <span class="math inline">\(n \times n\)</span>.</p>
 <p>Here’s an example. In numpy, we can use <code>np.transpose(A)</code>, or more simply <code>A.T</code> to get the transpose of a matrix. Notice both of the products <span class="math inline">\(\mathbf{A} \mathbf{A}^\top\)</span> and <span class="math inline">\(\mathbf{A}^\top \mathbf{A}^\top\)</span> are square, but each</p>
 <div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'A = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>At <span class="op">=</span> A.T<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'At = </span><span class="ch">\n</span><span class="sc">{</span>At<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>AAt <span class="op">=</span> A <span class="op">@</span> At<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'A At = </span><span class="ch">\n</span><span class="sc">{</span>AAt<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>AtA <span class="op">=</span> At <span class="op">@</span> A<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'At A = </span><span class="ch">\n</span><span class="sc">{</span>AtA<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>A = 
 [[1 2 3]
@@ -941,10 +977,13 @@ At A =
 \]</span></p>
 <p>I’ll also confirm that indeed <span class="math inline">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span> in this case.</p>
 <div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'A = </span><span class="ch">\n</span><span class="sc">{</span>A<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>])<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'b = </span><span class="ch">\n</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>x, _, _, _ <span class="op">=</span> np.linalg.lstsq(A, b, rcond<span class="op">=</span><span class="va">None</span>)<span class="op">;</span> <span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">.</span><span class="bu">round</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Ax = </span><span class="sc">{</span>A <span class="op">@</span> x<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>A = 
 [[1 2 3]
