@@ -35,8 +35,8 @@ format:
     number-sections: true
     code-fold: true
     fig-align: center
-  pdf:
-    documentclass: scrreprt
+  # pdf:
+  #   documentclass: scrreprt
 
 jupyter: python3
 

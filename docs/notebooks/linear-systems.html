@@ -606,10 +606,10 @@ C = AB =
 <h3 data-number="4.3.3" class="anchored" data-anchor-id="matrix-multiplication-vs-element-wise-multiplication"><span class="header-section-number">4.3.3</span> Matrix Multiplication vs Element-Wise Multiplication</h3>
 <p>We’ve already seen a different way we can multiply two matrices (or any array), namely element-wise multiplication. For matrices, element-wise multiplication is sometimes called the <strong>Hadamard product</strong>. I’ll denote element-wise multiplication as <span class="math inline">\(\mathbf{A} \circ \mathbf{B}\)</span>. Note that element-wise multiplication is only defined when the shapes of <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> are <em>exactly equal</em> (or can be broadcasted to be equal).</p>
 <p>It’s important to mind the difference between matrix multiplication and element-wise multiplication of matrices. In general <span class="math inline">\(\mathbf{A} \circ \mathbf{B} \neq \mathbf{A} \mathbf{B}\)</span>. They’re defined completely differently,</p>
-<p><span class="math display">\[
-(A \circ B)_{i,j} = A_{i,j} \cdot B_{i,j} \\
-(AB)_{i,j} = \sum_k A_{i,k}B_{k,j}.
-\]</span></p>
+<p><span class="math display">\[\begin{align*}
+(A \circ B)_{i,j} &amp;= A_{i,j} \cdot B_{i,j} \\
+(AB)_{i,j} &amp;= \sum_k A_{i,k}B_{k,j}.
+\end{align*}\]</span></p>
 <p>In numpy use <code>A * B</code> for element-wise multiplication and <code>A @ B</code> for matrix multiplication. To make it clear the two kinds of multiplication aren’t the same thing here’s an example.</p>
 <div class="cell" data-execution_count="14">
 <details>
@@ -789,13 +789,13 @@ x2 = (a*e*l - a*h*k - b*d*l + b*g*k + d*h*j - e*g*j)/(a*e*i - a*f*h - b*d*i + b*
 <p><span class="math display">\[\begin{alignat*}{5}
    3x_0 &amp; {}+{} &amp;  2x_1 &amp; {}+{} &amp; x_2 {}={} &amp; 0 \\
    x_0 &amp; {}+{} &amp;  x_1 &amp; {}-{} &amp; x_2 {}={} &amp; 1 \\
-   x_0 &amp; {}-{} &amp;  3x_1 &amp; {}-{} &amp; x_3 {}={} &amp; -3.
+   x_0 &amp; {}-{} &amp;  3x_1 &amp; {}-{} &amp; x_3 {}={} &amp; -3. \\
 \end{alignat*}\]</span></p>
 <p>Again using substitution, you can solve each equation one by one to check that this system has a solution at <span class="math inline">\(x_0=-\frac{1}{2}\)</span>, <span class="math inline">\(x_1=1\)</span>, and <span class="math inline">\(x_2=-\frac{1}{2}\)</span>. The three equations above form a set of three planes given by</p>
 <p><span class="math display">\[\begin{align*}
 z &amp;= -3x - 2y + 0, \\
 z &amp;= x + y - 1, \\
-z &amp;= 4 .
+z &amp;= 4 . \\
 \end{align*}\]</span></p>
 <p>The solution to this <span class="math inline">\(3 \times 3\)</span> system will be the point where all three of these planes intersect. It’s a perhaps a little hard to see in the plot, but hopefully you get the point. In general, the solution of an <span class="math inline">\(n \times n\)</span> linear system will occur at the point where the set of <span class="math inline">\(n\)</span> hyperplanes all intersect. If any two of the hyperplanes are parallel, the determinant will be zero, and there won’t be a solution.</p>
 <div class="cell" data-execution_count="18">
@@ -821,12 +821,12 @@ z &amp;= 4 .
 <p>Let’s now try to see if we can figure out a pattern, a way to systematically solve these linear systems. Let’s start by going back to the easy <span class="math inline">\(2 \times 2\)</span> case. Recall that the linear system</p>
 <p><span class="math display">\[\begin{alignat*}{3}
    ax_0 &amp; {}+{} &amp;  bx_1 &amp; {}={} &amp; e \\
-   cx_0 &amp; {}+{} &amp;  dx_1 &amp; {}={} &amp; f.
+   cx_0 &amp; {}+{} &amp;  dx_1 &amp; {}={} &amp; f. \\
 \end{alignat*}\]</span></p>
 <p>has solutions given by</p>
 <p><span class="math display">\[\begin{align*}
 x_0 &amp;= \frac{de-bf}{ad-bc} \\
-x_1 &amp;= \frac{af-ce}{ad-bc}.
+x_1 &amp;= \frac{af-ce}{ad-bc}. \\
 \end{align*}\]</span></p>
 <p>Now, if we write this <span class="math inline">\(2 \times 2\)</span> linear system in matrix-vector notation, we’d have</p>
 <p><span class="math display">\[
@@ -1190,15 +1190,7 @@ z &amp;= -x + y. \\
 </div>
 </div>
 </div>
-<p>To see why this system has infinitely many solutions, let’s try to solve it. It’s easy enough using substitution. The second equation says <span class="math inline">\(x_1 = x_0 + x_2\)</span>. Plugging this into the first equation then says</p>
-<p><span class="math display">\[\begin{align*}
-x_0 + x_1 + x_2 &amp;= 2, \\
-x_0 + (x_0 + x_2) + x_2 &amp;= 2, \\
-2x_0 + 2x_2 &amp;= 2, \\
-x_0 + x_2 &amp;= 1, \\
-x_2 &amp;= 1 - x_0.
-\end{align*}\]</span></p>
-<p>There’s no way to solve for <span class="math inline">\(x_0\)</span> because we don’t have enough equations. We thus have to conclude that the solutions to this system look like</p>
+<p>To see why this system has infinitely many solutions, let’s try to solve it. It’s easy enough using substitution. The second equation says <span class="math inline">\(x_1 = x_0 + x_2\)</span>. Plugging this into the first equation then says <span class="math inline">\(x_2 = 1 - x_0\)</span>. There’s no way to solve for <span class="math inline">\(x_0\)</span> because we don’t have enough equations. We thus have to conclude that the solutions to this system look like</p>
 <p><span class="math display">\[x_0 = x_0, \quad x_1 = 1, \quad x_2 = 1 - x_0.\]</span></p>
 <p>Any choice of <span class="math inline">\(x_0\)</span> will satisfy this linear system, which means it’ll have infinitely many solutions, which are of course just the points on the line above.</p>
 <p>In general, we can almost exactly the same trick to “solve” these linear systems as we did with the over-determined systems. This time, instead of multiplying <span class="math inline">\(\mathbf{A}\)</span> on the <em>left</em> by <span class="math inline">\(\mathbf{A}^\top\)</span>, we’ll instead multiply on the <em>right</em> by <span class="math inline">\(\mathbf{A}^\top\)</span>,</p>
@@ -1207,7 +1199,7 @@ x_2 &amp;= 1 - x_0.
 <p><span class="math display">\[\mathbf{x} = (\mathbf{A}\mathbf{A}^\top)^{-1} \mathbf{A}^\top \mathbf{b}.\]</span></p>
 <p>Note that this gives only <em>one</em> of the infinitely many possible solutions to an under-determined linear system. For reasons I won’t go into now, it turns out the solution it gives is called the <strong>least norm</strong> solution. In a sense, this means it gives you the “smallest” vector <span class="math inline">\(\mathbf{x}\)</span> that satisfies <span class="math inline">\(\mathbf{A}\mathbf{x} = \mathbf{b}\)</span>. By smallest, I mean it’s the vector such that the <span class="math inline">\(1 \times 1\)</span> matrix <span class="math inline">\(\mathbf{x}^\top \mathbf{x}\)</span> is minimized.</p>
 <p>It turns out the matrix <span class="math inline">\((\mathbf{A}\mathbf{A}^\top)^{-1} \mathbf{A}^\top\)</span> on the right is <em>also</em> a pseudoinverse. It satisfies the property that it’s a <em>right</em> inverse of <span class="math inline">\(\mathbf{A}\)</span>, in the sense that</p>
-<p><span class="math inline">\(\mathbf{A} \mathbf{A}^+ = \mathbf{I}.\)</span></p>
+<p><span class="math display">\[\mathbf{A} \mathbf{A}^+ = \mathbf{I}.\]</span></p>
 <p>In fact, there are many different kinds of pseudoinverses. The two I covered here are the most practical ones.</p>
 <p>In numpy, you can solve an under-determined system by using the same <code>np.linalg.lstsq(A, b)</code> function from before. It’s able to tell which case you want by looking at the shape of the <code>A</code> you pass in. Here’s the least norm solution for the above example,</p>
 <p><span class="math display">\[

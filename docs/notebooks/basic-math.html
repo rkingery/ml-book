@@ -789,13 +789,13 @@ x &amp;= \frac{c - b}{a}.
 </tbody>
 </table>
 <p>Here’s an example of an equation involving exponentials and logs. Suppose you have <span class="math inline">\(n\)</span> bits of numbers (perhaps it’s the precision in some float) and you want to know how many <em>digits</em> this number takes up in decimal form (what you’re used to). This would be equivalent to solving the following equation for <span class="math inline">\(x\)</span>,</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align*}
 2^n &amp;= 10^{x} \\
 \log(2^n) &amp;= \log(10^{x}) \\
 n\log(2) &amp;= x\log(10) \\
 x &amp;= \frac{\log(2)}{\log(10)} \cdot n \\
-x &amp;\approx 0.3 \cdot n.
-\end{align}\]</span></p>
+x &amp;\approx 0.3 \cdot n. \\
+\end{align*}\]</span></p>
 <p>For example, you can use this formula to show that 52 bits of floating point precision translates to about 15 to 16 digits of precision. In numpy, the function <code>np.log</code> function calculates the (base-<span class="math inline">\(e\)</span>) log of a number.</p>
 <div class="cell" data-execution_count="22">
 <details>
