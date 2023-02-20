@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Systems of Linear Equations</span></a>
+  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Systems</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -199,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a>
+  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Probability</span></a>
   </div>
 </li>
     </ul>
@@ -439,7 +439,8 @@ x &amp;= \frac{c - b}{a}.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">2</span> <span class="op">*</span> np.ones(<span class="bu">len</span>(x))</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Constant Function: $y=2$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Constant Function: $y=2$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -454,7 +455,8 @@ x &amp;= \frac{c - b}{a}.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">2</span> <span class="op">*</span> x</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Linear Function: $y=2x$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Linear Function: $y=2x$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -469,7 +471,8 @@ x &amp;= \frac{c - b}{a}.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">2</span> <span class="op">*</span> x <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Affine Function: $y=2x-1$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Affine Function: $y=2x-1$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -490,7 +493,8 @@ x &amp;= \frac{c - b}{a}.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Quadratic Function: $y=x^2$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Quadratic Function: $y=x^2$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -506,7 +510,8 @@ x &amp;= \frac{c - b}{a}.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">3</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Cubic Function: $y=x^3$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Cubic Function: $y=x^3$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -522,8 +527,11 @@ x &amp;= \frac{c - b}{a}.
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">5</span> <span class="op">-</span> <span class="dv">5</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">10</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>) <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">40</span>, <span class="dv">40</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">10</span>], title<span class="op">=</span><span class="st">'Arbitrary Polynomial'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x): </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">5</span> <span class="op">-</span> <span class="dv">5</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">10</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">40</span>, <span class="dv">40</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">10</span>], </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Arbitrary Polynomial'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -547,7 +555,8 @@ x &amp;= \frac{c - b}{a}.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.01</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: (x <span class="op">**</span> <span class="dv">3</span> <span class="op">+</span> x <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> (x <span class="op">**</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Rational Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Rational Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -563,7 +572,8 @@ x &amp;= \frac{c - b}{a}.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">1</span> <span class="op">/</span> x</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Odd Function: $y=1/x$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Odd Function: $y=1/x$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -579,7 +589,8 @@ x &amp;= \frac{c - b}{a}.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">1</span> <span class="op">/</span> np.<span class="bu">abs</span>(x)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Even Function: $y=1/|x|$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Even Function: $y=1/|x|$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -601,7 +612,8 @@ x &amp;= \frac{c - b}{a}.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.sqrt(x)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Square Root: $y=\sqrt</span><span class="sc">{x}</span><span class="st">=x^{1/2}$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Square Root: $y=\sqrt</span><span class="sc">{x}</span><span class="st">=x^{1/2}$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -690,7 +702,8 @@ x &amp;= \frac{c - b}{a}.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="fl">0.1</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.exp(x)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="st">'Exponential Function: $y=\exp(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Exponential Function: $y=\exp(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -705,7 +718,8 @@ x &amp;= \frac{c - b}{a}.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="fl">0.01</span>, <span class="dv">5</span>, <span class="fl">0.1</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.log(x)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Logarithm Function: $y=\log(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Logarithm Function: $y=\log(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -804,7 +818,8 @@ x &amp;\approx 0.3 \cdot n.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.sin(x)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>),  ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], title<span class="op">=</span><span class="st">'Sine Function: $y=\sin(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>),  ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Sine Function: $y=\sin(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -819,7 +834,8 @@ x &amp;\approx 0.3 \cdot n.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.cos(x)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], title<span class="op">=</span><span class="st">'Cosine Function: $y=\cos(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Cosine Function: $y=\cos(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -889,7 +905,8 @@ y =
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.01</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x:  (x <span class="op">&gt;=</span> <span class="dv">0</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], title<span class="op">=</span><span class="st">'Unit Step Function: $y=u(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Unit Step Function: $y=u(x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -916,7 +933,8 @@ x &amp; x \geq 0.
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x:  x <span class="op">*</span> (x <span class="op">&gt;=</span> <span class="dv">0</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'ReLU Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'ReLU Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -939,7 +957,8 @@ x &amp; \text{if } x \ge 0 \\
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="fl">0.1</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="bu">abs</span>(x)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], title<span class="op">=</span><span class="st">'Absolute Value Function: $y=|x|$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Absolute Value Function: $y=|x|$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -968,7 +987,8 @@ x &amp; \text{if } x \ge 0 \\
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x:  <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>x))</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>), ticks_every<span class="op">=</span>[<span class="dv">2</span>, <span class="fl">0.2</span>], title<span class="op">=</span><span class="st">'Sigmoid Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>), ticks_every<span class="op">=</span>[<span class="dv">2</span>, <span class="fl">0.2</span>], </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Sigmoid Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -990,7 +1010,8 @@ x &amp; \text{if } x \ge 0 \\
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: (np.exp(x) <span class="op">-</span> np.exp(<span class="op">-</span>x)) <span class="op">/</span> (np.exp(x) <span class="op">+</span> np.exp(<span class="op">-</span>x))</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], title<span class="op">=</span><span class="st">'Tanh Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.5</span>], </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'Tanh Function'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1024,7 +1045,8 @@ x &amp; \text{if } x \ge 0 \\
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">2</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x: a <span class="op">*</span> x <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="ss">f'$a=</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="ss">f'$a=</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1042,7 +1064,8 @@ x &amp; \text{if } x \ge 0 \\
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">2</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x: (b <span class="op">*</span> x) <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="ss">f'$b=</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="ss">f'$b=</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1058,7 +1081,8 @@ x &amp; \text{if } x \ge 0 \\
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x: (x <span class="op">+</span> c) <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">7</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="ss">f'$c=</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">7</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="ss">f'$c=</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1074,7 +1098,8 @@ x &amp; \text{if } x \ge 0 \\
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> d</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">8</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="ss">f'$d=</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">8</span>), ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>], </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="ss">f'$d=</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1089,7 +1114,8 @@ x &amp; \text{if } x \ge 0 \\
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x: a <span class="op">*</span> (b <span class="op">*</span> (x <span class="op">+</span> c)) <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> d</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">8</span>, <span class="dv">8</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>], title<span class="op">=</span><span class="ss">f'$a=</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">, b=</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">, c=</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">, d=</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, g], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">8</span>, <span class="dv">8</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">10</span>), ticks_every<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>], </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="ss">f'$a=</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">, b=</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">, c=</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">, d=</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1162,7 +1188,8 @@ z = f(0, 1) = 1</code></pre>
 <div class="cell" data-execution_count="39">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, f, title<span class="op">=</span><span class="st">'3D Plot: $z=x^2+y^2$'</span>, ticks_every<span class="op">=</span>[<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">50</span>], labelpad<span class="op">=</span><span class="dv">5</span>, dist<span class="op">=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, f, title<span class="op">=</span><span class="st">'3D Plot: $z=x^2+y^2$'</span>, </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                 ticks_every<span class="op">=</span>[<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">50</span>], labelpad<span class="op">=</span><span class="dv">5</span>, dist<span class="op">=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1348,7 +1375,8 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> x)</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">100</span>), ticks_every<span class="op">=</span>[<span class="fl">0.2</span>, <span class="dv">20</span>], title<span class="op">=</span><span class="st">'$y=1/(1-x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>plot_function(x, f, xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">100</span>), ticks_every<span class="op">=</span>[<span class="fl">0.2</span>, <span class="dv">20</span>], </span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="st">'$y=1/(1-x)$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <p><img src="basic-math_files/figure-html/cell-48-output-1.png" class="img-fluid"></p>
@@ -1391,7 +1419,7 @@ x2 = 1.72180     y2 = 0.58079</code></pre>
 <section id="greek-alphabet" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="greek-alphabet"><span class="header-section-number">1.6</span> Greek Alphabet</h2>
 <p>Like many other technical fields, machine learning makes heavy use of the Greek alphabet to represent variable names in mathematical equations. While not all Greek characters are used, certain ones are worth being aware of. Below is a <a href="https://howtosaymathematics.files.wordpress.com/2011/08/greek-alphabet2.pdf">table</a> of the Greek letters. You don’t need to memorize all of these letters, but it’s worth referencing this table whenever you encounter a symbol you don’t recognize.</p>
-<p><img src="resources/greek.png" width="550"></p>
+<p><img src="./resources/greek.png" width="550"></p>
 
 
 </section>

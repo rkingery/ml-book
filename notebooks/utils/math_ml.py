@@ -8,7 +8,8 @@ local = Path().cwd().parent / 'local'
 
 ## basic-math
 
-def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labels=None, colors=None, xlabel='$x$', ylabel='$y$'):
+def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labels=None, colors=None, xlabel='$x$', ylabel='$y$',
+                  legend_fontsize=None, legend_loc=None):
     xlim = xlim if xlim is not None else (min(x), max(x))
     ylim = ylim if ylim is not None else xlim
     xlow, xhigh = xlim
@@ -31,7 +32,7 @@ def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labe
         plt.yticks(np.arange(int(ylow), int(yhigh) + 1, ticks_every[1]))
     plt.grid(True, alpha=0.5)
     if labels is not None:
-        plt.legend()
+        plt.legend(loc=legend_loc, fontsize=legend_fontsize)
     plt.xlim(*xlim)
     plt.ylim(*ylim)
     plt.show()
@@ -46,6 +47,8 @@ def query_wolfram_alpha(query, api_file='wolfram_key.txt', answer='formatted'):
 
 def plot_function_3d(x, y, f, title='', ticks_every=None, elev=30, azim=30, labels=None, zorders=None, colors=None, xlim=None, 
                      ylim=None, zlim=None, labelpad=0, points=None, lines=None, figsize=None, titlepad=0, dist=10, **kwargs):
+    import warnings
+    warnings.filterwarnings('ignore')
     if not isinstance(f, list):
         f = [f]
     X, Y = np.meshgrid(x, y)
