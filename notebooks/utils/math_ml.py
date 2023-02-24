@@ -9,7 +9,7 @@ local = Path().cwd().parent / 'local'
 ## basic-math
 
 def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labels=None, colors=None, xlabel='$x$', ylabel='$y$',
-                  legend_fontsize=None, legend_loc=None):
+                  legend_fontsize=None, legend_loc=None, points=None, point_colors=None, point_labels=None):
     xlim = xlim if xlim is not None else (min(x), max(x))
     ylim = ylim if ylim is not None else xlim
     xlow, xhigh = xlim
@@ -24,6 +24,12 @@ def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labe
         label = labels[i] if isinstance(labels, list) else None
         color = colors[i] if isinstance(colors, list) else None
         plt.plot(x, fn(x), label=label, color=color)
+    if points is not None:
+        for point in points:
+            x0, y0 = point
+            label = point_labels[i] if isinstance(point_labels, list) else None
+            color = point_colors[i] if isinstance(point_colors, list) else 'red'
+            plt.scatter([x0], [y0], marker='o', color=color, label=label, zorder=len(f) + 1)
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
@@ -193,7 +199,23 @@ def plot_vectors(vectors, xlim=None, ylim=None, title='', labels=None, colors=No
     plt.xlim(*xlim)
     plt.ylim(*ylim)
     plt.title(title)
-    plt.show();
+    plt.show()
+    
+def plot_vector_field(A, b=None, xlim=(-10, 10), ylim=(-10, 10), n_points=20, color='steelblue', alpha=1, 
+                      scale=None, title='', figsize=(5, 4)):
+    if b is None:
+        b = np.zeros((A.shape[0], 1))
+    # Define initial grid of vectors v = [x, y]
+    vx, vy = np.meshgrid(np.linspace(xlim[0], xlim[1], n_points), np.linspace(ylim[0], ylim[1], n_points))
+    # Define output vectors w = A v
+    wx = A[0, 0] * vx + A[0, 1] * vy + b[1, 0]
+    wy = A[1, 0] * vx + A[1, 1] * vy + b[1, 0]
+    plt.figure(figsize=figsize)
+    plt.quiver(vx, vy, wx, wy, color=color, alpha=alpha, scale=scale, angles='xy', scale_units='xy')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.title(title)
+    plt.show()
 
 def plot_svd(A, num=200, seed=0, **kwargs):
     # sample `num` total points inside the unit disk
