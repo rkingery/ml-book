@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculus</span></a>
+  <a href="../notebooks/calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -450,19 +450,32 @@ d &amp; -b \\
 -c &amp; a \\
 \end{pmatrix}.
 \]</span></p>
+<p>It also turns out that the transpose and inverse operations commute with each other,</p>
+<p><span class="math display">\[(\mathbf{A}^\top)^{-1} = (\mathbf{A}^{-1})^\top.\]</span></p>
+<p>Recall the pseudoinverse of a matrix is the generalization of the inverse to rectangular matrices. If <span class="math inline">\(\mathbf{A}\)</span> is an <span class="math inline">\(m \times n\)</span> matrix, the <strong>pseudoinverse</strong> is defined by,</p>
+<p><span class="math display">\[
+\mathbf{A}^+ =
+\begin{cases}
+(\mathbf{A}^\top \mathbf{A})^{-1} \mathbf{A}^\top, &amp; m &gt; n \\
+\mathbf{A}^\top (\mathbf{A} \mathbf{A}^\top)^{-1}, &amp; m &lt; n. \\
+\end{cases}
+\]</span></p>
+<p>For the pseudoinverse to exist in either case, the smallest dimension needs to have all linearly independent vectors. Some properties of the matrix inverse also hold for the pseudoinverse,</p>
+<p><span class="math display">\[(\mathbf{A}\mathbf{B})^+ = \mathbf{B}^+ \mathbf{A}^+,\]</span> <span class="math display">\[(\mathbf{A}^\top)^+ = (\mathbf{A}^+)^\top.\]</span></p>
+<p>Some properties don’t though. For example, the pseudoinverse isn’t a two-sided inverse anymore. It’s a <em>left inverse</em> if <span class="math inline">\(m &gt; n\)</span>, and a <em>right inverse</em> if <span class="math inline">\(m &lt; n\)</span>.</p>
 </section>
 <section id="determinant-and-trace" class="level3" data-number="6.1.4">
 <h3 data-number="6.1.4" class="anchored" data-anchor-id="determinant-and-trace"><span class="header-section-number">6.1.4</span> Determinant and Trace</h3>
-<p>Notice something from this formula. Since <span class="math inline">\(\text{det}(\mathbf{A}) = ad - bc\)</span> in this case, we can evidently write</p>
+<p>Notice something with the <span class="math inline">\(2 \times 2\)</span> matrix above. Since <span class="math inline">\(\text{det}(\mathbf{A}) = ad - bc\)</span>, we can evidently write</p>
 <p><span class="math display">\[\mathbf{A}^{-1} = \frac{1}{\text{det}(\mathbf{A})} \mathbf{\tilde A},\]</span></p>
-<p>where <span class="math inline">\(\mathbf{\tilde A}\)</span> is some kind of matrix related to <span class="math inline">\(\mathbf{A}\)</span>. The properties of <span class="math inline">\(\mathbf{\tilde A}\)</span> aren’t important (it’s called the <em>adjugate</em> if you’re curious). But this general fact turns out to be true for any <span class="math inline">\(n \times n\)</span> matrix, except the formula for the determinant gets a lot more complicated. What’s important is that <span class="math inline">\(\mathbf{A}^{-1}\)</span> is <em>inversely proportional</em> to the determinant. That’s why we can’t allow <span class="math inline">\(\text{det}(\mathbf{A}) = 0\)</span>, because then <span class="math inline">\(\mathbf{A}^{-1}\)</span> blows up due to the division by zero.</p>
-<p>Now, I’ve already said <span class="math inline">\((\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1}\)</span>. If then</p>
-<p><span class="math display">\[\mathbf{A}^{-1} = \frac{1}{\text{det}(\mathbf{A})}\mathbf{\tilde A}, \quad \mathbf{B}^{-1} = \frac{1}{\text{det}(\mathbf{B})}\mathbf{\tilde B},\]</span></p>
-<p>it’s evidently the case that</p>
-<p><span class="math display">\[(\mathbf{AB})^{-1} = \frac{1}{\text{det}(\mathbf{AB})}\mathbf{\tilde{AB}} = \frac{1}{\text{det}(\mathbf{A}) \cdot \text{det}(\mathbf{B})}\mathbf{\tilde B}\mathbf{\tilde A} = \mathbf{B}^{-1} \mathbf{A}^{-1}.\]</span></p>
-<p>Provided that <span class="math inline">\(\mathbf{\tilde{AB}}=\mathbf{\tilde B}\mathbf{\tilde A}\)</span>, which is true, it thus follows that</p>
+<p>where <span class="math inline">\(\mathbf{\tilde A}\)</span> is some kind of matrix related to <span class="math inline">\(\mathbf{A}\)</span>. The properties of <span class="math inline">\(\mathbf{\tilde A}\)</span> aren’t important (it’s called the <em>adjugate</em> if you’re curious). But this general fact turns out to be true for any <span class="math inline">\(n \times n\)</span> matrix, except the formula for the determinant gets a lot more complicated. What’s important is that <span class="math inline">\(\mathbf{A}^{-1}\)</span> is <em>inversely proportional</em> to the determinant, i.e.</p>
+<p><span class="math display">\[\mathbf{A}^{-1} \propto \frac{1}{\text{det}(\mathbf{A})}.\]</span></p>
+<p>That’s why we can’t allow <span class="math inline">\(\text{det}(\mathbf{A}) = 0\)</span>, because then <span class="math inline">\(\mathbf{A}^{-1}\)</span> blows up due to the division by zero. Now, I’ve already said <span class="math inline">\((\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1}\)</span>. If then</p>
+<p><span class="math display">\[\mathbf{A}^{-1} \propto \frac{1}{\text{det}(\mathbf{A})}, \quad \mathbf{B}^{-1} \propto \frac{1}{\text{det}(\mathbf{B})},\]</span></p>
+<p>we evidently must have that</p>
+<p><span class="math display">\[(\mathbf{AB})^{-1} \propto \frac{1}{\text{det}(\mathbf{AB})} \propto \mathbf{B}^{-1} \mathbf{A}^{-1} \propto \frac{1}{\text{det}(\mathbf{A}) \cdot \text{det}(\mathbf{B})}.\]</span></p>
+<p>It thus seems to be the case that the determinant of a product is proportional to the product of the determinants. This proportionality turns out to be exact, i.e.</p>
 <p><span class="math display">\[\text{det}(\mathbf{A}\mathbf{B}) = \text{det}(\mathbf{A}) \cdot \text{det}(\mathbf{B}) = \text{det}(\mathbf{B}) \cdot \text{det}(\mathbf{A}).\]</span></p>
-<p>Said differently, the determinant of a matrix product is just the product of their individual determinants.</p>
 <p>In general, the determinant of an <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> is a nasty <span class="math inline">\(n\)</span> degree multivariate polynomial of the elements of <span class="math inline">\(\mathbf{A}\)</span>. There’s no reliably easy way to calculate it except for small <span class="math inline">\(n\)</span> matrices. In numpy, you can use <code>np.linalg.det(A)</code> to calculate the determinant, but just as with inverses, this is a numerically unstable operation, and so should be avoided where possible. Moreover, it runs in <span class="math inline">\(O(n^3)\)</span> time, which is just as slow as matrix multiplication.</p>
 <p>Here’s an example. I’ll verify this “product rule” for determinants using two <span class="math inline">\(3 \times 3\)</span> matrices. The determinant of both matrices turns out to be <span class="math inline">\(6\)</span>, which means their product should have determinant <span class="math inline">\(36\)</span>.</p>
 <div class="cell" data-execution_count="8">
@@ -532,11 +545,11 @@ tr(BA) = 13</code></pre>
 </section>
 <section id="linear-independence-and-rank" class="level3" data-number="6.1.5">
 <h3 data-number="6.1.5" class="anchored" data-anchor-id="linear-independence-and-rank"><span class="header-section-number">6.1.5</span> Linear Independence and Rank</h3>
-<p>We can always think of a matrix in terms of its <strong>column vectors</strong>. If <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, it has <span class="math inline">\(n\)</span> column vectors <span class="math inline">\(\mathbf{a}_0, \mathbf{a}_1, \cdots, \mathbf{a}_{n-1}\)</span> each of size <span class="math inline">\(m\)</span>. Concatenated together in order, the column vectors form the matrix itself,</p>
+<p>We can always think of a matrix in terms of its <strong>column vectors</strong>. If <span class="math inline">\(\mathbf{A}\)</span> is <span class="math inline">\(m \times n\)</span>, it has <span class="math inline">\(n\)</span> column vectors <span class="math inline">\(\mathbf{A}_{:, 0}, \mathbf{A}_{:, 1}, \cdots, \mathbf{A}_{:, n-1}\)</span> each of size <span class="math inline">\(m\)</span>. Concatenated together in order, the column vectors form the matrix itself,</p>
 <p><span class="math display">\[
 \mathbf{A} =
 \begin{pmatrix}
-\mathbf{a}_0 &amp; \mathbf{a}_1 &amp; \cdots &amp; \mathbf{a}_{n-1}
+\mathbf{A}_{:, 0} &amp; \mathbf{A}_{:, 1} &amp; \cdots &amp; \mathbf{A}_{:, n-1}
 \end{pmatrix}.
 \]</span></p>
 <p>It turns out these column vectors also tell us how invertible a matrix is, but in a more general and useful way than the determinant does. Roughly speaking, a matrix is invertible if we can’t write any one column vector as a function of the other column vectors. This is just the definition of linear independence.</p>
@@ -598,6 +611,7 @@ c &amp; \beta c \\
 <pre><code>rank(A) = 1</code></pre>
 </div>
 </div>
+<p>The idea of rank also extends to rectangular matrices. An <span class="math inline">\(m \times n\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> is called <strong>full rank</strong> if the vectors in its minimum dimension are linearly independent. That is, if <span class="math inline">\(m &lt; n\)</span>, the <em>row vectors</em> must all be linearly independent. And if <span class="math inline">\(m &gt; n\)</span> the <em>column vectors</em> must all be linearly independent.</p>
 </section>
 <section id="outer-products" class="level3" data-number="6.1.6">
 <h3 data-number="6.1.6" class="anchored" data-anchor-id="outer-products"><span class="header-section-number">6.1.6</span> Outer Products</h3>
@@ -612,8 +626,8 @@ x_1 y_0 &amp; x_1 y_1 &amp; \cdots &amp; x_1 y_{n-1} \\
 x_{n-1} y_0 &amp; x_{n-1} y_1 &amp; \cdots &amp; x_{n-1} y_{n-1} \\
 \end{pmatrix}.
 \]</span></p>
-<p>Each column vector <span class="math inline">\(\mathbf{a}_j\)</span> of the outer product matrix is linearly proportional to the first column <span class="math inline">\(\mathbf{a}_0\)</span>, since</p>
-<p><span class="math display">\[\mathbf{a}_j = \mathbf{x} y_j = \mathbf{x} y_0 \frac{y_j}{y_0} = \frac{y_j}{y_0} \mathbf{a}_0.\]</span></p>
+<p>Notice each column vector <span class="math inline">\(\mathbf{A}_{:, j}\)</span> of the outer product matrix is linearly proportional to the first column <span class="math inline">\(\mathbf{A}_{:, 0}\)</span>, since</p>
+<p><span class="math display">\[\mathbf{A}_{:, j} = \mathbf{x} y_j = \mathbf{x} y_0 \frac{y_j}{y_0} = \frac{y_j}{y_0} \mathbf{A}_{:, 0}.\]</span></p>
 <p>This means that only one column vector is linearly independent, which implies <span class="math inline">\(\text{rank}(\mathbf{x} \mathbf{y}^\top)=1\)</span>. The outer product is evidently rank-1, and hence highly singular. You’d never be able to invert it. But it is useful as we’ll see soon.</p>
 <p>Here’s an example of an outer product calculation. You can either calculate <code>x @ y.T</code> directly or use <code>np.outer(x, y)</code>. Since both vectors are size <span class="math inline">\(3\)</span>, the outer product should be a <span class="math inline">\(3 \times 3\)</span> matrix with rank-1.</p>
 <div class="cell" data-execution_count="12">

@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/basic-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculus</span></a>
+  <a href="../notebooks/calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -208,19 +208,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#geometry-of-vectors" id="toc-geometry-of-vectors" class="nav-link active" data-scroll-target="#geometry-of-vectors"><span class="toc-section-number">5.1</span>  Geometry of Vectors</a>
-  <ul class="collapse">
-  <li><a href="#visualizing-vectors" id="toc-visualizing-vectors" class="nav-link" data-scroll-target="#visualizing-vectors"><span class="toc-section-number">5.1.1</span>  Visualizing Vectors</a></li>
-  <li><a href="#vector-operations" id="toc-vector-operations" class="nav-link" data-scroll-target="#vector-operations"><span class="toc-section-number">5.1.2</span>  Vector Operations</a></li>
-  <li><a href="#the-dot-product" id="toc-the-dot-product" class="nav-link" data-scroll-target="#the-dot-product"><span class="toc-section-number">5.1.3</span>  The Dot Product</a></li>
-  <li><a href="#projections" id="toc-projections" class="nav-link" data-scroll-target="#projections"><span class="toc-section-number">5.1.4</span>  Projections</a></li>
-  <li><a href="#linear-independence" id="toc-linear-independence" class="nav-link" data-scroll-target="#linear-independence"><span class="toc-section-number">5.1.5</span>  Linear Independence</a></li>
-  <li><a href="#basis-vectors" id="toc-basis-vectors" class="nav-link" data-scroll-target="#basis-vectors"><span class="toc-section-number">5.1.6</span>  Basis Vectors</a></li>
-  <li><a href="#cosine-similarity" id="toc-cosine-similarity" class="nav-link" data-scroll-target="#cosine-similarity"><span class="toc-section-number">5.1.7</span>  Cosine Similarity</a></li>
-  <li><a href="#other-norms" id="toc-other-norms" class="nav-link" data-scroll-target="#other-norms"><span class="toc-section-number">5.1.8</span>  Other Norms</a></li>
-  </ul></li>
-  <li><a href="#linear-maps" id="toc-linear-maps" class="nav-link" data-scroll-target="#linear-maps"><span class="toc-section-number">5.2</span>  Linear Maps</a></li>
-  <li><a href="#n-dimensional-vector-spaces" id="toc-n-dimensional-vector-spaces" class="nav-link" data-scroll-target="#n-dimensional-vector-spaces"><span class="toc-section-number">5.3</span>  <span class="math inline">\(n\)</span>-dimensional Vector Spaces</a></li>
+  <li><a href="#visualizing-vectors" id="toc-visualizing-vectors" class="nav-link active" data-scroll-target="#visualizing-vectors"><span class="toc-section-number">5.1</span>  Visualizing Vectors</a></li>
+  <li><a href="#vector-operations" id="toc-vector-operations" class="nav-link" data-scroll-target="#vector-operations"><span class="toc-section-number">5.2</span>  Vector Operations</a></li>
+  <li><a href="#the-dot-product" id="toc-the-dot-product" class="nav-link" data-scroll-target="#the-dot-product"><span class="toc-section-number">5.3</span>  The Dot Product</a></li>
+  <li><a href="#projections" id="toc-projections" class="nav-link" data-scroll-target="#projections"><span class="toc-section-number">5.4</span>  Projections</a></li>
+  <li><a href="#linear-independence" id="toc-linear-independence" class="nav-link" data-scroll-target="#linear-independence"><span class="toc-section-number">5.5</span>  Linear Independence</a></li>
+  <li><a href="#basis-vectors" id="toc-basis-vectors" class="nav-link" data-scroll-target="#basis-vectors"><span class="toc-section-number">5.6</span>  Basis Vectors</a></li>
+  <li><a href="#cosine-similarity" id="toc-cosine-similarity" class="nav-link" data-scroll-target="#cosine-similarity"><span class="toc-section-number">5.7</span>  Cosine Similarity</a></li>
+  <li><a href="#other-norms" id="toc-other-norms" class="nav-link" data-scroll-target="#other-norms"><span class="toc-section-number">5.8</span>  Other Norms</a></li>
+  <li><a href="#linear-maps" id="toc-linear-maps" class="nav-link" data-scroll-target="#linear-maps"><span class="toc-section-number">5.9</span>  Linear Maps</a></li>
+  <li><a href="#higher-dimensional-vector-spaces" id="toc-higher-dimensional-vector-spaces" class="nav-link" data-scroll-target="#higher-dimensional-vector-spaces"><span class="toc-section-number">5.10</span>  Higher-Dimensional Vector Spaces</a></li>
   </ul>
 </nav>
 </nav>
@@ -257,11 +254,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="geometry-of-vectors" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="geometry-of-vectors"><span class="header-section-number">5.1</span> Geometry of Vectors</h2>
 <p>I’ve introduced matrices and vectors so far kind of organically as the natural way to write and solve systems of linear equations. They’re good for a lot more than solving linear systems, however. For one thing, they possess important geometric properties. I’m now going to re-define the concepts covered so far, but in more geometric terms.</p>
-<section id="visualizing-vectors" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="visualizing-vectors"><span class="header-section-number">5.1.1</span> Visualizing Vectors</h3>
+<section id="visualizing-vectors" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="visualizing-vectors"><span class="header-section-number">5.1</span> Visualizing Vectors</h2>
 <p>Let’s go back to the simple 2-dimensional case. Imagine you have a point in the xy-plane, call it <span class="math inline">\((x,y)\)</span>. Now, we can think of this as a single point, but we can also imagine it differently. Suppose there was an arrow pointing from the origin <span class="math inline">\((0,0)\)</span> to the point <span class="math inline">\((x,y)\)</span>. For example, if the point was <span class="math inline">\((1,1)\)</span>, this arrow might look like this.</p>
 <div class="cell" data-execution_count="2">
 <details>
@@ -307,8 +302,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{align*}\]</span></p>
 <p>Be careful when working with vectors in code to make sure you’re using the right shapes for the right situation or you’ll get shape mismatch errors (or worse a silent bug).</p>
 </section>
-<section id="vector-operations" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="vector-operations"><span class="header-section-number">5.1.2</span> Vector Operations</h3>
+<section id="vector-operations" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="vector-operations"><span class="header-section-number">5.2</span> Vector Operations</h2>
 <p>The magnitude, or length, of <span class="math inline">\(\mathbf{v}\)</span> is typically denoted by the symbol <span class="math inline">\(||\mathbf{v}||\)</span>, called a <strong>norm</strong>,</p>
 <p><span class="math display">\[||\mathbf{v}|| = \sqrt{v_x^2 + v_y^2}.\]</span></p>
 <p>In the above example with <span class="math inline">\(\mathbf{v}=(1,1)\)</span>, its norm is <span class="math inline">\(||\mathbf{v}||=\sqrt{1+1}=\sqrt{2} \approx 1.414\)</span>.</p>
@@ -398,8 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="the-dot-product" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="the-dot-product"><span class="header-section-number">5.1.3</span> The Dot Product</h3>
+<section id="the-dot-product" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="the-dot-product"><span class="header-section-number">5.3</span> The Dot Product</h2>
 <p>It turns out we can understand both the lengths and angles of vectors in terms of a single operation called the <strong>dot product</strong>, also called the inner or scalar product. The dot product is a kind of multiplication between two vectors that returns a scalar. If <span class="math inline">\(\mathbf{v}=(v_x,v_y)\)</span> and <span class="math inline">\(\mathbf{w}=(w_x,w_y)\)</span> are two vectors in the plane, their dot product is defined as</p>
 <p><span class="math display">\[\mathbf{v} \cdot \mathbf{w} = v_x w_x + v_y w_y.\]</span></p>
 <p>That is, the dot product is just the sum of the element-wise products of the two vectors.</p>
@@ -467,8 +462,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="projections" class="level3" data-number="5.1.4">
-<h3 data-number="5.1.4" class="anchored" data-anchor-id="projections"><span class="header-section-number">5.1.4</span> Projections</h3>
+<section id="projections" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="projections"><span class="header-section-number">5.4</span> Projections</h2>
 <p>Let <span class="math inline">\(\mathbf{e}_x=(1,0)\)</span>. It’s the unit vector pointing along the positive x-axis. Notice the dot product between <span class="math inline">\(\mathbf{v}=(v_x, v_y)\)</span> and <span class="math inline">\(\mathbf{e}_x\)</span> is just</p>
 <p><span class="math display">\[\mathbf{v} \cdot \mathbf{e}_x = v_x \cdot 1 + v_y \cdot 0 = v_x.\]</span></p>
 <p>Evidently the dot product <span class="math inline">\(\mathbf{v} \cdot \mathbf{e}_x\)</span> “picks” out the x-component of <span class="math inline">\(\mathbf{v}\)</span>, namely <span class="math inline">\(v_x\)</span>. The vector <span class="math inline">\(v_x \mathbf{e}_x = (v_x,0)\)</span> gotten by rescaling <span class="math inline">\(\mathbf{e}_x\)</span> by <span class="math inline">\(v_x\)</span> is called the <strong>projection</strong> of <span class="math inline">\(\mathbf{v}\)</span> onto the x-axis. It’s the vector you’d get by dropping <span class="math inline">\(\mathbf{v}\)</span> perpendicular to the x-axis.</p>
@@ -497,13 +492,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="linear-independence" class="level3" data-number="5.1.5">
-<h3 data-number="5.1.5" class="anchored" data-anchor-id="linear-independence"><span class="header-section-number">5.1.5</span> Linear Independence</h3>
+<section id="linear-independence" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="linear-independence"><span class="header-section-number">5.5</span> Linear Independence</h2>
 <p>I just showed we can decompose any vector <span class="math inline">\(\mathbf{v} \in \mathbb{R}^2\)</span> into its projections <span class="math inline">\(\mathbf{v} = v_x \mathbf{e}_x + v_y \mathbf{e}_y\)</span>. The fact we can do this is because the unit vectors <span class="math inline">\(\mathbf{e}_x\)</span> and <span class="math inline">\(\mathbf{e}_y\)</span> are special, for a few reasons.</p>
 <p>The first reason these vectors are special is that they don’t lie along the same line in the plane. Said differently, we can’t write one vector as a scalar multiple of the other, <span class="math inline">\(\mathbf{e}_x \neq c \mathbf{e}_y\)</span> for any scalar <span class="math inline">\(c\)</span>. Vectors with this property are called <em>linearly independent</em>.</p>
-<p>More generally, a set of <span class="math inline">\(k\)</span> vectors <span class="math inline">\(\mathbf{v}_0, \mathbf{v}_1, \cdots, \mathbf{v}_{k-1}\)</span> is called <strong>linearly independent</strong> if no one vector <span class="math inline">\(\mathbf{v}_j\)</span> in the set can be written as a linear combination of the rest, i.e.&nbsp;for <em>any</em> choice of scalars <span class="math inline">\(c_i\)</span>,</p>
+<p>More generally, a set of <span class="math inline">\(k\)</span> vectors <span class="math inline">\(\mathbf{v}_0, \mathbf{v}_1, \cdots, \mathbf{v}_{k-1}\)</span> is called <strong>linearly independent</strong> if no one vector <span class="math inline">\(\mathbf{v}_j\)</span> in the set can be written as a linear combination of the rest. That is, for <em>any</em> choice of scalars <span class="math inline">\(c_0, c_1, \cdots, c_{k-1}\)</span>,</p>
 <p><span class="math display">\[\mathbf{v}_j \neq \sum_{i \neq j} c_i \mathbf{v}_i.\]</span></p>
-<p>A set of vectors that isn’t linearly independent is called <strong>linearly dependent</strong>. In a linearly dependent set, you can always express at least one vector as a linear combination of the rest, for example by finding a choice of scalars <span class="math inline">\(c_i\)</span>, you could write <span class="math inline">\(\mathbf{v}_0\)</span> as</p>
+<p>A set of vectors that isn’t linearly independent is called <strong>linearly dependent</strong>. In a linearly dependent set, you can always express at least one vector as a linear combination of the rest, for example by finding a choice of scalars <span class="math inline">\(c_0, c_1, \cdots, c_{k-1}\)</span>, you could write <span class="math inline">\(\mathbf{v}_0\)</span> as</p>
 <p><span class="math display">\[\mathbf{v}_0 = \sum_{i=1}^{k-1} c_i \mathbf{v}_i = c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \cdots + c_{k-1} \mathbf{v}_{k-1}.\]</span></p>
 <p>Linearly dependent sets of vectors are redundant in a sense. We have more than we need. We can always keep dropping vectors from the set until the ones remaining are linearly independent.</p>
 <p>The vector space spanned by all linear combinations of a set of vectors is called the <strong>span</strong> of that set. The span of a single vector will always be a <em>line</em>, since a linear combination of any one vector is just the scalar multiples of that vector. The span of any <em>two</em> linearly independent vectors will always be a <em>plane</em>. The span of <span class="math inline">\(k\)</span> linearly independent vectors will form a <span class="math inline">\(k\)</span>-dimensional <em>hyperplane</em>.</p>
@@ -536,8 +531,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>For vectors in <span class="math inline">\(\mathbb{R}^2\)</span>, there are only two possibilities, they either lie on the same line, or they span the whole plane. This follows from the fact that any vector <span class="math inline">\(\mathbf{v}\)</span> can be decomposed as <span class="math inline">\(\mathbf{v} = v_x \mathbf{e}_x + v_y \mathbf{e}_y\)</span>. An implication of this fact is that a set of vectors in <span class="math inline">\(\mathbb{R}^2\)</span> can only be linearly independent if it contains only one or two vectors. If it contains a third vector, that vector <em>must</em> be a linear combination of the other two. The maximum number of linearly independent vectors in a set is the <strong>dimension</strong> of the vector space. Since <span class="math inline">\(\mathbb{R}^2\)</span> is 2-dimensional, it can only sustain 2 linearly independent vectors at a time.</p>
 </section>
-<section id="basis-vectors" class="level3" data-number="5.1.6">
-<h3 data-number="5.1.6" class="anchored" data-anchor-id="basis-vectors"><span class="header-section-number">5.1.6</span> Basis Vectors</h3>
+<section id="basis-vectors" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="basis-vectors"><span class="header-section-number">5.6</span> Basis Vectors</h2>
 <p>In <span class="math inline">\(\mathbb{R}^2\)</span>, if we can find any two vectors <span class="math inline">\(\mathbf{a}\)</span> and <span class="math inline">\(\mathbf{b}\)</span> that are linearly independent, then we can write any other vector <span class="math inline">\(\mathbf{v}\)</span> as a linear combination of those two vectors,</p>
 <p><span class="math display">\[\mathbf{v} = v_a \mathbf{a} + v_b \mathbf{b}.\]</span></p>
 <p>The set <span class="math inline">\(\{\mathbf{a}, \mathbf{b}\}\)</span> is called a <em>basis</em>. We can use vectors in this set as a “basis” to write any other vector.</p>
@@ -609,8 +604,8 @@ v_y &amp;= \mathbf{v} \cdot \mathbf{e}_y.
 </div>
 </div>
 </section>
-<section id="cosine-similarity" class="level3" data-number="5.1.7">
-<h3 data-number="5.1.7" class="anchored" data-anchor-id="cosine-similarity"><span class="header-section-number">5.1.7</span> Cosine Similarity</h3>
+<section id="cosine-similarity" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="cosine-similarity"><span class="header-section-number">5.7</span> Cosine Similarity</h2>
 <p>Just like we can express the length of a vector using the dot product, it turns out we can also express the <em>angle</em> between any two vectors in the plane using the dot product. If <span class="math inline">\(\theta\)</span> is the angle between two vectors <span class="math inline">\(\mathbf{v}\)</span> and <span class="math inline">\(\mathbf{w}\)</span>, it turns out the dot product is given by</p>
 <p><span class="math display">\[\mathbf{v} \cdot \mathbf{w} = ||\mathbf{v}|| \cdot ||\mathbf{w}|| \cos \theta.\]</span></p>
 <p>Note that both sides of this equation are scalars since the dot product is a scalar and the product of norms is a scalar. If you’re good at trigonometry, you can convince yourself this formula must be true by projecting <span class="math inline">\(\mathbf{v}\)</span> onto <span class="math inline">\(\mathbf{w}\)</span> similar to the way we did projections onto the x and y axes before. The difference this time is that the component of <span class="math inline">\(\mathbf{v}\)</span> in the direction of <span class="math inline">\(\mathbf{w}\)</span> is not <span class="math inline">\(v_x\)</span> or <span class="math inline">\(v_y\)</span> anymore, but instead <span class="math inline">\(||\mathbf{v}|| \cos \theta\)</span>.</p>
@@ -665,10 +660,10 @@ v_y &amp;= \mathbf{v} \cdot \mathbf{e}_y.
 <pre><code>cos(v, w) = -0.7071067811865475</code></pre>
 </div>
 </div>
-<p><strong>Algorithm Analysis:</strong> Like the dot product, this function uses only <span class="math inline">\(O(n)\)</span> FLOPS. There are three independent dot product operations happening here, each adding <span class="math inline">\(O(n)\)</span> FLOPS. Since the outputs of dot products are scalars, the multiply and divide only add one FLOP each. The square root isn’t obvious, but you can assume it takes some constant number of FLOPS as well. The total must therefore be <span class="math inline">\(O(n)\)</span>.</p>
+<p><strong>Algorithm Analysis:</strong> Like the dot product, this function runs in <span class="math inline">\(O(n)\)</span> time. There are three independent dot product operations happening here, each adding <span class="math inline">\(O(n)\)</span> FLOPS. Since the outputs of dot products are scalars, the multiply and divide only add one FLOP each. The square root isn’t obvious, but you can assume it takes some constant number of FLOPS as well. The total must therefore be <span class="math inline">\(O(n)\)</span>.</p>
 </section>
-<section id="other-norms" class="level3" data-number="5.1.8">
-<h3 data-number="5.1.8" class="anchored" data-anchor-id="other-norms"><span class="header-section-number">5.1.8</span> Other Norms</h3>
+<section id="other-norms" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="other-norms"><span class="header-section-number">5.8</span> Other Norms</h2>
 <p>It turns out that the norm I defined above is only <em>one</em> way to measure the length of a vector. It’s the most natural way to do so sense it corresponds to your intuitive notions of length, which itself relates to the Pythagorean Theorem. There are other ways to quantify vector length as well that aren’t as intuitive. Because they do sometimes show up in machine learning I’ll briefly mention a couple of these here.</p>
 <p>The norm I’ve covered is called the <strong>2-norm</strong>. It’s called this because it involves squares and square roots. We can write it in the form</p>
 <p><span class="math display">\[||\mathbf{v}|| = ||\mathbf{v}||_2 = \big(v_x^2 + v_y^2 \big)^{1/2}.\]</span></p>
@@ -703,37 +698,55 @@ Infinity-Norm of v: 2.0</code></pre>
 </div>
 </div>
 </section>
-</section>
-<section id="linear-maps" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="linear-maps"><span class="header-section-number">5.2</span> Linear Maps</h2>
-<p>So where do matrices fit into all this vector space stuff? It turns out that matrices correspond to functions between vectors to vectors. These are called <strong>linear maps</strong>. A linear map is a vector-valued function from one vector space to another that preserves the properties of vectors. In <span class="math inline">\(\mathbb{R}^2\)</span>, a linear map is a function between vectors <span class="math inline">\(\mathbf{v}=(v_x,v_y)\)</span> and <span class="math inline">\(\mathbf{w}=(w_x,w_y)\)</span> of the form</p>
-<p><span class="math display">\[\mathbf{w} = (w_x, w_y) = (av_x + bv_y, cv_x + dv_y) = \mathbf{F}(\mathbf{v}).\]</span></p>
-<p>That is, each component of the output vector <span class="math inline">\(\mathbf{w}\)</span> is a linear combination of the input vector <span class="math inline">\(\mathbf{v}\)</span>. Now, if you stare at this function for a little bit, you should see that this kind of looks like a <span class="math inline">\(2 \times 2\)</span> system of linear equations,</p>
-<p><span class="math display">\[\begin{alignat*}{3}
-   av_x &amp; {}+{} &amp;  bv_y &amp; {}={} &amp; w_x \\
-   cv_x &amp; {}+{} &amp;  dv_y &amp; {}={} &amp; w_y.
-\end{alignat*}\]</span></p>
-<p>This of course means the linear map is equivalent to a matrix-vector equation. If we identify <span class="math inline">\(\mathbf{v}\)</span> and <span class="math inline">\(\mathbf{w}\)</span> with <span class="math inline">\(2 \times 1\)</span> column vectors, and define a <span class="math inline">\(\mathbf{A}\)</span> by</p>
+<section id="linear-maps" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="linear-maps"><span class="header-section-number">5.9</span> Linear Maps</h2>
+<p>So where do matrices fit into all this vector space stuff? It turns out that matrices correspond to functions that send vectors to new vectors. These kinds of functions are called <em>linear maps</em>. A <strong>linear map</strong> is any vector-valued function <span class="math inline">\(\mathbf{w} = \mathbf{F}(\mathbf{v})\)</span> that satisfies the <em>principle of superposition</em>: For any scalars <span class="math inline">\(a,b\)</span> and any vectors <span class="math inline">\(\mathbf{u}, \mathbf{v}\)</span>,</p>
+<p><span class="math display">\[\mathbf{F}(a\mathbf{u} + b\mathbf{v}) = a\mathbf{F}(\mathbf{u}) + b\mathbf{F}(\mathbf{v}).\]</span></p>
+<p>Said differently, a linear map is a function in which we can always split the function up over sums and factor out scalar constants. For vectors in the plane, linear maps are exactly the functions that map a vector <span class="math inline">\(\mathbf{v}=(v_x,v_y)\)</span> in the plane to another vector <span class="math inline">\(\mathbf{w}=(w_x,w_y)\)</span> in the plane.</p>
+<p>To see how linear maps relate to matrices, let’s look at a vector in terms of the standard basis, <span class="math inline">\(\mathbf{v}=x\mathbf{e}_x + y\mathbf{e}_y\)</span>, and see how it behaves under the map <span class="math inline">\(\mathbf{w} = \mathbf{F}(\mathbf{v})\)</span>. Using the principle of superposition, we have</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{w} &amp;= \mathbf{F}(\mathbf{v}) \\
+&amp;= \mathbf{F}(x\mathbf{e}_x + y\mathbf{e}_y) \\
+&amp;= x \mathbf{F}(\mathbf{e}_x) + y \mathbf{F}(\mathbf{e}_y). \\
+&amp;= \begin{pmatrix} \mathbf{F}(\mathbf{e}_x) &amp; \mathbf{F}(\mathbf{e}_y) \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}. \\
+\end{align*}\]</span></p>
+<p>Evidently, if we <em>define</em> a <span class="math inline">\(2 \times 2\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> as the matrix whose column vectors are <span class="math inline">\(\mathbf{F}(\mathbf{e}_x)\)</span> and <span class="math inline">\(\mathbf{F}(\mathbf{e}_y)\)</span>, then we just get <span class="math inline">\(\mathbf{w} = \mathbf{A} \mathbf{v}\)</span>. That is, a linear map is completely equivalent to matrix-vector multiplication by some matrix, that matrix just being the matrix of column vectors that the basis vectors get mapped to.</p>
+<p>As an example, suppose we had the following linear map and wanted to figure out its corresponding matrix,</p>
+<p><span class="math display">\[(v_x + 2v_y, 3v_x + 4v_y) = \mathbf{F}\big((v_x, v_y)\big).\]</span></p>
+<p>What we can do is see how <span class="math inline">\(\mathbf{F}(\mathbf{v})\)</span> acts on the standard basis vectors. Evidently,</p>
+<p><span class="math display">\[
+\mathbf{F}\big((1, 0)\big) = (1 + 0, 3 + 0) = (1, 3), \quad
+\mathbf{F}\big((0, 1)\big) = (0 + 2, 0 + 4) = (2, 4).
+\]</span></p>
+<p>Treating these as column vectors, we can stack them to get the <span class="math inline">\(2 \times 2\)</span> matrix</p>
 <p><span class="math display">\[
 \mathbf{A} =
 \begin{pmatrix}
-a &amp; b \\
-c &amp; d
-\end{pmatrix},
+1 &amp; 2 \\
+3 &amp; 4 \\
+\end{pmatrix}.
 \]</span></p>
-<p>then the linear map <span class="math inline">\(\mathbf{w} = \mathbf{F}(\mathbf{v})\)</span> is equivalent to the matrix-vector equation <span class="math inline">\(\mathbf{w}=\mathbf{A}\mathbf{v}\)</span>, or</p>
-<p><span class="math display">\[\mathbf{F}(\mathbf{v}) = \mathbf{A}\mathbf{v}.\]</span></p>
-<p>In fact, <em>every</em> linear map <span class="math inline">\(\mathbf{F}(\mathbf{v})\)</span> can be identified with some matrix equation <span class="math inline">\(\mathbf{A}\mathbf{v}\)</span>. Knowing <span class="math inline">\(\mathbf{A}\)</span> (in some basis) is equivalent to knowing the linear map itself.</p>
-<p>But why are linear maps important? The main reason is that they preserve linear structure. Notice that I can define a line through any vector <span class="math inline">\(\mathbf{v}\)</span> by scaling it with some parameter <span class="math inline">\(t\)</span>. If I apply a linear map to this line I’d get <span class="math inline">\(\mathbf{F}(t\mathbf{v}) = t\mathbf{F}(\mathbf{v})\)</span>. Check it yourself from the definition. Said differently, linear maps map lines to lines, thus preserving the linear structure of the vector space. The new line won’t usually be the <em>original</em> line. It may get rotated. But it’s still a line.</p>
-<p>Let’s try to visualize what a linear map does by defining a particular <span class="math inline">\(2 \times 2\)</span> matrix <span class="math inline">\(\mathbf{A}\)</span> and seeing how it acts on inputs <span class="math inline">\(\mathbf{v}\)</span>.</p>
+<p>Thus, for this example, the linear map is given by</p>
+<p><span class="math display">\[
+\mathbf{F}(\mathbf{v}) = \mathbf{A} \mathbf{v} =
+\begin{pmatrix}
+1 &amp; 2 \\
+3 &amp; 4 \\
+\end{pmatrix}
+\begin{pmatrix}
+v_x \\
+v_y \\
+\end{pmatrix}.
+\]</span></p>
+<p>Since both the input and output vectors are in the plane, we can visualize them on the same plot. Let’s look at what the above example does, for example, to <span class="math inline">\(\mathbf{v}=(1,1)\)</span>. Algebraically, the output should be the vector <span class="math inline">\(\mathbf{w}=(3, 7)\)</span>. Geometrically, this linear map seems to be doing two things, stretching the vector out by a factor of <span class="math inline">\(\frac{||\mathbf{w}||}{||\mathbf{v}||} \approx 5.4\)</span>, and rotating it counterclockwise by an angle of <span class="math inline">\(\cos(\mathbf{v}, \mathbf{w}) \approx 53^\circ\)</span>. It’s a general fact that we can decompose a linear map into a combination of scalings and rotations. I’ll talk more about that in the next lesson.</p>
 <div class="cell" data-execution_count="17">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="op">-</span><span class="fl">0.1</span>], [<span class="fl">0.1</span>, <span class="dv">1</span>]])</span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plot_vectors([v.flatten(), (A <span class="op">@</span> v).flatten()], colors<span class="op">=</span>[<span class="st">'black'</span>, <span class="st">'red'</span>],</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>             labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{{</span><span class="st">v</span><span class="sc">}}</span><span class="st">$'</span>, <span class="st">'$\mathbf</span><span class="sc">{{</span><span class="st">A</span><span class="sc">}}</span><span class="st">\mathbf</span><span class="sc">{{</span><span class="st">v</span><span class="sc">}}</span><span class="st">$'</span>], text_offsets<span class="op">=</span>[[<span class="fl">0.01</span>, <span class="op">-</span><span class="fl">0.1</span>], [<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.05</span>]],</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>             title<span class="op">=</span><span class="st">'Linear Map: $\mathbf</span><span class="sc">{{</span><span class="st">w</span><span class="sc">}}</span><span class="st"> = \mathbf</span><span class="sc">{{</span><span class="st">A</span><span class="sc">}}</span><span class="st">\mathbf</span><span class="sc">{{</span><span class="st">v</span><span class="sc">}}</span><span class="st">$'</span>,  xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="fl">1.5</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="fl">1.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>             title<span class="op">=</span><span class="st">'$\mathbf</span><span class="sc">{{</span><span class="st">w</span><span class="sc">}}</span><span class="st"> = \mathbf</span><span class="sc">{{</span><span class="st">A</span><span class="sc">}}</span><span class="st">\mathbf</span><span class="sc">{{</span><span class="st">v</span><span class="sc">}}</span><span class="st">$'</span>,  xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">5</span>), ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -743,19 +756,14 @@ c &amp; d
 </div>
 </div>
 </div>
-<p>Why stop there? Let’s apply the linear map a whole bunch of times recursively and see what happens to the output vectors <span class="math inline">\(\mathbf{w}\)</span>. I’ll plot each of the <span class="math inline">\(k=63\)</span> vectors in the following sequence, <span class="math display">\[\mathbf{v}, \ \mathbf{A}\mathbf{v}, \ \mathbf{A}^2\mathbf{v}, \ \cdots, \ \mathbf{A}^{63}\mathbf{v}.\]</span></p>
-<p>Note each power <span class="math inline">\(\mathbf{A}^j\)</span> here is a <em>matrix power</em>, defined by applying <em>matrix multiplication</em> over and over <span class="math inline">\(k\)</span> times. It’s <em>not</em> the element-wise power.</p>
-<p>For the particular values in this plot I’ll choose <span class="math inline">\(\mathbf{v}=\begin{pmatrix} 1 \\ 1 \end{pmatrix}\)</span> and <span class="math inline">\(\mathbf{A}=\begin{pmatrix} 1 &amp; -0.1 \\ 0.1 &amp; 1 \end{pmatrix}\)</span>. The original vector <span class="math inline">\(\mathbf{v}\)</span> is colored black. Notice that each linear map is slowly rotating the vector counterclockwise and also slightly stretching it. By the time it gets back around it’s already maybe 40% longer than the original vector.</p>
-<p>In fact, <em>every</em> linear map between two vectors in the plane will do at least one of these two things: rotate the input vector in the plane, or stretch (or shrink) it by some factor. I just chose a particularly nice one to plot.</p>
+<p>This plot doesn’t really tell us that much about the linear map though. It only says how the map acts on a single vector <span class="math inline">\(\mathbf{v}=(1,1)\)</span>. What would be <em>really</em> illuminating is to see how the map acts on a bunch of different vectors. We can do that using what’s called a vector field plot. To show how these work, I’ll do a <em>vector field plot</em> of the previous example.</p>
+<p>Here’s how you should read a vector field plot. For each vector you see, imagine that vector as the <em>output</em> to the linear map whose <em>input</em> is the vector pointing from the origin to that point (which we never show explicitly in the plot). For example, at the point <span class="math inline">\(\mathbf{v}=(1,1)\)</span> you should expect to see the vector <span class="math inline">\(\mathbf{w}=(3,7)\)</span>. Note that the vectors have been scaled down by a factor of around 25 so that you can see them all in the plot. Other than that, they should all point in the right directions, and be of the right proportion to each other.</p>
+<p>The most obvious thing you’ll probably notice in the plot is the diagonal line running from the upper left to the lower right. Along this <em>characteristic line</em>, the vectors seem to all be getting scaled <em>down</em> by the linear map, but more or less they all point in the same direction, i.e.&nbsp;along the line. If you look more carefully, you’ll see another characteristic line as well. Notice how vectors not on this line all seem to be pointing along the opposite diagonal, from lower left to upper right. Those vectors in fact seem to be getting scaled <em>up</em> by the linear map. These characteristic lines and their scaling values are special. They’re called <strong>eigenvectors</strong> and <strong>eigenvalues</strong> respectively. They in a sense encode the properties of a matrix. I’ll talk more about those in the next lesson.</p>
 <div class="cell" data-execution_count="18">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">63</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>vectors <span class="op">=</span> [(np.linalg.matrix_power(A, i) <span class="op">@</span> v).flatten() <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k)]</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ss">$\mathbf</span><span class="ch">{{</span><span class="ss">v</span><span class="ch">}}</span><span class="ss">, \mathbf</span><span class="ch">{{</span><span class="ss">A</span><span class="ch">}}</span><span class="ss">\mathbf</span><span class="ch">{{</span><span class="ss">v</span><span class="ch">}}</span><span class="ss">, \mathbf</span><span class="ch">{{</span><span class="ss">A</span><span class="ch">}}</span><span class="ss">^2\mathbf</span><span class="ch">{{</span><span class="ss">v</span><span class="ch">}}</span><span class="ss">, \cdots, \mathbf</span><span class="ch">{{</span><span class="ss">A</span><span class="ch">}}</span><span class="ss">^</span><span class="ch">{{</span><span class="sc">{</span>k<span class="sc">}</span><span class="ch">}}</span><span class="ss">\mathbf</span><span class="ch">{{</span><span class="ss">v</span><span class="ch">}}</span><span class="ss">$</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span>.strip()</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>plot_vectors(vectors, colors<span class="op">=</span>[<span class="st">'black'</span>]<span class="op">+</span>[<span class="st">'red'</span>]<span class="op">*</span>(k<span class="op">-</span><span class="dv">1</span>), title<span class="op">=</span>title, xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">2.5</span>, <span class="fl">2.5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">2.5</span>, <span class="fl">2.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plot_vector_field(A, alpha<span class="op">=</span><span class="fl">0.8</span>, title<span class="op">=</span><span class="ss">f'Vector Field of $F(v)=Av$,</span><span class="ch">\n</span><span class="ss">$A=$</span><span class="sc">{</span>A<span class="sc">.</span>tolist()<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -765,22 +773,17 @@ c &amp; d
 </div>
 </div>
 </div>
-<p>What do you suppose the transpose of <span class="math inline">\(\mathbf{A}\)</span> does in this particular example? That is, suppose you use <span class="math inline">\(\mathbf{A}^\top\)</span> instead. Notice what would happen is the minus sign would move from the upper right to the lower left. You can verify that this will just cause the matrix to spin vectors the other way, clockwise instead of counterclockwise.</p>
-<p>In fact, what I’ve just shown is a special case of what happens when you compose linear maps: Composition of linear maps is <em>equivalent</em> to matrix multiplication. If <span class="math inline">\(\mathbf{F}(\mathbf{w}) = \mathbf{A}\mathbf{w}\)</span> and <span class="math inline">\(\mathbf{G}(\mathbf{v}) = \mathbf{B}\mathbf{v}\)</span> are two linear maps, then their composite function <span class="math inline">\(\mathbf{F}(\mathbf{G}(\mathbf{v}))\)</span> is another linear map given by</p>
-<p><span class="math display">\[\mathbf{F}(\mathbf{G}(\mathbf{v})) = \mathbf{A}\mathbf{B}\mathbf{v}.\]</span></p>
-<p>This is perhaps the <em>real</em> reason matrix multiplication is important. Because linear maps are important, and applying multiple linear maps in sequence is just matrix multiplication.</p>
-<p>Two other special linear maps worth being aware of are the identity map and the inverse map. The identity map is the map <span class="math inline">\(\mathbf{F}(\mathbf{v}) = \mathbf{I}\mathbf{v}\)</span>. What does it do to <span class="math inline">\(\mathbf{v}\)</span>? Let’s see. We can get the identity matrix in numpy using <code>np.eye(n)</code>, where <code>n</code> is the dimension (in this case 2).</p>
-<p>It looks like nothing is happening. That is, <span class="math inline">\(\mathbf{I}\mathbf{v} = \mathbf{v}\)</span>. You can verify this by writing this out in components and seeing what the matrix-vector product is. In fact, <span class="math inline">\(\mathbf{I}\mathbf{v} = \mathbf{v}\)</span> is <em>always</em> true, for any dimension, and any vector <span class="math inline">\(\mathbf{v}\)</span>.</p>
-<p><strong>Aside:</strong> Notice that I had to <em>flatten</em> the vectors here to do the plot. That’s because I’ve sneakily defined vectors in two different ways, first as a <em>column</em> vector of shape <span class="math inline">\((2,1)\)</span> and <em>then</em> as a <em>flat</em> vector of shape <span class="math inline">\((2,)\)</span>.</p>
+<p>Let’s briefly look at some special linear maps. The first one is the <strong>identity map</strong>,</p>
+<p><span class="math display">\[\mathbf{v} = \mathbf{F}(\mathbf{v}).\]</span></p>
+<p>The identity map always maps a vector to itself. It’s not hard to see what the corresponding matrix is. The name gives it away. Since <span class="math inline">\(\mathbf{e}_x = \mathbf{F}(\mathbf{e}_x)\)</span> and <span class="math inline">\(\mathbf{e}_y = \mathbf{F}(\mathbf{e}_y)\)</span>, the corresponding matrix is the <span class="math inline">\(2 \times 2\)</span> identity matrix</p>
+<p><span class="math display">\[\mathbf{I} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \\ \end{pmatrix}.\]</span></p>
+<p>Graphically, the identity map just leaves a vector where it is. It neither rotates it nor scales it.</p>
+<p>Here’s what the vector field plot looks like. Notice that all the output vectors are mapping radially outward, and getting larger the further you get away from the origin. It’s harder to tell from the plot, but each output vector is also the same length as the input vectors, which of course aren’t shown.</p>
 <div class="cell" data-execution_count="19">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> np.eye(<span class="dv">2</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plot_vectors([v.flatten(), (I <span class="op">@</span> v).flatten()], zorders<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>],</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>             title<span class="op">=</span><span class="st">'Identity Map: $\mathbf</span><span class="sc">{F}</span><span class="st">(\mathbf</span><span class="sc">{v}</span><span class="st">)=\mathbf</span><span class="sc">{I}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>             labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>, <span class="st">'$\mathbf</span><span class="sc">{I}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>],</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>             colors<span class="op">=</span>[<span class="st">'black'</span>, <span class="st">'red'</span>], xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>), </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>             text_offsets<span class="op">=</span>[[<span class="dv">0</span>, <span class="op">-</span><span class="fl">0.25</span>], [<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">1</span>]])</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plot_vector_field(I, alpha<span class="op">=</span><span class="fl">0.8</span>, title<span class="op">=</span><span class="ss">f'Vector Field of $F(v)=Iv$,</span><span class="ch">\n</span><span class="ss">$I=$</span><span class="sc">{</span>I<span class="sc">.</span>tolist()<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -790,20 +793,43 @@ c &amp; d
 </div>
 </div>
 </div>
-<p>The inverse map is just the linear map that undoes the original linear map <span class="math inline">\(\mathbf{F}(\mathbf{v}) = \mathbf{A}\mathbf{v}\)</span>, i.e.</p>
-<p><span class="math display">\[\mathbf{F}^{-1}(\mathbf{v}) = \mathbf{A}^{-1}\mathbf{v}.\]</span></p>
-<p>You can see what this does by applying the two maps in succession. Here’s an example of doing this with the vector <span class="math inline">\(\mathbf{v}=(1,1)\)</span> and the <span class="math inline">\(90^\circ\)</span> rotation matrix</p>
-<p><span class="math display">\[\mathbf{A}=\begin{pmatrix} 0 &amp; 1 \\ -1 &amp; 0 \end{pmatrix}.\]</span></p>
-<p>Applying <span class="math inline">\(\mathbf{F}(\mathbf{v})\)</span> followed by <span class="math inline">\(\mathbf{F}^{-1}(\mathbf{v})\)</span> just gives the same vector <span class="math inline">\(\mathbf{v}\)</span> back. This just follows from the fact that <span class="math inline">\(\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}\)</span>, so the composition <span class="math inline">\(\mathbf{F}^{-1}(\mathbf{F}(\mathbf{v}))=\mathbf{v}\)</span>.</p>
+<p>Another special linear map is the <strong>inverse map</strong>. If <span class="math inline">\(\mathbf{w} = \mathbf{F}(\mathbf{v})\)</span> is a linear map, its inverse map is</p>
+<p><span class="math display">\[\mathbf{v} = \mathbf{F}^{-1}(\mathbf{w}).\]</span></p>
+<p>Like the name suggests, the inverse map just undoes the original map, in the sense that</p>
+<p><span class="math display">\[\mathbf{F}^{-1}(\mathbf{F}(\mathbf{v})) = \mathbf{v}.\]</span></p>
+<p>If <span class="math inline">\(\mathbf{F}(\mathbf{v}) = \mathbf{A}\mathbf{v}\)</span> is the matrix representation of the original map, then it should be obvious that <span class="math inline">\(\mathbf{F}^{-1}(\mathbf{w}) = \mathbf{A}^{-1}\mathbf{w}\)</span> is the matrix representation of the inverse map. That is, the matrix corresponding to the inverse map is just the inverse of the matrix corresponding to the original map.</p>
+<p>Here’s what the vector field plot looks like for the example from before with</p>
+<p><span class="math display">\[
+\mathbf{F}(\mathbf{v}) = \mathbf{A} \mathbf{v} =
+\begin{pmatrix}
+1 &amp; 2 \\
+3 &amp; 4 \\
+\end{pmatrix}
+\begin{pmatrix}
+v_x \\
+v_y \\
+\end{pmatrix}.
+\]</span></p>
+<p>The inverse map should be given by</p>
+<p><span class="math display">\[
+\mathbf{F}^{-1}(\mathbf{w}) = \mathbf{A}^{-1} \mathbf{w} =
+\begin{pmatrix}
+-2 &amp; 1 \\
+\frac{3}{2} &amp; -\frac{1}{2} \\
+\end{pmatrix}
+\begin{pmatrix}
+w_x \\
+w_y \\
+\end{pmatrix}.
+\]</span></p>
+<p>Notice how in this case the characteristic lines are the same, but their behavior has flipped. With <span class="math inline">\(\mathbf{A}\)</span>, the upper left to lower right diagonal made vectors smaller while the other diagonal made them bigger. But <span class="math inline">\(\mathbf{A}^{-1}\)</span> seems to do the exact opposite. Also, if you look more carefully, you’ll see the direction of the arrows has reversed too, with them all flowing in instead of going out. Interesting.</p>
 <div class="cell" data-execution_count="20">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">0</span>, <span class="dv">1</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>]])</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>plot_vectors([v.flatten(), (A <span class="op">@</span> v).flatten(), (np.linalg.inv(A) <span class="op">@</span> A <span class="op">@</span> v).flatten()], zorders<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>],</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>             title<span class="op">=</span><span class="st">'Inverse Map: $\mathbf</span><span class="sc">{F}</span><span class="st">^{-1}(\mathbf</span><span class="sc">{v}</span><span class="st">)=\mathbf</span><span class="sc">{A}</span><span class="st">^{-1}\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>             labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>, <span class="st">'$\mathbf</span><span class="sc">{A}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>, <span class="st">'$\mathbf</span><span class="sc">{A}</span><span class="st">^{-1}\mathbf</span><span class="sc">{A}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st">$'</span>],</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>             colors<span class="op">=</span>[<span class="st">'black'</span>, <span class="st">'red'</span>, <span class="st">'blue'</span>], xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="dv">2</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>), </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>             text_offsets<span class="op">=</span>[[<span class="dv">0</span>, <span class="op">-</span><span class="fl">0.3</span>], [<span class="fl">0.05</span>, <span class="op">-</span><span class="fl">0.05</span>], [<span class="dv">0</span>, <span class="fl">0.1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>A_inv <span class="op">=</span> np.linalg.inv(A)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>plot_vector_field(A_inv, alpha<span class="op">=</span><span class="fl">0.8</span>, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="ss">f'Vector Field of $F^</span><span class="ch">{{</span><span class="ss">-1</span><span class="ch">}}</span><span class="ss">(v)=A^</span><span class="ch">{{</span><span class="ss">-1</span><span class="ch">}}</span><span class="ss">v$,</span><span class="ch">\n</span><span class="ss">$A^</span><span class="ch">{{</span><span class="ss">-1</span><span class="ch">}}</span><span class="ss">=$</span><span class="sc">{</span>A_inv<span class="sc">.</span><span class="bu">round</span>(<span class="dv">2</span>)<span class="sc">.</span>tolist()<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -813,25 +839,46 @@ c &amp; d
 </div>
 </div>
 </div>
-<p>I’ll close this section by mentioning that we’re often not interested in <em>linear maps</em> in practice, but <em>affine maps</em>. Recall that a simple linear function might have the form <span class="math inline">\(y=ax\)</span>. An affine function has the form <span class="math inline">\(y=ax+b\)</span>. That is, an affine function is just a linear function shifted upward by <span class="math inline">\(b\)</span>. The same idea extends to maps between vectors.</p>
-<p>An <strong>affine map</strong> is just a linear map shifted by some constant translation vector <span class="math inline">\(\mathbf{b}\)</span>,</p>
+<p>The behavior of linear maps is perhaps the real reason why matrix multiplication is so important to linear algebra as opposed to, say, element-wise multiplication. To see why, suppose we have two linear maps in the plane, <span class="math inline">\(\mathbf{u} = \mathbf{F}(\mathbf{w})\)</span> and <span class="math inline">\(\mathbf{w} = \mathbf{G}(\mathbf{v})\)</span>. What happens if we <em>compose</em> these two maps to get</p>
+<p><span class="math display">\[\mathbf{u} = \mathbf{F}(\mathbf{G}(\mathbf{v}))?\]</span></p>
+<p>Since both linear maps <em>must</em> have some matrix representation, we can write <span class="math inline">\(\mathbf{u} = \mathbf{A}\mathbf{w}\)</span> and <span class="math inline">\(\mathbf{w} = \mathbf{B} \mathbf{v}\)</span>, where <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> are two matrices whose values are determined by how their respective maps act on the standard basis <span class="math inline">\(\mathbf{e}_x, \mathbf{e}_y\)</span>. If we thus compose the two maps, we evidently get</p>
+<p><span class="math display">\[\mathbf{u} = (\mathbf{A} \mathbf{B}) \mathbf{v}.\]</span></p>
+<p>That is, the composition of two linear maps is equivalent to matrix multiplication. Notice the fact that matrix multiplication doesn’t commute also implies that composition of linear maps doesn’t commute either.</p>
+<p>While linear maps are interesting for linear algebra, in machine learning we’re more often interested in *affine maps<strong>. An </strong>affine map** is just a linear map shifted by some constant vector,</p>
 <p><span class="math display">\[\mathbf{F}(\mathbf{v}) = \mathbf{A}\mathbf{v} + \mathbf{b}.\]</span></p>
-<p>The only difference between an affine map and a linear map is that vectors will get not just scaled and rotated, but also <em>translated</em> by <span class="math inline">\(\mathbf{b}\)</span>. In machine learning, the translation vector <span class="math inline">\(\mathbf{b}\)</span> often called a <strong>bias vector</strong>.</p>
-<p>Here’s a plot of what this looks like using the same previous matrix, and a bias vector <span class="math inline">\(\mathbf{b}=(-1, -1)\)</span>. I want to show that <span class="math inline">\(\mathbf{A}\mathbf{v} + \mathbf{b}\)</span> is really just the vector <span class="math inline">\(\mathbf{A}\mathbf{v}\)</span>, but translated so its tail lies at <span class="math inline">\(\mathbf{b}\)</span>. To do so, I’ll plot the vector <span class="math inline">\(\mathbf{A}\mathbf{v} + \mathbf{b}\)</span> with its tail at the origin, as well as the vector <span class="math inline">\(\mathbf{A}\mathbf{v}\)</span> with its tail shifted to the point <span class="math inline">\(\mathbf{b}\)</span>. What matters is that the head of both of these vectors is the same. The main vector <span class="math inline">\(\mathbf{A}\mathbf{v} + \mathbf{b}\)</span> is shown in red.</p>
+<p>In machine learning, the constant vector <span class="math inline">\(\mathbf{b}\)</span> is usually called a <strong>bias vector</strong>. Graphically, the only real difference between an affine map and a linear map is that vectors will not just get rotated and scaled, but <em>translated</em> by <span class="math inline">\(\mathbf{b}\)</span>.</p>
+<p>As an example, consider the affine map</p>
+<p><span class="math display">\[
+\mathbf{F}(\mathbf{v}) = \mathbf{A} \mathbf{v} + \mathbf{b} =
+\begin{pmatrix}
+1 &amp; 2 \\
+3 &amp; 4 \\
+\end{pmatrix}
+\begin{pmatrix}
+v_x \\
+v_y \\
+\end{pmatrix} +
+\begin{pmatrix}
+1 \\
+1 \\
+\end{pmatrix}.
+\]</span></p>
+<p>In this case, <span class="math inline">\(\mathbf{b}=(1,1)\)</span>. Graphically, you can imagine this map doing the same <span class="math inline">\(\mathbf{A} \mathbf{v}\)</span> mapping from before, but translating the tail of each vector by <span class="math inline">\(\mathbf{b}=(1,1)\)</span>. For example, if we take <span class="math inline">\(\mathbf{v}=(1,0)\)</span> the affine map would look as follows.</p>
 <div class="cell" data-execution_count="21">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">0</span>, <span class="dv">1</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>]])</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]).reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([[<span class="dv">1</span>], [<span class="dv">1</span>]])</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([[<span class="dv">1</span>], [<span class="dv">0</span>]])</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>vectors <span class="op">=</span> [x.flatten() <span class="cf">for</span> x <span class="kw">in</span> [v, A <span class="op">@</span> v, A <span class="op">@</span> v <span class="op">+</span> b, b]]</span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>plot_vectors(</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    vectors, xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">2.5</span>, <span class="fl">1.5</span>), headwidth<span class="op">=</span><span class="dv">5</span>, colors<span class="op">=</span>[<span class="st">'black'</span>, <span class="st">'blue'</span>, <span class="st">'red'</span>, <span class="st">'green'</span>],</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    vectors, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">5</span>), headwidth<span class="op">=</span><span class="dv">5</span>, colors<span class="op">=</span>[<span class="st">'black'</span>, <span class="st">'blue'</span>, <span class="st">'red'</span>, <span class="st">'green'</span>],</span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>[<span class="st">'$\mathbf</span><span class="sc">{{</span><span class="st">v</span><span class="sc">}}</span><span class="st">$'</span>, <span class="st">'$\mathbf</span><span class="sc">{{</span><span class="st">A</span><span class="sc">}}</span><span class="st">\mathbf</span><span class="sc">{{</span><span class="st">v</span><span class="sc">}}</span><span class="st">$'</span>, </span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">'$\mathbf</span><span class="sc">{{</span><span class="st">A</span><span class="sc">}}</span><span class="st">\mathbf</span><span class="sc">{{</span><span class="st">v</span><span class="sc">}}</span><span class="st"> + \mathbf</span><span class="sc">{{</span><span class="st">b</span><span class="sc">}}</span><span class="st">$'</span>, <span class="st">'$\mathbf</span><span class="sc">{{</span><span class="st">b</span><span class="sc">}}</span><span class="st">$'</span>], </span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    text_offsets<span class="op">=</span>[[<span class="dv">0</span>, <span class="dv">0</span>], [<span class="op">-</span><span class="fl">1.4</span>, <span class="op">-</span><span class="fl">1.25</span>], [<span class="fl">0.07</span>, <span class="dv">0</span>], [<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.1</span>]], </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    text_offsets<span class="op">=</span>[[<span class="dv">0</span>, <span class="fl">0.1</span>], [<span class="fl">0.6</span>, <span class="op">-</span><span class="fl">0.8</span>], [<span class="op">-</span><span class="fl">1.7</span>, <span class="op">-</span><span class="fl">1.3</span>], [<span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.2</span>]], </span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    tails<span class="op">=</span>[[<span class="dv">0</span>, <span class="dv">0</span>], [b[<span class="dv">0</span>][<span class="dv">0</span>], b[<span class="dv">1</span>][<span class="dv">0</span>]], [<span class="dv">0</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">0</span>]],</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Affine Map: $\mathbf</span><span class="sc">{F}</span><span class="st">(\mathbf</span><span class="sc">{v}</span><span class="st">) = \mathbf</span><span class="sc">{A}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st"> + \mathbf</span><span class="sc">{b}</span><span class="st">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    zorders<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Affine Map: $\mathbf</span><span class="sc">{F}</span><span class="st">(\mathbf</span><span class="sc">{v}</span><span class="st">) = \mathbf</span><span class="sc">{A}</span><span class="st">\mathbf</span><span class="sc">{v}</span><span class="st"> + \mathbf</span><span class="sc">{b}</span><span class="st">$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -841,22 +888,32 @@ c &amp; d
 </div>
 </div>
 </div>
+<p>It’s a little hard to see what’s going on in the vector field plot of this affine map, but again all it’s doing is shifting the output vectors by <span class="math inline">\(\mathbf{b}\)</span>. Notice the characteristic lines and values don’t really seem to change. They’re a property of <span class="math inline">\(\mathbf{A}\)</span>, and I didn’t change <span class="math inline">\(\mathbf{A}\)</span> in this example.</p>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>plot_vector_field(A, b<span class="op">=</span>b, alpha<span class="op">=</span><span class="fl">0.8</span>, title<span class="op">=</span><span class="ss">f'Vector Field of $F(v)=Av+b$,</span><span class="ch">\n</span><span class="ss">$A=$</span><span class="sc">{</span>A<span class="sc">.</span>tolist()<span class="sc">}</span><span class="ss">, $b=$</span><span class="sc">{</span>b<span class="sc">.</span>tolist()<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="vector-spaces_files/figure-html/cell-23-output-1.png" class="img-fluid"></p>
+</div>
+</div>
 </section>
-<section id="n-dimensional-vector-spaces" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="n-dimensional-vector-spaces"><span class="header-section-number">5.3</span> <span class="math inline">\(n\)</span>-dimensional Vector Spaces</h2>
-<p>It may seem like everything I’ve said is special for the case of <span class="math inline">\(n=2\)</span> dimensions, but it’s really not. Every single thing I’ve said extends exactly how you’d expect to vectors of arbitrary size <span class="math inline">\(n\)</span>. The only difference now is that you can’t visualize the stuff anymore. You just have to trust the math. I’ll restate all of the definitions from above here, but for <span class="math inline">\(n\)</span>-dimensional vector spaces instead.</p>
+<section id="higher-dimensional-vector-spaces" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="higher-dimensional-vector-spaces"><span class="header-section-number">5.10</span> Higher-Dimensional Vector Spaces</h2>
+<p>It may seem like everything I’ve said is special for the case of two dimensions, but it’s really not. Every single thing I’ve said extends exactly how you’d expect to vectors of arbitrary size <span class="math inline">\(n\)</span>. The only difference now is that you can’t visualize the stuff anymore. You just have to trust the math. I’ll restate all of the definitions from above here, but for <span class="math inline">\(n\)</span>-dimensional vector spaces instead.</p>
 <p>A <strong>vector</strong> of size <span class="math inline">\(n\)</span> can be defined as a 1-dimensional array of real numbers <span class="math inline">\(x_0,x_1,x_2,\cdots,x_{n-1}\)</span>,</p>
 <p><span class="math display">\[\mathbf{x} = (x_0,x_1,x_2,\cdots,x_{n-1}).\]</span></p>
 <p>Vectors can be added together, and multiplied by scalars. Vector addition is defined element-wise. If <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> are two vectors, then</p>
 <p><span class="math display">\[\mathbf{x} + \mathbf{y} = (x_0+y_0, x_1+y_1, \cdots, x_{n-1}+y_{n-1}).\]</span></p>
 <p>To keep a running example through this section, I’ll use numpy to create two vectors <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> each of size <span class="math inline">\(n=10\)</span>. Here’s their vector sum.</p>
-<div class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="23">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>])</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>])</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + y = </span><span class="sc">{</span>x <span class="op">+</span> y<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>])</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>])</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + y = </span><span class="sc">{</span>x <span class="op">+</span> y<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>x + y = [2 2 2 4 6 5 3 3 3 1]</code></pre>
@@ -864,11 +921,11 @@ c &amp; d
 </div>
 <p>Scalar multiplication is defined similarly. If <span class="math inline">\(c \in \mathbb{R}\)</span> is some scalar and <span class="math inline">\(\mathbf{x}\)</span> is some vector, then</p>
 <p><span class="math display">\[c\mathbf{x} = (cx_0,cx_1,\cdots,cx_{n-1}).\]</span></p>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="24">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'c * x = </span><span class="sc">{</span>c <span class="op">*</span> x<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'c * x = </span><span class="sc">{</span>c <span class="op">*</span> x<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>c * x = [ 5 10 15 20 25 25 20 15 10  5]</code></pre>
@@ -877,10 +934,10 @@ c &amp; d
 <p>Vectors of size <span class="math inline">\(n\)</span> live in the <span class="math inline">\(n\)</span>-dimensional <strong>vector space</strong> <span class="math inline">\(\mathbb{R}^n\)</span>. By definition, any <strong>linear combination</strong> of two vectors must also live in the same vector space. That is, if <span class="math inline">\(\mathbf{x}, \mathbf{y} \in \mathbb{R}^n\)</span> are two vectors and <span class="math inline">\(a,b \in \mathbb{R}\)</span> are two scalars, then <span class="math inline">\(a \mathbf{x} + b \mathbf{y} \in \mathbb{R}^n\)</span>.</p>
 <p>The <strong>dot product</strong> or <strong>inner product</strong> between two vectors <span class="math inline">\(\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{y}\)</span> of size <span class="math inline">\(n\)</span> is defined as their sum product, i.e.</p>
 <p><span class="math display">\[\mathbf{x} \cdot \mathbf{y} = x_0y_0 + x_1y_1 + \cdots + x_{n-1}y_{n-1}.\]</span></p>
-<div class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="25">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x . y = </span><span class="sc">{</span>np<span class="sc">.</span>dot(x, y)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x . y = </span><span class="sc">{</span>np<span class="sc">.</span>dot(x, y)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>x . y = 1</code></pre>
@@ -894,12 +951,12 @@ c &amp; d
 ||\mathbf{x}||_\infty &amp;= \max_{i=0,\cdots,n-1} |x_i| = \max\big(|x_0|, |x_1|, \cdots, |x_{n-1}|\big).
 \end{align*}\]</span></p>
 <p>It will always be the case that <span class="math inline">\(||\mathbf{x}||_1 \geq ||\mathbf{x}||_2 \geq ||\mathbf{x}||_\infty\)</span>.</p>
-<div class="cell" data-execution_count="25">
+<div class="cell" data-execution_count="26">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'1-Norm of x: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(x, <span class="bu">ord</span><span class="op">=</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'2-Norm of x: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(x, <span class="bu">ord</span><span class="op">=</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Infinity-Norm of x: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(x, <span class="bu">ord</span><span class="op">=</span>np.inf)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'1-Norm of x: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(x, <span class="bu">ord</span><span class="op">=</span><span class="dv">1</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'2-Norm of x: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(x, <span class="bu">ord</span><span class="op">=</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Infinity-Norm of x: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(x, <span class="bu">ord</span><span class="op">=</span>np.inf)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>1-Norm of x: 30.0
@@ -914,10 +971,10 @@ Infinity-Norm of x: 5.0</code></pre>
 <p>Using this identity, we can define the <strong>cosine similarity</strong> <span class="math inline">\(\cos(\mathbf{x}, \mathbf{y})\)</span> by solving for <span class="math inline">\(\cos \theta\)</span>,</p>
 <p><span class="math display">\[\cos(\mathbf{x}, \mathbf{y}) = \frac{\mathbf{x} \cdot \mathbf{y}}{||\mathbf{x}|| \cdot ||\mathbf{y}||}.\]</span></p>
 <p>The dot product is a measure of how similar two vectors are, and the cosine similarity is a <em>normalized</em> measure of how similar two vectors are, since dividing by the norms forces <span class="math inline">\(-1 \leq \cos \theta \leq 1\)</span>.</p>
-<div class="cell" data-execution_count="26">
+<div class="cell" data-execution_count="27">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'cos(x, y) = </span><span class="sc">{</span>cosine_similarity(x, y)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'cos(x, y) = </span><span class="sc">{</span>cosine_similarity(x, y)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>cos(x, y) = 0.04264014327112208</code></pre>
@@ -942,15 +999,15 @@ Infinity-Norm of x: 5.0</code></pre>
 \end{cases}
 \]</span></p>
 <p><strong>Notation:</strong> The symbol <span class="math inline">\(\delta_{ij}\)</span> is called the <strong>Kronecker delta</strong>. It’s just a shorthand way of writing something is <span class="math inline">\(1\)</span> if <span class="math inline">\(i=j\)</span> and <span class="math inline">\(0\)</span> if <span class="math inline">\(i \neq j\)</span>.</p>
-<div class="cell" data-execution_count="27">
+<div class="cell" data-execution_count="28">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> [ei.flatten().astype(<span class="bu">int</span>) <span class="cf">for</span> ei <span class="kw">in</span> np.eye(n)]</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e3 = </span><span class="sc">{</span>e[<span class="dv">3</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e8 = </span><span class="sc">{</span>e[<span class="dv">8</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e3 . e3 = </span><span class="sc">{</span>np<span class="sc">.</span>dot(e[<span class="dv">3</span>], e[<span class="dv">3</span>])<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e3 . e8 = </span><span class="sc">{</span>np<span class="sc">.</span>dot(e[<span class="dv">3</span>], e[<span class="dv">8</span>])<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> [ei.flatten().astype(<span class="bu">int</span>) <span class="cf">for</span> ei <span class="kw">in</span> np.eye(n)]</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e3 = </span><span class="sc">{</span>e[<span class="dv">3</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e8 = </span><span class="sc">{</span>e[<span class="dv">8</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e3 . e3 = </span><span class="sc">{</span>np<span class="sc">.</span>dot(e[<span class="dv">3</span>], e[<span class="dv">3</span>])<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'e3 . e8 = </span><span class="sc">{</span>np<span class="sc">.</span>dot(e[<span class="dv">3</span>], e[<span class="dv">8</span>])<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>e3 = [0 0 0 1 0 0 0 0 0 0]
@@ -962,10 +1019,16 @@ e3 . e8 = 0</code></pre>
 <p>If a basis is orthonormal, any vector <span class="math inline">\(\mathbf{x}\)</span> can be decomposed into a linear combination of the basis elements by taking the dot product <span class="math inline">\(\mathbf{x} \cdot \mathbf{e}_i\)</span>. For the standard basis, these just give the vector components <span class="math inline">\(x_i\)</span>,</p>
 <p><span class="math display">\[\mathbf{x} = \sum_{i=0}^{n-1} (\mathbf{x} \cdot \mathbf{e}_i) \mathbf{e}_i = \sum_{i=0}^{n-1} x_i \mathbf{e}_i = x_0 \mathbf{e}_0 + x_1 \mathbf{e}_1 + \cdots x_{n-1} \mathbf{e}_{n-1}.\]</span></p>
 <p>Each term <span class="math inline">\(x_i \mathbf{e}_i\)</span> in the sum corresponds to the <strong>projection</strong> of <span class="math inline">\(\mathbf{x}\)</span> onto the <span class="math inline">\(i\)</span><sup>th</sup> axis. Each axis in <span class="math inline">\(\mathbb{R}^n\)</span> is still a single line, but now there are <span class="math inline">\(n\)</span> of these axis lines, all perpendicular to each other.</p>
-<p>A <strong>linear map</strong> is a vector-valued function <span class="math inline">\(\mathbf{y}=\mathbf{F}(\mathbf{x})\)</span> between vector spaces that preserves the linear structure of the spaces. In general, <span class="math inline">\(\mathbf{x} \in \mathbb{R}^m\)</span> and <span class="math inline">\(\mathbf{y} \in \mathbb{R}^n\)</span> need not be in the same vector spaces. Either way, a linear map can always be expressed as a matrix-vector equation <span class="math inline">\(\mathbf{y}=\mathbf{A}\mathbf{x}\)</span>, where <span class="math inline">\(\mathbf{A}\)</span> is some <span class="math inline">\(m \times n\)</span> matrix. More generally, an <strong>affine map</strong> is a linear map shifted by some <strong>bias vector</strong> <span class="math inline">\(\mathbf{b} \in \mathbb{R}^m\)</span>. Affine maps can always be expressed as a shifted matrix-vector equation, <span class="math inline">\(\mathbf{y}=\mathbf{A}\mathbf{x} + \mathbf{b}\)</span>.</p>
-<p><strong>Aside:</strong> Roughly speaking a neural network is just a composite function of successive affine maps, except that one adds a <em>nonlinearity</em> function <span class="math inline">\(\boldsymbol{\sigma}(\mathbf{x})\)</span> in between each successive affine map to make it nonlinear. For example, the following nonlinear function could represent a “one hidden layer” neural network,</p>
-<p><span class="math display">\[\mathbf{y} = \boldsymbol{\sigma}_2\big(\mathbf{A}_2\boldsymbol{\sigma}_1(\mathbf{A}_1\mathbf{x} + \mathbf{b}_1) + \mathbf{b}_2\big).\]</span></p>
-<p>The nonlinearity functions that get chosen are rarely exotic. Most of the time they’re all just the ReLU function <span class="math inline">\(\boldsymbol{\sigma}(\mathbf{x})=\max(\mathbf{0}, \mathbf{x})\)</span>, except in the output layer. The coefficients in the matrices and bias vectors become the parameters of the network and get learned from the training data.</p>
+<p>A <strong>linear map</strong> is a vector-valued function <span class="math inline">\(\mathbf{y}=\mathbf{F}(\mathbf{x})\)</span> between vector spaces that preserves the linear structure of the spaces. In general, <span class="math inline">\(\mathbf{x} \in \mathbb{R}^m\)</span> and <span class="math inline">\(\mathbf{y} \in \mathbb{R}^n\)</span> need not be in the same vector spaces. Either way, a linear map can always be expressed as a matrix-vector equation <span class="math inline">\(\mathbf{y}=\mathbf{A}\mathbf{x}\)</span>, where <span class="math inline">\(\mathbf{A}\)</span> is some <span class="math inline">\(m \times n\)</span> matrix whose entries are determined by how the map acts on the standard basis vectors, i.e.&nbsp;for each column <span class="math inline">\(i=0,1,\cdots,n-1\)</span> we have</p>
+<p><span class="math display">\[\mathbf{A}_{:, i} = \mathbf{F}(\mathbf{e}_i).\]</span></p>
+<p>More generally, an <strong>affine map</strong> is a linear map shifted by some <strong>bias vector</strong> <span class="math inline">\(\mathbf{b} \in \mathbb{R}^m\)</span>. Affine maps can always be expressed as a shifted matrix-vector equation, <span class="math inline">\(\mathbf{y}=\mathbf{A}\mathbf{x} + \mathbf{b}\)</span>.</p>
+<p><strong>Application:</strong> Roughly speaking a neural network is just a composite function of successive affine maps. The only real difference with a neural network is that in between each affine map we apply a non-linear <em>activation function</em> to make the output do more interesting things. Most of the time nowadays the activation function is just the ReLU function <span class="math inline">\(\text{ReLU}(\mathbf{z})=\max(\mathbf{0}, \mathbf{z})\)</span>. All it does is sets any negative entries to zero. For example, here’s what a “single hidden layer neural network” might look like for a regression problem,</p>
+<p><span class="math display">\[\begin{align*}
+\mathbf{z} &amp;= \mathbf{A}\mathbf{x} + \mathbf{b}, \\
+\mathbf{a} &amp;= \text{ReLU}(\mathbf{z}), \\
+\mathbf{y} &amp;= \mathbf{B}\mathbf{a} + \mathbf{c}. \\
+\end{align*}\]</span></p>
+<p>The main thing about a neural network though is that the values in the matrix and bias vectors are <em>learned</em> from the training data. That is, they’re tuned specifically to make sure the neural network approximates the <em>true</em> input-output relationship behavior in the data as well as possible.</p>
 <p>Just as with linear maps in the plane, linear maps in higher dimensions always preserve lines. Not just lines in fact, but planes and hyperplanes as well. These generalizations of lines are called <strong>linear subspaces</strong>. Linear subspaces will always be hyperplanes in <span class="math inline">\(n\)</span>-dimensional space that pass through the origin. Think of them as planes passing through the origin, but in more dimensions. If the hyperplane spanned by <span class="math inline">\(\mathbf{x}_0, \mathbf{x}_1, \cdots, \mathbf{x}_{k-1}\)</span> is some <span class="math inline">\(k\)</span>-dimensional linear subspace of <span class="math inline">\(\mathbb{R}^n\)</span>, then its <strong>image</strong> under the linear map will be a new <span class="math inline">\(k\)</span>-dimensional linear subspace in <span class="math inline">\(\mathbb{R}^m\)</span> (if <span class="math inline">\(k \leq m\)</span>, otherwise it’ll just be the full vector space <span class="math inline">\(\mathbb{R}^m\)</span> itself). Any linear combination of vectors in a given subspace will stay inside that subspace. It’s <em>closed</em> under vector space operations. For all practical purposes it’s a new vector space <span class="math inline">\(\mathbb{R}^k\)</span> unto itself.</p>
 
 

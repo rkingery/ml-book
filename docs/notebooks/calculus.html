@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Mathematics for Machine Learning - 3&nbsp; Calculus</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../notebooks/linear-systems.html" rel="next">
+<link href="../notebooks/numerical-computing.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculus</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Mathematics for Machine Learning</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/basic-math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basic Math</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/numerical-computing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Numerical Computation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/calculus.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Probability</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#infinitesimals" id="toc-infinitesimals" class="nav-link active" data-scroll-target="#infinitesimals"><span class="toc-section-number">3.1</span>  Infinitesimals</a></li>
+  <li><a href="#differential-calculus" id="toc-differential-calculus" class="nav-link" data-scroll-target="#differential-calculus"><span class="toc-section-number">3.2</span>  Differential Calculus</a>
+  <ul class="collapse">
+  <li><a href="#differentials-and-derivatives" id="toc-differentials-and-derivatives" class="nav-link" data-scroll-target="#differentials-and-derivatives"><span class="toc-section-number">3.2.1</span>  Differentials and Derivatives</a></li>
+  <li><a href="#interpreting-derivatives" id="toc-interpreting-derivatives" class="nav-link" data-scroll-target="#interpreting-derivatives"><span class="toc-section-number">3.2.2</span>  Interpreting Derivatives</a></li>
+  <li><a href="#second-differentials" id="toc-second-differentials" class="nav-link" data-scroll-target="#second-differentials"><span class="toc-section-number">3.2.3</span>  Second Differentials</a></li>
+  <li><a href="#differential-rules" id="toc-differential-rules" class="nav-link" data-scroll-target="#differential-rules"><span class="toc-section-number">3.2.4</span>  Differential Rules</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content column-page-right" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculus</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>In this lesson, I’ll cover the basics of the calculus of a single variable. Calculus is often divided into different areas, those being:</p>
+<ul>
+<li>Infinitesimals: How to manipulate numbers that are “infinitely” small.</li>
+<li>Differentiation: How one variable changes continuously in response to one or more other variables.</li>
+<li>Integration: How to add up infinitely many small numbers to get a finite number.</li>
+<li>Limits: What happens as one value gets closer to another.</li>
+</ul>
+<p>Not all of these topics are equally important to know for machine learning, but I’ll try to at least touch on each topic a little bit. Let’s get started.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="infinitesimals" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="infinitesimals"><span class="header-section-number">3.1</span> Infinitesimals</h2>
+<p>Perhaps most fundamental to what calculus is is the idea of an infinitely small number, usually called an <em>infinitesimal</em>. A positive <strong>infinitesimal</strong> is a <em>hyperreal number</em> <span class="math inline">\(\varepsilon\)</span> that’s much smaller than any positive real number <span class="math inline">\(x\)</span>,</p>
+<p><span class="math display">\[0 &lt; \varepsilon \ll x\]</span></p>
+<p>A negative infinitesimal is defined similarly, except with the signs all flipped, <span class="math inline">\(x \ll \varepsilon &lt; 0\)</span>. I say “hyperreal number” because infinitesimals aren’t technically real numbers. They extend the number line in a sense.</p>
+<p>Thankfully we won’t really have to worry about this technical distinction in this book. For practical purposes, think of infinitesimals as a really, really small numbers. When we say infinitesimal in practice, we usually mean a really small number like <span class="math inline">\(\varepsilon = 10^{-10}\)</span>. This means <span class="math inline">\(\varepsilon^2 = 10^{-20}\)</span>. If we take say <span class="math inline">\(x=1\)</span>, then <span class="math inline">\(\varepsilon=10^{-10}\)</span> is really small compared to <span class="math inline">\(x\)</span>, but <span class="math inline">\(\varepsilon^2 = 10^{-20}\)</span> is really really small compared to <span class="math inline">\(x\)</span>, so small that it might as well be zero,</p>
+<p><span class="math display">\[\varepsilon^2 \approx 0.\]</span></p>
+<p>A computer wouldn’t even be able to tell the difference really between <span class="math inline">\(x\)</span> and <span class="math inline">\(x + \varepsilon^2\)</span>.</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> np.float64(<span class="fl">1e-10</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'epsilon = </span><span class="sc">{</span>epsilon<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + epsilon = </span><span class="sc">{</span><span class="dv">1</span> <span class="op">-</span> epsilon<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'epsilon^2 = </span><span class="sc">{</span>epsilon <span class="op">**</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + epsilon^2 = </span><span class="sc">{</span><span class="dv">1</span> <span class="op">-</span> epsilon <span class="op">**</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>x = 1
+epsilon = 1e-10
+x + epsilon = 0.9999999999
+epsilon^2 = 1.0000000000000001e-20
+x + epsilon^2 = 1.0</code></pre>
+</div>
+</div>
+<p>The inverse of an infinitesimal must evidently be a really big number <span class="math inline">\(N = \frac{1}{\varepsilon}\)</span>. These are called <em>infinitely large</em> numbers. Technically speaking, a positive <strong>infinitely large</strong> number is a hyperreal number that’s much larger than any positive real number <span class="math inline">\(x\)</span>,</p>
+<p><span class="math display">\[0 \leq x \ll N.\]</span></p>
+<p>Similarly for infinitely large negative numbers, we’d have <span class="math inline">\(N \ll x &lt; 0\)</span>.</p>
+<p>If in practice we’d think of an infinitesimal as a tiny number like <span class="math inline">\(\varepsilon = 10^{-10}\)</span>, we’d think of an infinitely large number a really large number like <span class="math inline">\(N=10^{10}\)</span>. If <span class="math inline">\(N\)</span> is really large, then <span class="math inline">\(N^2\)</span> is really really large, so large that it might as well be infinity,</p>
+<p><span class="math display">\[N^2 \approx \infty.\]</span></p>
+<p>If <span class="math inline">\(x=1\)</span>, then <span class="math inline">\(x + N \approx N\)</span>. As far as a computer is concerned you can’t really even tell the difference.</p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> np.float64(<span class="fl">1e10</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'N = </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + N = </span><span class="sc">{</span><span class="dv">1</span> <span class="op">+</span> N<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'N^2 = </span><span class="sc">{</span>N <span class="op">**</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x + N^2 = </span><span class="sc">{</span><span class="dv">1</span> <span class="op">+</span> N <span class="op">**</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>x = 1
+N = 10000000000.0
+x + N = 10000000001.0
+N^2 = 1e+20
+x + N^2 = 1e+20</code></pre>
+</div>
+</div>
+</section>
+<section id="differential-calculus" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="differential-calculus"><span class="header-section-number">3.2</span> Differential Calculus</h2>
+<section id="differentials-and-derivatives" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="differentials-and-derivatives"><span class="header-section-number">3.2.1</span> Differentials and Derivatives</h3>
+<p>To make it easier to tell what’s an infinitesimal with respect to what, we often use the notation of <em>differentials</em>. If <span class="math inline">\(x\)</span> is some variable, we’d denote any infinitesimal added to it by the symbol <span class="math inline">\(dx\)</span>, called the <strong>differential</strong> of <span class="math inline">\(x\)</span>. If <span class="math inline">\(y=f(x)\)</span> is some function of <span class="math inline">\(x\)</span>, then the differential with respect to <span class="math inline">\(y\)</span> is the amount that <span class="math inline">\(y\)</span> changes if we change <span class="math inline">\(x\)</span> to <span class="math inline">\(x+dx\)</span>,</p>
+<p><span class="math display">\[dy = f(x+dx) - f(x).\]</span></p>
+<p>If it helps, you can think of <span class="math inline">\(dx\)</span> as meaning “a little bit of <span class="math inline">\(x\)</span>”, and <span class="math inline">\(dy\)</span> as meaning “a little bit of <span class="math inline">\(y\)</span>”.</p>
+<p>Let’s look at an example. Suppose <span class="math inline">\(y=x^2\)</span>. What is <span class="math inline">\(dy\)</span>? Evidently, we’d have</p>
+<p><span class="math display">\[dy = f(x + dx) - f(x) = (x+dx)^2 - x^2 = (x^2 + 2xdx + dx^2) - x^2 = 2xdx + dx^2.\]</span></p>
+<p>This is how much <span class="math inline">\(y\)</span> changes if we change <span class="math inline">\(x\)</span> by <span class="math inline">\(dx\)</span>. Now, if <span class="math inline">\(dx\)</span> is infinitesimal, <span class="math inline">\(dx^2 \approx 0\)</span>, which means</p>
+<p><span class="math display">\[dy \approx 2xdx.\]</span></p>
+<p>Notice how if <span class="math inline">\(dx\)</span> is infinitesimal, then <span class="math inline">\(dy\)</span> will evidently be an infinitesimal too. If we change <span class="math inline">\(x=1\)</span> by a really small amount <span class="math inline">\(dx=10^{-10}\)</span>, then we’d change <span class="math inline">\(y=x^2=1\)</span> by <span class="math inline">\(dy=2xdx=2 \cdot 10^{-10}\)</span>, which is also a really small change.</p>
+<p>The ratio of these differentials says something about the rate that <span class="math inline">\(y\)</span> changes if we change <span class="math inline">\(x\)</span>. It’s called the <em>derivative</em> of <span class="math inline">\(y=x^2\)</span>,</p>
+<p><span class="math display">\[\frac{dy}{dx} = 2x.\]</span></p>
+<p>Notice that the derivative is not itself infinitesimal since all the differentials are on the left-hand side. It’s a real number, on the same scale as <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
+<p>Of course, we can calculate these things numerically too. We just have to be careful about floating point roundoff. Since we’re subtracting two numbers that are almost equal we’ll inevitably get a lot of roundoff if we make <span class="math inline">\(dx\)</span> too small. When coding these things you have to be careful about how small you choose <span class="math inline">\(dx\)</span>. I’ll take <span class="math inline">\(dx=10^{-5}\)</span> here. If the calculation were exact, we’d expect to get</p>
+<p><span class="math display">\[dy=2xdx = 2 \cdot 10^{-5} = 2.00001.\]</span></p>
+<p>But evidently we don’t get this exactly. In fact, since <span class="math inline">\(dx^2 = 10^{-10}\)</span>, we should expect to start seeing errors around 10 decimal places due to <span class="math inline">\(dx\)</span> not being exactly infinitesimal, which is what we’re seeing here.</p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dx <span class="op">=</span> <span class="fl">1e-5</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">1</span> <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>dy <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> dx) <span class="op">**</span> <span class="dv">2</span> <span class="op">-</span> y</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'dy = </span><span class="sc">{</span>dy<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'dy/dx = </span><span class="sc">{</span>dy <span class="op">/</span> dx<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>dy = 2.0000100000139298e-05
+dy/dx = 2.00001000001393</code></pre>
+</div>
+</div>
+<p>Let’s do another example. Suppose we have the function <span class="math inline">\(y = x^3\)</span>. Then we’d have</p>
+<p><span class="math display">\[dy = f(x+dx) - f(x) = (x+dx)^3 - x^3 = (x^3 + 3x^2 dx + 3 x dx^2 + dx^3) - x^3 = 3x^2 dx + 3 x dx^2 + dx^3.\]</span></p>
+<p>If <span class="math inline">\(dx\)</span> is infinitesimal, then <span class="math inline">\(dx^2 \approx 0\)</span>, which also means <span class="math inline">\(dx^3 \approx 0\)</span>. Thus, if <span class="math inline">\(x\)</span> changes by a small amount <span class="math inline">\(dx\)</span>, then <span class="math inline">\(y=x^3\)</span> changes by an amount</p>
+<p><span class="math display">\[dy = 3x^2 dx.\]</span></p>
+<p>The derivative of <span class="math inline">\(y=x^3\)</span> is again just the ratio of differentials,</p>
+<p><span class="math display">\[\frac{dy}{dx} = 3x^2.\]</span></p>
+<p>Here’s a numerical calculation to verify this fact. I’ll again choose <span class="math inline">\(x=1\)</span> and <span class="math inline">\(dx=10^{-5}\)</span>. We should expect to get <span class="math inline">\(dy =3 \cdot 10^{-5}\)</span> and <span class="math inline">\(\frac{dy}{dx} = 3\)</span>. To within an error of about <span class="math inline">\(dx^2=10^{-10}\)</span> it seems we do.</p>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dx <span class="op">=</span> <span class="fl">1e-5</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">1</span> <span class="op">**</span> <span class="dv">3</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>dy <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> dx) <span class="op">**</span> <span class="dv">3</span> <span class="op">-</span> y</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'dy = </span><span class="sc">{</span>dy<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'dy/dx = </span><span class="sc">{</span>dy <span class="op">/</span> dx<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>dy = 3.0000300001109537e-05
+dy/dx = 3.000030000110953</code></pre>
+</div>
+</div>
+<p>In both examples, the amount that <span class="math inline">\(y\)</span> changes if <span class="math inline">\(x\)</span> changes by <span class="math inline">\(dx\)</span> is evidently just the derivative times <span class="math inline">\(dx\)</span>,</p>
+<p><span class="math display">\[dy = \frac{dy}{dx} dx.\]</span></p>
+<p>The notation makes this fact look pretty trivial, since we can imagine canceling the <span class="math inline">\(dx\)</span> terms on the right to get <span class="math inline">\(dy\)</span>. In fact, that’s exactly what we’re doing.</p>
+<p>In general, if <span class="math inline">\(y=f(x)\)</span> is some function that’s reasonably well-behaved at a point <span class="math inline">\(x\)</span>, then the <strong>differential</strong> of <span class="math inline">\(y\)</span> at that point is</p>
+<p><span class="math display">\[dy = f(x+dx) - f(x),\]</span></p>
+<p>and the <strong>derivative</strong> of <span class="math inline">\(y=f(x)\)</span> at that point is given by</p>
+<p><span class="math display">\[\frac{dy}{dx} = \frac{f(x+dx) - f(x)}{dx}.\]</span></p>
+<p>This will only be exact when <span class="math inline">\(dx\)</span> is infinitesimal, otherwise we’d have an error on the order of <span class="math inline">\(dx^2\)</span>. Notice that both the differential and the derivative are themselves functions of <span class="math inline">\(x\)</span>. For this reason, it’s common to think of <span class="math inline">\(\frac{d}{dx}\)</span> is some kind of derivative operator and write</p>
+<p><span class="math display">\[\frac{dy}{dx} = \frac{d}{dx} f(x), \quad \text{or} \quad \frac{dy}{dx} = f'(x).\]</span></p>
+<p>What exactly did I mean when I said the function <span class="math inline">\(f(x)\)</span> needs to be “reasonably well behaved” at the point <span class="math inline">\(x\)</span>? For one thing, the function needs to be <strong>continuous</strong>. Informally, you can think of <span class="math inline">\(f(x)\)</span> as being continuous if you can draw its graph on a piece of paper without lifting your pen. There are no jumps or holes anywhere in the function’s graph. More formally, a function is continuous at <span class="math inline">\(x\)</span> if <span class="math inline">\(dy = f(x+dx) - f(x)\)</span> is infinitesimal whenever <span class="math inline">\(dx\)</span> is infinitesimal.</p>
+<p>Continuity is just <em>one</em> condition necessary for <span class="math inline">\(f(x)\)</span> to be differentiable. It also can’t be too jagged in some sense. Derivatives don’t make sense at points where there are kinks in the graph. In practice, however, this isn’t a huge problem. We can just extend the derivative to be what’s called a <a href="https://en.wikipedia.org/wiki/Subderivative">subderivative</a>. With a subderivative, you can roughly speaking take whatever value for the derivative you want at these kinks and it won’t make a difference.</p>
+<p>Here’s a quick python function <code>diff</code> that can numerically calculate the derivative of some function <span class="math inline">\(f(x)\)</span> at a point <span class="math inline">\(x\)</span>.</p>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diff(f, x, dx<span class="op">=</span><span class="fl">1e-5</span>):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    dy <span class="op">=</span> f(x <span class="op">+</span> dx) <span class="op">-</span> f(x)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dy <span class="op">/</span> dx</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>dydx <span class="op">=</span> diff(f, <span class="dv">1</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'dy/dx = </span><span class="sc">{</span>dydx<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>dy/dx = 2.00001000001393</code></pre>
+</div>
+</div>
+<p>Calculating the derivative this way is called <strong>numerical differentiation</strong>. It turns out, you can reduce the error in numerical differentiation calculations a lot by centering the difference estimate for <span class="math inline">\(dy\)</span>,</p>
+<p><span class="math display">\[dy=\frac{f\big(x+\frac{dx}{2}\big)-f\big(x-\frac{dx}{2}\big)}{2}.\]</span></p>
+<p>It’s equivalent to the above function when <span class="math inline">\(dx\)</span> is infinitesimal, but when it’s not it reduces the error by a factor of <span class="math inline">\(dx\)</span>. For more details, see <a href="https://en.wikipedia.org/wiki/Finite_difference">here</a>.</p>
+</section>
+<section id="interpreting-derivatives" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="interpreting-derivatives"><span class="header-section-number">3.2.2</span> Interpreting Derivatives</h3>
+<p>Since <span class="math inline">\(dy\)</span> is the change in <span class="math inline">\(y\)</span> in response to the change in <span class="math inline">\(x\)</span> by <span class="math inline">\(dx\)</span>, the derivative <span class="math inline">\(\frac{dy}{dx}\)</span> evidently represents some kind of rate. It’s the rate that <span class="math inline">\(y\)</span> changes in response to small changes in <span class="math inline">\(x\)</span>.</p>
+<p>Depending on what exactly <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are we can think of the derivative as representing many different things. Here are some examples:</p>
+<ul>
+<li>If <span class="math inline">\(x\)</span> is the position of some particle and <span class="math inline">\(t\)</span> is time, <span class="math inline">\(\frac{dx}{dt}\)</span> represents the <em>speed</em> or <em>velocity</em> of that particle at time <span class="math inline">\(t\)</span>.</li>
+<li>If <span class="math inline">\(q\)</span> is the quantity of some economic good and <span class="math inline">\(p\)</span> is the price of that good, then <span class="math inline">\(\frac{dq}{dp}\)</span> represents the <em>elasticity</em> of that good, i.e.&nbsp;how responsive the good’s quantity is to changes in its price.</li>
+<li>If <span class="math inline">\(p\)</span> is the pressure in the atmosphere at a height <span class="math inline">\(z\)</span> from the Earth’s surface, then <span class="math inline">\(\frac{dp}{dz}\)</span> represents the <em>pressure gradient</em>, a measure of how much pressure varies with altitude.</li>
+<li>If <span class="math inline">\(L\)</span> is the loss function of some machine learning algorithm and <span class="math inline">\(\theta\)</span> is some parameter of the model, then <span class="math inline">\(\frac{dL}{d\theta}\)</span> represents the <em>loss gradient</em>, a measure of how sensitive the loss is to changes in that particular parameter.</li>
+</ul>
+<p>The derivative also has a useful interpretation when thinking about a function graphically. It represents the <em>slope</em> of a function <span class="math inline">\(y=f(x)\)</span> at the point <span class="math inline">\(x\)</span>. This follows from the fact that</p>
+<p><span class="math display">\[dy = \frac{dy}{dx} dx.\]</span></p>
+<p>If we relax the requirement that <span class="math inline">\(dx\)</span> be infinitesimal, then it’s just the difference between two finite points <span class="math inline">\(x - x_0\)</span>, which means <span class="math inline">\(dy\)</span> is also the difference between two points <span class="math inline">\(f(x) - f(x_0)\)</span>. If we plug these into the above formula and rearrange, it says</p>
+<p><span class="math display">\[f(x) \approx f(x_0) + \frac{d}{dx} f(x_0) (x - x_0).\]</span></p>
+<p>If we think of <span class="math inline">\(x_0\)</span> as some fixed point and <span class="math inline">\(x\)</span> as a variable, this is just the equation for a line. It’s a line passing through the point <span class="math inline">\((x_0, f(x_0))\)</span> with a slope <span class="math inline">\(\frac{d}{dx} f(x_0)\)</span>. This line is called the <strong>tangent line</strong> of the function at the point <span class="math inline">\(x_0\)</span>. To see why let’s do a quick example.</p>
+<p>Suppose again that <span class="math inline">\(y=x^2\)</span>. If we take <span class="math inline">\(x_0=1\)</span>, then <span class="math inline">\(f(x_0) = 1\)</span> and <span class="math inline">\(\frac{d}{dx} f(x_0) = 2x_0 = 2\)</span>, so we have an equation</p>
+<p><span class="math display">\[y \approx 1 + 2(x - 1) = 2x - 1.\]</span></p>
+<p>Let’s plot this line along with the function itself to see what’s going on. Notice the tangent line is hugging the function at the red point <span class="math inline">\(x_0=1, y_0=1\)</span>, and that the slope of the line seems to hug the curve at that point. This is what it means to say that the derivative is the slope of a function at a point. It’s the slope of the tangent line passing through that point.</p>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dfdx <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">2</span> <span class="op">*</span> x</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="fl">0.1</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>f_line <span class="op">=</span> <span class="kw">lambda</span> x: f(x0) <span class="op">+</span> dfdx(x0) <span class="op">*</span> (x <span class="op">-</span> x0)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, f_line], points<span class="op">=</span>[[x0, f(x0)]], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">4</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="ss">f'Tangent to $y=x^2$ at $x_0$=</span><span class="sc">{</span>x0<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice a curious fact from this slope interpretation. At the minimum value of the function the slope, in this case <span class="math inline">\(x=0\)</span>, the slope is flat, which evidently implies that the derivative at the minimum is zero. We’ll exploit this fact in a future lesson when we talk about optimization.</p>
+<p>Another way to interpret the equation</p>
+<p><span class="math display">\[f(x) \approx f(x_0) + \frac{d}{dx} f(x_0) (x - x_0)\]</span></p>
+<p>is that the right-hand side is the best linear approximation of the function at the point <span class="math inline">\(x=x_0\)</span>. Provided <span class="math inline">\(x \approx x_0\)</span>, we can well-approximate <span class="math inline">\(f(x)\)</span> by its tangent line. Another way of saying the same thing is that if we zoom in enough on the plot we can’t tell that the function isn’t linear.</p>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, f_line], points<span class="op">=</span>[[x0, f(x0)]], xlim<span class="op">=</span>(<span class="fl">0.7</span>, <span class="fl">1.3</span>), ylim<span class="op">=</span>(<span class="fl">0.7</span>, <span class="fl">1.3</span>),</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="ss">f'$y=x^2$ near $x_0=1$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="second-differentials" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="second-differentials"><span class="header-section-number">3.2.3</span> Second Differentials</h3>
+<p>Differentials and derivatives cover the situation when we’re interested in changes in a function that are <em>first-order</em> in <span class="math inline">\(dx\)</span>. But suppose we’re interested in changes that are <em>second-order</em> in <span class="math inline">\(dx\)</span>? This leads us to the notion of second differentials. If <span class="math inline">\(dx^2\)</span> is a second-order differential change in <span class="math inline">\(x\)</span>, then <span class="math inline">\(d^2y = d(dy)\)</span> is a second-order differential change in <span class="math inline">\(y=f(x)\)</span>. Using the fact that <span class="math inline">\(dy=f(x+dx)-f(x)\)</span>, it’s not too hard to show that</p>
+<p><span class="math display">\[d^2 y  = f(x+dx)-2f(x)+f(x-dx).\]</span></p>
+<p>The ratio of second differentials is called the <strong>second-derivative</strong> of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span>,</p>
+<p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{f(x+dx)-2f(x)+f(x-dx)}{dx^2}.\]</span></p>
+<p>As with the first derivative <span class="math inline">\(\frac{dy}{dx}\)</span>, this equality will only be exact when <span class="math inline">\(dx\)</span> is infinitesimal. Otherwise there will be an error of order <span class="math inline">\(dx^3\)</span>.</p>
+<p>Let’s do a quick example. Consider again the cubic function <span class="math inline">\(y=x^3\)</span>. I already showed its first derivative is the function <span class="math inline">\(\frac{dy}{dx} = 3x^2\)</span>. Let’s see what its second derivative is. Evidently, for <span class="math inline">\(d^2y\)</span> we have</p>
+<p><span class="math display">\[\begin{align*}
+d^2 y &amp;= f(x+dx)-2f(x)+f(x-dx) \\
+&amp;= (x+dx)^3 - 2x^3 + (x-dx)^3 \\
+&amp;= (x^3 + 3x^2dx + 3xdx^2 + dx^3) - 2x^3 + (x^3 - 3x^2dx + 3xdx^2 - dx^3) \\
+&amp;= 6xdx^2.
+\end{align*}\]</span></p>
+<p>Dividing both sides by <span class="math inline">\(dx^2\)</span>, the second derivative of <span class="math inline">\(y=x^3\)</span> is evidently just <span class="math inline">\(\frac{d^2 y}{dx^2} = 6x\)</span>. We can actually see this in a simpler way. Notice that</p>
+<p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{d}{dx} \frac{dy}{dx}.\]</span></p>
+<p>That is, it’s just the derivative of the derivative. Since we already knew <span class="math inline">\(dy = 3x^2dx\)</span> and <span class="math inline">\(d(x^2)=2xdx\)</span>, we could just have done</p>
+<p><span class="math display">\[\begin{align*}
+d^2 y = d(dy) &amp;= d(3x^2dx) \\
+&amp;= 3d(x^2)dx \\
+&amp;= 3(2xdx)dx \\
+&amp;= 6xdx^2. \\
+\end{align*}\]</span></p>
+<p>Just like the first derivative is a function of <span class="math inline">\(x\)</span>, so is the second derivative. For this reason we’d also often write it as</p>
+<p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{d^2}{dx^2} f(x) = f''(x).\]</span></p>
+<p>To see how the second derivative arises we need to ask what happens if we want to approximate a function <span class="math inline">\(y=f(x)\)</span> not just with a line, but with a parabola. It turns out that if we want to approximate the function with a parabola about some point <span class="math inline">\(x=x_0\)</span> we’d use something like this,</p>
+<p><span class="math display">\[f(x) \approx f(x_0) + \frac{d}{dx} f(x_0) (x - x_0) + \color{red}{\frac{1}{2} \frac{d^2}{dx^2} f(x_0) (x - x_0)^2}.\]</span></p>
+<p>The new term is shown in red. It’s quadratic in <span class="math inline">\(x-x_0\)</span> and proportional to the second derivative of <span class="math inline">\(y=f(x)\)</span> at the point <span class="math inline">\(x_0\)</span>. We can imagine writing it in a form</p>
+<p><span class="math display">\[y = a(x-x_0)^2 + b(x-x_0) + c.\]</span></p>
+<p>This gives the equation of a parabola with vertex at <span class="math inline">\(\big(x_0-\frac{b}{2a}, (x_0-\frac{b}{2a})^2\big)\)</span>. Evidently, the <em>curvature</em> of the parabola is determined by the coefficient <span class="math inline">\(a = \frac{1}{2} \frac{d^2}{dx^2} f(x_0)\)</span>. This means that the second derivative is a measure of the function’s <em>curvature</em> around a point. The larger the second derivative is, the steeper the parabola at that point will be, and hence the steeper the function’s curvature will be.</p>
+<p>Here’s an example. Suppose we have the function <span class="math inline">\(y = x^3 + 5x^2\)</span>, and we wanted to approximate the function with a parabola about the point <span class="math inline">\(x=1\)</span>. The approximating parabola turns out to be</p>
+<p><span class="math display">\[y = 8(x - 1)^2 + 13(x - 1) + 6.\]</span></p>
+<p>The plot of the function and the approximating parabola is shown below.</p>
+<div class="cell" data-execution_count="23">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">3</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> x <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dfdx <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">3</span> <span class="op">*</span> x <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> x</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>d2fdx2 <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">6</span> <span class="op">*</span> x <span class="op">+</span> <span class="dv">10</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">50</span>, <span class="dv">50</span>, <span class="fl">0.1</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>f_parabola <span class="op">=</span> <span class="kw">lambda</span> x: f(x0) <span class="op">+</span> dfdx(x0) <span class="op">*</span> (x <span class="op">-</span> x0) <span class="op">+</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="op">*</span> d2fdx2(x0) <span class="op">*</span> (x <span class="op">-</span> x0) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, f_parabola], points<span class="op">=</span>[[x0, f(x0)]], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">100</span>),</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="ss">f''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>While this looks like a bad approximation when <span class="math inline">\(x\)</span> is far away from <span class="math inline">\(x=1\)</span>, especially if <span class="math inline">\(x\)</span> is negative, if we zoom in closer to <span class="math inline">\(x=1\)</span> we see that it actually does a very good job of approximating the function locally. In the range <span class="math inline">\([0.5, 1.5]\)</span> you can’t even really tell the function isn’t parabolic.</p>
+<div class="cell" data-execution_count="27">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, f_parabola], points<span class="op">=</span>[[x0, f(x0)]], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">30</span>),</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="ss">f''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The sign of the second derivative at <span class="math inline">\(x=x_0\)</span> says something about which way the function is curving. If the second derivative is positive, the function is curving <em>upward</em> around <span class="math inline">\(x=x_0\)</span>. If the second derivative is negative, the function is curving <em>downward</em> at <span class="math inline">\(x=x_0\)</span>. In the edge case where the second derivative is zero you can’t tell. You have to go to higher order terms and look at the sign of those.</p>
+<p>There are higher-order differentials and derivatives as well. We can take third differentials, fourth differentials, and so on. Fortunately, these higher terms don’t really seem to show up in machine learning, so it’s not worth going into them.</p>
+<p>I’ll just briefly mention a nice fact. For many functions in practice, we can keep doing the kind of approximation I’ve been doing indefinitely for higher and higher derivatives. If we take infinitely many terms we get what’s called the <strong>Taylor Series Expansion</strong> of <span class="math inline">\(y=f(x)\)</span> about <span class="math inline">\(x=x_0\)</span>,</p>
+<p><span class="math display">\[f(x) = f(x_0) + \frac{d}{dx} f(x_0) (x - x_0) + \frac{1}{2} \frac{d^2}{dx^2} f(x_0) (x - x_0)^2 + \frac{1}{6} \frac{d^3}{dx^3} f(x_0) (x - x_0)^3 + \cdots\]</span></p>
+<p>By taking more and more terms in the Taylor Series we can get a better and better approximation of a function about a point <span class="math inline">\(x=x_0\)</span> by using higher and higher degree polynomials. The Taylor Series is more easily expressed using summation notation as</p>
+<p><span class="math display">\[f(x) = \sum_{n=0}^\infty \frac{1}{n!} \frac{d^n}{dx^n} f(x_0) (x-x_0)^n.\]</span></p>
+</section>
+<section id="differential-rules" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="differential-rules"><span class="header-section-number">3.2.4</span> Differential Rules</h3>
+<p>While we can tediously derive the differentials and derivatives of each function we care about one-by-one, I’ll spare you the math and just state them in the table below. In a minute we’ll see we can combine these with differential rules to differentiate even more complex functions.</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 30%">
+<col style="width: 36%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Function</strong></td>
+<td style="text-align: left;"><strong>Differential</strong></td>
+<td style="text-align: left;"><strong>Derivative</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = 0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = 0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = 0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = 1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = 0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = 0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = dx\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = 1\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = x^2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = 2xdx\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = 2x\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = \sqrt{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = \frac{dx}{2\sqrt{x}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = \frac{1}{2\sqrt{x}}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = \frac{1}{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = -\frac{dx}{x^2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = -\frac{1}{x^2}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = e^x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = e^xdx\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = e^x\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = \log{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = \frac{dx}{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = \frac{1}{x}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = \sin{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = \cos{x}dx\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = \cos{x}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = \cos{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = -\sin{x}dx\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = -\sin{x}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = \sigma(x)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = \sigma(x)\big(1-\sigma(x)\big)dx\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = \sigma(x)\big(1-\sigma(x)\big)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = \tanh(x)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = \big(1 - \tanh^2(x)\big)dx\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = \big(1 - \tanh^2(x)\big)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = \text{ReLU}(x)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = u(x)dx = [x \geq 0]dx\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = u(x) = [x \geq 0]\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Let’s now look at some general rules for differentials and derivatives. The most fundamental rule is that these things are <em>linear</em>. That is, if <span class="math inline">\(a, b\)</span> are constant real numbers and <span class="math inline">\(u, v\)</span> are functions,</p>
+<p><span class="math display">\[d(au + bv) = adu + bdv, \quad \text{and} \quad \frac{d(au+bv)}{dx} = a \frac{du}{dx} + b \frac{dv}{dx}.\]</span></p>
+<p>It’s pretty easy to see this. Suppose <span class="math inline">\(f(x) = au(x) + bv(x)\)</span>. Then we’d have</p>
+<p><span class="math display">\[\begin{align*}
+d(au + bv) &amp;= f(x + dx) - f(x) \\
+&amp;= \big(au(x+dx) + bv(x+dx)\big) - \big(au(x) + bv(x)\big) \\
+&amp;= a \big(u(x+dx) - u(x) \big) + b \big(v(x+dx) - v(x) \big) \\
+&amp;= adu + bdv.
+\end{align*}\]</span></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-page-right">
+  <div class="nav-page nav-page-previous">
+      <a href="../notebooks/numerical-computing.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Numerical Computation</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../notebooks/linear-systems.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Systems</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
