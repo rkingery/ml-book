@@ -213,8 +213,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#differentials-and-derivatives" id="toc-differentials-and-derivatives" class="nav-link" data-scroll-target="#differentials-and-derivatives"><span class="toc-section-number">3.2.1</span>  Differentials and Derivatives</a></li>
   <li><a href="#interpreting-derivatives" id="toc-interpreting-derivatives" class="nav-link" data-scroll-target="#interpreting-derivatives"><span class="toc-section-number">3.2.2</span>  Interpreting Derivatives</a></li>
-  <li><a href="#second-differentials" id="toc-second-differentials" class="nav-link" data-scroll-target="#second-differentials"><span class="toc-section-number">3.2.3</span>  Second Differentials</a></li>
-  <li><a href="#differential-rules" id="toc-differential-rules" class="nav-link" data-scroll-target="#differential-rules"><span class="toc-section-number">3.2.4</span>  Differential Rules</a></li>
+  <li><a href="#second-derivatives" id="toc-second-derivatives" class="nav-link" data-scroll-target="#second-derivatives"><span class="toc-section-number">3.2.3</span>  Second Derivatives</a></li>
+  <li><a href="#differentiation-rules" id="toc-differentiation-rules" class="nav-link" data-scroll-target="#differentiation-rules"><span class="toc-section-number">3.2.4</span>  Differentiation Rules</a></li>
+  </ul></li>
+  <li><a href="#integral-calculus" id="toc-integral-calculus" class="nav-link" data-scroll-target="#integral-calculus"><span class="toc-section-number">3.3</span>  Integral Calculus</a>
+  <ul class="collapse">
+  <li><a href="#indefinite-integration" id="toc-indefinite-integration" class="nav-link" data-scroll-target="#indefinite-integration"><span class="toc-section-number">3.3.1</span>  Indefinite Integration</a></li>
+  <li><a href="#definite-integration" id="toc-definite-integration" class="nav-link" data-scroll-target="#definite-integration"><span class="toc-section-number">3.3.2</span>  Definite Integration</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -265,9 +270,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="infinitesimals" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="infinitesimals"><span class="header-section-number">3.1</span> Infinitesimals</h2>
 <p>Perhaps most fundamental to what calculus is is the idea of an infinitely small number, usually called an <em>infinitesimal</em>. A positive <strong>infinitesimal</strong> is a <em>hyperreal number</em> <span class="math inline">\(\varepsilon\)</span> that’s much smaller than any positive real number <span class="math inline">\(x\)</span>,</p>
-<p><span class="math display">\[0 &lt; \varepsilon \ll x\]</span></p>
-<p>A negative infinitesimal is defined similarly, except with the signs all flipped, <span class="math inline">\(x \ll \varepsilon &lt; 0\)</span>. I say “hyperreal number” because infinitesimals aren’t technically real numbers. They extend the number line in a sense.</p>
-<p>Thankfully we won’t really have to worry about this technical distinction in this book. For practical purposes, think of infinitesimals as a really, really small numbers. When we say infinitesimal in practice, we usually mean a really small number like <span class="math inline">\(\varepsilon = 10^{-10}\)</span>. This means <span class="math inline">\(\varepsilon^2 = 10^{-20}\)</span>. If we take say <span class="math inline">\(x=1\)</span>, then <span class="math inline">\(\varepsilon=10^{-10}\)</span> is really small compared to <span class="math inline">\(x\)</span>, but <span class="math inline">\(\varepsilon^2 = 10^{-20}\)</span> is really really small compared to <span class="math inline">\(x\)</span>, so small that it might as well be zero,</p>
+<p><span class="math display">\[0 &lt; \varepsilon \ll x.\]</span></p>
+<p>A negative infinitesimal is defined similarly, except with the signs all flipped, <span class="math inline">\(x \ll \varepsilon &lt; 0\)</span>. I say “hyperreal number” because infinitesimals aren’t technically real numbers. They extend the number line in a sense. Thankfully we won’t really have to worry about this technical distinction in this book.</p>
+<p>For practical purposes, think of infinitesimals as a really, really small numbers. When we say infinitesimal in practice, we usually mean a really small number like <span class="math inline">\(\varepsilon = 10^{-10}\)</span>. This means <span class="math inline">\(\varepsilon^2 = 10^{-20}\)</span>. If we take say <span class="math inline">\(x=1\)</span>, then <span class="math inline">\(\varepsilon=10^{-10}\)</span> is really small compared to <span class="math inline">\(x\)</span>, but <span class="math inline">\(\varepsilon^2 = 10^{-20}\)</span> is really really small compared to <span class="math inline">\(x\)</span>, so small that it might as well be zero,</p>
 <p><span class="math display">\[\varepsilon^2 \approx 0.\]</span></p>
 <p>A computer wouldn’t even be able to tell the difference really between <span class="math inline">\(x\)</span> and <span class="math inline">\(x + \varepsilon^2\)</span>.</p>
 <div class="cell" data-execution_count="2">
@@ -403,12 +408,13 @@ dy/dx = 3.000030000110953</code></pre>
 </section>
 <section id="interpreting-derivatives" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="interpreting-derivatives"><span class="header-section-number">3.2.2</span> Interpreting Derivatives</h3>
-<p>Since <span class="math inline">\(dy\)</span> is the change in <span class="math inline">\(y\)</span> in response to the change in <span class="math inline">\(x\)</span> by <span class="math inline">\(dx\)</span>, the derivative <span class="math inline">\(\frac{dy}{dx}\)</span> evidently represents some kind of rate. It’s the rate that <span class="math inline">\(y\)</span> changes in response to small changes in <span class="math inline">\(x\)</span>.</p>
+<p>Since <span class="math inline">\(dy\)</span> is the change in <span class="math inline">\(y\)</span> in response to the change in <span class="math inline">\(x\)</span> by <span class="math inline">\(dx\)</span>, the derivative <span class="math inline">\(\frac{dy}{dx}\)</span> evidently represents some kind of a <em>rate</em>. It’s the rate that <span class="math inline">\(y\)</span> changes in response to small changes in <span class="math inline">\(x\)</span>.</p>
 <p>Depending on what exactly <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are we can think of the derivative as representing many different things. Here are some examples:</p>
 <ul>
 <li>If <span class="math inline">\(x\)</span> is the position of some particle and <span class="math inline">\(t\)</span> is time, <span class="math inline">\(\frac{dx}{dt}\)</span> represents the <em>speed</em> or <em>velocity</em> of that particle at time <span class="math inline">\(t\)</span>.</li>
-<li>If <span class="math inline">\(q\)</span> is the quantity of some economic good and <span class="math inline">\(p\)</span> is the price of that good, then <span class="math inline">\(\frac{dq}{dp}\)</span> represents the <em>elasticity</em> of that good, i.e.&nbsp;how responsive the good’s quantity is to changes in its price.</li>
 <li>If <span class="math inline">\(p\)</span> is the pressure in the atmosphere at a height <span class="math inline">\(z\)</span> from the Earth’s surface, then <span class="math inline">\(\frac{dp}{dz}\)</span> represents the <em>pressure gradient</em>, a measure of how much pressure varies with altitude.</li>
+<li>If <span class="math inline">\(q\)</span> is the quantity of some economic good and <span class="math inline">\(p\)</span> is the price of that good, then <span class="math inline">\(\frac{dq}{dp}\)</span> represents the <em>elasticity</em> of that good, i.e.&nbsp;how responsive the good’s quantity is to changes in its price.</li>
+<li>If <span class="math inline">\(C\)</span> is the cost of some good and <span class="math inline">\(q\)</span> is the amount of that good we have, then <span class="math inline">\(\frac{dC}{dq}\)</span> represents the <em>marginal cost</em> of that good. It’s the amount we’d have to pay to get one more unit of that good.</li>
 <li>If <span class="math inline">\(L\)</span> is the loss function of some machine learning algorithm and <span class="math inline">\(\theta\)</span> is some parameter of the model, then <span class="math inline">\(\frac{dL}{d\theta}\)</span> represents the <em>loss gradient</em>, a measure of how sensitive the loss is to changes in that particular parameter.</li>
 </ul>
 <p>The derivative also has a useful interpretation when thinking about a function graphically. It represents the <em>slope</em> of a function <span class="math inline">\(y=f(x)\)</span> at the point <span class="math inline">\(x\)</span>. This follows from the fact that</p>
@@ -419,7 +425,7 @@ dy/dx = 3.000030000110953</code></pre>
 <p>Suppose again that <span class="math inline">\(y=x^2\)</span>. If we take <span class="math inline">\(x_0=1\)</span>, then <span class="math inline">\(f(x_0) = 1\)</span> and <span class="math inline">\(\frac{d}{dx} f(x_0) = 2x_0 = 2\)</span>, so we have an equation</p>
 <p><span class="math display">\[y \approx 1 + 2(x - 1) = 2x - 1.\]</span></p>
 <p>Let’s plot this line along with the function itself to see what’s going on. Notice the tangent line is hugging the function at the red point <span class="math inline">\(x_0=1, y_0=1\)</span>, and that the slope of the line seems to hug the curve at that point. This is what it means to say that the derivative is the slope of a function at a point. It’s the slope of the tangent line passing through that point.</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span></span>
@@ -440,11 +446,11 @@ dy/dx = 3.000030000110953</code></pre>
 </div>
 </div>
 </div>
-<p>Notice a curious fact from this slope interpretation. At the minimum value of the function the slope, in this case <span class="math inline">\(x=0\)</span>, the slope is flat, which evidently implies that the derivative at the minimum is zero. We’ll exploit this fact in a future lesson when we talk about optimization.</p>
+<p>Notice a curious fact from this slope interpretation. At the minimum value of the function, in this case at <span class="math inline">\(x=0\)</span>, the slope is flat, which evidently implies that the derivative at the minimum is zero. We’ll exploit this fact in a future lesson when we talk about optimization.</p>
 <p>Another way to interpret the equation</p>
 <p><span class="math display">\[f(x) \approx f(x_0) + \frac{d}{dx} f(x_0) (x - x_0)\]</span></p>
 <p>is that the right-hand side is the best linear approximation of the function at the point <span class="math inline">\(x=x_0\)</span>. Provided <span class="math inline">\(x \approx x_0\)</span>, we can well-approximate <span class="math inline">\(f(x)\)</span> by its tangent line. Another way of saying the same thing is that if we zoom in enough on the plot we can’t tell that the function isn’t linear.</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, f_line], points<span class="op">=</span>[[x0, f(x0)]], xlim<span class="op">=</span>(<span class="fl">0.7</span>, <span class="fl">1.3</span>), ylim<span class="op">=</span>(<span class="fl">0.7</span>, <span class="fl">1.3</span>),</span>
@@ -459,11 +465,11 @@ dy/dx = 3.000030000110953</code></pre>
 </div>
 </div>
 </section>
-<section id="second-differentials" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="second-differentials"><span class="header-section-number">3.2.3</span> Second Differentials</h3>
+<section id="second-derivatives" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="second-derivatives"><span class="header-section-number">3.2.3</span> Second Derivatives</h3>
 <p>Differentials and derivatives cover the situation when we’re interested in changes in a function that are <em>first-order</em> in <span class="math inline">\(dx\)</span>. But suppose we’re interested in changes that are <em>second-order</em> in <span class="math inline">\(dx\)</span>? This leads us to the notion of second differentials. If <span class="math inline">\(dx^2\)</span> is a second-order differential change in <span class="math inline">\(x\)</span>, then <span class="math inline">\(d^2y = d(dy)\)</span> is a second-order differential change in <span class="math inline">\(y=f(x)\)</span>. Using the fact that <span class="math inline">\(dy=f(x+dx)-f(x)\)</span>, it’s not too hard to show that</p>
 <p><span class="math display">\[d^2 y  = f(x+dx)-2f(x)+f(x-dx).\]</span></p>
-<p>The ratio of second differentials is called the <strong>second-derivative</strong> of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span>,</p>
+<p>The ratio of second differentials is called the <strong>second derivative</strong> of <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span>,</p>
 <p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{f(x+dx)-2f(x)+f(x-dx)}{dx^2}.\]</span></p>
 <p>As with the first derivative <span class="math inline">\(\frac{dy}{dx}\)</span>, this equality will only be exact when <span class="math inline">\(dx\)</span> is infinitesimal. Otherwise there will be an error of order <span class="math inline">\(dx^3\)</span>.</p>
 <p>Let’s do a quick example. Consider again the cubic function <span class="math inline">\(y=x^3\)</span>. I already showed its first derivative is the function <span class="math inline">\(\frac{dy}{dx} = 3x^2\)</span>. Let’s see what its second derivative is. Evidently, for <span class="math inline">\(d^2y\)</span> we have</p>
@@ -492,7 +498,7 @@ d^2 y = d(dy) &amp;= d(3x^2dx) \\
 <p>Here’s an example. Suppose we have the function <span class="math inline">\(y = x^3 + 5x^2\)</span>, and we wanted to approximate the function with a parabola about the point <span class="math inline">\(x=1\)</span>. The approximating parabola turns out to be</p>
 <p><span class="math display">\[y = 8(x - 1)^2 + 13(x - 1) + 6.\]</span></p>
 <p>The plot of the function and the approximating parabola is shown below.</p>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">3</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> x <span class="op">**</span> <span class="dv">2</span></span>
@@ -516,7 +522,7 @@ d^2 y = d(dy) &amp;= d(3x^2dx) \\
 </div>
 </div>
 <p>While this looks like a bad approximation when <span class="math inline">\(x\)</span> is far away from <span class="math inline">\(x=1\)</span>, especially if <span class="math inline">\(x\)</span> is negative, if we zoom in closer to <span class="math inline">\(x=1\)</span> we see that it actually does a very good job of approximating the function locally. In the range <span class="math inline">\([0.5, 1.5]\)</span> you can’t even really tell the function isn’t parabolic.</p>
-<div class="cell" data-execution_count="27">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f, f_parabola], points<span class="op">=</span>[[x0, f(x0)]], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">30</span>),</span>
@@ -531,15 +537,16 @@ d^2 y = d(dy) &amp;= d(3x^2dx) \\
 </div>
 </div>
 <p>The sign of the second derivative at <span class="math inline">\(x=x_0\)</span> says something about which way the function is curving. If the second derivative is positive, the function is curving <em>upward</em> around <span class="math inline">\(x=x_0\)</span>. If the second derivative is negative, the function is curving <em>downward</em> at <span class="math inline">\(x=x_0\)</span>. In the edge case where the second derivative is zero you can’t tell. You have to go to higher order terms and look at the sign of those.</p>
+<p>If we interpret the first derivative as some kind of <em>rate</em>, then we’d have to interpret the second derivative as a rate of a rate, or an <em>acceleration</em>. For example, if <span class="math inline">\(y\)</span> was the position of an object, then the first derivative <span class="math inline">\(\frac{dy}{dx}\)</span> would represent its speed or velocity, while the second derivative <span class="math inline">\(\frac{d^2y}{dx^2}\)</span> would represent the object’s acceleration at a given point in time.</p>
 <p>There are higher-order differentials and derivatives as well. We can take third differentials, fourth differentials, and so on. Fortunately, these higher terms don’t really seem to show up in machine learning, so it’s not worth going into them.</p>
 <p>I’ll just briefly mention a nice fact. For many functions in practice, we can keep doing the kind of approximation I’ve been doing indefinitely for higher and higher derivatives. If we take infinitely many terms we get what’s called the <strong>Taylor Series Expansion</strong> of <span class="math inline">\(y=f(x)\)</span> about <span class="math inline">\(x=x_0\)</span>,</p>
-<p><span class="math display">\[f(x) = f(x_0) + \frac{d}{dx} f(x_0) (x - x_0) + \frac{1}{2} \frac{d^2}{dx^2} f(x_0) (x - x_0)^2 + \frac{1}{6} \frac{d^3}{dx^3} f(x_0) (x - x_0)^3 + \cdots\]</span></p>
-<p>By taking more and more terms in the Taylor Series we can get a better and better approximation of a function about a point <span class="math inline">\(x=x_0\)</span> by using higher and higher degree polynomials. The Taylor Series is more easily expressed using summation notation as</p>
-<p><span class="math display">\[f(x) = \sum_{n=0}^\infty \frac{1}{n!} \frac{d^n}{dx^n} f(x_0) (x-x_0)^n.\]</span></p>
+<p><span class="math display">\[f(x) = \sum_{n=0}^\infty \frac{1}{n!} \frac{d^n}{dx^n} f(x_0) (x-x_0)^n = f(x_0) + \frac{d}{dx} f(x_0) (x - x_0) + \frac{1}{2} \frac{d^2}{dx^2} f(x_0) (x - x_0)^2 + \frac{1}{6} \frac{d^3}{dx^3} f(x_0) (x - x_0)^3 + \cdots\]</span></p>
+<p>By taking more and more terms in the Taylor Series we can get a better and better approximation of a function about a point <span class="math inline">\(x=x_0\)</span> by using higher and higher degree polynomials. Note that when infinitely many terms are used the equality becomes exact. It’s only approximate if we ignore higher-order terms.</p>
 </section>
-<section id="differential-rules" class="level3" data-number="3.2.4">
-<h3 data-number="3.2.4" class="anchored" data-anchor-id="differential-rules"><span class="header-section-number">3.2.4</span> Differential Rules</h3>
-<p>While we can tediously derive the differentials and derivatives of each function we care about one-by-one, I’ll spare you the math and just state them in the table below. In a minute we’ll see we can combine these with differential rules to differentiate even more complex functions.</p>
+<section id="differentiation-rules" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="differentiation-rules"><span class="header-section-number">3.2.4</span> Differentiation Rules</h3>
+<p>It would be useful to have a systematic way to calculate differentials and derivatives without having to go back to the definition each time or always do it numerically. In this section I’ll show some rules that makes this kind of thing much easier.</p>
+<p>To start with, I’ll list the differentials and derivatives of some common functions. I won’t torture you by deriving all of these one-by-one.</p>
 <table class="table">
 <colgroup>
 <col style="width: 33%">
@@ -568,9 +575,9 @@ d^2 y = d(dy) &amp;= d(3x^2dx) \\
 <td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = 1\)</span></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><span class="math inline">\(y = x^2\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(dy = 2xdx\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = 2x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(y = x^n\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(dy = nx^{n-1}dx\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = nx^{n-1}\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><span class="math inline">\(y = \sqrt{x}\)</span></td>
@@ -610,7 +617,7 @@ d^2 y = d(dy) &amp;= d(3x^2dx) \\
 <tr class="odd">
 <td style="text-align: left;"><span class="math inline">\(y = \tanh(x)\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(dy = \big(1 - \tanh^2(x)\big)dx\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = \big(1 - \tanh^2(x)\big)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = 1 - \tanh^2(x)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><span class="math inline">\(y = \text{ReLU}(x)\)</span></td>
@@ -628,6 +635,573 @@ d(au + bv) &amp;= f(x + dx) - f(x) \\
 &amp;= a \big(u(x+dx) - u(x) \big) + b \big(v(x+dx) - v(x) \big) \\
 &amp;= adu + bdv.
 \end{align*}\]</span></p>
+<p>For example, that if we have the function <span class="math inline">\(y = 5\sin x + 10x^2 - 4\)</span>, then we can write</p>
+<p><span class="math display">\[dy = d(5\sin x + 10x^2 - 4) = 5d(\sin x) + 10d(x^2) - 4d(1) = 5\cos x dx + 20xdx + 0dx,\]</span></p>
+<p>or dividing both sides by <span class="math inline">\(dx\)</span>,</p>
+<p><span class="math display">\[\frac{dy}{dx} = 5\cos x + 20x.\]</span></p>
+<p>If we wanted, we could take the second derivative just as easily,</p>
+<p><span class="math display">\[d^2y = d(5\cos x \cdot dx + 20xdx) = 5dx \cdot d(\cos x) + 20dx^2 = -5\sin x \cdot dx^2 + 20 dx^2,\]</span></p>
+<p>which means</p>
+<p><span class="math display">\[\frac{d^2y}{dx^2} = -5\sin x + 20.\]</span></p>
+<p>Sympy can do all this for you. You’ll first need to define a variable <code>x</code>, then define <code>y</code> as a function of <code>x</code>. Once you’ve done this, you can get the first derivative with <code>y.diff(x)</code>, and the second derivative with <code>y.diff(x).diff(x)</code>.</p>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">5</span> <span class="op">*</span> sp.sin(x) <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> x <span class="op">**</span> <span class="dv">2</span>  <span class="op">-</span> <span class="dv">4</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>dydx <span class="op">=</span> y.diff(x)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>d2dx2 <span class="op">=</span> y.diff(x).diff(x)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'dy/dx = </span><span class="sc">{</span>dydx<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'd2y/dx2 = </span><span class="sc">{</span>d2dx2<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>y = 10*x**2 + 5*sin(x) - 4
+dy/dx = 20*x + 5*cos(x)
+d2y/dx2 = 20 - 5*sin(x)</code></pre>
+</div>
+</div>
+<p>Here’s a more interesting example that shows we can take differentials of any equation. It need not even be a single-valued function <span class="math inline">\(y=f(x)\)</span>. Any function of the form <span class="math inline">\(g(x,y)=0\)</span> will do. Suppose we have the equation <span class="math inline">\(x^2+y^2=1\)</span>. This is the equation for a circle of radius 1. Taking the differential of both sides and solving for <span class="math inline">\(dy\)</span>, we have</p>
+<p><span class="math display">\[\begin{align*}
+d(x^2 + y^2) &amp;= d(1) \\
+d(x^2) + d(y^2) &amp;= 0 \\
+2xdx + 2ydy &amp;= 0 \\
+dy &amp;= -\frac{x}{y}dx.
+\end{align*}\]</span></p>
+<p>Evidently the slope of a circle changes like <span class="math inline">\(\frac{dy}{dx} = -\frac{x}{y}\)</span>. Since the differential of a constant is always zero, this will be true for a circle of <em>any</em> radius.</p>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> <span class="kw">lambda</span> x: np.sqrt(<span class="dv">1</span> <span class="op">-</span> x <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>f2 <span class="op">=</span> <span class="kw">lambda</span> x: <span class="op">-</span>np.sqrt(<span class="dv">1</span> <span class="op">-</span> x <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>dfdx1 <span class="op">=</span> <span class="kw">lambda</span> x: <span class="op">-</span>x <span class="op">/</span> f1(x)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>dfdx2 <span class="op">=</span> <span class="kw">lambda</span> x: <span class="op">-</span>x <span class="op">/</span> f2(x)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> f1(x0)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.001</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> y0 <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    f_line <span class="op">=</span> <span class="kw">lambda</span> x: y0 <span class="op">+</span> dfdx1(x0) <span class="op">*</span> (x <span class="op">-</span> x0)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    f_line <span class="op">=</span> <span class="kw">lambda</span> x: y0 <span class="op">+</span> dfdx2(x0) <span class="op">*</span> (x <span class="op">-</span> x0)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>plot_function(x, [f1, f2, f_line], points<span class="op">=</span>[[x0, y0]], xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>              colors<span class="op">=</span>[<span class="st">'steelblue'</span>, <span class="st">'steelblue'</span>, <span class="st">'orange'</span>], </span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>              title<span class="op">=</span><span class="ss">f'Tangent to $x^2+y^2=1$ at (</span><span class="sc">{</span><span class="bu">round</span>(x0, <span class="dv">3</span>)<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span><span class="bu">round</span>(y0, <span class="dv">3</span>)<span class="sc">}</span><span class="ss">)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Another useful rule that differentials and derivatives follow is the <strong>product rule</strong>. If <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are two functions, then the differential of their product <span class="math inline">\(y=uv\)</span> is</p>
+<p><span class="math display">\[d(uv) = udv + vdu.\]</span></p>
+<p>It’s pretty easy to see that this is true as well. If we nudge <span class="math inline">\(y\)</span> a little bit to <span class="math inline">\(y+dy\)</span>, then we necessarily must nudge <span class="math inline">\(u\)</span> to some <span class="math inline">\(u+du\)</span> and <span class="math inline">\(v\)</span> to some <span class="math inline">\(v+dv\)</span>. This means we have</p>
+<p><span class="math display">\[\begin{align*}
+dy = d(uv) &amp;=  (u+du)(v+dv) - uv \\
+&amp;=  (uv + udv + vdu + dudv) - uv \\
+&amp;\approx  udv + vdu, \\
+\end{align*}\]</span></p>
+<p>where the last step follows provided <span class="math inline">\(dudv \approx 0\)</span>, which will be true if both <span class="math inline">\(du\)</span> and <span class="math inline">\(dv\)</span> are infinitesimal. Dividing both sides by <span class="math inline">\(dx\)</span> gives the derivative equivalent,</p>
+<p><span class="math display">\[\frac{d(uv)}{dx} = u\frac{dv}{dx} + v\frac{du}{dx}.\]</span></p>
+<p>As an example, suppose we had the function <span class="math inline">\(y=x^2e^x\)</span>. Setting <span class="math inline">\(u=x^2\)</span> and <span class="math inline">\(v=e^x\)</span>, we’d have</p>
+<p><span class="math display">\[dy = d(uv) = udv + vdu = x^2 d(e^x) + e^x d(x^2) = x^2 e^x dx + 2xe^x dx.\]</span></p>
+<p>Dividing both sides by <span class="math inline">\(dx\)</span> then gives the derivative, <span class="math inline">\(\frac{dy}{dx} = x^2 e^x + 2xe^x\)</span>.</p>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x <span class="op">**</span> <span class="dv">2</span> <span class="op">*</span> sp.exp(x)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>dydx <span class="op">=</span> y.diff(x)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'dy/dx = </span><span class="sc">{</span>dydx<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>y = x**2*exp(x)
+dy/dx = x**2*exp(x) + 2*x*exp(x)</code></pre>
+</div>
+</div>
+<p>Suppose we have a function <span class="math inline">\(y=\frac{u}{v}\)</span> that’s a quotient of two functions <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>. To find <span class="math inline">\(dy\)</span>, can write this as <span class="math inline">\(y=uv^{-1}\)</span> and use the product rule,</p>
+<p><span class="math display">\[dy = d(uv^{-1}) = ud(v^{-1}) + v^{-1}du = -\frac{udv}{v^2} + \frac{du}{v} = \frac{vdu - udv}{v^2}.\]</span></p>
+<p>This is called the <strong>quotient rule</strong>,</p>
+<p><span class="math display">\[d\bigg(\frac{u}{v}\bigg) = \frac{vdu - udv}{v^2}.\]</span></p>
+<p>Again, dividing both sides by <span class="math inline">\(dx\)</span> gives the quotient rule for derivatives,</p>
+<p><span class="math display">\[\frac{dy}{dx} = \frac{v\frac{du}{dx} - u\frac{dv}{dx}}{v^2}.\]</span></p>
+<p>As an example, suppose we wanted to differentiate <span class="math inline">\(y=\frac{12e^x + 1}{x^2 + 1}\)</span>. Taking <span class="math inline">\(u=12e^x + 1\)</span> and <span class="math inline">\(v=x^2 + 1\)</span>, we’d have</p>
+<p><span class="math display">\[dy = \frac{vdu - udv}{v^2} = \frac{(x^2 + 1)d(12e^x + 1) - (12e^x + 1)d(x^2 + 1)}{(x^2 + 1)^2} = \frac{12e^x(x^2 + 1)dx - 2x(12e^x + 1)dx}{(x^2 + 1)^2}.\]</span></p>
+<p>Or dividing both sides by <span class="math inline">\(dx\)</span>,</p>
+<p><span class="math display">\[\frac{dy}{dx} = \frac{12e^x(x^2 + 1) - 2x(12e^x + 1)}{(x^2 + 1)^2}.\]</span></p>
+<div class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> (<span class="dv">12</span> <span class="op">*</span> sp.exp(x) <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> (x <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>dydx <span class="op">=</span> y.diff(x)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'dy/dx = </span><span class="sc">{</span>dydx<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>y = (12*exp(x) + 1)/(x**2 + 1)
+dy/dx = -2*x*(12*exp(x) + 1)/(x**2 + 1)**2 + 12*exp(x)/(x**2 + 1)</code></pre>
+</div>
+</div>
+<p>The last rule I’ll mention is by far the most important one to know for machine learning purposes. It’s called the <strong>chain rule</strong>. Suppose we had a composite function <span class="math inline">\(y = f(g(x))\)</span>, or equivalently <span class="math inline">\(y=g(z)\)</span> and <span class="math inline">\(z=f(x)\)</span>. Then taking differentials we’d get</p>
+<p><span class="math display">\[dy = \frac{dy}{dz} dz = \frac{dy}{dz} \frac{dz}{dx} dx.\]</span></p>
+<p>Dividing both sides by <span class="math inline">\(dx\)</span> gives the derivative version,</p>
+<p><span class="math display">\[\frac{dy}{dx} = \frac{dy}{dz} \frac{dz}{dx}.\]</span></p>
+<p>The notation makes this look trivial since it seems like all we’re doing is multiplying and dividing by <span class="math inline">\(dz\)</span>. But the chain rule is a pretty deep fact. It says if we have a complicated function we can always break it up into easier composite functions, differentiate those, then multiply the results together.</p>
+<p>Here’s an example. Suppose we had a function <span class="math inline">\(y = e^{-\frac{1}{2} x^2}\)</span>. This looks pretty complicated but it’s not. Notice we can think about this as a composition of the form <span class="math inline">\(y = e^z\)</span> where <span class="math inline">\(z = -\frac{1}{2} x^2\)</span>. Differentiating each of these on their is easy,</p>
+<p><span class="math display">\[\begin{align*}
+dy &amp;= d(e^z) = e^z dz, \\
+dz &amp;= d\bigg(-\frac{1}{2} x^2\bigg) = -xdx. \\
+\end{align*}\]</span></p>
+<p>If we want to differentiate <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(x\)</span> we just need to multiply these two together and substitute in for <span class="math inline">\(z\)</span>,</p>
+<p><span class="math display">\[dy = \frac{dy}{dz} \frac{dz}{dx} dx = e^z (-x) dx = -x e^{-\frac{1}{2} x^2} dx,\]</span></p>
+<p>or again dividing both sides by <span class="math inline">\(dx\)</span>,</p>
+<p><span class="math display">\[\frac{dy}{dx} = -x e^{-\frac{1}{2} x^2}.\]</span></p>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> sp.exp(<span class="op">-</span>sp.Rational(<span class="dv">1</span>, <span class="dv">2</span>) <span class="op">*</span> x <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>dydx <span class="op">=</span> y.diff(x)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'dy/dx = </span><span class="sc">{</span>dydx<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>y = exp(-x**2/2)
+dy/dx = -x*exp(-x**2/2)</code></pre>
+</div>
+</div>
+<p>What really makes the chain rule powerful for machine learning is that we can use it on arbitrarily many composition chains. For example, if we have a composition of three functions <span class="math inline">\(y=f(u)\)</span>, <span class="math inline">\(u=g(z)\)</span>, <span class="math inline">\(z=h(x)\)</span>, we’d have</p>
+<p><span class="math display">\[\frac{dy}{dx} = \frac{dy}{du} \frac{du}{dz} \frac{dz}{dx}.\]</span></p>
+<p>More generally, if we had a complicated function of <span class="math inline">\(n\)</span> compositions</p>
+<p><span class="math display">\[\begin{align*}
+y_0 &amp;= x, \\
+y_1 &amp;= f_1(y_0), \\
+y_2 &amp;= f_2(y_1), \\
+\vdots &amp; \qquad \vdots \\
+y_n &amp;= f_n(y_{n-1}), \\
+y &amp;= y_n, \\
+\end{align*}\]</span></p>
+<p>the chain rule would say</p>
+<p><span class="math display">\[\frac{dy}{dx} = \prod_{i=1}^n \frac{dy_i}{dy_{i-1}} = \frac{dy}{dy_{n-1}} \frac{dy_{n-1}}{dy_{n-2}} \cdots \frac{dy_2}{dy_1} \frac{dy_1}{dx}.\]</span></p>
+<p>This fact is fundamental to how a neural network is trained. At each step of training a neural network, we have to <em>backpropagate</em> through the neural network to calculate <span class="math inline">\(\frac{dy}{dx}\)</span>. All backpropogation is is the chain rule, where each term in the chain is a layer in the neural network. It’s probably no exaggeration to say that deep learning works as well as it does <em>because</em> of the ability of the chain rule to make calculating the derivative of complicated composite functions easy.</p>
+<p>The last rule I’ll mention is a method to calculate the derivative of an inverse function. Suppose <span class="math inline">\(y=f(x)\)</span>. If the function is invertible, we can solve for <span class="math inline">\(x\)</span> and get an inverse function <span class="math inline">\(x = f^{-1}(y)\)</span>. The inverse rule says if we know the derivative of one of these we can easily get the derivative of the other by inverting it,</p>
+<p><span class="math display">\[\frac{dx}{dy} = \frac{1}{\frac{dy}{dx}}.\]</span></p>
+<p>Again, the notation makes this look pretty trivial. What’s not said is that in going from one to the other we have to be careful what’s a function of what. On the left-hand side, <span class="math inline">\(x\)</span> is a function of <span class="math inline">\(y\)</span>, but on the right-hand side <span class="math inline">\(y\)</span> is a function of <span class="math inline">\(x\)</span>.</p>
+<p>For example, suppose we had the function <span class="math inline">\(y=e^x\)</span> and for some reason wanted to know <span class="math inline">\(\frac{dx}{dy}\)</span>. What we can do is calculate <span class="math inline">\(\frac{dy}{dx} = e^x\)</span>, and invert it to get <span class="math inline">\(\frac{dx}{dy}\)</span>,</p>
+<p><span class="math display">\[\frac{dx}{dy} = \frac{1}{\frac{dy}{dx}} = \frac{1}{e^x} = \frac{1}{y}.\]</span></p>
+<p>Of course, this is just the derivative of the logarithm function <span class="math inline">\(x = \log y\)</span>, which makes sense since <span class="math inline">\(x=\log y\)</span> is the inverse of <span class="math inline">\(y=e^x\)</span>.</p>
+<p>Here’s a summary table of all these rules for reference. I’ll state them in derivative form and provide an example of each one for later reference.</p>
+<table class="table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 39%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Name</strong></td>
+<td style="text-align: left;"><strong>Rule</strong></td>
+<td style="text-align: left;"><strong>Example</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Linear Rule</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}(au + bv) = a\frac{du}{dx} + b\frac{dv}{dx}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}(2x^2 + 5\log x) = 2\frac{d}{dx}x^2 + 5\frac{d}{dx}\log x = 4x + \frac{5}{x}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Product Rule</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}(uv)=u\frac{dv}{dx} + v\frac{du}{dx}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}(x e^x) = x \frac{d}{dx}e^x + e^x \frac{d}{dx} x = xe^x + e^x\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Quotient Rule</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx}\big(\frac{u}{v}\big) = \frac{v\frac{du}{dx}-u\frac{dv}{dx}}{v^2}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} \frac{\cos x}{x^2} = \frac{x^2\frac{d}{dx}\cos x-\cos x\frac{d}{dx}x^2}{(x^2)^2} = \frac{-x^2 \sin x - 2x \cos x}{x^4}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chain Rule</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dy}{dx} = \frac{dy}{dz}\frac{dz}{dx}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} e^{\sin x} = \frac{d}{dy} e^y \frac{d}{dx}\sin x = e^{\sin x} \cos x\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Inverse Rule</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{dx}{dy} = \frac{1}{\frac{dy}{dx}}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(y = 5x + 1 \quad \Longrightarrow \quad \frac{dx}{dy} = \frac{1}{\frac{dy}{dx}} = \frac{1}{5}\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="integral-calculus" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="integral-calculus"><span class="header-section-number">3.3</span> Integral Calculus</h2>
+<p>By far, differential calculus is the most important area of calculus to know for machine learning purposes. The main reason for this is that in machine learning we seek to train models by optimizing functions, and (as I’ll cover in a future lesson) optimization is all about taking derivatives.</p>
+<p>Nevertheless, integral calculus is the giant other half of calculus, so I owe it to at least briefly cover the subject. Knowing a little about integration will also make it easier to understand the later lessons on probability theory and distributions.</p>
+<p>We can think about integral calculus in two distinct ways that turn out to be linked together by an important theorem. One way of thinking about an integral is as an inverse operation that undoes differentiation. The other way of thinking about an integral is as sum of a bunch of infinitesimal segments.</p>
+<section id="indefinite-integration" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="indefinite-integration"><span class="header-section-number">3.3.1</span> Indefinite Integration</h3>
+<p>Suppose we knew that some function <span class="math inline">\(F(x)\)</span> had a derivative of <span class="math inline">\(f(x)\)</span>, i.e.</p>
+<p><span class="math display">\[f(x) = \frac{d}{dx} F(x).\]</span></p>
+<p>If we only knew <span class="math inline">\(f(x)\)</span>, how would we go about “undoing” the differentiation to get back <span class="math inline">\(F(x)\)</span>? Essentially what we’d need to do is work backward.</p>
+<p>For example, suppose we knew <span class="math inline">\(f(x)=x\)</span>. How could we find <span class="math inline">\(F(x)\)</span>? Well, we already know that <span class="math inline">\(\frac{d}{dx} x^2 = 2x\)</span>. If we divide both sides of this equation by <span class="math inline">\(2\)</span> we’ve evidently got <span class="math inline">\(F(x)\)</span>, i.e.&nbsp;<span class="math inline">\(F(x) = \frac{1}{2} x^2\)</span>. Strictly speaking, this is only <em>one</em> possible solution. We could add any constant to <span class="math inline">\(F(x)\)</span> and not change the answer since the derivative of a constant is zero.</p>
+<p>The function <span class="math inline">\(F(x)\)</span> is called the <strong>indefinite integral</strong> of <span class="math inline">\(f(x)\)</span>. In textbooks it’s sometimes also called an <em>antiderivative</em> since it undoes the derivative operation. For reasons I’ll explain soon, we usually write the indefinite integral using a funny notation,</p>
+<p><span class="math display">\[F(x) = \int f(x) dx.\]</span></p>
+<p>For example, if <span class="math inline">\(f(x) = x\)</span>, we’d write</p>
+<p><span class="math display">\[\int x dx = \frac{1}{2} x^2.\]</span></p>
+<p>The function on the right is the <span class="math inline">\(F(x)=\frac{1}{2} x^2\)</span> that undoes the function inside the integral, namely <span class="math inline">\(f(x)=x\)</span>.</p>
+<p>As far as interpreting what an indefinite integral is, if you think of <span class="math inline">\(f(x)\)</span> as the rate of some thing, then <span class="math inline">\(F(x)\)</span> tells you the aggregate total of that thing. For example, if <span class="math inline">\(f(x)\)</span> was the speed of an object as a function of time, then its integral <span class="math inline">\(F(x)\)</span> would tell you how far that object has moved as a function of time. If <span class="math inline">\(f(x)\)</span> was the demand of some good as a function of price, then <span class="math inline">\(F(x)\)</span> would be the <em>consumer surplus</em> of that good, or how much consumers benefit from being able to buy that good for cheaper than they were willing to pay.</p>
+<p>We could go through and figure out what the indefinite integral is one-by-one for the common functions we’ve seen so far, but I’ll spare you the detail. They’re given in the table below.</p>
+<table class="table">
+<colgroup>
+<col style="width: 48%">
+<col style="width: 51%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Function</strong></td>
+<td style="text-align: left;"><strong>Integral</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = 0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int y dx = 0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = 1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int y dx = x\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int y dx = \frac{1}{2}x^2\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = \sqrt{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int y dx = \frac{2}{3} x^{3/2}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = \frac{1}{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int y dx = \log{x}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = x^n\)</span> where <span class="math inline">\(n \neq -1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int y dx = \frac{1}{n+1}x^{n+1}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = e^x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int y dx = e^x\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = \log{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int y dx = x \log{x} - x\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(y = \sin{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int y dx = -\cos{x}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(y = \cos{x}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int y dx = \sin{x}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>By construction, the indefinite integral is the inverse operation of the derivative operation. This means they cancel each other,</p>
+<p><span class="math display">\[d\bigg(\int f(x) dx\bigg) = f(x) dx, \quad \text{and} \quad \int dF(x) = \int \frac{d}{dx} F(x) dx = F(x).\]</span></p>
+<p>This fact is sometimes called the <strong>Leibniz Rule</strong>. It means that the indefinite integral inherits many of the properties of the derivative. Most importantly, it’s <em>linear</em>. If <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are constants, and <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are two functions, then</p>
+<p><span class="math display">\[\int \big(au + bv\big) dx = a \int u dx + b \int v dx.\]</span></p>
+<p>For example, if <span class="math inline">\(y = -x^3 + 7\sin x\)</span>, we’d have</p>
+<p><span class="math display">\[\int y dx = \int (-x^3 + 7\sin x) dx = - \int x^3 dx + 6 \int \sin x dx = -\frac{1}{4} x^4 - 6 \cos x.\]</span></p>
+<p>Again, you could technically add a constant to this answer and not change the result, but it’s not typical to do this, at least outside of calculus textbooks.</p>
+<p>As with differentiation, sympy can calculate these things for you. Just define <code>x</code> and <code>y</code>, then calculate the indefinite integral with <code>y.integrate(x)</code>.</p>
+<div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="op">-</span>x <span class="op">**</span> <span class="dv">3</span> <span class="op">+</span> <span class="dv">7</span> <span class="op">*</span> sp.sin(x)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>int_y <span class="op">=</span> y.integrate(x)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'int y dx = </span><span class="sc">{</span>int_y<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>y = -x**3 + 7*sin(x)
+int y dx = -x**4/4 - 7*cos(x)</code></pre>
+</div>
+</div>
+<p>The integral version of the product rule is called <strong>integration by parts</strong>. If we start with the product rule,</p>
+<p><span class="math display">\[d(uv) = udv + vdu,\]</span></p>
+<p>and integrate both sides, we get</p>
+<p><span class="math display">\[\int d(uv) = \int udv + \int vdu.\]</span></p>
+<p>Since <span class="math inline">\(uv = \int d(uv)\)</span>, we can re-arrange terms to get the rule for integration by parts,</p>
+<p><span class="math display">\[\int u dv = uv - \int v du.\]</span></p>
+<p>Using integration by parts in practice isn’t often as straight forward as the product rule. To make integration by parts work in practice, you want to try to choose <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> so the right-hand side is easier to integrate than the left-hand side.</p>
+<p>As a quick example, suppose we wanted to integrate <span class="math inline">\(y = x e^x\)</span>. What we could do is take <span class="math inline">\(u = x\)</span> and <span class="math inline">\(v=e^x\)</span>, so <span class="math inline">\(du=dx\)</span> and <span class="math inline">\(dv = e^x dx\)</span>. Then we’d have</p>
+<p><span class="math display">\[\int x e^x dx = x e^x - \int e^x dx = x e^x - e^x.\]</span></p>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x <span class="op">*</span> sp.exp(x)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>int_y <span class="op">=</span> y.integrate(x)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'int y dx = </span><span class="sc">{</span>int_y<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>y = x*exp(x)
+int y dx = (x - 1)*exp(x)</code></pre>
+</div>
+</div>
+<p>Though less widely known and rarely covered in textbooks for some reason, there’s also an integration by parts for the quotient rule. Using the quotient rule</p>
+<p><span class="math display">\[d\bigg( \frac{u}{v} \bigg) = \frac{vdu - udv}{v^2},\]</span></p>
+<p>and integrating both sides, we get</p>
+<p><span class="math display">\[\int d\bigg( \frac{u}{v} \bigg) = \int \frac{vdu - udv}{v^2} = \int \frac{1}{v}du + \int \frac{u}{v^2}dv.\]</span></p>
+<p>Since <span class="math inline">\(\frac{u}{v} = \int d\big(\frac{u}{v}\big)\)</span> we can again rearrange terms to get</p>
+<p><span class="math display">\[\int \frac{1}{v} du = \frac{u}{v} + \int \frac{u}{v^2} du.\]</span></p>
+<p>Just as with the product integration by parts, using this in practice often involves reducing a complicated integral on the left-hand side to a less complicated integral on the right-hand side.</p>
+<p>The integral version of the <em>chain rule</em> is called <strong>change of variables</strong> or <strong>substitution</strong>. Suppose we had a function <span class="math inline">\(y=f(x)\)</span> and wanted to integrate it. One thing we could do is make a change of variable by letting <span class="math inline">\(x\)</span> be a function of some other variable <span class="math inline">\(u\)</span>, say <span class="math inline">\(x = g(u)\)</span>. If we multiply and divide <span class="math inline">\(f(x)dx\)</span> by <span class="math inline">\(du\)</span>, then</p>
+<p><span class="math display">\[f(x) dx = f(g(u)) \frac{dx}{du} du.\]</span></p>
+<p>Integrating both sides gives the change of variables formula,</p>
+<p><span class="math display">\[\int f(x) dx = \int f(g(u)) \frac{dx}{du} du.\]</span></p>
+<p>The left-hand side is integrated with respect to <span class="math inline">\(x\)</span>, while the right-hand side is integrated with respect to <span class="math inline">\(u\)</span>. Just like with integration by parts, using the change of variables formula in practice is more an art than a science. The tricky part is figuring out what <span class="math inline">\(x=g(u)\)</span> should be to make the integral easier to compute.</p>
+<p>For example, suppose we wanted to integrate the function <span class="math inline">\(y = x e^{x^2}\)</span>. What we could do is let <span class="math inline">\(u=x^2\)</span>. Then <span class="math inline">\(du=2xdx\)</span>, and so we’d have</p>
+<p><span class="math display">\[\int x e^{x^2} dx = \int x e^{u} \frac{1}{2x} du = \frac{1}{2} \int e^u du = \frac{1}{2} e^u = \frac{1}{2} e^{x^2}.\]</span></p>
+<div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x <span class="op">*</span> sp.exp(x <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>int_y <span class="op">=</span> y.integrate(x)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'int y dx = </span><span class="sc">{</span>int_y<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>y = x*exp(x**2)
+int y dx = exp(x**2)/2</code></pre>
+</div>
+</div>
+<table class="table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 39%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Name</strong></td>
+<td style="text-align: left;"><strong>Rule</strong></td>
+<td style="text-align: left;"><strong>Example</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leibniz Rule</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} \int y dx = y\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\frac{d}{dx} \int \sin t dt = \sin x\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Linear Rule</td>
+<td style="text-align: left;"><span class="math inline">\(\int (au + bv) dx = a\int u dx + b\int v dx\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int (-1 + 5e^x) dx = -\int 1 dx + 5\int e^x dx = -x + 5e^x\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Integration By Parts (product version)</td>
+<td style="text-align: left;"><span class="math inline">\(\int u dv = uv - \int v du\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int x e^x dx = \int x d(e^x) = x e^x - \int e^x dx = x e^x - e^x\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Integration By Parts (quotient version)</td>
+<td style="text-align: left;"><span class="math inline">\(\int \frac{1}{v} du = \frac{u}{v} + \int \frac{u}{v^2} dv\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int \frac{\sin \sqrt{x}}{x^2} dx = \frac{2\cos x^{-1/2}}{x^{1/2}} + \int x^{3/2} \cos x^{-1/2}dx = \frac{2\cos x^{-1/2}}{x^{1/2}} - 2 \sin x^{-1/2}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Change of Variables</td>
+<td style="text-align: left;"><span class="math inline">\(\int f(x) dx = \int f(g(u)) \frac{dx}{du} dx\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\int x e^{x^2} dx = \int e^{x^2} d\big(\frac{1}{2}x^2\big) = \frac{1}{2} \int e^u du = \frac{1}{2} e^u = \frac{1}{2} e^{x^2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Before moving on, I’ll mention an important fact. While we can always take the derivative of a function and get a symbolic answer in terms of functions we’re used to, this is not always possible with integrals. In fact, most integrals we can write down we can’t evaluate using the methods covered here. There’s no way to find an explicit <span class="math inline">\(F(x)\)</span> whose derivative is <span class="math inline">\(f(x)\)</span> in terms of simple functions. A classic example of this is the Gaussian function</p>
+<p><span class="math display">\[y = e^{-x^2}.\]</span></p>
+<p>There’s no way you’d be able to integrate this symbolically and get a closed form solution in terms of simple functions. Unfortunately, this is the rule, not the exception. This fact often makes integration a lot harder than differentiation in practice. Fortunately, we can always evaluate an integral numerically, but I’ll need to discuss the definite integral first so we can understand what that even means.</p>
+</section>
+<section id="definite-integration" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="definite-integration"><span class="header-section-number">3.3.2</span> Definite Integration</h3>
+<p>I said that integral calculus essentially consists of two things, finding functions that undo a derivative, and summing up infinitesimals. The first part I just covered, the indefinite integral. I’ll now discuss the second part, and how it can be linked with the definite integral via the Fundamental Theorem of Calculus.</p>
+<p>Suppose now we had a function <span class="math inline">\(y=f(x)\)</span> and we wanted to compute the area under this curve between two endpoints <span class="math inline">\(x=a\)</span> and <span class="math inline">\(x=b\)</span>. So we have a working example, suppose the function is <span class="math inline">\(y=\sqrt{x}\)</span> and we want to find the area under its curve from <span class="math inline">\(x=0\)</span> to <span class="math inline">\(x=10\)</span>.</p>
+<div class="cell" data-execution_count="19">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.sqrt(x)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="dv">0</span>, <span class="dv">10</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>plot_function_with_area(x, f, a<span class="op">=</span>a, b<span class="op">=</span>b, title<span class="op">=</span><span class="st">'$y=\sqrt</span><span class="sc">{x}</span><span class="st">$ on $[0,10]$'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If you had to estimate the area of something like this with no prior knowledge, what you might do is try to approximate the area by using a shape you already know how to find the area of. Perhaps the easiest thing to try would be a rectangle. Suppose we took a rectangle whose base was length <span class="math inline">\(10\)</span> and whose height was <span class="math inline">\(\sqrt{10}\)</span>. Then very roughly speaking we could claim the area <span class="math inline">\(A\)</span> under the curve is</p>
+<p><span class="math display">\[A \approx 10 \cdot \sqrt{10} \approx 31.62.\]</span></p>
+<p>But this actually isn’t a great estimate. Here’s what we just calculated the area of. Notice how much area above the curve we’re taking with this estimate. We’re over-estimating the true area by a good bit it seems. How can we improve this estimate?</p>
+<div class="cell" data-execution_count="20">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plot_approximating_rectangles(x, f, dx<span class="op">=</span><span class="dv">10</span>, title<span class="op">=</span><span class="st">'$A </span><span class="ch">\\</span><span class="st">approx$ 1 Rectangle'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Approximate Area: 31.622776601683796</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/cell-21-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>One thing we could do is use not one rectangle, but two rectangles. Suppose we took each rectangle to have half the width of the curve, say <span class="math inline">\(dx=5\)</span>. The left rectangle can have height <span class="math inline">\(\sqrt{5}\)</span>, and the right can have height <span class="math inline">\(\sqrt{10}\)</span>. If we sum up these two areas, we’d get</p>
+<p><span class="math display">\[A \approx 5 \cdot \sqrt{5} + 5 \cdot \sqrt{10} \approx 26.99\]</span></p>
+<p>Here’s what this approximation looks like. It’s clearly a lot better, but we’re still over-estimating the area by a decent bit.</p>
+<div class="cell" data-execution_count="21">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plot_approximating_rectangles(x, f, dx<span class="op">=</span><span class="dv">5</span>, title<span class="op">=</span><span class="st">'$A </span><span class="ch">\\</span><span class="st">approx $ 2 Rectangles'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Approximate Area: 26.991728188340847</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/cell-22-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It seems like we can keep going with this strategy though. Let’s try <span class="math inline">\(N=10\)</span> rectangles each of width <span class="math inline">\(dx=1\)</span>. Call the areas of these <span class="math inline">\(N\)</span> rectangles in order <span class="math inline">\(A_0, A_1, \cdots, A_{N-1}\)</span>. Each area will be a width <span class="math inline">\(dx\)</span> times a height <span class="math inline">\(y_i=\sqrt{i+1}\)</span>. Thus, we have</p>
+<p><span class="math display">\[\begin{align*}
+A \approx \sum_{i=0}^{N-1} A_i &amp;= \sum_{i=0}^{N-1} y_i dx \\
+&amp;= y_0dx + y_1dx + y_2dx + \cdots + y_9dx \\
+&amp;= \big(\sqrt{1} + \sqrt{2} + \sqrt{3} + \cdots + \sqrt{10}\big)\cdot 1 \\
+&amp;\approx 22.468
+\end{align*}\]</span></p>
+<p>Here’s what this approximation looks like. It’s clearly a whole lot better. Notice how little extra area is left above the curve.</p>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plot_approximating_rectangles(x, f, dx<span class="op">=</span><span class="dv">1</span>, title<span class="op">=</span><span class="st">'$A </span><span class="ch">\\</span><span class="st">approx $ 10 Rectangles'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Approximate Area: 22.468278186204103</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/cell-23-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, it’s fair to ask if this approximation will ever become <em>exact</em>. Can we eventually take enough rectangles such that <span class="math inline">\(A = \sum y_i dx\)</span> exactly? In fact we can. The trick is to allow the rectangle widths <span class="math inline">\(dx\)</span> to become infinitesimally thin. If we do that, while taking <span class="math inline">\(N = \lfloor \frac{b-a}{dx} \rfloor\)</span> rectangles, then <span class="math inline">\(N\)</span> will become infinitely large and we’ll have an exact equality</p>
+<p><span class="math display">\[A = \sum_{i=0}^{N-1} y_i dx.\]</span></p>
+<p>Here’s what this might look like. Notice how for all practical purposes it looks like we’re calculating the area of the curve exactly now.</p>
+<div class="cell" data-execution_count="23">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>plot_approximating_rectangles(x, f, dx<span class="op">=</span><span class="fl">0.1</span>, title<span class="op">=</span><span class="st">'$A </span><span class="ch">\\</span><span class="st">approx N$ Rectangles'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, print_area<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What I’ve just shown is that the exact area under the curve of a function <span class="math inline">\(y=f(x)\)</span> is the sum of an infinitely large number of rectangles of height <span class="math inline">\(y_i=f(x_i)\)</span> and infinitesimal width <span class="math inline">\(dx\)</span>. For historical reasons we usually write a sum of infinitely many infinitesimals using a special notation,</p>
+<p><span class="math display">\[\int_a^b y dx = \sum_{i=0}^{N-1} y_i dx.\]</span></p>
+<p>This is called the <strong>definite integral</strong> of the function <span class="math inline">\(y=f(x)\)</span> from <span class="math inline">\(x=a\)</span> to <span class="math inline">\(x=b\)</span>. Historically, the reason the <span class="math inline">\(\int\)</span> was chosen is because it looks kind of like the S in “summa”, the Latin word for “sum”. This makes it clear that an integral is just a sum, a sum of infinitely many infinitesimal quantities <span class="math inline">\(ydx\)</span>.</p>
+<p>Of course, this says nothing about how to actually calculate these things. We’ve got nothing to go on but the definition. For numerical purposes that’s good enough. If we wanted to calculate a definite integral numerically, we could just take a bunch of really small rectangles like this and sum them up.</p>
+<p>Below I’ll define a function called <code>integrate</code> that will take in the function <code>f</code> and the endpoints <code>a</code> and <code>b</code>, and return the definite integral. Since it’s just an area, the definite integral will always be a numerical value. I’ll default <code>dx = 1e-4</code> to give a reasonable tradeoff between accuracy and speed.</p>
+<p>I’ll use this function to estimate the area of our running example, namely</p>
+<p><span class="math display">\[A = \int_0^{10} \sqrt{x} dx.\]</span></p>
+<p>Evidently, the exact area in this case seems to be about <span class="math inline">\(A \approx 21.082\)</span>.</p>
+<div class="cell" data-execution_count="24">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> integrate(f, a, b, dx<span class="op">=</span><span class="fl">1e-4</span>):</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="bu">int</span>((b <span class="op">-</span> a) <span class="op">/</span> dx)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    interval <span class="op">=</span> np.cumsum(dx <span class="op">*</span> np.ones(N))</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    rectangles <span class="op">=</span> np.array([f(x <span class="op">-</span> dx<span class="op">/</span><span class="dv">2</span>) <span class="op">*</span> dx <span class="cf">for</span> x <span class="kw">in</span> interval])</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    integral <span class="op">=</span> np.<span class="bu">sum</span>(rectangles)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> integral</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.sqrt(x)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="dv">0</span>, <span class="dv">10</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>area <span class="op">=</span> integrate(f, a, b, dx<span class="op">=</span><span class="fl">1e-4</span>)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A = </span><span class="sc">{</span>area<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>A = 21.081851128609895</code></pre>
+</div>
+</div>
+<p><strong>Aside:</strong> You can actually improve the convergence of this function a lot by instead taking <code>f(x - dx/2) * dx</code> for the rectangle areas instead of <code>f(x) * dx</code>. This is similar to differentiation, where we improve convergence by taking the midpoint value instead of the right-most value. As with that case, this trick reduces the error estimate from around <span class="math inline">\(dx\)</span> to around <span class="math inline">\(dx^2\)</span>. Doing this will allow you to use a much larger <code>dx</code> value to get the same accuracy.</p>
+<p>While it may not be obvious, the formula I gave to calculate the area under the curve actually calculates what’s called a <em>signed area</em>. That is, it counts area as positive when the curve is above the x-axis, and as negative when the curve is below the x-axis. To see this, notice if we took <span class="math inline">\(y=-\sqrt{x}\)</span>, we’d have</p>
+<p><span class="math display">\[\int_0^{10} y dx = - \int_0^{10} \sqrt{x} dx \approx -21.082.\]</span></p>
+<p>Why? Because this curve lies below the x-axis on the interval <span class="math inline">\(0 \leq x \leq 10\)</span>. This means the definite integral doesn’t calculate the area per se. It subtracts the area above the x-axis with the area below the x-axis.</p>
+<p>While we can always calculate definite integrals numerically, and in practice this is what you’d usually do, we can also derive a formula to calculate them exactly in many cases. This formula is important because it’s what links together the indefinite integral with the definite integral, i.e.&nbsp;undoing the derivative with summing up infinitesimals areas. It’s called the <strong>Fundamental Theorem of Calculus</strong>.</p>
+<p>Suppose we had a definite integral <span class="math inline">\(F(x) = \int f(x) dx\)</span> whose derivative is <span class="math inline">\(f(x)\)</span>. If we wanted to evaluate the definite integral of <span class="math inline">\(f(x)\)</span> from <span class="math inline">\(x=a\)</span> to <span class="math inline">\(x=b\)</span>, we could use the formula</p>
+<p><span class="math display">\[\int_a^b f(x) dx = F(b) - F(a) = F(x) \ \bigg|_{x=a}^{x=b}.\]</span></p>
+<p>The notation <span class="math inline">\(F(x) \big|_{x=a}^{x=b}\)</span> is just a short-hand way of writing <span class="math inline">\(F(b)-F(a)\)</span>. This formula says that all we’d need to do is calculate the definite integral at the endpoints and subtract them to get the area under the curve of <span class="math inline">\(f(x)\)</span> in the region <span class="math inline">\(a \leq x \leq b\)</span>.</p>
+<p>Since I’m already covering more than I need to for machine learning purposes, I won’t prove this fact. I’ll just show that it’s true by using it to calculate the previous example and verifying that it agrees with the numerical answer. In that case, we have</p>
+<p><span class="math display">\[\begin{align*}
+\int_0^{10} \sqrt{x} dx &amp;= \int_0^{10} x^{1/2} dx \\
+&amp;= \frac{x^{3/2}}{3/2} \ \bigg|_{x=0}^{x=10} \\
+&amp;= \frac{2}{3}x^{3/2} \ \bigg|_{x=0}^{x=10} \\
+&amp;= \frac{2}{3} 10^{3/2} - \frac{2}{3} 0^{3/2} \approx 21.082. \\
+\end{align*}\]</span></p>
+<p>You can also use sympy to calculate definite integrals by using the method <code>y.integrate((x, a, b))</code>.</p>
+<div class="cell" data-execution_count="25">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.Symbol(<span class="st">'x'</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> sp.sqrt(x)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> y.integrate((x, <span class="dv">0</span>, <span class="dv">10</span>))</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A = </span><span class="sc">{</span>A<span class="sc">}</span><span class="ss"> ≈ </span><span class="sc">{</span>A<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>A = 20*sqrt(10)/3 ≈ 21.082</code></pre>
+</div>
+</div>
+<p>A couple more rules for the definite integral I’ll mention involve the endpoints <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, called the <strong>limits of integration</strong>. Since all we’re doing is summing up rectangles, we can always split up a sum over the interval <span class="math inline">\([a,b]\)</span> into a sum over two subintervals <span class="math inline">\([a,c]\)</span> and <span class="math inline">\([c,b]\)</span>. That is, if <span class="math inline">\(y=f(x)\)</span>, then</p>
+<p><span class="math display">\[\int_a^b y dx = \int_a^c y dx + \int_c^d y dx.\]</span></p>
+<p>We can also swap the limits of integration if we agree on the convention that doing so flips the sign of the integral,</p>
+<p><span class="math display">\[\int_a^b y dx = -\int_b^a y dx.\]</span></p>
+<p>We can even have either limit be infinite, provided that it makes sense to integrate the function over an infinite interval. We can do so as long as the output isn’t a NaN value like <span class="math inline">\(\infty - \infty\)</span>. For technical reasons these types of integrals are sometimes called <strong>improper integrals</strong>.</p>
+<p>For example, suppose we had the function <span class="math inline">\(y=e^{-x}\)</span>. We can integrate this function from <span class="math inline">\(a=0\)</span> to <span class="math inline">\(b=\infty\)</span> just fine. First, notice that taking <span class="math inline">\(u=-x\)</span> we get</p>
+<p><span class="math display">\[\int e^{-x} dx = \int e^u du = -e^{-x}.\]</span></p>
+<p>Then the definite integral is just</p>
+<p><span class="math display">\[\int_0^\infty e^{-x} dx = -e^{-x} \ \bigg |_{x=0}^{x=\infty} = -e^{-\infty} + e^{-0} = 1.\]</span></p>
+<p>The last equality follows from the fact that <span class="math inline">\(e^{-N} \approx 0\)</span> when <span class="math inline">\(N\)</span> is infinitely large. Strangely, the area under the curve of this infinite graph is exactly one. Curves with area one are called probability density functions. They can be used to create probability distributions. I’ll talk more on that in a few lessons.</p>
+<div class="cell" data-execution_count="26">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: np.exp(<span class="op">-</span>x)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>plot_function_with_area(x, f, a<span class="op">=</span><span class="dv">0</span>, b<span class="op">=</span><span class="dv">10</span>, title<span class="op">=</span><span class="st">'$y=e^{-x}$'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
