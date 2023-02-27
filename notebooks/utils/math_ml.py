@@ -363,16 +363,17 @@ def plot_tangent_contour(x, y, x0, y0, f, f_tangent, dfdx, title=''):
     plt.title(title)
     plt.show()
     
-def plot_approximating_rectangles(x, f, dx=1, show_all_xticks=True):
+def plot_approximating_rectangles(x, f, dx=1, show_all_xticks=True, title='', print_area=True, **kwargs):
     y = f(x)
     x_rect = np.arange(min(x), max(x), dx) + dx / 2
     n_rects = len(x_rect)
     y_rect = f(x_rect + dx / 2)
-    print(f'Approximate Area: {np.sum(y_rect * dx)}')
+    if print_area:
+        print(f'Approximate Area: {np.sum(y_rect * dx)}')
     plt.figure(figsize=(4, 3))
-    plt.plot(x, y, color='red')
-    plt.bar(x_rect, y_rect, width=dx, edgecolor='black', facecolor='steelblue', alpha=0.7, linewidth=1)
-    plt.title(f'{n_rects} Rectangles')
+    plt.plot(x, y, color='red', linewidth=2)
+    plt.bar(x_rect, y_rect, width=dx, edgecolor='steelblue', facecolor='steelblue', **kwargs)
+    plt.title(title)
     if show_all_xticks:
         plt.xticks(np.arange(min(x), max(x) + 1))
     plt.show()
@@ -380,6 +381,7 @@ def plot_approximating_rectangles(x, f, dx=1, show_all_xticks=True):
 def plot_function_with_area(x, f, a, b, title='', xlabel='$x$', ylabel='$y$', **kwargs):
     y = f(x)
     mask = (x >= a) & (x <= b)
+    plt.figure(figsize=(4, 3))
     plt.plot(x, y, color='red', **kwargs)
     plt.fill_between(x, y, where=mask, color='steelblue', alpha=0.7)
     plt.title(title)
