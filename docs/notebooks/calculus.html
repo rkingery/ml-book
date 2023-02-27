@@ -249,12 +249,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p>In this lesson, I’ll cover the basics of the calculus of a single variable. Calculus is often divided into different areas, those being:</p>
 <ul>
-<li>Infinitesimals: How to manipulate numbers that are “infinitely” small.</li>
+<li>Infinitesimals: How to manipulate numbers that are infinitely small or large.</li>
 <li>Differentiation: How one variable changes continuously in response to one or more other variables.</li>
 <li>Integration: How to add up infinitely many small numbers to get a finite number.</li>
-<li>Limits: What happens as one value gets closer to another.</li>
 </ul>
-<p>Not all of these topics are equally important to know for machine learning, but I’ll try to at least touch on each topic a little bit. Let’s get started.</p>
+<p>Let’s get started.</p>
 <div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
@@ -297,7 +296,7 @@ x + epsilon^2 = 1.0</code></pre>
 <p>The inverse of an infinitesimal must evidently be a really big number <span class="math inline">\(N = \frac{1}{\varepsilon}\)</span>. These are called <em>infinitely large</em> numbers. Technically speaking, a positive <strong>infinitely large</strong> number is a hyperreal number that’s much larger than any positive real number <span class="math inline">\(x\)</span>,</p>
 <p><span class="math display">\[0 \leq x \ll N.\]</span></p>
 <p>Similarly for infinitely large negative numbers, we’d have <span class="math inline">\(N \ll x &lt; 0\)</span>.</p>
-<p>If in practice we’d think of an infinitesimal as a tiny number like <span class="math inline">\(\varepsilon = 10^{-10}\)</span>, we’d think of an infinitely large number a really large number like <span class="math inline">\(N=10^{10}\)</span>. If <span class="math inline">\(N\)</span> is really large, then <span class="math inline">\(N^2\)</span> is really really large, so large that it might as well be infinity,</p>
+<p>If in practice we’d think of an infinitesimal as a tiny number like <span class="math inline">\(\varepsilon = 10^{-10}\)</span>, we’d think of an infinitely large number a really big number like <span class="math inline">\(N=10^{10}\)</span>. If <span class="math inline">\(N\)</span> is really big, then <span class="math inline">\(N^2\)</span> is really really big, so big that it might as well be infinity,</p>
 <p><span class="math display">\[N^2 \approx \infty.\]</span></p>
 <p>If <span class="math inline">\(x=1\)</span>, then <span class="math inline">\(x + N \approx N\)</span>. As far as a computer is concerned you can’t really even tell the difference.</p>
 <div class="cell" data-execution_count="3">
@@ -319,6 +318,7 @@ N^2 = 1e+20
 x + N^2 = 1e+20</code></pre>
 </div>
 </div>
+<p><strong>Aside:</strong> For historical reasons, most modern calculus books don’t talk about infinitesimals or infinitely large numbers at all. It’s not because they’re not rigorous, at least anymore. It has to do with the history of calculus. For a long time people had a hard time pinning down what exactly these infinitely small numbers really were. To get around this, in the 19th century many mathematicians started to think instead in terms of <a href="https://en.wikipedia.org/wiki/Limit_(mathematics)">limits</a>. I personally find that the language of limits tends to complicate understanding of the subject, so I’ve decided not to cover it here. You’ll see we don’t even need them anywhere in this book.</p>
 </section>
 <section id="differential-calculus" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="differential-calculus"><span class="header-section-number">3.2</span> Differential Calculus</h2>
@@ -936,7 +936,7 @@ int y dx = -x**4/4 - 7*cos(x)</code></pre>
 <p><span class="math display">\[\int d(uv) = \int udv + \int vdu.\]</span></p>
 <p>Since <span class="math inline">\(uv = \int d(uv)\)</span>, we can re-arrange terms to get the rule for integration by parts,</p>
 <p><span class="math display">\[\int u dv = uv - \int v du.\]</span></p>
-<p>Using integration by parts in practice isn’t often as straight forward as the product rule. To make integration by parts work in practice, you want to try to choose <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> so the right-hand side is easier to integrate than the left-hand side.</p>
+<p>Actually using integration by parts to calculate things isn’t often as straight forward as the product rule. To make integration by parts work in practice, you want to try to choose <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> so the right-hand side is easier to integrate than the left-hand side.</p>
 <p>As a quick example, suppose we wanted to integrate <span class="math inline">\(y = x e^x\)</span>. What we could do is take <span class="math inline">\(u = x\)</span> and <span class="math inline">\(v=e^x\)</span>, so <span class="math inline">\(du=dx\)</span> and <span class="math inline">\(dv = e^x dx\)</span>. Then we’d have</p>
 <p><span class="math display">\[\int x e^x dx = x e^x - \int e^x dx = x e^x - e^x.\]</span></p>
 <div class="cell" data-execution_count="17">
@@ -981,6 +981,7 @@ int y dx = (x - 1)*exp(x)</code></pre>
 int y dx = exp(x**2)/2</code></pre>
 </div>
 </div>
+<p>Here’s a summary table of the integral rules I’ve covered so far.</p>
 <table class="table">
 <colgroup>
 <col style="width: 30%">
