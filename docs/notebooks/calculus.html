@@ -208,7 +208,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#infinitesimals" id="toc-infinitesimals" class="nav-link active" data-scroll-target="#infinitesimals"><span class="toc-section-number">3.1</span>  Infinitesimals</a></li>
+  <li><a href="#infinitesimal-calculus" id="toc-infinitesimal-calculus" class="nav-link active" data-scroll-target="#infinitesimal-calculus"><span class="toc-section-number">3.1</span>  Infinitesimal Calculus</a>
+  <ul class="collapse">
+  <li><a href="#infinitesimals" id="toc-infinitesimals" class="nav-link" data-scroll-target="#infinitesimals"><span class="toc-section-number">3.1.1</span>  Infinitesimals</a></li>
+  <li><a href="#infinitely-large-numbers" id="toc-infinitely-large-numbers" class="nav-link" data-scroll-target="#infinitely-large-numbers"><span class="toc-section-number">3.1.2</span>  Infinitely Large Numbers</a></li>
+  <li><a href="#limits" id="toc-limits" class="nav-link" data-scroll-target="#limits"><span class="toc-section-number">3.1.3</span>  Limits</a></li>
+  </ul></li>
   <li><a href="#differential-calculus" id="toc-differential-calculus" class="nav-link" data-scroll-target="#differential-calculus"><span class="toc-section-number">3.2</span>  Differential Calculus</a>
   <ul class="collapse">
   <li><a href="#differentials-and-derivatives" id="toc-differentials-and-derivatives" class="nav-link" data-scroll-target="#differentials-and-derivatives"><span class="toc-section-number">3.2.1</span>  Differentials and Derivatives</a></li>
@@ -249,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p>In this lesson, I’ll cover the basics of the calculus of a single variable. Calculus is often divided into different areas, those being:</p>
 <ul>
-<li>Infinitesimals: How to manipulate numbers that are infinitely small or large.</li>
+<li>Infinitesimals: How to manipulate numbers that are infinitely small or infinitely large.</li>
 <li>Differentiation: How one variable changes continuously in response to one or more other variables.</li>
 <li>Integration: How to add up infinitely many small numbers to get a finite number.</li>
 </ul>
@@ -266,8 +271,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="infinitesimals" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="infinitesimals"><span class="header-section-number">3.1</span> Infinitesimals</h2>
+<section id="infinitesimal-calculus" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="infinitesimal-calculus"><span class="header-section-number">3.1</span> Infinitesimal Calculus</h2>
+<section id="infinitesimals" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="infinitesimals"><span class="header-section-number">3.1.1</span> Infinitesimals</h3>
 <p>Perhaps most fundamental to what calculus is is the idea of an infinitely small number, usually called an <em>infinitesimal</em>. A positive <strong>infinitesimal</strong> is a <em>hyperreal number</em> <span class="math inline">\(\varepsilon\)</span> that’s much smaller than any positive real number <span class="math inline">\(x\)</span>,</p>
 <p><span class="math display">\[0 &lt; \varepsilon \ll x.\]</span></p>
 <p>A negative infinitesimal is defined similarly, except with the signs all flipped, <span class="math inline">\(x \ll \varepsilon &lt; 0\)</span>. I say “hyperreal number” because infinitesimals aren’t technically real numbers. They extend the number line in a sense. Thankfully we won’t really have to worry about this technical distinction in this book.</p>
@@ -293,6 +300,9 @@ epsilon^2 = 1.0000000000000001e-20
 x + epsilon^2 = 1.0</code></pre>
 </div>
 </div>
+</section>
+<section id="infinitely-large-numbers" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="infinitely-large-numbers"><span class="header-section-number">3.1.2</span> Infinitely Large Numbers</h3>
 <p>The inverse of an infinitesimal must evidently be a really big number <span class="math inline">\(N = \frac{1}{\varepsilon}\)</span>. These are called <em>infinitely large</em> numbers. Technically speaking, a positive <strong>infinitely large</strong> number is a hyperreal number that’s much larger than any positive real number <span class="math inline">\(x\)</span>,</p>
 <p><span class="math display">\[0 \leq x \ll N.\]</span></p>
 <p>Similarly for infinitely large negative numbers, we’d have <span class="math inline">\(N \ll x &lt; 0\)</span>.</p>
@@ -318,7 +328,17 @@ N^2 = 1e+20
 x + N^2 = 1e+20</code></pre>
 </div>
 </div>
-<p><strong>Aside:</strong> For historical reasons, most modern calculus books don’t talk about infinitesimals or infinitely large numbers at all. It’s not because they’re not rigorous, at least anymore. It has to do with the history of calculus. For a long time people had a hard time pinning down what exactly these infinitely small numbers really were. To get around this, in the 19th century many mathematicians started to think instead in terms of <a href="https://en.wikipedia.org/wiki/Limit_(mathematics)">limits</a>. I personally find that the language of limits tends to complicate understanding of the subject, so I’ve decided not to cover it here. You’ll see we don’t even need them anywhere in this book.</p>
+</section>
+<section id="limits" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="limits"><span class="header-section-number">3.1.3</span> Limits</h3>
+<p>For historical reasons, most modern calculus books don’t talk about infinitesimals or infinitely large numbers at all. It’s not because they’re not rigorous, at least anymore. It mostly has to do with the history of calculus. For a long time people had a hard time rigorously pinning down what exactly these infinitely small numbers were. To get around this, in the 19th century many mathematicians started to think instead in terms of <a href="https://en.wikipedia.org/wiki/Limit_(mathematics)">limits</a>.</p>
+<p>In the language of infinitesimals, we’d say that the <strong>limit</strong> of a function <span class="math inline">\(y=f(x)\)</span> as <span class="math inline">\(x\)</span> approaches some value <span class="math inline">\(a\)</span> is the value <span class="math inline">\(L\)</span> such that</p>
+<p><span class="math display">\[L \approx f(a + \varepsilon),\]</span></p>
+<p>where <span class="math inline">\(\varepsilon\)</span> is any infinitesimal added to <span class="math inline">\(a\)</span>. Said differently, <span class="math inline">\(f(x) \approx L\)</span> whenever <span class="math inline">\(x \approx a\)</span>. Limits are usually written with the notation</p>
+<p><span class="math display">\[\lim_{x \rightarrow a} f(x) = L.\]</span></p>
+<p>In the language of limits, we’d think of <span class="math inline">\(x\)</span> being some value that gets closer and closer to <span class="math inline">\(a\)</span>, which then causes <span class="math inline">\(f(x)\)</span> to get closer and closer to <span class="math inline">\(L\)</span>.</p>
+<p>I personally find that the language of limits tends to complicate understanding of calculus. Anything phrased in terms of limits pretty much can be more easily phrased in terms of infinitesimals. As such, you’ll see we don’t even really need limits anywhere in this book.</p>
+</section>
 </section>
 <section id="differential-calculus" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="differential-calculus"><span class="header-section-number">3.2</span> Differential Calculus</h2>
@@ -336,7 +356,7 @@ x + N^2 = 1e+20</code></pre>
 <p><span class="math display">\[\frac{dy}{dx} = 2x.\]</span></p>
 <p>Notice that the derivative is not itself infinitesimal since all the differentials are on the left-hand side. It’s a real number, on the same scale as <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
 <p>Of course, we can calculate these things numerically too. We just have to be careful about floating point roundoff. Since we’re subtracting two numbers that are almost equal we’ll inevitably get a lot of roundoff if we make <span class="math inline">\(dx\)</span> too small. When coding these things you have to be careful about how small you choose <span class="math inline">\(dx\)</span>. I’ll take <span class="math inline">\(dx=10^{-5}\)</span> here. If the calculation were exact, we’d expect to get</p>
-<p><span class="math display">\[dy=2xdx = 2 \cdot 10^{-5} = 2.00001.\]</span></p>
+<p><span class="math display">\[dy=2xdx = 2 \cdot 10^{-5} = 0.00002.\]</span></p>
 <p>But evidently we don’t get this exactly. In fact, since <span class="math inline">\(dx^2 = 10^{-10}\)</span>, we should expect to start seeing errors around 10 decimal places due to <span class="math inline">\(dx\)</span> not being exactly infinitesimal, which is what we’re seeing here.</p>
 <div class="cell" data-execution_count="4">
 <details>
@@ -1183,8 +1203,8 @@ A \approx \sum_{i=0}^{N-1} A_i &amp;= \sum_{i=0}^{N-1} y_i dx \\
 <p>We can also swap the limits of integration if we agree on the convention that doing so flips the sign of the integral,</p>
 <p><span class="math display">\[\int_a^b y dx = -\int_b^a y dx.\]</span></p>
 <p>We can even have either limit be infinite, provided that it makes sense to integrate the function over an infinite interval. We can do so as long as the output isn’t a NaN value like <span class="math inline">\(\infty - \infty\)</span>. For technical reasons these types of integrals are sometimes called <strong>improper integrals</strong>.</p>
-<p>For example, suppose we had the function <span class="math inline">\(y=e^{-x}\)</span>. We can integrate this function from <span class="math inline">\(a=0\)</span> to <span class="math inline">\(b=\infty\)</span> just fine. First, notice that taking <span class="math inline">\(u=-x\)</span> we get</p>
-<p><span class="math display">\[\int e^{-x} dx = \int e^u du = -e^{-x}.\]</span></p>
+<p>For example, suppose we had the function <span class="math inline">\(y=e^{-x}\)</span>. We can integrate this function from <span class="math inline">\(a=0\)</span> to <span class="math inline">\(b=\infty\)</span> just fine. First, notice that taking a change of variables <span class="math inline">\(u=-x\)</span> we get <span class="math inline">\(du=-dx\)</span>, so</p>
+<p><span class="math display">\[\int e^{-x} dx = -\int e^u du = -e^{u} = -e^{-x}.\]</span></p>
 <p>Then the definite integral is just</p>
 <p><span class="math display">\[\int_0^\infty e^{-x} dx = -e^{-x} \ \bigg |_{x=0}^{x=\infty} = -e^{-\infty} + e^{-0} = 1.\]</span></p>
 <p>The last equality follows from the fact that <span class="math inline">\(e^{-N} \approx 0\)</span> when <span class="math inline">\(N\)</span> is infinitely large. Strangely, the area under the curve of this infinite graph is exactly one. Curves with area one are called probability density functions. They can be used to create probability distributions. I’ll talk more on that in a few lessons.</p>
