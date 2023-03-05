@@ -9,7 +9,8 @@ local = Path().cwd().parent / 'local'
 ## basic-math
 
 def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labels=None, colors=None, xlabel='$x$', ylabel='$y$',
-                  legend_fontsize=None, legend_loc=None, points=None, point_colors=None, point_labels=None):
+                  legend_fontsize=None, legend_loc=None, points=None, point_colors=None, point_labels=None, figsize=(4, 3),
+                  **kwargs):
     xlim = xlim if xlim is not None else (min(x), max(x))
     ylim = ylim if ylim is not None else xlim
     xlow, xhigh = xlim
@@ -17,13 +18,13 @@ def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labe
     if not isinstance(f, list):
         f = [f]
         colors = ['red']
-    plt.figure(figsize=(4, 3))
+    plt.figure(figsize=figsize)
     plt.hlines(0 * x, xlow, xhigh, color='black', linewidth=0.7)
     plt.vlines(0 * f[0](x), ylow, yhigh, color='black', linewidth=0.7)
     for i, fn in enumerate(f):
         label = labels[i] if isinstance(labels, list) else None
         color = colors[i] if isinstance(colors, list) else None
-        plt.plot(x, fn(x), label=label, color=color)
+        plt.plot(x, fn(x), label=label, color=color, **kwargs)
     if points is not None:
         for point in points:
             x0, y0 = point
@@ -52,9 +53,41 @@ def query_wolfram_alpha(query, api_file='wolfram_key.txt', answer='formatted'):
     return answer
 
 def plot_function_3d(x, y, f, title='', ticks_every=None, elev=30, azim=30, labels=None, zorders=None, colors=None, xlim=None, 
-                     ylim=None, zlim=None, labelpad=0, points=None, lines=None, figsize=None, titlepad=0, dist=10, **kwargs):
+                     ylim=None, zlim=None, labelpad=0, points=None, lines=None, figsize=(4, 3), titlepad=0, dist=10, 
+                     arrows=None, arrow_offset=0.01, title_fontsize=14, curves=None, **kwargs):
+    from mpl_toolkits.mplot3d.proj3d import proj_transform
+    from mpl_toolkits.mplot3d.axes3d import Axes3D
+    from matplotlib.patches import FancyArrowPatch
     import warnings
     warnings.filterwarnings('ignore')
+
+    class Arrow3D(FancyArrowPatch):
+        def __init__(self, x, y, z, dx, dy, dz, *args, **kwargs):
+            super().__init__((0, 0), (0, 0), *args, **kwargs)
+            self._xyz = (x, y, z)
+            self._dxdydz = (dx, dy, dz)
+
+        def draw(self, renderer):
+            x1, y1, z1 = self._xyz
+            dx, dy, dz = self._dxdydz
+            x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
+            xs, ys, zs = proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
+            self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
+            super().draw(renderer)
+
+        def do_3d_projection(self, renderer=None):
+            x1, y1, z1 = self._xyz
+            dx, dy, dz = self._dxdydz
+            x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
+            xs, ys, zs = proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
+            self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
+            return np.min(zs)
+
+    def _arrow3D(ax, x, y, z, dx, dy, dz, *args, **kwargs):
+        arrow = Arrow3D(x, y, z, dx, dy, dz, *args, **kwargs)
+        ax.add_artist(arrow)
+    setattr(Axes3D, 'arrow3D', _arrow3D)
+    
     if not isinstance(f, list):
         f = [f]
     X, Y = np.meshgrid(x, y)
@@ -72,6 +105,11 @@ def plot_function_3d(x, y, f, title='', ticks_every=None, elev=30, azim=30, labe
         color = colors[i] if isinstance(colors, list) else None
         label = labels[i] if isinstance(labels, list) else None
         ax.plot_surface(X, Y, fn(X, Y), zorder=zorder, color=color, label=label, **kwargs)
+    if curves is not None:
+        for curve in curves:
+            if curve is not None:
+                xc, yc, zc = curve
+                ax.plot(xc, yc, zc, color='black', linewidth=0.5)
     if points is not None:
         for point in points:
             x0, y0, z0 = point
@@ -82,8 +120,14 @@ def plot_function_3d(x, y, f, title='', ticks_every=None, elev=30, azim=30, labe
         for line in lines:
             xline, yline, zline = line
             ax.plot3D(xline, yline, zline, color='red', zorder=9, linewidth=1, path_effects=[outline])
+    if arrows is not None:
+        for arrow in arrows:
+            x0, y0, z0 = arrow[0]
+            x1, y1, z1 = arrow[1]
+            ax.arrow3D(x0 + arrow_offset, y0 + arrow_offset, z0 + arrow_offset, 
+                       x1, y1, z1, mutation_scale=15, fc='red')
     ax.view_init(elev=elev, azim=azim)
-    ax.set_title(title, y=1, pad=titlepad, fontsize=15)
+    ax.set_title(title, y=1, pad=titlepad, fontsize=title_fontsize)
     if ticks_every is not None:
         ax.set_xticks(np.arange(int(xlow), int(xhigh) + 1, ticks_every[0]))
         ax.set_yticks(np.arange(int(ylow), int(yhigh) + 1, ticks_every[1]))
@@ -99,18 +143,58 @@ def plot_function_3d(x, y, f, title='', ticks_every=None, elev=30, azim=30, labe
         pass # ax.legend()
     plt.show()
     
-def plot_countour(x, y, f, title=''):
+def plot_contour(x, y, f, xlim=None, ylim=None, title=None, ticks_every=None, labels=None, show_clabels=False,
+                  xlabel='$x$', ylabel='$y$', legend_fontsize=None, legend_loc=None, points=None, arrows=None,
+                  point_colors=None, point_labels=None, curves=None, figsize=(4, 3), levels=None, colors=None,
+                  alphas=None, **kwargs):
+    if not isinstance(f, list):
+        f = [f]
     X, Y = np.meshgrid(x, y)
-    Z = f(X, Y)
-    plt.figure(figsize=(4, 3))
-    cs = plt.contour(X, Y, Z)
-    plt.clabel(cs, fmt='%1.1f')
+    xlim = xlim if xlim is not None else (min(x), max(x))
+    ylim = ylim if ylim is not None else (min(y), max(y))
+    xlow, xhigh = xlim
+    ylow, yhigh = ylim
+    plt.figure(figsize=figsize)
+    plt.hlines(0 * x, xlow, xhigh, color='black', linewidth=0.7)
+    plt.vlines(0 * y, ylow, yhigh, color='black', linewidth=0.7)
+    for i, fn in enumerate(f):
+        label = labels[i] if isinstance(labels, list) else None
+        level = levels[i] if isinstance(levels, list) else None
+        color = colors[i] if isinstance(colors, list) else None
+        alpha = alphas[i] if isinstance(alphas, list) else None
+        cs = plt.contour(X, Y, fn(X, Y), colors=color, labels=label, levels=level, alpha=alpha, zorder=0, **kwargs)
+        if show_clabels:
+            plt.clabel(cs)
+    if curves is not None:
+        for curve in curves:
+            xc, fc = curve
+            plt.plot(xc, fc(xc), color='green', linewidth=2)
+    if arrows is not None:
+        for arrow in arrows:
+            x0, y0 = arrow[0]
+            x1, y1 = arrow[1]
+            plt.quiver(x0, y0, x1, y1, color='red', angles='xy', scale_units='xy', scale=1, headwidth=3,
+                       width=0.013, headlength=4, edgecolors='black', linewidth=1, zorder=2)
+    if points is not None:
+        for point in points:
+            x0, y0 = point
+            label = point_labels[i] if isinstance(point_labels, list) else None
+            color = point_colors[i] if isinstance(point_colors, list) else 'red'
+            plt.scatter([x0], [y0], marker='o', color=color, label=label, edgecolors='black', zorder=3)
     plt.title(title)
-    plt.xlabel('$x$')
-    plt.ylabel('$y$')
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    if ticks_every is not None:
+        plt.xticks(np.arange(int(xlow), int(xhigh) + 1, ticks_every[0]))
+        plt.yticks(np.arange(int(ylow), int(yhigh) + 1, ticks_every[1]))
+    plt.grid(True, alpha=0.5)
+    if labels is not None:
+        plt.legend(loc=legend_loc, fontsize=legend_fontsize)
+    plt.xlim(*xlim)
+    plt.ylim(*ylim)
     plt.show()
 
-    
+
 ## numerical-computing
 
 def represent_as_float(x, n, n_exp, n_man, bias):
@@ -201,15 +285,16 @@ def plot_vectors(vectors, xlim=None, ylim=None, title='', labels=None, colors=No
     plt.title(title)
     plt.show()
     
-def plot_vector_field(A, b=None, xlim=(-10, 10), ylim=(-10, 10), n_points=20, color='steelblue', alpha=1, 
+def plot_vector_field(F, xlim=(-10, 10), ylim=(-10, 10), n_points=20, color='steelblue', alpha=1, 
                       scale=None, title='', figsize=(5, 4)):
-    if b is None:
-        b = np.zeros((A.shape[0], 1))
+    # if b is None:
+    #     b = np.zeros((A.shape[0], 1))
     # Define initial grid of vectors v = [x, y]
     vx, vy = np.meshgrid(np.linspace(xlim[0], xlim[1], n_points), np.linspace(ylim[0], ylim[1], n_points))
     # Define output vectors w = A v
-    wx = A[0, 0] * vx + A[0, 1] * vy + b[1, 0]
-    wy = A[1, 0] * vx + A[1, 1] * vy + b[1, 0]
+    # wx = A[0, 0] * vx + A[0, 1] * vy + b[1, 0]
+    # wy = A[1, 0] * vx + A[1, 1] * vy + b[1, 0]
+    wx, wy = F(vx, vy)
     plt.figure(figsize=figsize)
     plt.quiver(vx, vy, wx, wy, color=color, alpha=alpha, scale=scale, angles='xy', scale_units='xy')
     plt.xlabel('x')
@@ -272,95 +357,6 @@ def plot_right_triangle(points=[(0, 0), (1, 0), (1, 1)], base_label='$dx$', heig
     plt.text(x[1] + 0.5 * offset, mid_height, height_label)
     plt.text(mid_base - 2.5 * offset, mid_height + 2.5 * offset, hyp_label)
     plt.axis('off')
-    plt.show()
-
-def plot_tangent_curve(x, x0, f, f_tangent, xlim=None, ylim=None, title=None):
-    plt.figure(figsize=(4, 3))
-    plt.plot(x, f(x), zorder=0)
-    plt.plot(x, f_tangent(x), zorder=1)
-    plt.scatter([x0], [f(x0)], marker='o', color='red', zorder=2)
-    plt.title(title)
-    plt.xlabel('$x$')
-    plt.ylabel('$y$')
-    plt.grid(True, alpha=0.5)
-    if xlim is not None:
-        plt.xlim(*xlim)
-    if ylim is not None:
-        plt.ylim(*ylim)
-    plt.show()
-    
-def plot_tangent_plane(x, y, x0, y0, f, f_tangent, dfdx, title='', plot_grad=False, grad_scale=2):
-    from mpl_toolkits.mplot3d.proj3d import proj_transform
-    from mpl_toolkits.mplot3d.axes3d import Axes3D
-    from matplotlib.patches import FancyArrowPatch
-
-    class Arrow3D(FancyArrowPatch):
-        def __init__(self, x, y, z, dx, dy, dz, *args, **kwargs):
-            super().__init__((0, 0), (0, 0), *args, **kwargs)
-            self._xyz = (x, y, z)
-            self._dxdydz = (dx, dy, dz)
-
-        def draw(self, renderer):
-            x1, y1, z1 = self._xyz
-            dx, dy, dz = self._dxdydz
-            x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
-            xs, ys, zs = proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
-            self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
-            super().draw(renderer)
-
-        def do_3d_projection(self, renderer=None):
-            x1, y1, z1 = self._xyz
-            dx, dy, dz = self._dxdydz
-            x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
-            xs, ys, zs = proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
-            self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
-            return np.min(zs)
-
-    def _arrow3D(ax, x, y, z, dx, dy, dz, *args, **kwargs):
-        arrow = Arrow3D(x, y, z, dx, dy, dz, *args, **kwargs)
-        ax.add_artist(arrow)
-    setattr(Axes3D, 'arrow3D', _arrow3D)
-    
-    X, Y = np.meshgrid(x, y)
-    Z = f(X, Y)
-    Z_tangent = f_tangent(X, Y)
-    grad = dfdx(x0, y0)
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-    ax.plot_surface(X, Y, Z, color='blue', alpha=0.4, zorder=1)
-    ax.plot_surface(X, Y, Z_tangent, color='green', alpha=0.4, zorder=2)
-    if plot_grad:
-        offset = 0.01
-        ax.arrow3D(x0 + offset, y0 + offset, f(x0, y0) + offset, grad[0] / grad_scale, grad[1] / grad_scale, 0, 
-                   mutation_scale=15, fc='red')
-    ax.scatter([x0], [y0], [f(x0, y0)], s=250, marker='.', color='red', zorder=4, edgecolors='black')
-    ax.set_title(title)
-    ax.set_xlabel('$x$')
-    ax.set_ylabel('$y$')
-    ax.set_zlabel('$z$')
-    plt.show()
-    
-def plot_tangent_contour(x, y, x0, y0, f, f_tangent, dfdx, title=''):
-    X, Y = np.meshgrid(x, y)
-    Z = f(X, Y)
-    Z0 = f_tangent(X, Y)
-    
-    grad = dfdx(x0, y0)
-    m = - grad[1] / grad[0]
-    b = y0 - m * x0
-    y_tangent = m * x + b
-
-    plt.figure(figsize=(4, 4))
-    plt.contour(X, Y, Z, zorder=1)
-    plt.plot(x, y_tangent, color='green', zorder=2, linewidth=3)
-    plt.quiver(x0, y0, grad[0], grad[1], color='red', angles='xy', scale_units='xy', scale=3, headwidth=3,
-               zorder=3, width=0.013, headlength=4, edgecolors='black', linewidth=1)
-    plt.scatter([x0], [y0], marker='o', color='red', edgecolors='black', zorder=4)
-    plt.xlim(x.min(), x.max())
-    plt.ylim(y.min(), y.max())
-    plt.xlabel('$x$')
-    plt.ylabel('$y$')
-    plt.title(title)
     plt.show()
     
 def plot_approximating_rectangles(x, f, dx=1, show_all_xticks=True, title='', print_area=True, **kwargs):
