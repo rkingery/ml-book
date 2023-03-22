@@ -208,14 +208,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#differential-calculus-in-2d" id="toc-differential-calculus-in-2d" class="nav-link active" data-scroll-target="#differential-calculus-in-2d"><span class="toc-section-number">7.1</span>  Differential Calculus in 2D</a>
-  <ul class="collapse">
-  <li><a href="#partial-differentials" id="toc-partial-differentials" class="nav-link" data-scroll-target="#partial-differentials"><span class="toc-section-number">7.1.1</span>  Partial Differentials</a></li>
-  <li><a href="#total-differentials" id="toc-total-differentials" class="nav-link" data-scroll-target="#total-differentials"><span class="toc-section-number">7.1.2</span>  Total Differentials</a></li>
-  <li><a href="#tangent-planes" id="toc-tangent-planes" class="nav-link" data-scroll-target="#tangent-planes"><span class="toc-section-number">7.1.3</span>  Tangent Planes</a></li>
-  <li><a href="#gradients" id="toc-gradients" class="nav-link" data-scroll-target="#gradients"><span class="toc-section-number">7.1.4</span>  Gradients</a></li>
-  <li><a href="#hessians" id="toc-hessians" class="nav-link" data-scroll-target="#hessians"><span class="toc-section-number">7.1.5</span>  Hessians</a></li>
-  </ul></li>
+  <li><a href="#partial-differentials" id="toc-partial-differentials" class="nav-link active" data-scroll-target="#partial-differentials"><span class="toc-section-number">7.1</span>  Partial Differentials</a></li>
+  <li><a href="#total-differentials" id="toc-total-differentials" class="nav-link" data-scroll-target="#total-differentials"><span class="toc-section-number">7.2</span>  Total Differentials</a></li>
+  <li><a href="#tangent-planes" id="toc-tangent-planes" class="nav-link" data-scroll-target="#tangent-planes"><span class="toc-section-number">7.3</span>  Tangent Planes</a></li>
+  <li><a href="#the-gradient" id="toc-the-gradient" class="nav-link" data-scroll-target="#the-gradient"><span class="toc-section-number">7.4</span>  The Gradient</a></li>
+  <li><a href="#the-hessian" id="toc-the-hessian" class="nav-link" data-scroll-target="#the-hessian"><span class="toc-section-number">7.5</span>  The Hessian</a></li>
+  <li><a href="#the-jacobian" id="toc-the-jacobian" class="nav-link" data-scroll-target="#the-jacobian"><span class="toc-section-number">7.6</span>  The Jacobian</a></li>
+  <li><a href="#differentiation-rules" id="toc-differentiation-rules" class="nav-link" data-scroll-target="#differentiation-rules"><span class="toc-section-number">7.7</span>  Differentiation Rules</a></li>
+  <li><a href="#volume-integration" id="toc-volume-integration" class="nav-link" data-scroll-target="#volume-integration"><span class="toc-section-number">7.8</span>  Volume Integration</a></li>
+  <li><a href="#calculus-in-higher-dimensions" id="toc-calculus-in-higher-dimensions" class="nav-link" data-scroll-target="#calculus-in-higher-dimensions"><span class="toc-section-number">7.9</span>  Calculus In Higher Dimensions</a></li>
   </ul>
 </nav>
 </nav>
@@ -252,13 +253,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils.math_ml <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="differential-calculus-in-2d" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="differential-calculus-in-2d"><span class="header-section-number">7.1</span> Differential Calculus in 2D</h2>
+<section id="partial-differentials" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="partial-differentials"><span class="header-section-number">7.1</span> Partial Differentials</h2>
 <p>In univariate calculus we were interested in functions of the form <span class="math inline">\(y=f(x)\)</span>, where <span class="math inline">\(y\)</span> is a single output that depends continuously on a single input <span class="math inline">\(x\)</span>. We can extend differentiation to higher dimensions as well. To keep things simple, let’s start with <em>bivariate</em> functions of the form <span class="math inline">\(z = f(x,y)\)</span>. The output <span class="math inline">\(z\)</span> will now depend continuously on <em>two</em> input variables <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
 <p>Recall the graph of a bivariate function is a two-dimensional surface. For example, here’s a plot of the function</p>
 <p><span class="math display">\[z = x^2 + y^2.\]</span></p>
 <p>The graph of this function is an upward-facing bowl centered at the origin <span class="math inline">\((0,0,0)\)</span>.</p>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
@@ -276,8 +277,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<section id="partial-differentials" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="partial-differentials"><span class="header-section-number">7.1.1</span> Partial Differentials</h3>
 <p>Suppose we have some bivariate function <span class="math inline">\(z=f(x,y)\)</span>. We ultimately want to figure out how does a small change in both inputs create small changes in the output. It’s simpler to start with the case where we only change one input at a time, while imagining the other one is constant.</p>
 <p>Let’s start by pretending <span class="math inline">\(y\)</span> is constant and only <span class="math inline">\(x\)</span> is allowed to vary. Then for all practical purposes <span class="math inline">\(z\)</span> is a function of <span class="math inline">\(x\)</span> alone. To make this easier to visualize I’ll write <span class="math inline">\(z = f(x, \color{red}{y}\color{black})\)</span> to represent this idea. Variables in black will be allowed to vary, and variables in red are assumed to be held constant.</p>
 <p>Let me also go ahead and introduce the notion of a <strong>partial differential</strong>. In situations where we’re only varying one input variable while holding the rest fixed, it’s common to use a special notation for the differentials. Instead of writing <span class="math inline">\(dz\)</span> for the differential of <span class="math inline">\(z\)</span>, we’d write <span class="math inline">\(\partial z\)</span> (pronounced “partial z”) to make it clear we’re only varying one input. If the input we’re varying is <span class="math inline">\(x\)</span>, we might write <span class="math inline">\(\partial_x z\)</span> to make this extra clear. If we’re varying <span class="math inline">\(y\)</span>, we’d write <span class="math inline">\(\partial_y z\)</span>. Since the input differentials <span class="math inline">\(dx\)</span> and <span class="math inline">\(dy\)</span> don’t depend on anything we can denote them either way. That is, <span class="math inline">\(\partial x = dx\)</span> and <span class="math inline">\(\partial y = dy\)</span>.</p>
@@ -365,8 +364,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(z = \frac{10}{5x - y}\)</span> whenever <span class="math inline">\(5x-y \neq 0\)</span>.</li>
 </ul>
 </section>
-<section id="total-differentials" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="total-differentials"><span class="header-section-number">7.1.2</span> Total Differentials</h3>
+<section id="total-differentials" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="total-differentials"><span class="header-section-number">7.2</span> Total Differentials</h2>
 <p>The partial differentials only say how much the output changes in response to one variable changing. What if both variables are allowed to change? Suppose again we have a function <span class="math inline">\(z=f(x,y)\)</span>, but this time we change <em>both</em> <span class="math inline">\(x\)</span> by <span class="math inline">\(dx\)</span> <em>and</em> <span class="math inline">\(y\)</span> by <span class="math inline">\(dy\)</span>. The total amount <span class="math inline">\(z\)</span> would change evidently must be</p>
 <p><span class="math display">\[dz = f(x+dx, y+dy) - f(x, y).\]</span></p>
 <p>Since we’re allowing both inputs to vary now we can use the regular <span class="math inline">\(dz\)</span> notation for the differential. We’d call <span class="math inline">\(dz\)</span> the <strong>total differential</strong> of <span class="math inline">\(z\)</span>.</p>
@@ -384,8 +383,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[dz = \partial_x z + \partial_y z = \frac{\partial z}{\partial x}dx + \frac{\partial z}{\partial y}dy.\]</span></p>
 <p>Evidently, we can think of an arbitrary small change in <span class="math inline">\(z\)</span> as being composed of two independent terms: One term that says how much <span class="math inline">\(z\)</span> will change in response to only <span class="math inline">\(x\)</span> varying, and another term that says how much <span class="math inline">\(z\)</span> will change in response to only <span class="math inline">\(y\)</span> varying. This is why I covered partial differentials first. We can build any total differential out of a sum of partial differentials. They’re in some sense a <em>basis</em> in the linear algebraic sense.</p>
 </section>
-<section id="tangent-planes" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="tangent-planes"><span class="header-section-number">7.1.3</span> Tangent Planes</h3>
+<section id="tangent-planes" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="tangent-planes"><span class="header-section-number">7.3</span> Tangent Planes</h2>
 <p>Let’s now try to get a visual understanding what these terms mean. Recall in the univariate case that we used the formula <span class="math inline">\(dy = \frac{dy}{dx} dx\)</span> to get a formula for the tangent line to the function <span class="math inline">\(y=f(x)\)</span> at the point <span class="math inline">\(x=a\)</span>,</p>
 <p><span class="math display">\[f(x) \approx f(a) + \frac{d}{dx} f(a) \cdot (x-a).\]</span></p>
 <p>The tangent line was the best approximation of the function <span class="math inline">\(y=f(x)\)</span> near the point <span class="math inline">\(x=a\)</span>, and the <em>slope</em> of the tangent line was just the derivative taken at the point <span class="math inline">\(a\)</span>. We can do a similar thing in the bivariate case.</p>
@@ -408,7 +407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">100</span>)</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">100</span>)</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>f_tangent <span class="op">=</span> <span class="kw">lambda</span> x, y: <span class="dv">2</span> <span class="op">*</span> a <span class="op">*</span> (x <span class="op">-</span> a) <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> b <span class="op">*</span> (y <span class="op">-</span> b) <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>f_tangent <span class="op">=</span> <span class="kw">lambda</span> x, y: dfdx(a, b)[<span class="dv">0</span>] <span class="op">*</span> (x <span class="op">-</span> a) <span class="op">+</span> dfdx(a, b)[<span class="dv">1</span>] <span class="op">*</span> (y <span class="op">-</span> b) <span class="op">+</span> f(a, b)</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, [f, f_tangent], labelpad<span class="op">=</span><span class="dv">5</span>, ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">4</span>], dist<span class="op">=</span><span class="dv">12</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>),</span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                 xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), zlim<span class="op">=</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>), elev<span class="op">=</span><span class="dv">30</span>, azim<span class="op">=-</span><span class="dv">45</span>,</span>
@@ -430,13 +429,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>As long as we’re near the point <span class="math inline">\((a,b)\)</span>, the function <span class="math inline">\(z=f(x,y)\)</span> is well approximated by its tangent plane. Said differently, we’ve managed to <strong>linearize</strong> the function near the point <span class="math inline">\((a,b)\)</span>. As long as <span class="math inline">\((x,y)\)</span> is close to <span class="math inline">\((a,b)\)</span>, we can for all practical purposes pretend the point is on the tangent plane. Anytime you see a plane or a line like this, you should immediately think linear algebra. Indeed, we’re on the cusp of seeing where calculus and linear algebra meet.</p>
 </section>
-<section id="gradients" class="level3" data-number="7.1.4">
-<h3 data-number="7.1.4" class="anchored" data-anchor-id="gradients"><span class="header-section-number">7.1.4</span> Gradients</h3>
+<section id="the-gradient" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="the-gradient"><span class="header-section-number">7.4</span> The Gradient</h2>
 <p>So far we’ve talked about partial derivatives and total differentials, but we’ve yet to talk about a <em>total derivative</em>. Let’s look again at the formula for the total differential,</p>
 <p><span class="math display">\[dz = \frac{\partial z}{\partial x}dx + \frac{\partial z}{\partial y}dy.\]</span></p>
 <p>What would it even mean in this case to talk about a derivative as a ratio of total differentials? To make headway here we should step back and stare at this equation. If you look carefully, you’ll see this equation is screaming at us to use vector notation. It kind of looks like a dot product between two vectors.</p>
 <p>If we define the following two vectors in the plane,</p>
-<p><span class="math display">\[d\mathbf{x} = (dx, dy), \quad \mathbf{g} = \bigg(\frac{\partial z}{\partial x}, \frac{\partial z}{\partial y}\bigg),\]</span></p>
+<p><span class="math display">\[d\mathbf{x} = (dx, dy), \quad \mathbf{g} = \mathbf{g}(\mathbf{x}) = \bigg(\frac{\partial z}{\partial x}, \frac{\partial z}{\partial y}\bigg),\]</span></p>
 <p>then we can write the total differential as the dot product <span class="math inline">\(dz = \mathbf{g} \cdot d\mathbf{x}\)</span>. Notice the analogy between this equation and the one for the univariate differential <span class="math inline">\(dy = \frac{dy}{dx} dx\)</span>. Evidently, the vector <span class="math inline">\(\mathbf{g}\)</span> acts like some kind of vector derivative. It’s called the <strong>gradient vector</strong>, or usually just the <strong>gradient</strong>. By abusing notation a little bit, we’ll sometimes write the gradient as a ratio of differentials by pretending we can divide by <span class="math inline">\(d\mathbf{x}\)</span>,</p>
 <p><span class="math display">\[\frac{dz}{d\mathbf{x}} = \mathbf{g} = \bigg(\frac{\partial z}{\partial x}, \frac{\partial z}{\partial y}\bigg),\]</span></p>
 <p>Doing this makes it obvious that we can go back and forth between the total differential <span class="math inline">\(dz\)</span> and the gradient <span class="math inline">\(\mathbf{g}\)</span> by “multiplying” both sides by <span class="math inline">\(d\mathbf{x}\)</span>.</p>
@@ -468,16 +467,16 @@ g = a</code></pre>
 <div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diff(f, x, y, dx<span class="op">=</span><span class="fl">1e-5</span>, dy<span class="op">=</span><span class="fl">1e-5</span>):</span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad(f, x, y, dx<span class="op">=</span><span class="fl">1e-5</span>, dy<span class="op">=</span><span class="fl">1e-5</span>):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    dzdx <span class="op">=</span> diff_x(f, x, y, dx)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    dzdy <span class="op">=</span> diff_y(f, y, y, dy)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    grad <span class="op">=</span> [dzdx, dzdy]</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> grad</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    dzdy <span class="op">=</span> diff_y(f, x, y, dy)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    gradient <span class="op">=</span> [dzdx, dzdy]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gradient</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>grad <span class="op">=</span> diff(f, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'g = </span><span class="sc">{</span>grad<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>gradient <span class="op">=</span> grad(f, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'g = </span><span class="sc">{</span>gradient<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>g = [2.00001000001393, 2.00001000001393]</code></pre>
@@ -512,14 +511,14 @@ g = a</code></pre>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>f_tangent <span class="op">=</span> <span class="kw">lambda</span> x, y: <span class="dv">2</span> <span class="op">*</span> a <span class="op">*</span> (x <span class="op">-</span> a) <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> b <span class="op">*</span> (y <span class="op">-</span> b) <span class="op">+</span> <span class="dv">2</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>grad <span class="op">=</span> dfdx(a, b)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>gradient <span class="op">=</span> dfdx(a, b)</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_tangent_plane(x, y, a, b, f, f_tangent, dfdx, plot_grad=True, grad_scale=2, title=f'')</span></span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, f, labelpad<span class="op">=</span><span class="dv">5</span>, ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>], dist<span class="op">=</span><span class="dv">12</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>),</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                 xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), zlim<span class="op">=</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">20</span>), elev<span class="op">=</span><span class="dv">50</span>, azim<span class="op">=-</span><span class="dv">60</span>, titlepad<span class="op">=</span><span class="dv">10</span>,</span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                 points<span class="op">=</span>[(a, b, f(a, b))], title<span class="op">=</span><span class="ss">f'Gradient Vector at </span><span class="sc">{</span>(a, b)<span class="sc">}</span><span class="ss">'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>,</span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># curves = [(x, 0 * x + b, f(x, b**2)), (0 * y + a, y, f(a**2, y))],</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>                 arrows<span class="op">=</span>[[[a, b, f(a, b)], [grad[<span class="dv">0</span>] <span class="op">/</span> <span class="dv">2</span>, grad[<span class="dv">1</span>] <span class="op">/</span> <span class="dv">2</span>, <span class="dv">0</span>]]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>                 arrows<span class="op">=</span>[[[a, b, f(a, b)], [gradient[<span class="dv">0</span>] <span class="op">/</span> <span class="dv">2</span>, gradient[<span class="dv">1</span>] <span class="op">/</span> <span class="dv">2</span>, <span class="dv">0</span>]]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -542,10 +541,10 @@ g = a</code></pre>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">100</span>)</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>f_tangent <span class="op">=</span> <span class="kw">lambda</span> x, y: <span class="dv">2</span> <span class="op">*</span> a <span class="op">*</span> (x <span class="op">-</span> a) <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> b <span class="op">*</span> (y <span class="op">-</span> b) <span class="op">+</span> <span class="dv">2</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>grad <span class="op">=</span> dfdx(a, b)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>gradient <span class="op">=</span> dfdx(a, b)</span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>levels <span class="op">=</span> [[<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">14</span>, <span class="dv">20</span>], [<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>]]</span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [[<span class="st">'steelblue'</span>] <span class="op">*</span> <span class="bu">len</span>(levels), [<span class="st">'green'</span>]]</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>plot_contour(x, y, [f, f_tangent], points<span class="op">=</span>[(a, b)], arrows<span class="op">=</span>[[(a, b), (grad[<span class="dv">0</span>], grad[<span class="dv">1</span>])]], figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>plot_contour(x, y, [f, f_tangent], points<span class="op">=</span>[(a, b)], arrows<span class="op">=</span>[[(a, b), (gradient[<span class="dv">0</span>], gradient[<span class="dv">1</span>])]], figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>),</span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>             ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>], show_clabels<span class="op">=</span><span class="va">True</span>, alphas<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.9</span>], colors<span class="op">=</span>colors, levels<span class="op">=</span>levels,</span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>             title<span class="op">=</span><span class="ss">f'Gradient Vector at </span><span class="sc">{</span>(a, b)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -557,12 +556,12 @@ g = a</code></pre>
 </div>
 </div>
 </div>
-<p>Since the gradient can be thought of as a vector-valued function that maps vectors <span class="math inline">\(\mathbf{x}\)</span> to new vectors <span class="math inline">\(\mathbf{g}\)</span>, we can also think of the gradient as a vector field. Here’s a vector field plot of the gradient of <span class="math inline">\(z=x^2 + y^2\)</span> for different choices of <span class="math inline">\(\mathbf{x}\)</span>. Notice how all the gradients are pointing radially outwards. This follows from the fact that <span class="math inline">\(\mathbf{g} = 2\mathbf{x}\)</span> for this function. The arrows are also getting bigger the further we get away from the origin.</p>
-<div class="cell" data-execution_count="15">
+<p>Since the gradient can be thought of as a vector-valued function that maps vectors <span class="math inline">\(\mathbf{x}\)</span> to new vectors <span class="math inline">\(\mathbf{g}\)</span>, we can also think of the gradient as a vector field. Here’s a vector field plot of the gradient of <span class="math inline">\(z=x^2 + y^2\)</span> for different choices of <span class="math inline">\(\mathbf{x}\)</span>. Notice how all the gradients are pointing outwards. This follows from the fact that <span class="math inline">\(\mathbf{g} = 2\mathbf{x}\)</span> for this function. The arrows are also getting bigger the further we get away from the origin. If you follow any flow of arrows, you’ll move in the direction of steepest ascent.</p>
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plot_vector_field(dfdx, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), n_points<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="dv">1</span>, </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                      scale<span class="op">=</span><span class="va">None</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">3</span>), title<span class="op">=</span><span class="ss">f'Gradient as a Vector Field'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plot_vector_field(dfdx, xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), n_points<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                      scale<span class="op">=</span><span class="va">None</span>, figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">3</span>), title<span class="op">=</span><span class="ss">f'$g=2x$ as a Vector Field'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -574,8 +573,8 @@ g = a</code></pre>
 </div>
 <p>Notice something. Sense the gradient vectors all point up out of the bowl. The <em>negative</em> gradients must all point in the opposite direction, i.e.&nbsp;down into the bowl. If the positive gradient points in the direction of steepest <em>ascent</em>, then the negative gradient must point in the direction of steepest <em>descent</em>. Following the negative gradient takes you towards the bottom of the bowl as fast as possible. It’s hard to overstate how important this fact is to machine learning. The fundamental optimizer used to train most machine learning models is <em>gradient descent</em>. I’ll get back to this in a lot more detail in future lessons.</p>
 </section>
-<section id="hessians" class="level3" data-number="7.1.5">
-<h3 data-number="7.1.5" class="anchored" data-anchor-id="hessians"><span class="header-section-number">7.1.5</span> Hessians</h3>
+<section id="the-hessian" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="the-hessian"><span class="header-section-number">7.5</span> The Hessian</h2>
 <p>In basic calculus we could also talk about derivatives of derivatives. The <em>second derivative</em> of a univariate function <span class="math inline">\(y=f(x)\)</span> is just the derivative of the derivative, i.e.</p>
 <p><span class="math display">\[\frac{d^2 y}{dx^2} = \frac{d}{dx} \frac{dy}{dx}.\]</span></p>
 <p>We can do the same thing in multivariate calculus, but we have to be careful about what we mean by <em>the</em> second derivative of a function.</p>
@@ -591,33 +590,33 @@ g = a</code></pre>
 <p>We can get the <em>second</em> partial derivatives by differentiating both of these, each with respect to <em>both</em> <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>,</p>
 <p><span class="math display">\[\begin{align*}
 \frac{\partial^2 z}{\partial x^2} &amp;= \frac{\partial}{\partial x} \frac{\partial z}{\partial x} = e^x \sin 5y - \frac{8y}{x^3}, &amp;
-\frac{\partial^2 z}{\partial x \partial y} &amp;= \frac{\partial}{\partial x} \frac{\partial z}{\partial y} = 5 e^x \cos 5y + \frac{4}{x^2}, \\
-\frac{\partial^2 z}{\partial y \partial x} &amp;= \frac{\partial}{\partial y} \frac{\partial z}{\partial x} = 5e^x \cos 5y + \frac{4}{x^2}, &amp;
+\frac{\partial^2 z}{\partial y \partial x} &amp;= \frac{\partial}{\partial y} \frac{\partial z}{\partial x} = 5 e^x \cos 5y + \frac{4}{x^2}, \\
+\frac{\partial^2 z}{\partial x \partial y} &amp;= \frac{\partial}{\partial x} \frac{\partial z}{\partial y} = 5e^x \cos 5y + \frac{4}{x^2}, &amp;
 \frac{\partial^2 z}{\partial y^2} &amp;= \frac{\partial}{\partial y} \frac{\partial z}{\partial y} = -25e^x \sin 5y.
 \end{align*}\]</span></p>
 <p>Of course, sympy can calculate these for you. For example, to calculate the mixed partial <span class="math inline">\(\frac{\partial^2 z}{\partial y \partial x}\)</span>, just call <code>z.diff(x).diff(y)</code>. Notice how the ordering of the method call is backwards from the partial derivative notation. Be careful about that.</p>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="11">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> sp.exp(x) <span class="op">*</span> sp.sin(<span class="dv">5</span> <span class="op">*</span> y) <span class="op">-</span> <span class="dv">4</span> <span class="op">*</span> y <span class="op">/</span> x</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'z = </span><span class="sc">{</span>z<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'∂∂z/∂x∂x = </span><span class="sc">{</span>z<span class="sc">.</span>diff(x)<span class="sc">.</span>diff(x)<span class="sc">}</span><span class="ss">, </span><span class="ch">\t</span><span class="ss"> ∂∂z/∂x∂y = </span><span class="sc">{</span>z<span class="sc">.</span>diff(y)<span class="sc">.</span>diff(x)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'∂∂z/∂y∂x = </span><span class="sc">{</span>z<span class="sc">.</span>diff(x)<span class="sc">.</span>diff(y)<span class="sc">}</span><span class="ss">, </span><span class="ch">\t</span><span class="ss"> ∂∂z/∂y∂y = </span><span class="sc">{</span>z<span class="sc">.</span>diff(y)<span class="sc">.</span>diff(y)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'∂∂z/∂x∂x = </span><span class="sc">{</span>z<span class="sc">.</span>diff(x)<span class="sc">.</span>diff(x)<span class="sc">}</span><span class="ss">, </span><span class="ch">\t</span><span class="ss"> ∂∂z/∂y∂x = </span><span class="sc">{</span>z<span class="sc">.</span>diff(y)<span class="sc">.</span>diff(x)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'∂∂z/∂x∂y = </span><span class="sc">{</span>z<span class="sc">.</span>diff(x)<span class="sc">.</span>diff(y)<span class="sc">}</span><span class="ss">, </span><span class="ch">\t</span><span class="ss"> ∂∂z/∂y∂y = </span><span class="sc">{</span>z<span class="sc">.</span>diff(y)<span class="sc">.</span>diff(y)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>z = exp(x)*sin(5*y) - 4*y/x
-∂∂z/∂x∂x = exp(x)*sin(5*y) - 8*y/x**3,   ∂∂z/∂x∂y = 5*exp(x)*cos(5*y) + 4/x**2
-∂∂z/∂y∂x = 5*exp(x)*cos(5*y) + 4/x**2,   ∂∂z/∂y∂y = -25*exp(x)*sin(5*y)</code></pre>
+∂∂z/∂x∂x = exp(x)*sin(5*y) - 8*y/x**3,   ∂∂z/∂y∂x = 5*exp(x)*cos(5*y) + 4/x**2
+∂∂z/∂x∂y = 5*exp(x)*cos(5*y) + 4/x**2,   ∂∂z/∂y∂y = -25*exp(x)*sin(5*y)</code></pre>
 </div>
 </div>
 <p>I laid the second partials in this example out as a <span class="math inline">\(2 \times 2\)</span> grid on purpose to suggest that we should probably organize them into a <span class="math inline">\(2 \times 2\)</span> matrix. This matrix is called the <strong>Hessian matrix</strong>, or just the <strong>Hessian</strong> for short. I’ll denote it by the symbol <span class="math inline">\(\mathbf{H}\)</span>,</p>
 <p><span class="math display">\[
-\mathbf{H} =
+\mathbf{H} = \mathbf{H}(\mathbf{x}) =
 \begin{pmatrix}
-\frac{\partial^2 z}{\partial x^2} &amp; \frac{\partial^2 z}{\partial x \partial y} \\
-\frac{\partial^2 z}{\partial y \partial x} &amp; \frac{\partial^2 z}{\partial y^2}
+\frac{\partial^2 z}{\partial x^2} &amp; \frac{\partial^2 z}{\partial y \partial x} \\
+\frac{\partial^2 z}{\partial x \partial y} &amp; \frac{\partial^2 z}{\partial y^2}
 \end{pmatrix}.
 \]</span></p>
 <p>In the previous example the Hessian matrix turned out to be</p>
@@ -628,46 +627,492 @@ e^x \sin 5y - \frac{8y}{x^3} &amp; 5 e^x \cos 5y + \frac{4}{x^2} \\
 5 e^x \cos 5y + \frac{4}{x^2} &amp; -25e^x \sin 5y \\
 \end{pmatrix}.
 \]</span></p>
-<p>If you stare at the off diagonals of this example, you’ll see this matrix is <em>symmetric</em>, i.e.&nbsp;<span class="math inline">\(\mathbf{H}^\top = \mathbf{H}\)</span>. This is a more or less general fact. As long as the second partial derivatives are all continuous, their Hessian matrix will be symmetric.</p>
+<p>If you stare at the off diagonals of this example, you’ll see this matrix is <em>symmetric</em>, i.e.&nbsp;<span class="math inline">\(\mathbf{H}^\top = \mathbf{H}\)</span>. This is a more or less general fact. As long as the second partial derivatives are all continuous, their Hessian matrix will be symmetric. This will generally be the case for us in practice.</p>
+<p>To calculate the Hessian numerically, we’d need to calculate all the second partial derivatives and put them into a matrix. Here’s the simplest way one might do this for a bivariate function. The function I’ll use looks just like the one for the gradient, except now we need to take derivatives twice. I’ll use it to calculate the Hessian of the quadratic <span class="math inline">\(z = x^2 + y^2\)</span> at the point <span class="math inline">\((1,1)\)</span>. The exact answer should be <span class="math inline">\(\mathbf{H} = \text{diag}(2, 2)\)</span>. Taking both <span class="math inline">\(dx\)</span> and <span class="math inline">\(dy\)</span> to be <code>1e-4</code>, to within an error of around <code>1e-4</code> the answer seems right.</p>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hessian(f, x, y, dx<span class="op">=</span><span class="fl">1e-4</span>, dy<span class="op">=</span><span class="fl">1e-4</span>):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    dfdx <span class="op">=</span> <span class="kw">lambda</span> x, y: diff_x(f, x, y, dx)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    dfdy <span class="op">=</span> <span class="kw">lambda</span> x, y: diff_y(f, x, y, dy)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    d2zdx2 <span class="op">=</span> diff_x(dfdx, x, y, dx)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    d2zdxdy <span class="op">=</span> diff_x(dfdy, x, y, dx)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    d2zdydx <span class="op">=</span> diff_y(dfdx, x, y, dy)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    d2zdy2 <span class="op">=</span> diff_y(dfdy, x, y, dy)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    H <span class="op">=</span> np.array([[d2zdx2, d2zdydx], [d2zdxdy, d2zdy2]])</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> H</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> hessian(f, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'H = </span><span class="ch">\n</span><span class="sc">{</span>H<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>H = 
+[[1.99999999 0.        ]
+ [0.         1.99999999]]</code></pre>
+</div>
+</div>
 <p>It may not be completely obvious, but the Hessian is indeed the multivariate generalization of the second derivative. I’ll show why in the next section. Because of this, I’ll sometimes denote the Hessian by pretending we can divide by <span class="math inline">\(d\mathbf{x}^2\)</span> and writing</p>
 <p><span class="math display">\[\frac{d^2 z}{d\mathbf{x}^2} = \mathbf{H}.\]</span></p>
 <p>Since we have the first and second derivatives now, we can talk about the <em>second-order</em> approximation of a function. If <span class="math inline">\(z = f(\mathbf{x})\)</span>, and <span class="math inline">\(\mathbf{x}\)</span> is close to some vector <span class="math inline">\(\mathbf{a}\)</span>, then the function’s best quadratic approximation is given by</p>
 <p><span class="math display">\[f(\mathbf{x}) \approx f(\mathbf{a}) + \mathbf{g}(\mathbf{a})^\top (\mathbf{x} - \mathbf{a}) + \frac{1}{2}(\mathbf{x} - \mathbf{a})^\top \mathbf{H}(\mathbf{a}) (\mathbf{x} - \mathbf{a}).\]</span></p>
 <p>Remember, <span class="math inline">\(\mathbf{g}(\mathbf{a})\)</span> and <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span> mean, take the gradient and Hessian and evaluate them at the point <span class="math inline">\(\mathbf{a}\)</span>. This means they’ll be arrays of numbers, not arrays of functions. Instead of a plane, this approximation will try to approximate the function near <span class="math inline">\(\mathbf{a}\)</span> with a quadratic surface. The interesting thing in the multivariate case is that a quadratic surface need not even be bowl-shaped. We can also have quadratic surfaces that look like a <strong>saddle</strong>, for example</p>
 <p><span class="math display">\[z = x^2 - y^2.\]</span></p>
-<div class="cell" data-execution_count="37">
+<div class="cell" data-execution_count="13">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> y<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, f, title<span class="op">=</span><span class="st">'$z=x^2-y^2$'</span>, titlepad<span class="op">=</span><span class="dv">0</span>, labelpad<span class="op">=</span><span class="dv">5</span>, ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>], dist<span class="op">=</span><span class="dv">12</span>,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                 figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>), elev<span class="op">=</span><span class="dv">30</span>, azim<span class="op">=</span><span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, f, title<span class="op">=</span><span class="st">'$z=x^2-y^2$'</span>, titlepad<span class="op">=</span><span class="dv">0</span>, labelpad<span class="op">=</span><span class="dv">5</span>, ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>], dist<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                 figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>), elev<span class="op">=</span><span class="dv">30</span>, azim<span class="op">=</span><span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="multivariate-calculus_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="multivariate-calculus_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The presence of the quadratic form <span class="math inline">\((\mathbf{x} - \mathbf{a})^\top \mathbf{H}(\mathbf{a}) (\mathbf{x} - \mathbf{a})\)</span> should suggest what’s going on here. Recall that a quadratic form is closely related to the <em>eigenvalues</em> of a matrix. In particular, the <em>sign</em> of the eigenvalues say something about the sign of the quadratic form. In the scalar case, the <em>sign</em> of <span class="math inline">\(h\)</span> in an expression like <span class="math inline">\((x-a)h(x-a) = h(x-a)^2\)</span> says whether the quadratic will bowl upwards of downwards. In that case there were only two possibilities, up or down. In the <em>bivariate</em> case there are now three depending on the sign of the eigenvalues of <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span>:</p>
-<ul>
+<p>The presence of the quadratic form <span class="math inline">\((\mathbf{x} - \mathbf{a})^\top \mathbf{H}(\mathbf{a}) (\mathbf{x} - \mathbf{a})\)</span> should suggest what’s going on here. Recall that a quadratic form is closely related to the <em>eigenvalues</em> of a matrix. In particular, the <em>sign</em> of the eigenvalues say something about the sign of the quadratic form. In the scalar case, the <em>sign</em> of <span class="math inline">\(h\)</span> in an expression like <span class="math inline">\((x-a)h(x-a) = h \cdot (x-a)^2\)</span> says whether the quadratic will bowl upwards of downwards. In that case there are only two possibilities, the function will bowl up or down. In the <em>bivariate</em> case there are now three depending on the sign of the eigenvalues of <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span>:</p>
+<ol type="1">
 <li>Both eigenvalues are positive: In this case, <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span> is positive definite. This means the quadratic surface will be an upward bowl shape. The prototypical example of this kind of quadratic is <span class="math inline">\(z = x^2 + y^2\)</span>.</li>
 <li>Both eigenvalues are negative: In this case, <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span> is negative definite. This means the quadratic surface will be a downward bowl shape. The prototypical example of this kind of quadratic is <span class="math inline">\(z = -(x^2 + y^2)\)</span>.</li>
 <li>One eigenvalue is positive, the other is negative: In this case, <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span> is neither, or indefinite. This means the quadratic surface will be a saddle shape. The prototypical examples of this kind of quadratic are <span class="math inline">\(z = x^2 - y^2\)</span> or <span class="math inline">\(z = -x^2 + y^2\)</span>.</li>
-</ul>
-<p>WORK EXAMPLE FOR QUADRATIC. MENTION SECOND ORDER APPROXIMATION FUNCTION. MAYBE USE THIS TO PLOT APPROXIMATING PARABOLOID FOR A SIMPLE NON-QUADRATIC FUNCTION. TO SHOW HESSIAN IS SECOND DERIVATIVE, NEED TO EITHER SHOW EACH ROW IS A GRADIENT OR OUTER PRODUCT, OR SHOW IT’S THE JACOBIAN OF THE GRADIENT IN THE NEXT SECTION.</p>
-<p>Updates:</p>
-<ul>
-<li>Make it clear in the n-dimensional section that we’re looking at non-linear functions now. Show what they look like, and how we can linearize them and essentially recover a local linear algebra via <span class="math inline">\(dy = gdx\)</span>.</li>
-<li>Add code to calculate the Hessian. Maybe demonstrate how slow it is for large <span class="math inline">\(n\)</span>.</li>
-</ul>
-
-
+<li>One of the eigenvalues is zero: In this case, we can’t say much about what the function is doing at <span class="math inline">\(\mathbf{a}\)</span> using only a quadratic approximation. We’d have to consider higher order terms to get an idea.</li>
+</ol>
+<p>Usually, which of the three cases we fall into depends on the choice of the point <span class="math inline">\(\mathbf{a}\)</span>. For one choice of <span class="math inline">\(\mathbf{a}\)</span>, <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span> might be positive definite. For another it might be negative definite. For another it might be indefinite. For some simple functions though, the sign of the eigenvalues <em>don’t</em> depend on <span class="math inline">\(\mathbf{a}\)</span>. These types of functions are special.</p>
+<p>If <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span> is positive semi-definite for any point <span class="math inline">\(\mathbf{a}\)</span>, we’d say the function <span class="math inline">\(z=f(\mathbf{x})\)</span> is a <strong>convex function</strong>. Convex functions will always look more or less like upward-sloping bowls. Similarly, if <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span> is negative semi-definite for all points <span class="math inline">\(\mathbf{a}\)</span>, we’d say the function <span class="math inline">\(z=f(\mathbf{x})\)</span> is a <strong>concave function</strong>. Concave functions will always look more or less like downward-sloping bowls.</p>
+<p>As an example, consider again the quadratic function <span class="math inline">\(z = x^2 + y^2\)</span>. The Hessian of this simple function is just</p>
+<p><span class="math display">\[
+\mathbf{H} =
+\begin{pmatrix}
+2 &amp; 0 \\
+0 &amp; 2 \\
+\end{pmatrix} = 2 \mathbf{I}.
+\]</span></p>
+<p>This means its two eigenvalues are both <span class="math inline">\(\lambda = 2 &gt; 0\)</span>. Notice the Hessian doesn’t depend on <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span> at all. It’s constant. Taken together, this means <span class="math inline">\(\mathbf{H}\)</span> is positive definite for all <span class="math inline">\(\mathbf{x}\)</span>, and so the function <span class="math inline">\(z = x^2 + y^2\)</span> is a convex function.</p>
+<p>As another example, suppose we instead had <span class="math inline">\(z = -(x^2 + y^2)\)</span>. In that case, we’d have</p>
+<p><span class="math display">\[
+\mathbf{H} =
+\begin{pmatrix}
+-2 &amp; 0 \\
+0 &amp; -2 \\
+\end{pmatrix} = -2 \mathbf{I},
+\]</span></p>
+<p>so both eigenvalues are <span class="math inline">\(\lambda = -2 &lt; 0\)</span>. Again, the Hessian is constant, which in this case means <span class="math inline">\(\mathbf{H}\)</span> is negative definite for all <span class="math inline">\(\mathbf{x}\)</span>. Thus, <span class="math inline">\(z = -(x^2+y^2)\)</span> is a concave function. Notice that this is just the negative of the previous example. In fact, the negative of any convex function will be concave, and vice versa, since negating a function just flips the signs of the Hessian’s eigenvalues.</p>
+<p>As a final example, suppose we had <span class="math inline">\(z = x^2 - y^2\)</span>. In that case, we’d have</p>
+<p><span class="math display">\[
+\mathbf{H} =
+\begin{pmatrix}
+2 &amp; 0 \\
+0 &amp; -2 \\
+\end{pmatrix} = \text{diag}(2, -2).
+\]</span></p>
+<p>The eigenvalues in this case are the diagonal entries, <span class="math inline">\(\lambda = 2, -2\)</span>. Again, the Hessian is constant, but the eigenvalues have different signs, which means <span class="math inline">\(\mathbf{H}\)</span> is <em>indefinite</em> for all <span class="math inline">\(\mathbf{x}\)</span>. This function is thus neither convex nor concave.</p>
 </section>
+<section id="the-jacobian" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="the-jacobian"><span class="header-section-number">7.6</span> The Jacobian</h2>
+<p>When it comes to differentiation, we’ve gone about as far as we can go with scalar-valued bivariate functions of the form <span class="math inline">\(z = f(x, y)\)</span>. We’ll now step up one level, not by going to three <em>input</em> variables as you might think, but by going to <em>two</em> output variables. That is, we’ll consider <em>pairs</em> of bivariate functions</p>
+<p><span class="math display">\[\begin{align*}
+z &amp;= f(x, y), \\
+u &amp;= g(x, y). \\
+\end{align*}\]</span></p>
+<p>Functions like this are called <strong>vector-valued functions</strong>. They output vector values instead of scalar values. To see why, let’s write it in vector form by defining an input vector <span class="math inline">\(\mathbf{x} = (x, y)\)</span>, an output vector <span class="math inline">\(\mathbf{y} = (z, u)\)</span>, and a vector function <span class="math inline">\(\mathbf{f}(\mathbf{x}) = \big(f(x,y), g(x,y) \big)\)</span>. Then we can write the pair of bivariate functions as</p>
+<p><span class="math display">\[\mathbf{y} = \mathbf{f}(\mathbf{x}).\]</span></p>
+<p>Here’s an example of a vector-valued function,</p>
+<p><span class="math display">\[\begin{align*}
+z &amp;= x^2 + y^2, \\
+u &amp;= e^{x + y}. \\
+\end{align*}\]</span></p>
+<p>We can also write it in vector notation as</p>
+<p><span class="math display">\[
+\mathbf{y} =
+\begin{pmatrix}
+z \\
+u \\
+\end{pmatrix} =
+\begin{pmatrix}
+x^2 + y^2 \\
+e^{x + y} \\
+\end{pmatrix} =
+\mathbf{f}(\mathbf{x}).
+\]</span></p>
+<p>We can try to visualize a vector-valued function, but it does start to get harder. When it’s just a pair of bivariate functions, we can just visualize two surface in space. One will be the surface <span class="math inline">\(z=f(x,y)\)</span>, the other the surface <span class="math inline">\(u=g(x,y)\)</span>. Here’s a plot for the above example. The blue surface is the same familiar bowl of <span class="math inline">\(z = x^2 + y^2\)</span>. The orange surface is the 2D exponential <span class="math inline">\(u = e^{x + y}\)</span>, which as you’d predict blows up fast when <span class="math inline">\(x+y\)</span> is positive.</p>
+<div class="cell" data-execution_count="14">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">100</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">100</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x, y: np.exp(x <span class="op">+</span> y)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plot_function_3d(x, y, [f, g], title<span class="op">=</span><span class="st">'$z=x^2+y^2, u=e^{x+y}$'</span>, titlepad<span class="op">=</span><span class="dv">10</span>, labelpad<span class="op">=</span><span class="dv">5</span>, alpha<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                 ticks_every<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>], dist<span class="op">=</span><span class="dv">12</span>, zlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">30</span>), figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="multivariate-calculus_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For all practical purposes you can just treat these vector-valued functions as a pair of bivariate functions and operate on them one at a time. For example, we can take total differentials of <span class="math inline">\(z\)</span> and <span class="math inline">\(u\)</span> separately to get</p>
+<p><span class="math display">\[\begin{align*}
+dz &amp;= \frac{\partial z}{\partial x}dx + \frac{\partial z}{\partial y} dy, \\
+du &amp;= \frac{\partial u}{\partial x}dx + \frac{\partial u}{\partial y} dy. \\
+\end{align*}\]</span></p>
+<p>Each of these functions also has its own gradient, namely</p>
+<p><span class="math display">\[
+\frac{dz}{d\mathbf{x}} = \bigg(\frac{\partial z}{\partial x}, \frac{\partial z}{\partial y} \bigg), \quad
+\frac{du}{d\mathbf{x}} = \bigg(\frac{\partial u}{\partial x}, \frac{\partial u}{\partial y} \bigg).
+\]</span></p>
+<p>As you’d expect, using these gradients, we can write the total differentials as</p>
+<p><span class="math display">\[\begin{align*}
+dz &amp;= \frac{dz}{d\mathbf{x}} \cdot d\mathbf{x}, \\
+du &amp;= \frac{du}{d\mathbf{x}} \cdot d\mathbf{x}. \\
+\end{align*}\]</span></p>
+<p>Now’s where it gets more interesting. What do we mean by <em>the</em> derivative of a vector-valued function? It’s evidently not just the gradient, because now we’ve got two of them, one for <span class="math inline">\(z\)</span> and one for <span class="math inline">\(u\)</span>. But if you stare at the total differentials, you’ll see that yet again we can stack things into arrays. If we can define,</p>
+<p><span class="math display">\[
+d\mathbf{y} =
+\begin{pmatrix}
+dz \\
+du \\
+\end{pmatrix}, \quad
+\mathbf{J} = \mathbf{J}(\mathbf{x}) =
+\bigg (\frac{dz}{d\mathbf{x}}, \frac{du}{d\mathbf{x}} \bigg ),
+\]</span></p>
+<p>then we should be able to write the total differentials as a single vector equation,</p>
+<p><span class="math display">\[d\mathbf{y} =
+\begin{pmatrix}
+dz \\
+du \\
+\end{pmatrix} =
+\begin{pmatrix}
+\frac{dz}{d\mathbf{x}}^\top \\
+\frac{du}{d\mathbf{x}}^\top \\
+\end{pmatrix}
+\begin{pmatrix}
+dx \\
+dy \\
+\end{pmatrix} =
+\begin{pmatrix}
+\frac{dz}{d\mathbf{x}}^\top d\mathbf{x} \\
+\frac{du}{d\mathbf{x}}^\top d\mathbf{x} \\
+\end{pmatrix} =
+\mathbf{J} d\mathbf{x}.\]</span></p>
+<p>We do have to be careful though, because this time the array <span class="math inline">\(\mathbf{J}\)</span> is no longer a vector. It’s a stack of two column vectors, namely the gradients of <span class="math inline">\(z\)</span> and <span class="math inline">\(u\)</span>. This means <span class="math inline">\(\mathbf{J}\)</span> is a <span class="math inline">\(2 \times 2\)</span> <em>matrix</em>. It’s called the <strong>Jacobian matrix</strong>, or just the <strong>Jacobian</strong>,</p>
+<p><span class="math display">\[
+\mathbf{J} = \mathbf{J}(\mathbf{x}) =
+\begin{pmatrix}
+\frac{dz}{d\mathbf{x}}^\top \\
+\frac{du}{d\mathbf{x}}^\top \\
+\end{pmatrix} =
+\begin{pmatrix}
+\frac{\partial z}{\partial x} &amp; \frac{\partial z}{\partial y} \\
+\frac{\partial u}{\partial x} &amp; \frac{\partial u}{\partial y} \\
+\end{pmatrix}.
+\]</span></p>
+<p>Let’s do a quick example. Take the previous vector-valued function. In that case we’d have</p>
+<p><span class="math display">\[
+\mathbf{J}(\mathbf{x}) =
+\begin{pmatrix}
+\frac{\partial z}{\partial x} &amp; \frac{\partial u}{\partial x} \\
+\frac{\partial z}{\partial y} &amp; \frac{\partial u}{\partial y} \\
+\end{pmatrix} =
+\begin{pmatrix}
+2x &amp; 2y \\
+e^{x + y} &amp; e^{x + y} \\
+\end{pmatrix}.
+\]</span></p>
+<p>Notice from this example that unlike the Hessian of a scalar-valued function, the Jacobian is not symmetric <span class="math inline">\(\mathbf{J}^\top \neq \mathbf{J}\)</span>. This will generally be the case. Why should it be? After all, <span class="math inline">\(z=f(x,y)\)</span> and <span class="math inline">\(u=g(x,y)\)</span> are two completely different functions.</p>
+<p>Again, the total differential <span class="math inline">\(d\mathbf{y} = \mathbf{J} d\mathbf{x}\)</span> suggests that the Jacobian is <em>the</em> derivative of a vector-valued function. For this reason, I’ll again pretend we can divide by <span class="math inline">\(d\mathbf{x}\)</span> and sometimes write the Jacobian as</p>
+<p><span class="math display">\[\frac{d\mathbf{y}}{d\mathbf{x}} = \mathbf{J}.\]</span></p>
+<p>Notice how this looks almost exactly like the old scalar derivative <span class="math inline">\(\frac{dy}{dx}\)</span>. The only difference is that now both <span class="math inline">\(\mathbf{y}\)</span> and <span class="math inline">\(\mathbf{x}\)</span> are <em>vectors</em>, and their ratio is a <em>matrix</em>. As with the gradient, you can think of the Jacobian as a linear map, except this time it’s a map from vectors to vectors. It sends input differential vectors <span class="math inline">\(d\mathbf{x}\)</span> to output differential vectors <span class="math inline">\(d\mathbf{y} = \mathbf{J}d\mathbf{x}\)</span>.</p>
+<p>Calculating the Jacobian numerically is again pretty easy. Just calculate the gradients of <span class="math inline">\(z\)</span> and <span class="math inline">\(u\)</span> separately and stack them into a matrix. Here’s an example. I’ll numerically calculate the Jacobian of the above example at the point <span class="math inline">\(\mathbf{x} = (1,1)\)</span>.</p>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> jacob(f, g, x, y, dx<span class="op">=</span><span class="fl">1e-5</span>):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    grad_z <span class="op">=</span> grad(f, x, y, dx<span class="op">=</span>dx)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    grad_u <span class="op">=</span> grad(g, x, y, dx<span class="op">=</span>dx)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    jacobian <span class="op">=</span> np.vstack([grad_z, grad_u])</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> jacobian</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="kw">lambda</span> x, y: np.exp(x <span class="op">+</span> y)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="dv">1</span>, <span class="dv">1</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>jacobian <span class="op">=</span> jacob(f, g, a, b)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'J</span><span class="sc">{</span>a<span class="sc">,</span> b<span class="sc">}</span><span class="ss"> = </span><span class="ch">\n</span><span class="sc">{</span>jacobian<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>J(1, 1) = 
+[[2.00001    2.00001   ]
+ [7.38909304 7.38909304]]</code></pre>
+</div>
+</div>
+<p>As with scalar-valued function <span class="math inline">\(z = f(\mathbf{x})\)</span>, we can linearize a vector-valued function <span class="math inline">\(\mathbf{y} = \mathbf{f}(\mathbf{x})\)</span> about any point <span class="math inline">\(\mathbf{a}\)</span> provided <span class="math inline">\(\mathbf{x}\)</span> is near <span class="math inline">\(\mathbf{a}\)</span>,</p>
+<p><span class="math display">\[\mathbf{f}(\mathbf{x}) \approx \mathbf{f}(\mathbf{a}) + \mathbf{J}(\mathbf{a}) (\mathbf{x} - \mathbf{a}).\]</span></p>
+<p>The result of linearization this time though won’t be a tangent plane, but rather <em>two</em> tangent planes, one for each function. For example, with the previous function, linearizing near the point <span class="math inline">\(\mathbf{a} = (1,1)\)</span> would give</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+z \\
+u \\
+\end{pmatrix} \approx
+\begin{pmatrix}
+1^2 + 1^2 \\
+e^{1+1} \\
+\end{pmatrix} +
+\begin{pmatrix}
+2 \cdot 1 &amp; 2 \cdot 1 \\
+e^{1 + 1} &amp; e^{1 + 1} \\
+\end{pmatrix}
+\begin{pmatrix}
+x-1 \\
+y-1 \\
+\end{pmatrix} =
+\begin{pmatrix}
+2 + 2(x-1) + 2(y-1) \\
+e^2 +  e^2(x-1) + e^2(y-1)\\
+\end{pmatrix}.
+\]</span></p>
+<p>Let’s look at one last example. Suppose we had a <em>scalar-valued</em> function <span class="math inline">\(z = f(x,y)\)</span>. Then its <em>gradient</em> <span class="math inline">\(\mathbf{g}(\mathbf{x})\)</span> must itself be a <em>vector-valued</em> function, namely the function</p>
+<p><span class="math display">\[
+\mathbf{y} = \mathbf{g}(\mathbf{x}) =
+\begin{pmatrix}
+\color{red}{\frac{\partial z}{\partial x}} \\
+\color{blue}{\frac{\partial z}{\partial y}} \\
+\end{pmatrix}.
+\]</span></p>
+<p>This means we can take the Jacobian of the gradient,</p>
+<p><span class="math display">\[\mathbf{J}(\mathbf{x}) = \frac{d}{d\mathbf{x}} \mathbf{g}(\mathbf{x}) =
+\begin{pmatrix}
+\frac{\partial}{\partial x}\color{red}{\frac{\partial z}{\partial x}} &amp; \frac{\partial}{\partial y}\color{red}{\frac{\partial z}{\partial x}} \\
+\frac{\partial}{\partial x}\color{blue}{\frac{\partial z}{\partial y}} &amp; \frac{\partial}{\partial y}\color{blue}{\frac{\partial z}{\partial y}} \\
+\end{pmatrix} =
+\begin{pmatrix}
+\frac{\partial^2 z}{\partial x^2} &amp; \frac{\partial^2 z}{\partial y \partial x} \\
+\frac{\partial^2 z}{\partial x \partial y} &amp; \frac{\partial^2 z}{\partial y^2} \\
+\end{pmatrix} = \mathbf{H}(\mathbf{x}).
+\]</span></p>
+<p>That is, the Jacobian of the gradient is just the Hessian. This is the sense in which the Hessian is the multivariate generalization of the second derivative.</p>
+<p>If you haven’t noticed, multivariate calculus seems to come with its own confusing zoo of notation and terminology. Instead of just “derivatives”, we now have “partial derivatives”, “gradients”, and “Jacobians”. Instead of “second derivatives”, we have “second partial derivatives” and “Hessians”. Worse, there are a lot of different notations around to denote each of these things. All this stuff can be confusing. It’s the way it is largely for historical reasons. In practice, people often are lazier about these things. In fact, in machine learning, people often refer to <em>any</em> first derivative as a <em>gradient</em>, and <em>any</em> second derivative as a <em>Hessian</em>.</p>
+</section>
+<section id="differentiation-rules" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="differentiation-rules"><span class="header-section-number">7.7</span> Differentiation Rules</h2>
+<ul>
+<li>Mention extension of linearity and the product rule with a simple example or two</li>
+<li>Spend some time talking about the multivariate chain rule, including its matrix/vector form</li>
+<li>Give a table of common gradients and Jacobians for reference</li>
+</ul>
+</section>
+<section id="volume-integration" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="volume-integration"><span class="header-section-number">7.8</span> Volume Integration</h2>
+<p>So far I’ve only really talked about how to <em>differentiate</em> of bivariate functions. I’ve said nothing about how to <em>integrate</em> them. Indeed, for machine learning purposes differentiation is far more important to know in detail than integration is. Just as multivariate functions have different kinds of differentials and derivatives, they have different kinds of integrals as well. There are volume integrals, line integrals, surface integrals, and so on. For now I’ll focus only on volume integrals. These come up when dealing with multivariate probability distributions, as we’ll see later. This choice to skip other types of integration means I’ll be skipping over a lot of fundamental facts of vector calculus that aren’t as relevant in machine learning.</p>
+<p>Let’s begin by recalling how we defined the integral of a univariate function <span class="math inline">\(y = f(x)\)</span>. We defined the (definite) integral as the (signed) area under the curve of <span class="math inline">\(f(x)\)</span> in the region <span class="math inline">\(a \leq x \leq b\)</span>. We did this by approximating the exact area with the area of a bunch of rectangles of height <span class="math inline">\(f(x_n)\)</span> and width <span class="math inline">\(dx\)</span>. The area became exact as we allowed the number of rectangles <span class="math inline">\(N\)</span> to become infinitely large and their widths <span class="math inline">\(dx = \frac{b-a}{N}\)</span> to become infinitesimally small in proportion,</p>
+<p><span class="math display">\[A = \int_a^b f(x) dx = \sum_{n=0}^{N-1} f(x_n) dx.\]</span></p>
+<p>To calculate these areas efficiently we introduced the Fundamental Theorem of Calculus. This said that, provided we can find a function <span class="math inline">\(F(x)\)</span> whose derivative is the original function <span class="math inline">\(f(x)\)</span>, then the area under the curve is given by</p>
+<p><span class="math display">\[\int_a^b f(x) dx = F(b) - F(a).\]</span></p>
+<p>Let’s now try to extend these ideas to bivariate functions. With bivariate functions, we’ll no longer be talking about the <em>area under a curve</em>, but instead about the <em>volume under a surface</em>. We’ll approximate the volume under a surface not with <em>rectangles</em>, but with <em>rectangular prisms</em>. Instead of integrating between two endpoints, we’ll instead have to integrate over a two-dimensional <em>region</em> in the xy-plane.</p>
+<p>Suppose we want to calculate the <em>volume</em> under the surface of <span class="math inline">\(z = f(x, y)\)</span> inside of some region <span class="math inline">\((x, y) \in R\)</span>. The region could be any shape in the xy-plane. It could be a rectangle, a circle, a figure eight, whatever. What we’ll imagine breaking the region <span class="math inline">\(R\)</span> up into a bunch of little rectangles of width <span class="math inline">\(dx\)</span> and height <span class="math inline">\(dy\)</span>. Each little rectangle will evidently have an area of <span class="math inline">\(dA = dx \cdot dy\)</span>. Clearly, if we add up the area of all these little rectangles, we just get the area of the region <span class="math inline">\(R\)</span>. When <span class="math inline">\(dA\)</span> is infinitesimal, this is an integral for the area <span class="math inline">\(A\)</span>,</p>
+<p><span class="math display">\[A = \int_R dA = \int_R dx dy.\]</span></p>
+<p>Great, but this just gives us the <em>area</em> of the region <span class="math inline">\((x, y) \in R\)</span> in the plane. What we wanted was the <em>volume</em> under the surface of <span class="math inline">\(z = f(x, y)\)</span> in 3D space. Here’s how we can get that. Take one of the tiny rectangle areas <span class="math inline">\(dA\)</span> and multiply it by the value of the function evaluated at any point <span class="math inline">\((x_n, y_m)\)</span> inside that rectangle. This will give the volume <span class="math inline">\(dV = f(x_n, y_m) dA\)</span> of a <em>rectangular prism</em> whose base is <span class="math inline">\(dA\)</span> and whose height is <span class="math inline">\(f(x_n, y_m)\)</span>. To get the total volume under the surface, just add all these up. Provided <span class="math inline">\(dA\)</span> is infinitesimal, the total volume <span class="math inline">\(V\)</span> will be given by an integral,</p>
+<p><span class="math display">\[V = \int_R f(x, y) dA = \sum_{n=0}^{N-1}\sum_{m=0}^{M-1} f(x_n, y_m) dA.\]</span></p>
+<p>This integral is called the <strong>volume integral</strong> of <span class="math inline">\(z = f(x, y)\)</span> over the region <span class="math inline">\(R\)</span>. It’s just the sum of the volume of a bunch of infinitely thin rectangular prisms.</p>
+<p>Here’s an example so you can better see what’s going on. I’ll approximate the volume under the surface of <span class="math inline">\(z = x^2 + y^2\)</span> inside the region <span class="math inline">\(R = [0,1]^2\)</span>. That is, inside the region where <span class="math inline">\(0 \leq x \leq 1\)</span> and <span class="math inline">\(0 \leq y \leq 1\)</span>. This region is called the <em>unit square</em>. I’ll approximate the volume using <span class="math inline">\(N \cdot M = 10 \cdot 10 = 100\)</span> rectangular prisms each of base area <span class="math inline">\(dA = 0.1 \cdot 0.1 = 0.01\)</span>. The pink surface is the surface itself and the rectangular prisms are shown in blue.</p>
+<div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plot_approximating_prisms(x, y, f, dx<span class="op">=</span><span class="fl">0.1</span>, dy<span class="op">=</span><span class="fl">0.1</span>, azim<span class="op">=-</span><span class="dv">30</span>, elev<span class="op">=</span><span class="dv">30</span>, dist<span class="op">=</span><span class="dv">12</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>), titlepad<span class="op">=</span><span class="dv">0</span>, </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                          labelpad<span class="op">=</span><span class="dv">8</span>, ticks_every<span class="op">=</span><span class="va">None</span>, title<span class="op">=</span><span class="st">'$N\cdot M=100$ Rectangular Prisms'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="multivariate-calculus_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>It looks like the approximate volume from this calculation is about <span class="math inline">\(V \approx 0.57\)</span>. It’s hard to know at this moment how close this is to the true value, but based on the plot it seems we may be underestimating the true volume a little bit. We’ll come back to this in a second.</p>
+<p>The area <span class="math inline">\(dA\)</span> is called the <strong>area element</strong>. Since <span class="math inline">\(dA = dxdy\)</span>, we can also write the volume integral as</p>
+<p><span class="math display">\[\int_R f(x, y) dA = \iint_R f(x, y) dx dy.\]</span></p>
+<p>Notice the use of one integral sign on the left, and two on the right. This is saying more than it looks like. On the left, we’re doing a single integral for the area <span class="math inline">\(A\)</span>. On the right we’re doing a <em>double integral</em>, first over <span class="math inline">\(x\)</span>, then over <span class="math inline">\(y\)</span>. From this point on I’ll only focus on the case when <span class="math inline">\(R = [a, b] \times [c, d]\)</span> is a <em>rectangle</em>. That is, <span class="math inline">\(a \leq x \leq b\)</span> and <span class="math inline">\(c \leq y \leq d\)</span>. In that case, we can write the the double integral as</p>
+<p><span class="math display">\[\int_{[a, b] \times [c, d]} f(x, y) dA = \int_c^d \bigg( \int_a^b f(x, y) dx \bigg) dy.\]</span></p>
+<p>Notice that the right-hand side is just two univariate integrals, an inside integral over <span class="math inline">\(x\)</span> from <span class="math inline">\(x=a\)</span> to <span class="math inline">\(x=b\)</span>, and then an outside integral over <span class="math inline">\(y\)</span> from <span class="math inline">\(y=c\)</span> to <span class="math inline">\(y=d\)</span>. This gives us a way to actually calculate the volume under a surface. We first do the inner integral over <span class="math inline">\(x\)</span>, treating <span class="math inline">\(y\)</span> as constant, and then do the outer integral over <span class="math inline">\(y\)</span> to get a numerical value for <span class="math inline">\(V\)</span>. For each univariate integral all the usual integration rules apply.</p>
+<p>Let’s see if we can calculate the exact volume under the example in the above plot, namely the quadratic function <span class="math inline">\(z = x^2 + y^2\)</span> on the unit square <span class="math inline">\(R = [0,1]^2\)</span>. To make it clear which integral is which, I’ll highlight the <span class="math inline">\(x\)</span> integral and variables in blue, and the <span class="math inline">\(y\)</span> integral and variables in red. We have,</p>
+<p><span class="math display">\[\begin{align*}
+V &amp;= \int_{[0,1]^2} (\color{steelblue}{x^2} \color{black}{+} \color{red}{y^2}\color{black}{) dA} \\
+&amp;= \color{red}{\int_0^1} \color{black}{\bigg(}\color{steelblue}{\int_0^1} (\color{steelblue}{x^2} \color{black}{+} \color{red}{y^2}) \color{steelblue}{dx} \color{black}{\bigg)} \color{red}{dy} \\
+&amp;= \color{red}{\int_0^1} \color{black}{\bigg[}\frac{1}{3} \color{steelblue}{x^3} \color{black}{+} \color{steelblue}{x}\color{red}{y^2} \color{black}{\bigg]}_{\color{steelblue}{x=0}}^{\color{steelblue}{x=1}} \color{red}{dy} \\
+&amp;= \color{red}{\int_0^1} \color{black}{\bigg(\frac{1}{3}} + \color{red}{y^2} \color{black}{\bigg)} \color{red}{dy} \\
+&amp;= \color{black}{\bigg[\frac{1}{3}}\color{red}{y} \color{black}{+ \frac{1}{3}} \color{red}{y^3} \color{black}{\bigg]}_{\color{red}{y=0}}^{\color{red}{y=1}} \\
+&amp;= \color{black}{\frac{2}{3} \approx 0.667.} \\
+\end{align*}\]</span></p>
+<p>Evidently, the <em>exact</em> volume under the surface <span class="math inline">\(z = x^2 + y^2\)</span> on the unit square is just <span class="math inline">\(V = \frac{2}{3} \approx 0.667\)</span>. It seems like our approximation from before was indeed underestimating the true volume a decent bit. Here’s how to calculate the same volume integral with sympy. To integrate <span class="math inline">\(z = f(x,y)\)</span> over a rectangle <span class="math inline">\([a,b] \times [c,d]\)</span>, use the command <code>sp.integrate(z, (x, a, b), (y, c, d))</code>. Note the integral will be calculated in the order you specify.</p>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>volume <span class="op">=</span> sp.integrate(z, (x, <span class="dv">0</span>, <span class="dv">1</span>), (y, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'V = </span><span class="sc">{</span>volume<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>V = 2/3</code></pre>
+</div>
+</div>
+<p>Numerically integrating a volume integral is similar to the way it was for an area integral. We need to define a grid of points <span class="math inline">\((x_n, y_m)\)</span>, use those to get the prisms heights <span class="math inline">\(f(x_n, y_m)\)</span>, multiply those heights by <span class="math inline">\(dA = dx \cdot dy\)</span> to get the volume of the rectangular prisms, and then sum all the volumes up to get the full volume. In general, such an algorithm will run in <span class="math inline">\(O(N \cdot M)\)</span> time and have a <span class="math inline">\(\mathcal{O}(dx \cdot dy)\)</span> error.</p>
+<p>In the example below I’ll calculate the same example volume integral using <code>dx=1e-4</code> and <code>dy=1e-4</code>. That implies there will be</p>
+<p><span class="math display">\[N \cdot M = \frac{b-a}{dx} \cdot \frac{d-c}{dy} = 10^4 \cdot 10^4 = 10^8\]</span></p>
+<p>total subregions we’ll need to calculate the prism volumes of and then sum over. As you can see, this is already a pretty huge number which will make even this simple calculation run pretty slow. You can imagine how much worse it’ll get for higher-dimensional integrals. In fact, we’d almost never want to calculate volume integrals this way. There are better ways to do it, for example via random sampling schemes like <a href="https://en.wikipedia.org/wiki/Monte_Carlo_integration">Monte-Carlo integration</a>.</p>
+<div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> integrate(f, a, b, c, d, dx<span class="op">=</span><span class="fl">1e-4</span>, dy<span class="op">=</span><span class="fl">1e-4</span>):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="bu">int</span>((b <span class="op">-</span> a) <span class="op">/</span> dx)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> <span class="bu">int</span>((d <span class="op">-</span> c) <span class="op">/</span> dy)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    dA <span class="op">=</span> dx <span class="op">*</span> dy</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    x_range <span class="op">=</span> np.linspace(a <span class="op">+</span> dx<span class="op">/</span><span class="dv">2</span>, b <span class="op">-</span> dx<span class="op">/</span><span class="dv">2</span>, N)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    y_range <span class="op">=</span> np.linspace(c <span class="op">+</span> dy<span class="op">/</span><span class="dv">2</span>, d <span class="op">-</span> dy<span class="op">/</span><span class="dv">2</span>, M)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    X, Y <span class="op">=</span> np.meshgrid(x_range, y_range)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    Z <span class="op">=</span> f(X, Y)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    prisms <span class="op">=</span> Z <span class="op">*</span> dA</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    integral <span class="op">=</span> np.<span class="bu">sum</span>(prisms)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> integral</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x, y: x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="dv">0</span>, <span class="dv">1</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>c, d <span class="op">=</span> <span class="dv">0</span>, <span class="dv">1</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>volume <span class="op">=</span> integrate(f, a, b, c, d)</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'V = </span><span class="sc">{</span>volume<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>V = 0.6666666650000003</code></pre>
+</div>
+</div>
+<p>The volume integral inherits the same linearity property that the area integral. We can break it up over sums and factor out any multiplied constants,</p>
+<p><span class="math display">\[\int_{R} \big(a f(x, y) + b g(x, y)\big) dA = a \int_{R} f(x, y) dA + b \int_{R} g(x, y) dA.\]</span></p>
+<p>Just like we could split a univariate integral up by breaking the integration region <span class="math inline">\([a,b]\)</span> into pieces, we can do the same thing with volume integrals by breaking the region <span class="math inline">\(R\)</span> up into pieces. If we break <span class="math inline">\(R\)</span> up into two non-overlapping subregions <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span>, we can write</p>
+<p><span class="math display">\[\int_{R} f(x,y) dA = \int_{R_1} f(x,y) dA + \int_{R_2} f(x,y) dA.\]</span></p>
+<p>As long as one of the function inside the volume integral doesn’t blow up when integrated with respect to <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span> we can swap the integrals and get the same answer for the volume. For a rectangular region, this just says</p>
+<p><span class="math display">\[\int_{[a, b] \times [c, d]} f(x, y) dA = \int_c^d \bigg( \int_a^b f(x, y) dx \bigg) dy = \int_a^b \bigg( \int_c^d f(x, y) dy \bigg) dx.\]</span></p>
+<p>This makes sense, as a double integral is really just a double sum, and we can swap the order of sums as long as the values inside the sum don’t blow up.</p>
+<p>Recall that for a univariate function <span class="math inline">\(y = f(x)\)</span>, we could change variables by letting <span class="math inline">\(x = g(u)\)</span> and integrating over <span class="math inline">\(u\)</span>,</p>
+<p><span class="math display">\[\int f(x) dx = \int f(g(u)) \frac{dx}{du} du.\]</span></p>
+<p>We can do something similar for a bivariate function <span class="math inline">\(z = f(x,y)\)</span>. Suppose we found it difficult to integrate this function with respect to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. What we could do is try to find two other variables <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> that make things easier to integrate. Suppose they’re related via some vector-valued function <span class="math inline">\((x, y) = g(u, v)\)</span> or in vector notation <span class="math inline">\(\mathbf{x} = g(\mathbf{u})\)</span>. We’d like to be able to write something like</p>
+<p><span class="math display">\[f(\mathbf{x}) = f(g(\mathbf{u})) \cdot \frac{d\mathbf{x}}{d\mathbf{u}},\]</span></p>
+<p>but this isn’t quite right. The left-hand side is a scalar, while the right-hand side is a matrix since it’s multiplying a Jacobian. It turns out the <em>right</em> thing to do is multiply not by the Jacobian, but by the absolute value of its <em>determinant</em>,</p>
+<p><span class="math display">\[f(\mathbf{x}) = f(g(\mathbf{u})) \cdot \bigg | \det \bigg(\frac{d\mathbf{x}}{d\mathbf{u}} \bigg) \bigg | = f(g(\mathbf{u})) \cdot \big|\det(\mathbf{J})\big|.\]</span></p>
+<p>Using this rule we can integrate over a region <span class="math inline">\(R\)</span> by instead integrating over its transformed region <span class="math inline">\(g^{-1}(R) = \{ u, v : (x, y) = g(u, v) \}\)</span>,</p>
+<p><span class="math display">\[\int_R f(x, y) dxdy = \int_{g^{-1}(R)} f\big(g(u,v)\big) \cdot \big|\det(\mathbf{J})\big| \ du dv.\]</span></p>
+<p>This trick is particularly useful when <span class="math inline">\(R\)</span> is some complicated non-rectangular region in <span class="math inline">\(xy\)</span>-space, but we can easily find a transformation <span class="math inline">\((x, y) = g(u, v)\)</span> that makes <span class="math inline">\(g^{-1}(R)\)</span> rectangular in <span class="math inline">\(uv\)</span>-space. The formula <span class="math inline">\(dA = \big|\det(\mathbf{J})\big| \ du dv\)</span> is in fact the most general form of the area element we can write down.</p>
+<p>A classic example of a change of variables is “proving” that the area of a circle of radius <span class="math inline">\(s\)</span> is <span class="math inline">\(A = 2\pi s\)</span>. Suppose we wanted to find the <em>area</em> inside the circle <span class="math inline">\(R = \{x, y : x^2 + y^2 = s^2 \}\)</span>. If we just let <span class="math inline">\(f(x,y) = 1\)</span>, we can get this area <span class="math inline">\(A\)</span> by doing a volume integral,</p>
+<p><span class="math display">\[A = \int_R dA = \iint_R dx dy.\]</span></p>
+<p>This would be pretty complicated to do in <span class="math inline">\(xy\)</span> coordinates, but there’s a change of variables we can do to make this integral super easy, namely <em>polar coordinates</em>. Define a transformation function <span class="math inline">\((x, y) = g(r, \theta)\)</span> by</p>
+<p><span class="math display">\[x = r \cos \theta, \quad y = r \sin \theta.\]</span></p>
+<p>We require that <span class="math inline">\(r \geq 0\)</span> and <span class="math inline">\(0 \leq \theta \leq 2\pi\)</span>. It may not be obvious, but this is a valid invertible function. You can go back and forth between <span class="math inline">\((x,y)\)</span> and <span class="math inline">\((r,\theta)\)</span> for every point except the origin. This follows from the fact that <span class="math inline">\(r\)</span> just represents the distance of <span class="math inline">\((x,y)\)</span> from the origin, and <span class="math inline">\(\theta\)</span> represents the angle between the vector <span class="math inline">\(\mathbf{x} = (x,y)\)</span> and the <span class="math inline">\(x\)</span> basis vector <span class="math inline">\(\mathbf{e}_x = (1,0)\)</span>.</p>
+<p>Anyway, the Jacobian of this transformation is given by taking all the partial derivatives of <span class="math inline">\(\mathbf{x} = g(\mathbf{u})\)</span>,</p>
+<p><span class="math display">\[\mathbf{J} =
+\begin{pmatrix}
+\frac{\partial x}{\partial r} &amp; \frac{\partial y}{\partial r} \\
+\frac{\partial x}{\partial \theta} &amp; \frac{\partial y}{\partial \theta} \\
+\end{pmatrix} =
+\begin{pmatrix}
+\cos\theta &amp; \sin\theta \\
+-r\sin\theta &amp; r\cos\theta \\
+\end{pmatrix} \quad \Longrightarrow \quad
+\big|\det(\mathbf{J})\big| = \big | r\cos^2 \theta + r\sin^2 \theta \big | = r.
+\]</span></p>
+<p>Here I just used the trig identity <span class="math inline">\(\cos^2 \theta + \sin^2 \theta = 1\)</span>. Evidently, I’ve shown that the area element in polar coordinates is given by</p>
+<p><span class="math display">\[dA = dx dy = r dr d\theta.\]</span></p>
+<p>Now, to do the integration we need to figure out what <span class="math inline">\(g^{-1}(R)\)</span> is. Here let’s use some intuition. Since <span class="math inline">\(r\)</span> represents a radius, and we’re trying to find the area inside a circle of radius <span class="math inline">\(s\)</span>, it seems like <span class="math inline">\(r\)</span> should run from <span class="math inline">\(0\)</span> to <span class="math inline">\(s\)</span>. Since <span class="math inline">\(\theta\)</span> is an angle, to sweep over the area of a whole circle we should let the angle go all the way around, from <span class="math inline">\(0^\circ\)</span> to <span class="math inline">\(360^\circ\)</span>. In radians that means <span class="math inline">\(\theta\)</span> goes from <span class="math inline">\(0\)</span> to <span class="math inline">\(2\pi\)</span>.</p>
+<p>Thus, we finally have the integral in polar coordinates. The integration is pretty easy. Since <span class="math inline">\(f(x,y)=1\)</span>, we can just break this up into a product of independent integrals, one over <span class="math inline">\(r\)</span>, and the other one over <span class="math inline">\(\theta\)</span>. The area of a circle of radius <span class="math inline">\(s\)</span> is thus given by</p>
+<p><span class="math display">\[A = \int_R dA = \int_0^{2\pi} \bigg(\int_0^s r dr \bigg) d\theta = \bigg(\int_0^s r dr \bigg) \bigg(\int_0^{2\pi} d\theta \bigg) = \frac{1}{2} r^2 \ \bigg |_{r=0}^s \cdot \theta \ \bigg |_{\theta = 0}^{2\pi} = 2\pi s.\]</span></p>
+<p>Unfortunately, symbolic packages like sympy aren’t usually smart enough to recognize and perform a change of variables on their own. That’s an insight you usually have to do yourself before integrating. Once you’ve found a good change of variables, you can plug and chug as usual in the new variable system.</p>
+<div class="cell" data-run_control="{&quot;marked&quot;:false}" data-execution_count="19">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>r, theta, s <span class="op">=</span> sp.symbols(<span class="st">'r theta s'</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>area <span class="op">=</span> sp.integrate(<span class="dv">1</span>, (r, <span class="dv">0</span>, s), (theta, <span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> sp.pi))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'A = </span><span class="sc">{</span>area<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>A = 2*pi*s</code></pre>
+</div>
+</div>
+</section>
+<section id="calculus-in-higher-dimensions" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="calculus-in-higher-dimensions"><span class="header-section-number">7.9</span> Calculus In Higher Dimensions</h2>
+<p>Yet again, it may seem like very little I’ve said would generalize the dimensions higher than two, but in fact almost all of it does. I was careful to formulate the language in a way so that it would, particularly by using vector notation where I could. The main difference, again, is that with higher dimensional functions we can’t easily visualize what’s going on anymore.</p>
+<p>Suppose we have a scalar-valued function <span class="math inline">\(z = f(x_0, x_1, \cdots, x_{n-1})\)</span> that depends on <span class="math inline">\(n\)</span> input variables <span class="math inline">\(x_0, x_1, \cdots, x_{n-1}\)</span>. We can also think of this as a vector-input function by defining <span class="math inline">\(\mathbf{x} = (x_0, x_1, \cdots, x_{n-1})\)</span> and writing <span class="math inline">\(z = f(\mathbf{x})\)</span>. Now, suppose we nudge one of the <span class="math inline">\(x_i\)</span> by some infinitesimal amount <span class="math inline">\(\partial x_i = d x_i\)</span>. Then <span class="math inline">\(z = f(\mathbf{x})\)</span> will get nudged by an amount</p>
+<p><span class="math display">\[\partial_i f = f(x_0, x_1, \cdots, x_i + \partial x_i, \cdots, x_{n-1}) - f(x_0, x_1, \cdots, x_i, \cdots, x_{n-1}).\]</span></p>
+<p>This is called the <strong>partial differential</strong> of <span class="math inline">\(z = f(\mathbf{x})\)</span> with respect to <span class="math inline">\(x_i\)</span>. Notice all we did was nudge <span class="math inline">\(x_i\)</span> by a tiny amount <span class="math inline">\(\partial x_i\)</span>. All the other variables stayed fixed, hence the term “partial”. This expression looks kind of messy. We can write it more compactly using vector notation by noting that <span class="math inline">\(\mathbf{x} + \partial x_i \mathbf{e}_i\)</span> is the vector whose components are <span class="math inline">\(x_0, x_1, \cdots, x_i + \partial x_i, \cdots, x_{n-1}\)</span>. Then we just have</p>
+<p><span class="math display">\[\partial_i f = f(\mathbf{x} + \partial x_i \mathbf{e}_i) - f(\mathbf{x}).\]</span></p>
+<p>If we divide both sides by <span class="math inline">\(\partial x_i\)</span> we get the <strong>partial derivative</strong> of the function with respect to <span class="math inline">\(x_i\)</span>,</p>
+<p><span class="math display">\[\frac{\partial z}{\partial x_i} = \frac{f(\mathbf{x} + \partial x_i \mathbf{e}_i) - f(\mathbf{x})}{\partial x_i} = \frac{f(x_0, x_1, \cdots, x_i + \partial x_i, \cdots, x_{n-1}) - f(x_0, x_1, \cdots, x_i, \cdots, x_{n-1})}{\partial x_i}.\]</span></p>
+<p>In general we want to know how <span class="math inline">\(z\)</span> changes when all the inputs are arbitrarily changed, not how <span class="math inline">\(z\)</span> changes when only a single variable changes. Suppose <span class="math inline">\(\mathbf{x}\)</span> is changed by some size <span class="math inline">\(n\)</span> infinitesimal vector <span class="math inline">\(d\mathbf{x} = (dx_0, dx_1, \cdots, dx_{n-1})\)</span>. Then evidently <span class="math inline">\(z = f(\mathbf{x})\)</span> would change by an amount</p>
+<p><span class="math display">\[dz = f(\mathbf{x} + d\mathbf{x}) - f(\mathbf{x}) = f(x_0 + dx_0, x_1 + dx_1, \cdots, x_{n-1} + dx_{n-1}) - f(x_0, x_1, \cdots, x_{n-1}).\]</span></p>
+<p>This is called the <strong>total differential</strong> of <span class="math inline">\(z\)</span> with respect to <span class="math inline">\(\mathbf{x}\)</span>. By the same logic we used for bivariate functions, the total differential also turns out to be a sum over all its partial differentials,</p>
+<p><span class="math display">\[dz = \sum_{i=0}^{n-1} \partial_i z = \partial_0 z + \partial_1 z + \cdot + \partial_{n-1} z.\]</span></p>
+<p>This of course means that we can also write the total differential as a sum over the partial derivatives,</p>
+<p><span class="math display">\[dz = \sum_{i=0}^{n-1} \frac{\partial z}{\partial x_i} dx_i = \frac{\partial z}{\partial x_0} dx_0 + \frac{\partial z}{\partial x_1} dx_1 + \cdots + \frac{\partial z}{\partial x_{n-1}} dx_{n-1}.\]</span></p>
+<p>We can write everything in vector notation by defining a vector of size <span class="math inline">\(n\)</span> called the <strong>gradient vector</strong>,</p>
+<p><span class="math display">\[\frac{dz}{d\mathbf{x}} = \mathbf{g}(\mathbf{x}) = \bigg(\frac{\partial z}{\partial x_0}, \frac{\partial z}{\partial x_1}, \cdots, \frac{\partial z}{\partial x_{n-1}} \bigg).\]</span></p>
+<p>The gradient vector is again the multivariate generalization of the total derivative, at least for scalar-valued functions. We can again write the total differential as a dot product of the gradient vector with the differential <span class="math inline">\(d\mathbf{x}\)</span>,</p>
+<p><span class="math display">\[dz = \frac{dz}{d\mathbf{x}} \cdot d\mathbf{x} = \mathbf{g} \cdot d\mathbf{x}.\]</span></p>
+<p>This equation gives us a geometric interpretation of the gradient by defining a kind of <span class="math inline">\(n\)</span>-dimensional version of the tangent plane, called a <strong>tangent hyperplane</strong>. It’s an <span class="math inline">\(n\)</span>-dimensional hyperplane in <span class="math inline">\(n+1\)</span> dimensional space. The tangent hyperplane to the function at a point <span class="math inline">\(\mathbf{a}\)</span> is given by setting the differential <span class="math inline">\(d\mathbf{x} = \mathbf{x} - \mathbf{a}\)</span> and solving for <span class="math inline">\(f(\mathbf{x})\)</span> to get</p>
+<p><span class="math display">\[f(\mathbf{x}) \approx f(\mathbf{a}) + \mathbf{g}(\mathbf{a})^\top (\mathbf{x} - \mathbf{a}).\]</span></p>
+<p>Don’t even try to visualize this. It’s just a conceptual thing. You can think of the tangent hyperplane as a <em>best affine approximation</em> to the function at the point <span class="math inline">\(\mathbf{a}\)</span>. It’s the hyperplane that just touches tangent to the point <span class="math inline">\(f(\mathbf{a})\)</span> in <span class="math inline">\(n+1\)</span> dimensional space.</p>
+<p>The gradient vector <span class="math inline">\(\mathbf{g}(\mathbf{a})\)</span> again points in the direction of <em>steepest ascent</em> of the function at the point <span class="math inline">\(\mathbf{x} = \mathbf{a}\)</span>. You can think of this as following from the fact that along contours of constant <span class="math inline">\(z\)</span> we must have <span class="math inline">\(dz = 0\)</span>, which implies that <span class="math inline">\(\mathbf{g}\)</span> must be <em>orthogonal</em> to any infinitesimal changes <span class="math inline">\(d\mathbf{x}\)</span> along the contour. Of course, in higher-dimensions, a contour is <em>really</em> any <span class="math inline">\(n\)</span>-dimensional surface of constant <span class="math inline">\(z\)</span>.</p>
+<p>We can generalize the <em>second</em> derivative to higher dimensions as well by looking at the matrix of all partial derivatives of <span class="math inline">\(z = f(\mathbf{x})\)</span>. Since there are <span class="math inline">\(n\)</span> variables, there will be <span class="math inline">\(n^2\)</span> possible second partials, most of which will be <em>mixed</em> partials. In all cases we’d care about the order of the mixed partials doesn’t matter. That is, partial derivatives <em>commute</em>. For example, the second partial with respect to <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_j\)</span> can be found by any of the following,</p>
+<p><span class="math display">\[\frac{\partial^2 z}{\partial x_i \partial x_j} = \frac{\partial}{\partial x_i} \frac{\partial z}{\partial x_j} = \frac{\partial}{\partial x_j} \frac{\partial z}{\partial x_i} = \frac{\partial^2 z}{\partial x_j \partial x_i}.\]</span></p>
+<p>Putting all of these second partials into a matrix gives the <span class="math inline">\(n \times n\)</span> matrix we call the <strong>Hessian</strong>,</p>
+<p><span class="math display">\[
+\frac{d^2z}{d\mathbf{x}^2} = \mathbf{H}(\mathbf{x}) =
+\begin{pmatrix}
+\frac{\partial^2 z}{\partial x_0^2} &amp; \frac{\partial^2 z}{\partial x_1 \partial x_0} &amp; \cdots &amp; \frac{\partial^2 z}{\partial x_{n-1} \partial x_0} \\
+\frac{\partial^2 z}{\partial x_0 \partial x_1} &amp; \frac{\partial^2 z}{\partial x_1^2} &amp; \cdots &amp; \frac{\partial^2 z}{\partial x_{n-1} \partial x_1} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\frac{\partial^2 z}{\partial x_0 \partial x_{n-1}} &amp; \frac{\partial^2 z}{\partial x_1 \partial x_{n-1}} &amp; \cdots &amp; \frac{\partial^2 z}{\partial x_{n-1}^2}
+\end{pmatrix}.
+\]</span></p>
+<p>Since the second partials all commute, the Hessian will be symmetric, <span class="math inline">\(\mathbf{H}^\top = \mathbf{H}\)</span>. The Hessian is the multivariate generalization of the second derivative in the sense that it’s the <em>Jacobian</em> of the <em>gradient</em>. As with any <span class="math inline">\(n \times n\)</span> symmetric matrix, the Hessian is guaranteed to have <span class="math inline">\(n\)</span> real eigenvalues <span class="math inline">\(\lambda_0, \lambda_1, \cdots, \lambda_{n-1}\)</span>. The sign of these <span class="math inline">\(n\)</span> eigenvalues tells you the <em>curvature</em> of the function at a point. This follows from the <strong>second-order approximation</strong> to the function at a point <span class="math inline">\(\mathbf{a}\)</span>, given by</p>
+<p><span class="math display">\[f(\mathbf{x}) \approx f(\mathbf{a}) + \mathbf{g}(\mathbf{a})^\top (\mathbf{x} - \mathbf{a}) + \frac{1}{2}(\mathbf{x} - \mathbf{a})^\top \mathbf{H}(\mathbf{a}) (\mathbf{x} - \mathbf{a}).\]</span></p>
+<p>Geometrically, you can think of this function as defining a kind of hyper quadratic function. The term <span class="math inline">\((\mathbf{x} - \mathbf{a})^\top \mathbf{H}(\mathbf{a}) (\mathbf{x} - \mathbf{a})\)</span> is a quadratic form that determines the shape of this quadratic function. The sign of the eigenvalues tells you which directions will slope downwards and which will slope upwards.</p>
+<p>If the eigenvalues are all positive then <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span> will be positive definite, and the quadratic will bowl upwards. A function where <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span> is positive definite for <em>all</em> <span class="math inline">\(\mathbf{a} \in \mathbb{R}^n\)</span> is called a <strong>convex function</strong>. Convex functions are very special to machine learning and optimization in general since, as we’ll see later, they have a unique global minimum, and there are very reliably efficient algorithms to find this minimum.</p>
+<p>If the eigenvalues are all negative then <span class="math inline">\(\mathbf{H}(\mathbf{a})\)</span> will be negative definite, and the quadratic will bowl downwards. Up to a minus sign, convex and concave functions are basically the same things, since if <span class="math inline">\(f(\mathbf{x})\)</span> is convex, then <span class="math inline">\(-f(\mathbf{x})\)</span> will be concave, and vice versa. Just as convex functions have a unique global minimum, concave functions have a unique global maximum. Outside of these two cases the eigenvalues will have mixed signs. Then, the function is called a <strong>non-convex function</strong>. Non-convex functions can bowl upwards in some directions and downward in others, like a saddle, except in <span class="math inline">\(n\)</span> dimensions it can bowl downwards or upwards in multiple directions.</p>
+<p>Thus far we’ve considered scalar-valued functions. Of course, we can consider vector-valued functions as well. Suppose we have a function <span class="math inline">\(\mathbf{y} = f(\mathbf{x})\)</span> that maps <span class="math inline">\(n\)</span> inputs <span class="math inline">\(\mathbf{x} = (x_0, x_1, \cdots, x_{n-1})\)</span> inputs to <span class="math inline">\(m\)</span> outputs <span class="math inline">\(\mathbf{y} = (y_0, y_1, \cdots, y_{n-1})\)</span>. Note that we need not require <span class="math inline">\(m=n\)</span>. We can have as many inputs as we like and as many outputs as we like. We can again think of each output <span class="math inline">\(y_j\)</span> as a scalar-valued function that has a gradient <span class="math inline">\(\mathbf{g}_j\)</span>. Putting all of these gradients into a matrix defines the <span class="math inline">\(m \times n\)</span> <strong>Jacobian matrix</strong>,</p>
+<p><span class="math display">\[
+\frac{d\mathbf{y}}{d\mathbf{x}} = \mathbf{J}(\mathbf{x}) =
+\begin{pmatrix}
+\frac{\partial y_0}{\partial x_0} &amp; \frac{\partial y_0}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_0}{\partial x_{n-1}} \\
+\frac{\partial y_1}{\partial x_0} &amp; \frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_1}{\partial x_{n-1}} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\frac{\partial y_{m-1}}{\partial x_0} &amp; \frac{\partial y_{m-1}}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_{m-1}}{\partial x_{n-1}}
+\end{pmatrix}.
+\]</span></p>
+<p>The Jacobian matrix is the most general multivariate generalization of the ordinary derivative. It just generalizes the gradient to vector-valued functions. Notice that in general the Jacobian won’t even be a square matrix, much less symmetric. The total differential for a vector-valued function <span class="math inline">\(\mathbf{y} = f(\mathbf{x})\)</span> can be written in the usual way by using matrix-vector multiplication,</p>
+<p><span class="math display">\[d\mathbf{y} = \frac{d\mathbf{y}}{d\mathbf{x}} d\mathbf{x} = \mathbf{J} d\mathbf{x}.\]</span></p>
+<p>Evidently, the Jacobian can be thought of as a <em>linear map</em> that maps <span class="math inline">\(n\)</span>-dimensional differential vectors <span class="math inline">\(d\mathbf{x}\)</span> to <span class="math inline">\(m\)</span>-dimensional vectors <span class="math inline">\(d\mathbf{y}\)</span>. As with the gradient, we can use the Jacobian to create an <em>affine approximation</em> to the function at a point <span class="math inline">\(\mathbf{a}\)</span>,</p>
+<p><span class="math display">\[f(\mathbf{x}) \approx f(\mathbf{a}) + \mathbf{J}(\mathbf{a}) (\mathbf{x} - \mathbf{a}).\]</span></p>
+<p>Instead of defining a single <span class="math inline">\(n\)</span>-dimensional hyperplane, this function will define <span class="math inline">\(m\)</span> such hyperplanes at once, one for each component of <span class="math inline">\(\mathbf{y}\)</span>.</p>
+<p>Finally, we can generalize the volume integral to higher dimensions as well. Now though, <span class="math inline">\(z = f(x_0,\cdots,x_{n-1})\)</span> defines an <span class="math inline">\(n\)</span>-dimensional <strong>hypersurface</strong> in <span class="math inline">\(n+1\)</span>-dimensional space, and we seek to calculate the <strong>hypervolume</strong> under this hypersurface over an <span class="math inline">\(n\)</span>-dimensional region <span class="math inline">\(R\)</span>. We proceed by trying to approximate this hypervolume by using <em>hyperrectangles</em> with infinitesimal base <strong>hyperarea</strong> <span class="math inline">\(dA = dx_0 dx_1 \cdots dx_{n-1}\)</span> and heights <span class="math inline">\(f(x_0,\cdots,x_{n-1})\)</span>. Each of these hyperrectangles will have an infinitesimal hypervolume <span class="math inline">\(dV = f(x_0,\cdots,x_{n-1}) dA\)</span>.</p>
+<p>If we partition the region <span class="math inline">\(R\)</span> into a grid of points and calculate the hypervolumes of each of these points and sum them all up, we get the hypervolume <span class="math inline">\(V\)</span> under the function, which we call the <strong>hypervolume integral</strong> of <span class="math inline">\(f(x_0,\cdots,x_{n-1})\)</span> over <span class="math inline">\(R\)</span>,</p>
+<p><span class="math display">\[V = \int_{R} f(x_0,\cdots,x_{n-1}) \ dA = \sum_{\text{all hyperrectangles}} f(x_0,\cdots,x_{n-1}) \ dA.\]</span></p>
+<p>When the region <span class="math inline">\(R = [a_0, b_0] \times [a_1, b_1] \times \cdots \times [a_{n-1}, b_{n-1}]\)</span>, the region itself is a hyperrectangle. In that case, we can break up the hypervolume integral into a sequence of iterated univariate integrals,</p>
+<p><span class="math display">\[\int_{R} f(x_0,\cdots,x_{n-1}) \ dA = \int_{a_0}^{b_0} \int_{a_1}^{b_1} \cdots \int_{a_{n-1}}^{b_{n-1}} f(x_0,\cdots,x_{n-1}) \ dx_0dx_1\cdots dx_{n-1}.\]</span></p>
+<p>As with ordinary volume integrals, we’d do these from the inside out. Provided the function doesn’t blow up inside the region we can write the sequence of integrals in any order and get the same answer. All of the rules for the bivariate integral I mentioned extend to these hypervolume integrals as well. The only real difference is we’re not integrating over <span class="math inline">\(n\)</span> variables, not just <span class="math inline">\(2\)</span>.</p>
+<ul>
+<li>Write numerical routines to calculate gradient, Hessian, and Jacobian and talk about their performance</li>
+<li>Add in some examples, particularly for calculating the partial differentials/derivatives</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->
