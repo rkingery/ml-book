@@ -4,13 +4,19 @@ import seaborn as sns
 import pandas as pd
 from pathlib import Path
 
+from mpl_toolkits.mplot3d.proj3d import proj_transform
+from mpl_toolkits.mplot3d.axes3d import Axes3D
+from matplotlib.patches import FancyArrowPatch
+import warnings
+
+warnings.filterwarnings('ignore')
 local = Path().cwd().parent / 'local'
 
 ## basic-math
 
 def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labels=None, colors=None, xlabel='$x$', ylabel='$y$',
                   legend_fontsize=None, legend_loc=None, points=None, point_colors=None, point_labels=None, figsize=(4, 3),
-                  **kwargs):
+                  title_fontsize=None, **kwargs):
     xlim = xlim if xlim is not None else (min(x), max(x))
     ylim = ylim if ylim is not None else xlim
     xlow, xhigh = xlim
@@ -31,7 +37,7 @@ def plot_function(x, f, xlim=None, ylim=None, title=None, ticks_every=None, labe
             label = point_labels[i] if isinstance(point_labels, list) else None
             color = point_colors[i] if isinstance(point_colors, list) else 'red'
             plt.scatter([x0], [y0], marker='o', color=color, label=label, zorder=len(f) + 1)
-    plt.title(title)
+    plt.title(title, fontsize=title_fontsize)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     if ticks_every is not None:
@@ -55,11 +61,6 @@ def query_wolfram_alpha(query, api_file='wolfram_key.txt', answer='formatted'):
 def plot_function_3d(x, y, f, title='', ticks_every=None, elev=30, azim=30, labels=None, zorders=None, colors=None, xlim=None, 
                      ylim=None, zlim=None, labelpad=0, points=None, lines=None, figsize=(4, 3), titlepad=0, dist=10, 
                      arrows=None, arrow_offset=0.01, title_fontsize=14, curves=None, **kwargs):
-    from mpl_toolkits.mplot3d.proj3d import proj_transform
-    from mpl_toolkits.mplot3d.axes3d import Axes3D
-    from matplotlib.patches import FancyArrowPatch
-    import warnings
-    warnings.filterwarnings('ignore')
 
     class Arrow3D(FancyArrowPatch):
         def __init__(self, x, y, z, dx, dy, dz, *args, **kwargs):
@@ -386,6 +387,52 @@ def plot_function_with_area(x, f, a, b, title='', xlabel='$x$', ylabel='$y$', **
     plt.grid(True, alpha=0.5)
     plt.show()
     
+def plot_approximating_prisms(x, y, f, dx=1, dy=1, title='', print_volume=False, figsize=(6, 4),
+                              elev=30, azim=30, labelpad=0, titlepad=0, title_fontsize=14, xlim=None, 
+                              ylim=None, zlim=None, dist=10, buffer=0, ticks_every=None, **kwargs):
+    X, Y = np.meshgrid(x, y)
+    Z = f(X, Y) + buffer
+    xlim = xlim if xlim is not None else (min(x), max(x))
+    ylim = ylim if ylim is not None else (min(y), max(y))
+    zlim = zlim if zlim is not None else (Z.min(), Z.max())
+    xlow, xhigh = xlim
+    ylow, yhigh = ylim
+    zlow, zhigh = zlim
+
+    n_rects_x = int((max(x) - min(x)) / dx)
+    n_rects_y = int((max(y) - min(y)) / dy)
+
+    x_rect = np.arange(min(x), max(x), dx)
+    y_rect = np.arange(min(y), max(y), dy)
+    X_rect, Y_rect = np.meshgrid(x_rect, y_rect)
+    X_rect = X_rect.ravel()
+    Y_rect = Y_rect.ravel()
+    Z_rect = f(X_rect, Y_rect).ravel()
+
+    if print_volume:
+        print(f'Approximate Volume: {np.sum(f(X_rect, Y_rect) * dx * dy)}')
+
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_subplot(111, projection='3d')
+
+    ax.plot_surface(X, Y, Z, zorder=1, color='salmon', **kwargs)
+    ax.bar3d(X_rect, Y_rect, 0, dx, dy, Z_rect, alpha=0.5, zorder=0, zsort='average', shade=True,
+             edgecolor='steelblue', color='steelblue')
+
+    ax.view_init(elev=elev, azim=azim)
+    ax.set_title(title, y=1, pad=titlepad, fontsize=title_fontsize)
+    if ticks_every is not None:
+        ax.set_xticks(np.arange(int(xlow), int(xhigh) + 1, ticks_every[0]))
+        ax.set_yticks(np.arange(int(ylow), int(yhigh) + 1, ticks_every[1]))
+        ax.set_zticks(np.arange(int(zlow), int(zhigh) + 1, ticks_every[2]))
+    ax.set_xlabel('x', labelpad=labelpad)
+    ax.set_ylabel('y', labelpad=labelpad)
+    ax.set_zlabel('z', labelpad=labelpad)
+    ax.set_xlim(*xlim)
+    ax.set_ylim(*ylim)
+    ax.set_zlim(*zlim)
+    ax.dist = dist
+    plt.show()
     
 # probability
     
