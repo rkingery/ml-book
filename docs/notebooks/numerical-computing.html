@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mathematics for Machine Learning - 2&nbsp; Numerical Computation</title>
+<title>Mathematics for Machine Learning - 3&nbsp; Numerical Computation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Numerical Computation</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numerical Computation</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -159,47 +159,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/basic-math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basic Math</span></a>
+  <a href="../notebooks/basic-math.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Basic Math</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/numerical-computing.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Numerical Computation</span></a>
+  <a href="../notebooks/numerical-computing.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numerical Computation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculus</span></a>
+  <a href="../notebooks/calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Systems</span></a>
+  <a href="../notebooks/linear-systems.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Linear Systems</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
+  <a href="../notebooks/vector-spaces.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vector Spaces</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
+  <a href="../notebooks/matrix-algebra.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Matrix Algebra</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
+  <a href="../notebooks/multivariate-calculus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate Calculus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Basic Probability</span></a>
+  <a href="../notebooks/probability.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Basic Probability</span></a>
   </div>
 </li>
     </ul>
@@ -208,27 +208,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#integers" id="toc-integers" class="nav-link active" data-scroll-target="#integers"><span class="toc-section-number">2.1</span>  Integers</a>
+  <li><a href="#integers" id="toc-integers" class="nav-link active" data-scroll-target="#integers"><span class="toc-section-number">3.1</span>  Integers</a>
   <ul class="collapse">
-  <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics"><span class="toc-section-number">2.1.1</span>  Basics</a></li>
-  <li><a href="#representing-integers" id="toc-representing-integers" class="nav-link" data-scroll-target="#representing-integers"><span class="toc-section-number">2.1.2</span>  Representing Integers</a></li>
+  <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics"><span class="toc-section-number">3.1.1</span>  Basics</a></li>
+  <li><a href="#representing-integers" id="toc-representing-integers" class="nav-link" data-scroll-target="#representing-integers"><span class="toc-section-number">3.1.2</span>  Representing Integers</a></li>
   </ul></li>
-  <li><a href="#floats" id="toc-floats" class="nav-link" data-scroll-target="#floats"><span class="toc-section-number">2.2</span>  Floats</a>
+  <li><a href="#floats" id="toc-floats" class="nav-link" data-scroll-target="#floats"><span class="toc-section-number">3.2</span>  Floats</a>
   <ul class="collapse">
-  <li><a href="#basics-1" id="toc-basics-1" class="nav-link" data-scroll-target="#basics-1"><span class="toc-section-number">2.2.1</span>  Basics</a></li>
-  <li><a href="#representing-floats" id="toc-representing-floats" class="nav-link" data-scroll-target="#representing-floats"><span class="toc-section-number">2.2.2</span>  Representing Floats</a></li>
-  <li><a href="#double-precision" id="toc-double-precision" class="nav-link" data-scroll-target="#double-precision"><span class="toc-section-number">2.2.3</span>  Double Precision</a></li>
-  <li><a href="#common-floating-point-pitfalls" id="toc-common-floating-point-pitfalls" class="nav-link" data-scroll-target="#common-floating-point-pitfalls"><span class="toc-section-number">2.2.4</span>  Common Floating Point Pitfalls</a></li>
+  <li><a href="#basics-1" id="toc-basics-1" class="nav-link" data-scroll-target="#basics-1"><span class="toc-section-number">3.2.1</span>  Basics</a></li>
+  <li><a href="#representing-floats" id="toc-representing-floats" class="nav-link" data-scroll-target="#representing-floats"><span class="toc-section-number">3.2.2</span>  Representing Floats</a></li>
+  <li><a href="#double-precision" id="toc-double-precision" class="nav-link" data-scroll-target="#double-precision"><span class="toc-section-number">3.2.3</span>  Double Precision</a></li>
+  <li><a href="#common-floating-point-pitfalls" id="toc-common-floating-point-pitfalls" class="nav-link" data-scroll-target="#common-floating-point-pitfalls"><span class="toc-section-number">3.2.4</span>  Common Floating Point Pitfalls</a></li>
   </ul></li>
-  <li><a href="#array-computing" id="toc-array-computing" class="nav-link" data-scroll-target="#array-computing"><span class="toc-section-number">2.3</span>  Array Computing</a>
+  <li><a href="#array-computing" id="toc-array-computing" class="nav-link" data-scroll-target="#array-computing"><span class="toc-section-number">3.3</span>  Array Computing</a>
   <ul class="collapse">
-  <li><a href="#higher-dimensional-arrays" id="toc-higher-dimensional-arrays" class="nav-link" data-scroll-target="#higher-dimensional-arrays"><span class="toc-section-number">2.3.1</span>  Higher-Dimensional Arrays</a></li>
+  <li><a href="#higher-dimensional-arrays" id="toc-higher-dimensional-arrays" class="nav-link" data-scroll-target="#higher-dimensional-arrays"><span class="toc-section-number">3.3.1</span>  Higher-Dimensional Arrays</a></li>
   </ul></li>
-  <li><a href="#broadcasting" id="toc-broadcasting" class="nav-link" data-scroll-target="#broadcasting"><span class="toc-section-number">2.4</span>  Broadcasting</a>
+  <li><a href="#broadcasting" id="toc-broadcasting" class="nav-link" data-scroll-target="#broadcasting"><span class="toc-section-number">3.4</span>  Broadcasting</a>
   <ul class="collapse">
-  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="toc-section-number">2.4.1</span>  Motivation</a></li>
-  <li><a href="#broadcasting-rules" id="toc-broadcasting-rules" class="nav-link" data-scroll-target="#broadcasting-rules"><span class="toc-section-number">2.4.2</span>  Broadcasting Rules</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="toc-section-number">3.4.1</span>  Motivation</a></li>
+  <li><a href="#broadcasting-rules" id="toc-broadcasting-rules" class="nav-link" data-scroll-target="#broadcasting-rules"><span class="toc-section-number">3.4.2</span>  Broadcasting Rules</a></li>
   </ul></li>
+  <li><a href="#floating-point-operations" id="toc-floating-point-operations" class="nav-link" data-scroll-target="#floating-point-operations"><span class="toc-section-number">3.5</span>  Floating Point Operations</a></li>
   </ul>
 </nav>
 </nav>
@@ -240,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Numerical Computation</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Numerical Computation</span></h1>
 </div>
 
 
@@ -265,10 +266,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="integers" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="integers"><span class="header-section-number">2.1</span> Integers</h2>
-<section id="basics" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="basics"><span class="header-section-number">2.1.1</span> Basics</h3>
+<section id="integers" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="integers"><span class="header-section-number">3.1</span> Integers</h2>
+<section id="basics" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="basics"><span class="header-section-number">3.1.1</span> Basics</h3>
 <p>Recall the <strong>integers</strong> are whole numbers that can be positive, negative, or zero. Examples are 5, 100151, 0, -72, etc. The set of all integers is commonly denoted by the symbol <span class="math inline">\(\mathbb{Z}\)</span>.</p>
 <p>In python, integers (ints for short) are builtin objects of type <code>int</code> that more or less follow the rules that integers in math follow.</p>
 <p>Among other things, the following operations can be performed with integers:</p>
@@ -362,8 +363,8 @@ type(4 // 2) = &lt;class 'int'&gt;</code></pre>
 </div>
 </div>
 </section>
-<section id="representing-integers" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="representing-integers"><span class="header-section-number">2.1.2</span> Representing Integers</h3>
+<section id="representing-integers" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="representing-integers"><span class="header-section-number">3.1.2</span> Representing Integers</h3>
 <p>Just like every other data type, on a computer integers are actually represented internally as a sequence of bits. A <strong>bit</strong> is a “binary digit”, 0 or 1. A sequence of bits is just a sequence of zeros and ones, e.g.&nbsp;0011001010 or 1001001.</p>
 <p>The number of bits used to represent a piece of data is called its <strong>word size</strong>. If we use a word size of <span class="math inline">\(n\)</span> bits to represent an integer, then there are <span class="math inline">\(2^n\)</span> possible integer values we can represent.</p>
 <p>If integers could only be positive or zero, representing them with bits would be easy. We could just convert them to binary and that’s it. To convert a non-negative integer to binary, we just need to keep dividing it by 2 and recording its remainder (0 or 1) at each step. The binary form is then just the sequence of remainders, written right to left. More generally, the binary sequence of some arbitrary number <span class="math inline">\(x\)</span> is the sequence of coefficients <span class="math inline">\(b_k=0,1\)</span> in the sum</p>
@@ -570,10 +571,10 @@ max_int = -9223372036854775807</code></pre>
 </div>
 </section>
 </section>
-<section id="floats" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="floats"><span class="header-section-number">2.2</span> Floats</h2>
-<section id="basics-1" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="basics-1"><span class="header-section-number">2.2.1</span> Basics</h3>
+<section id="floats" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="floats"><span class="header-section-number">3.2</span> Floats</h2>
+<section id="basics-1" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="basics-1"><span class="header-section-number">3.2.1</span> Basics</h3>
 <p>What if we want to represent decimal numbers or fractions instead of whole numbers, like <span class="math inline">\(1.2\)</span> or <span class="math inline">\(0.99999\)</span>, or even irrational numbers like <span class="math inline">\(\pi=3.1415926\dots\)</span>? To do this we need a new system of numbers that I’ll call floating point numbers, or <strong>floats</strong>, for reasons I’ll explain soon. Floats will be a computer’s best attempt to represent the real numbers <span class="math inline">\(\mathbb{R}\)</span>. They’ll represent real numbers only approximately with some specified precision.</p>
 <p>In python, floats are builtin objects of type <code>float</code>. Floats obey pretty much the same operations that integers do with some minor exceptions:</p>
 <ul>
@@ -601,8 +602,8 @@ max_int = -9223372036854775807</code></pre>
 </div>
 <p>Most of them look right. But what the heck is going on with <span class="math inline">\(1.2 - 4.3\)</span> and <span class="math inline">\(1.2 \times 4.3\)</span>? We’re getting some weird trailing nines that shouldn’t be there. This gets to how floats are actually represented on a computer.</p>
 </section>
-<section id="representing-floats" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="representing-floats"><span class="header-section-number">2.2.2</span> Representing Floats</h3>
+<section id="representing-floats" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="representing-floats"><span class="header-section-number">3.2.2</span> Representing Floats</h3>
 <p>Representing real numbers on a computer is a lot more subtle than representing integers. Since a computer can only have a finite number of bits, they can’t represent infinitely many digits, e.g.&nbsp;in irrational numbers like <span class="math inline">\(\pi\)</span>. Using finite word sizes will necessarily have to truncate real numbers to some number of decimal places. This truncation will create an error in the calculation called <strong>numerical roundoff</strong>.</p>
 <p>So how should we represent a decimal number using <span class="math inline">\(n\)</span> bits? As an example, let’s imagine we’re trying to represent the number <span class="math inline">\(x=157.208\)</span>. Perhaps the first thing you might think of is to use some number of those bits to represent the integer part, and some number to represent the fractional part. Suppose you have <span class="math inline">\(n=16\)</span> bits available to represent <span class="math inline">\(x\)</span>. Then maybe you can use 8 bits for the integer part <span class="math inline">\(157\)</span>, and 8 bits for the fractional part <span class="math inline">\(0.208\)</span>. Converting both halves to binary, you’d get <span class="math display">\[157 \equiv 10011101, \quad 0.208 \equiv 0011010100111111.\]</span></p>
 <p>Truncating both sequences to 8 bits (from the left), you could thus adopt a convention that <span class="math inline">\(157.208 \equiv 10011101 \ 00110101\)</span>.</p>
@@ -707,8 +708,8 @@ Machine Epsilon: 0.25</code></pre>
 <p>Notice how different this plot is from the ones for the signed integers. With the integers, the points were equally spaced. Now points close to <span class="math inline">\(0\)</span> are getting represented much closer together than points far from <span class="math inline">\(0\)</span>. There are <span class="math inline">\(74\)</span> of the <span class="math inline">\(120\)</span> total points showing up just in the range <span class="math inline">\([-1,1]\)</span>. That’s over half!. Meanwhile, only <span class="math inline">\(22\)</span> points total show up in the combined ranges of <span class="math inline">\([-60,-10]\)</span> and <span class="math inline">\([10,60]\)</span>. Very strange.</p>
 <p>Feel free to play around with different floating point systems by using different choices for <code>n</code>, <code>n_man</code>, <code>n_exp</code>, and <code>bias</code>. Be careful, however, not to make <code>n_exp</code> too large or you may crash the kernel…</p>
 </section>
-<section id="double-precision" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="double-precision"><span class="header-section-number">2.2.3</span> Double Precision</h3>
+<section id="double-precision" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="double-precision"><span class="header-section-number">3.2.3</span> Double Precision</h3>
 <p>So how does python represent floats? Python by default uses what’s called <strong>double precision</strong> to represent floats, also called <strong>float64</strong>. This means <span class="math inline">\(n=64\)</span> total bits of precision are used, with <span class="math inline">\(n_e=11\)</span>, <span class="math inline">\(n_m=52\)</span>, and bias <span class="math inline">\(b=1023=2^{10}-1\)</span>. Double precision allows for a <em>much</em> larger range of numbers than 8-bit precision does:</p>
 <ul>
 <li>The max value allowed is <span class="math inline">\(2^{2^{n_e}-b} = 2^{1025} \approx 10^{308}\)</span>.</li>
@@ -830,8 +831,8 @@ np.inf - np.inf = nan</code></pre>
 </div>
 <p>I’ll finish this section by mentioning that there are two other floating point representations worth being aware of: <strong>single precision</strong> (or <strong>float32</strong>), and <strong>half precision</strong> (or <strong>float16</strong>). Single precision uses 32 bits to represent a floating point number. Half precision uses 16 bits. It may seem strange to even bother having these less-precise precisions lying around, but they do have their uses. For example, half precision shows up in deep learning as a more efficient way to represent the weights of a neural network. Since half precision floats only take up 25% as many bits as default double precision floats do, using them can yield a 4x reduction in model memory sizes. We’ll see more on this later.</p>
 </section>
-<section id="common-floating-point-pitfalls" class="level3" data-number="2.2.4">
-<h3 data-number="2.2.4" class="anchored" data-anchor-id="common-floating-point-pitfalls"><span class="header-section-number">2.2.4</span> Common Floating Point Pitfalls</h3>
+<section id="common-floating-point-pitfalls" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="common-floating-point-pitfalls"><span class="header-section-number">3.2.4</span> Common Floating Point Pitfalls</h3>
 <p>To cap this long section on floats, here’s a list of common pitfalls people run into when working with floating point numbers, and some ways to avoid each one. This is probably the most important thing to take away from this section. You may find it helpful to reference later on. See this <a href="https://www.codeproject.com/Articles/29637/Five-Tips-for-Floating-Point-Programming">post</a> for more information.</p>
 <ol type="1">
 <li>Numerical overflow: Letting a number blow up to infinity (or negative infinity)
@@ -872,8 +873,8 @@ np.inf - np.inf = nan</code></pre>
 </ol>
 </section>
 </section>
-<section id="array-computing" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="array-computing"><span class="header-section-number">2.3</span> Array Computing</h2>
+<section id="array-computing" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="array-computing"><span class="header-section-number">3.3</span> Array Computing</h2>
 <p>In machine learning and most of scientific computing we’re not interested in operating on just single numbers at a time, but many numbers at a time. This is done using <em>array operations</em>. The most popular library in python for doing numerical computation on arrays is numpy.</p>
 <p>Why not just do numerical computations in base python? After all, if we have large arrays of data we can just put them in a list. Consider the following example. Suppose we have two tables of data, <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span>. Each table has <span class="math inline">\(m=5\)</span> rows and <span class="math inline">\(n=3\)</span> columns. The rows represent samples, e.g.&nbsp;measured in a lab, and the columns represent the variables, or <em>features</em>, being measured, call them <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span>, if you like. I’ll define these two tables using python lists <code>A</code> and <code>B</code> below.</p>
 <div class="cell" data-execution_count="24">
@@ -1047,16 +1048,16 @@ B.shape = (5, 3)</code></pre>
 </div>
 <p>So why is numpy vectorization so much faster than using native python loops? Because it turns out that numpy by and large doesn’t actually perform array operations in python! When array operations are done, numpy compiles them down to low-level C code and runs the operations there, where things are much faster.</p>
 <p>Not only that, numpy takes advantage of very efficient linear algebra functions written over the course of decades by smart people. These functions come from low-level FORTRAN and C libraries like <a href="https://netlib.org/blas/">BLAS</a> and <a href="https://netlib.org/lapack/">LAPACK</a>. They’re hand-designed to take maximum advantage of computational speed-ups where available. These include things like parallelization, caching, and hardware vectorization operations. Native python doesn’t take advantage of <em>any</em> of these nice things. The moral is, if you want to run array operations efficiently, you need to use a numerical library like numpy or modern variants like pytorch.</p>
-<section id="higher-dimensional-arrays" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="higher-dimensional-arrays"><span class="header-section-number">2.3.1</span> Higher-Dimensional Arrays</h3>
-<p>The number of different dimensions an array has is called its <strong>dimension</strong> or <strong>rank</strong>. Equivalently, the rank or dimension of an array is just the length of its shape tuple. The arrays I showed above are examples of rank-2 or 2-dimensional arrays. We can define arrays with any number of dimensions we like. These arrays of different rank sometimes have special names:</p>
+<section id="higher-dimensional-arrays" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="higher-dimensional-arrays"><span class="header-section-number">3.3.1</span> Higher-Dimensional Arrays</h3>
+<p>The length of the shape of an array is called its <strong>dimension</strong> or <strong>rank</strong>. The arrays I showed above are examples of rank-2 or 2-dimensional arrays. We can define arrays with any number of dimensions we like. These arrays of different rank sometimes have special names:</p>
 <ul>
 <li>A 0-dimensional (rank-0) array is called a <strong>scalar</strong>. These are single numbers.</li>
 <li>A 1-dimensional (rank-1) array is called a <strong>vector</strong>. These are arrays with only one row.</li>
 <li>A 2-dimensional (rank-2) array is called a <strong>matrix</strong>. These are arrays with multiple rows.</li>
 <li>An array of dimension or rank 3 or higher is called a <strong>tensor</strong>. These are arrays with multiple matrices.</li>
 </ul>
-<p>More on these when we get to linear algebra. Here are some examples so you can see what they look like. Note I’m using <code>dtype=np.float64</code> to explicitly cast the values as float64 when defining the arrays. Numpy’s vectorization operations work for all of these arrays regardless of their shape.</p>
+<p>Here are some examples so you can see what they look like. Note I’m using <code>dtype=np.float64</code> to explicitly cast the values as float64 when defining the arrays. Numpy’s vectorization operations work for all of these arrays regardless of their shape.</p>
 <div class="cell" data-execution_count="34">
 <details>
 <summary>Code</summary>
@@ -1169,11 +1170,11 @@ elements of (A &gt;= 0) =
 </div>
 </section>
 </section>
-<section id="broadcasting" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="broadcasting"><span class="header-section-number">2.4</span> Broadcasting</h2>
+<section id="broadcasting" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="broadcasting"><span class="header-section-number">3.4</span> Broadcasting</h2>
 <p>Broadcasting is a set of conventions for doing array operations on arrays with incompatible shapes. This may seem like a strange thing to do, but it turns out knowing how and when to broadcast can make your code much shorter, more readable, and efficient. All modern-day numerical libraries in python support broadcasting, including numpy, pytorch, tensorflow, etc. So it’s a useful thing to learn.</p>
-<section id="motivation" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="motivation"><span class="header-section-number">2.4.1</span> Motivation</h3>
+<section id="motivation" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="motivation"><span class="header-section-number">3.4.1</span> Motivation</h3>
 <p>Let’s start with a simple example. Suppose we have an array of floats defined below. We’d like to add 1 to every number in the array. How can we do it? One “pythonic” way might be to use a list comprehension like so. This will work just fine, but it requires going back and forth between arrays and lists.</p>
 <div class="cell" data-execution_count="42">
 <details>
@@ -1214,8 +1215,8 @@ x + 1 = [2. 3. 4. 5. 6.]</code></pre>
 </div>
 <p>This notation has the advantage of keeping array equations simple, while at the same time keeping all operations in numpy so that they run fast.</p>
 </section>
-<section id="broadcasting-rules" class="level3" data-number="2.4.2">
-<h3 data-number="2.4.2" class="anchored" data-anchor-id="broadcasting-rules"><span class="header-section-number">2.4.2</span> Broadcasting Rules</h3>
+<section id="broadcasting-rules" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="broadcasting-rules"><span class="header-section-number">3.4.2</span> Broadcasting Rules</h3>
 <p>Suppose now that we have two arrays <code>A</code> and <code>B</code> of arbitrary shape and we want to operate on them, e.g.&nbsp;via the operations <code>+, -, *, /, //, **</code>. Here are the general broadcasting rules, quoted directly from the <a href="https://numpy.org/doc/stable/user/basics.broadcasting.html">numpy documentation</a>.</p>
 <blockquote class="blockquote">
 <p><strong>Numpy Documentation</strong><br><br>When operating on two arrays, numpy compares their shapes element-wise. It starts with the trailing (i.e.&nbsp;rightmost) dimensions and works its way left. Two dimensions are <strong>compatible</strong> when <br><br>1. they are equal, or<br>2. one of them is 1 <br><br>If these conditions are not met, a <code>ValueError: operands could not be broadcast together</code> exception is thrown, indicating that the arrays have <strong>incompatible</strong> shapes. The size of the resulting array is the size that is not 1 along each axis of the inputs.</p>
@@ -1298,11 +1299,29 @@ B.shape = (7, 1, 5)
 C.shape = (8, 7, 6, 5)</code></pre>
 </div>
 </div>
-<p>That’s pretty much all there is to broadcasting. It’s a systematic way of trying to copy the dimensions in each array until they both have the same shape. All this broadcasting is done under the hood for you when you try to operate on two arrays of different shapes. You don’t need to do anything but understand <em>how</em> the arrays get broadcast together so you can avoid errors in your calculations, sometimes very subtle errors.</p>
-<p>This can be a bit confusing to understand if you’re not used to it. We’ll practice broadcasting a good bit so you can get the hang of it.</p>
-
-
+<p>That’s pretty much all there is to broadcasting. It’s a systematic way of trying to copy the dimensions in each array until they both have the same shape. All this broadcasting is done under the hood for you when you try to operate on two arrays of different shapes. You don’t need to do anything but understand <em>how</em> the arrays get broadcast together so you can avoid errors in your calculations, sometimes very subtle errors. This can be a bit confusing to understand if you’re not used to it. We’ll practice broadcasting a good bit so you can get the hang of it.</p>
 </section>
+</section>
+<section id="floating-point-operations" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="floating-point-operations"><span class="header-section-number">3.5</span> Floating Point Operations</h2>
+<p>Typically, when working with numerical algorithms it’s conventional to measure the time the algorithm takes to run using <strong>floating point operations</strong>, or <strong>FLOPS</strong> for short. The main difference between counting the FLOPs of a program and computing its algorithmic runtime is that we only count <em>floating point</em> operations when counting FLOPs. We don’t count lines that perform logical operations or lines that define a statement like a for loop or a function signature. Other than that, counting FLOPS works exactly the same way as computing algorithmic runtime, including the use of the big-O notation.</p>
+<p>Let’s do an example. Suppose we want to element-wise multiply two vectors <code>x</code> and <code>y</code> each of size <span class="math inline">\(n\)</span>. If we didn’t use numpy, we might implement this using the following simple function:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a> <span class="kw">def</span> element_wise_multiply(x, y):</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> [x[i] <span class="op">*</span> y[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)]</span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To calculate the FLOPS of this function, we need to figure out how many operations of the type <code>+, -, *, /, //, %</code> are being executed as the function runs over the input. First, note that the function signature, the definition for <code>n</code>, and the return statement aren’t floating point operations. The only line doing any floating point is</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> [x[i] <span class="op">*</span> y[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This line is really a short-hand way of writing the following loop:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> n</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>    z[i] <span class="op">=</span> x[i] <span class="op">*</span> y[i]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, the definition of <code>z</code> isn’t actually a FLOP since the <code>*</code> is being used to define a list of length <code>n</code>. The only FLOPS evidently being performed are each of the <code>z[i] = x[i] * y[i]</code> operations. How many of these are being done? Since we’re doing one each time we run through the loop, we’re evidently doing <code>n</code> total FLOPS.</p>
+<p>Thus, this simple element-wise multiplication algorithm us running in exactly <span class="math inline">\(n\)</span> FLOPS. Just as we’d do for algorithmic runtime, we’d write this using big-O notation by saying the algorithm does <span class="math inline">\(O(n)\)</span> total FLOPS.</p>
+<p>As a <em>very</em> rough rule of thumb, algorithms that use less than <span class="math inline">\(O(n^3)\)</span> FLOPS are considered “fast”, and algorithms that use at or above <span class="math inline">\(O(n^3)\)</span> FLOPS are considered slow. Worst of all are algorithms that require exponentially many FLOPS or worse. Those are usually recursive in nature, often involving trees or graphs.</p>
+<p>Just as with algorithmic runtime and memory, take these asymptotic estimates with something of a grain of salt. They’re just abstractions. At the end of the day what we <em>really</em> care about is how fast our code runs and how much memory it’s using on our machines. Remember, asymptotic estimates ignore the constant factor out front of the leading term, which can often be a big deal in practice. When in doubt, always profile your code to figure out which lines are running slow and think about how you can speed them up.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -1442,12 +1461,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
       <a href="../notebooks/basic-math.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basic Math</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Basic Math</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../notebooks/calculus.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculus</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculus</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
