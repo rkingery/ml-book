@@ -1,3 +1,0 @@
-# Preface {.unnumbered}
-
-This is my book Mathematics for Machine Learning.
