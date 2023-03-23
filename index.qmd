@@ -1,0 +1,3 @@
+# Preface {.unnumbered}
+
+This is my book *Mathematics and Computer Science for Machine Learning*. Still a work in progress.

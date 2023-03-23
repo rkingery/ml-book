@@ -3,26 +3,27 @@ project:
   output-dir: docs
 
 book:
-  title: "Mathematics for Machine Learning"
+  title: "Mathematics and Computer Science for Machine Learning"
   author: "Ryan Kingery"
-  #date: "2/7/2023"
   page-navigation: true
   sidebar:
     style: docked
     background: light
   chapters:
     - index.qmd
+    - notebooks/algorithms.ipynb
     - notebooks/basic-math.ipynb
     - notebooks/numerical-computing.ipynb
     - notebooks/calculus.ipynb
     - notebooks/linear-systems.ipynb
-    - notebooks/vector-spaces.ipynb
-    - notebooks/matrix-algebra.ipynb
+    - notebooks/vectors.ipynb
+    - notebooks/matrices.ipynb
+    - notebooks/tensors.ipynb
     - notebooks/multivariate-calculus.ipynb
+    - notebooks/optimization.ipynb
     - notebooks/probability.ipynb
-    #- notebooks/multivariate-probability.ipynb
-
-#bibliography: references.bib
+    - notebooks/multivariate-probability.ipynb
+    - notebooks/statistics.ipynb
 
 format:
   html:
