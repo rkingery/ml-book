@@ -11,7 +11,7 @@ book:
     background: light
   chapters:
     - index.qmd
-    - notebooks/algorithms.ipynb
+    - notebooks/programming.ipynb
     - notebooks/basic-math.ipynb
     - notebooks/numerical-computing.ipynb
     - notebooks/calculus.ipynb

@@ -164,7 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/algorithms.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Programming and Algorithms</span></a>
+  <a href="../notebooks/programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Computer Programming</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -936,7 +936,7 @@ e^2 +  e^2(x-1) + e^2(y-1)\\
 \frac{\partial^2 z}{\partial x \partial y} &amp; \frac{\partial^2 z}{\partial y^2} \\
 \end{pmatrix} = \mathbf{H}(\mathbf{x}).
 \]</span></p>
-<p>That is, the Jacobian of the gradient is just the Hessian. This is the sense in which the Hessian is the multivariate generalization of the second derivative.</p>
+<p>That is, the Jacobian of the gradient is just the Hessian. This is the sense in which the Hessian is the multivariate generalization of the second derivative. What about the Hessian of a <em>vector-valued</em> function though? I haven’t talked about that. It turns out that the Hessian in that case isn’t a matrix anymore, but rather a <em>rank-3 tensor</em>. I’ll talk more about those in a future lesson.</p>
 <p>If you haven’t noticed, multivariate calculus seems to come with its own confusing zoo of notation and terminology. Instead of just “derivatives”, we now have “partial derivatives”, “gradients”, and “Jacobians”. Instead of “second derivatives”, we have “second partial derivatives” and “Hessians”. Worse, there are a lot of different notations around to denote each of these things. All this stuff can be confusing. It’s the way it is largely for historical reasons. In practice, people often are lazier about these things. In fact, in machine learning, people often refer to <em>any</em> first derivative as a <em>gradient</em>, and <em>any</em> second derivative as a <em>Hessian</em>.</p>
 </section>
 <section id="differentiation-rules" class="level2" data-number="9.7">
