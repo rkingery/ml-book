@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "Mathematics and Computer Science for Machine Learning"
+  title: "Math and Programming for Machine Learning"
   author: "Ryan Kingery"
   page-navigation: true
   sidebar:
