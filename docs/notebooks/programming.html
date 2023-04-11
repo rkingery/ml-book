@@ -233,7 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#data-structures" id="toc-data-structures" class="nav-link active" data-scroll-target="#data-structures"><span class="toc-section-number">1.1</span>  Data Structures</a></li>
+  <li><a href="#python" id="toc-python" class="nav-link active" data-scroll-target="#python"><span class="toc-section-number">1.1</span>  Python</a></li>
   <li><a href="#conditionals-statements" id="toc-conditionals-statements" class="nav-link" data-scroll-target="#conditionals-statements"><span class="toc-section-number">1.2</span>  Conditionals Statements</a></li>
   <li><a href="#loops" id="toc-loops" class="nav-link" data-scroll-target="#loops"><span class="toc-section-number">1.3</span>  Loops</a></li>
   <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="toc-section-number">1.4</span>  Functions</a></li>
@@ -268,28 +268,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>I’ll begin this book by covering the basics of computer programming in python as well. I’ll also talk a little bit about algorithms and how to measure their performance, and I’ll give a high-level overview of how a computer works. The goal is to get you proficient enough to be able to follow along in the rest of the book, and to be able to hopefully write simple python notebooks and scripts yourself. I’ll generally assume that the reader has at some point learned the basics of how to code, and has learned math up to at least a late high school level. Even if you’re rusty, you should be able to follow along if you make an effort.</p>
+<p>I’ll begin this book by covering the basics of computer programming in python. I’ll also talk a little bit about algorithms and how to measure their performance, and I’ll give a high-level overview of how a computer works. The goal is to get you proficient enough to be able to follow along in the rest of the book, and to be able to hopefully write simple python notebooks and scripts yourself. I’ll generally assume that the reader has at some point learned the basics of how to code, and has learned math up to at least a late high school level. Even if you’re rusty, you should be able to follow along if you make an effort.</p>
 <p>First, a word on the book itself. You’re reading a book that’s been completely written using Jupyter Notebook and rendered using Quarto. Notebooks are a fantastic place to do experimental coding like we often do in machine learning. They’re also, of course, fantastic for writing reports or books that contain substantial code. All of my lessons are notebooks that you should be able to find in the book’s <a href="https://github.com/rkingery/ml-book">GitHub repository</a>. Each notebook is fully executable, so if you like you can follow along this book using the notebooks, executing each line of code along the way, or even experimenting with ideas yourself. For a quick and basic introduction to Jupyter Notebook, see this <a href="https://docs.jupyter.org/en/latest/start/index.html">getting started</a> guide.</p>
 <p><strong>Tip:</strong> If you are reading this lesson using in Jupyter Notebook, note that each notebook is a series of <em>cells</em>, each of which can be executed or <em>run</em>. You can run a cell either by pressing <code>SHIFT-ENTER</code>, or by clicking the <code>Run</code> in the toolbar. Notebook cells will execute in the order you run them, even if they’re not in order on the page. Be careful with this. When in doubt, click on <code>Kernel</code> in the toolbar, and then <code>Restart &amp; Clear Output</code> in the dropdown menu to reset the session and clear any output being rendered. This will reset the state so you can start over. Note that this notebook and any other in this book was structured in a way that’s designed to be run in linear order from top to bottom.</p>
+<p>Before diving into python it’s useful to briefly give a high-level overview of how a computer works. At a high level, a computer has three fundamental components:</p>
+<p><strong>The Processor</strong></p>
+<p>The processor is the component of the computer that actually performs computations. Traditionally computers had only a single processor known as a <em>central processing unit</em> or <strong>CPU</strong>. The CPU was where all computations were performed. Until 20 or so years ago, the CPU was <em>single-core</em>, meaning it could only perform a single operation at a time. In the past 20 years though CPUs have become <em>multi-core</em>, which means they’re capable of executing operations in parallel. Another important trend of the past 20 years is the use of specialty processors for performing specific tasks. The most important of these is the <em>graphics processing unit</em> or <strong>GPU</strong>. As the name suggests, the GPU was originally intended to be used to accelerate computer graphics. However, over the past 10-15 years machine learning researchers have realized that the GPU is also very good at performing machine learning computations as well. Since then, we frequently find ourselves training models on the GPU, and increasingly running inference as well.</p>
+<p><strong>Memory</strong></p>
+<p>Memory is the way that a computer stores data. Depending on what the data is being stored for, there are different components of memory that each tradeoff in terms of the amount of data that can be stored and the speed with which data can be fetched from memory (called <em>latency</em> or <em>access time</em>). The components of memory make up what’s called the <strong>memory hierarchy</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://seewhysite.files.wordpress.com/2019/08/computer-memory-pyramid-1.png" class="img-fluid figure-img" width="550"></p>
+</figure>
+</div>
+<p>At the <em>top</em> of the hierarchy is what’s called <strong>register</strong> memory. This is where the processor stores the data it needs to access while performing computations. It’s fast, but not very big. The next level down is called <strong>cache</strong> memory. Cache is where data gets stored that needs to be quickly accessed, but is too big to fit in the registers. Strictly speaking there are different levels of caches, but I won’t dwell on this. The next level down memory hierarchy is called <strong>main memory</strong> or <strong>RAM</strong> (for <em>random access memory</em>). RAM is where all the data being actively used by the computer is stored, when it’s too big to fit in register or cache. The last level, the <em>base</em> of the hierarchy is called <strong>disk</strong>. This is where <em>persistent</em> data gets stored, i.e.&nbsp;data that’s meant to persist even if the computer is shut down. It used to be that disk memory was literally a disk with a sort of record-player dial that spun around to fetch a particular piece of data. Nowadays though disk memory is usually a <em>solid state drive</em> or <strong>SSD</strong>. For our purposes this doesn’t really mean that much, except that accessing data from disk is faster than it used to be. The last level of the hierarchy nowadays is the <strong>cloud</strong>. This is remote storage. Data is hosted on a completely different computer that the user accesses via an internet connection. Cloud storage is where we’d store data too big to fit on a local computer. Typically large data on the cloud is stored and accessed via <strong>buckets</strong>.</p>
+<p><strong>I/O</strong></p>
+<p>The last major component of a computer is <strong>I/O</strong>, a long-standing abbreviation for <em>in-out</em>. I/O is where all the interfacing between the user and the computer happens. The data printed to the screen is I/O. So are rendered images and video, audio, printers, FAX, scanners, copiers, etc. For our purposes, the only thing to note about I/O is that it’s <em>slow</em>. In programs where speed matters, you should try to minimizes the amount you print. That said, I/O is essential for debugging and experimental development, so we don’t want to <em>completely</em> avoid it.</p>
+<section id="python" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="python"><span class="header-section-number">1.1</span> Python</h2>
 <p>Python is a programming language well-known for its simplicity and ease of use, which makes it highly popular among programmers. Python also has extensive library support for numerical computing, data science, and machine learning tasks. All of this together makes python by far the most popular programming language in machine learning and the data sciences in general. As of this writing there is no language that even comes close to matching python in the machine learning field in terms of popularity and general capabilities.</p>
 <p>Python is a <em>high-level</em> programming language. This essentially means it supports many layers of abstraction, allowing programmers to not have to worry about many of the low-level details of programming that other lower-level programming languages might require you to keep track of. Python is an <em>interpreted</em> language, which essentially means we can execute code line-by-line instead of having to wait until we’re finished and then compiling the entire file into an executable to run. This makes it easy experiment with code line-by-line. The trade-off, however, is that python can be slower than compiled languages, sometimes 10-100 times slower. We’ll talk about ways to address this trade-off in future lessons, particularly by using libraries that automatically run code in lower-level languages for us. For most of this book though we’ll treat the interpreted nature of python as a blessing.</p>
-<section id="data-structures" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="data-structures"><span class="header-section-number">1.1</span> Data Structures</h2>
-<p>The most basic operations python can perform is arithmetic. At its most basic level the language can be used as a calculator. For example, if you wanted to calculate <code>1.75 + 3.5 * 4</code>, you’d just type it into a cell and run it directly.</p>
+<p>The most basic operations python can perform is arithmetic. At its most basic level the language can be used as a calculator. For example, if you wanted to calculate <code>1.75 + 3.5 * 4</code>, you’d just type it into a cell and run it directly, e.g.&nbsp;by pressing <code>SHIFT-ENTER</code>.</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fl">1.75</span> <span class="op">+</span> <span class="fl">3.5</span> <span class="op">*</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>15.75</code></pre>
 </div>
 </div>
-<p>All of the usual arithmetic operations from a calculator carry over to python as well. This even includes things like parenthesis, exponents, and order of operations. For example, we could calculate something like <code>(4 - 2) / 7.3 * 5</code> directly. This will execute the statement <code>(4 - 2)</code> in parentheses first, then the multiplication by <code>5</code>, and finally the division by <code>7.3</code>.</p>
+<p>All of the usual arithmetic operations from a scientific calculator carry over to python as well. This even includes things like parenthesis, exponents, and order of operations. For example, we could calculate something like <code>(4 - 2) / 7.3 * 5</code> directly. This will execute the statement <code>(4 - 2)</code> in parentheses first, then the multiplication by <code>5</code>, and finally the division by <code>7.3</code>.</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="op">*</span> (<span class="dv">4</span> <span class="op">-</span> <span class="dv">2</span>) <span class="op">/</span> <span class="fl">7.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>1.36986301369863</code></pre>
 </div>
 </div>
-<p>Python also supports several arithmetic operations that are less commonly found on a calculator. For example, we can <em>integer divide</em> two numbers to get the ratio of two numbers, but rounded down to the nearest integer. Regular division is done using the <code>/</code> operator, while integer division is done using the <code>//</code> operator. For example, <code>5 / 2</code> is just <span class="math inline">\(5 \div 2 = 2.5\)</span>, while <code>5 // 2</code> is division rounded down to the nearest integer, <span class="math inline">\(5 \ // \ 2 = 2\)</span>.</p>
+<p>Python also supports several arithmetic operations that are less commonly found on a calculator. For example, we can <em>integer divide</em> two numbers to get the ratio of two numbers rounded down to the nearest whole number. Regular division is done using the <code>/</code> operator, while integer division is done using the <code>//</code> operator. For example, <code>5 / 2</code> is just <span class="math inline">\(5 \div 2 = 2.5\)</span>, while <code>5 // 2</code> is division rounded down to the nearest integer, <span class="math inline">\(5 \ // \ 2 = 2\)</span>.</p>
 <div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="op">/</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -620,83 +633,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Anyway, suppose we didn’t know what <code>x</code> was and wanted to figure out if it was even or odd. We could define a boolean variable called <code>is_even</code> that we’ll set to <code>True</code> if <code>x</code> is even, and <code>False</code> if <code>x</code> is odd. As a conditional statement, this might look like the following,</p>
-<p><span class="math display">\[\begin{align*}
-&amp;\text{if $x \ \% \ 2 == 0$ then set is\_even = True}, \\
-&amp;\text{if $x \ \% \ 2 == 1$ then set is\_even = False}. \\
-\end{align*}\]</span></p>
-<p>To create a conditional statement in python we’d first create an <em>if statement</em> in the format <code>if condition:</code>. Then below that line, we’d indent over four spaces (or one tab) and type what it is we want to happen if <code>condition</code> is true.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condition:</span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>    do_something</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>if x % 2 == 0 then set is_even = True
+if x % 2 == 1 then set is_even = False</code></pre>
+<p>To create a conditional statement in python we’d first create an <em>if statement</em> in the format <code>if condition:</code>. Then below that line, we’d indent over <em>exactly</em> four spaces (or one tab) and type what it is we want to happen if <code>condition</code> is true.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condition:</span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>    do_something</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We’d do this for each conditional statement we want to check. Note that only the conditions indented get executed when the statement is true. Once you indent back out the statement will execute whether the statement is true or not. This means python is sensitive to indentation, since indentation refers to being inside of a block.</p>
 <p>Here’s what an if statement might look like for checking whether a number <code>x</code> is even. In that case, <code>condition</code> would be a boolean, either <code>x % 2 == 0</code> or <code>x % 2 == 1</code>. Let’s see how this works for <code>x = 5</code>, and then <code>x = 6</code>.</p>
 <div class="cell" data-execution_count="51">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>    is_even <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a>    is_even <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb101-8"><a href="#cb101-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(is_even)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a>    is_even <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a>    is_even <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(is_even)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>False</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="52">
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a>    is_even <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a>    is_even <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb103-7"><a href="#cb103-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb103-8"><a href="#cb103-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(is_even)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>    is_even <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb104-5"><a href="#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb104-6"><a href="#cb104-6" aria-hidden="true" tabindex="-1"></a>    is_even <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb104-7"><a href="#cb104-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb104-8"><a href="#cb104-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(is_even)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>True</code></pre>
 </div>
 </div>
 <p>Sometimes we might want to execute a chain of conditional statements. We might want to execute the second conditional only if the first one is true, the third conditional only if both the first and second are true, and the fourth condition if none of the other conditions are true. We can do this by using an <em>if else if else</em> style conditional. In this kind of statement there are three different conditionals, an if statement, an <em>else if</em> statement, and an <em>else</em> statement. The <em>else if</em> statement only gets executed if the <em>if</em> statement is false, and the <em>else</em> statement only gets executed if both statements are false.</p>
 <p>For example, suppose we wanted to increment some number <code>x</code> by one, but only if <code>x</code> is less than some other variable <code>y</code>. But if <code>x</code> is greater than <code>y</code>, we want to increment <code>y</code> by one instead. Finally, if <code>x</code> equals <code>y</code>, we want to reset both values to zero. As a conditional statement this might look as follows:</p>
-<p><span class="math display">\[\begin{align*}
-&amp;\text{if $x &lt; y$ then reset $x = x + 1$}, \\
-&amp;\text{else if $x &gt; y$ then reset $y = y + 1$}, \\
-&amp;\text{else reset $x = 0$ and $y = 0$}. \\
-\end{align*}\]</span></p>
+<pre><code>if x &lt; y then increment x to x + 1
+else if x &gt; y then increment y to y + 1
+else set x = 0 and y = 0</code></pre>
 <p>In python, to execute a complex conditional like this we just need to chain them in order. An <em>else if</em> condition is specified using <code>elif</code> in python, and an <em>else</em> condition is specified using <code>else</code>. The chain would look something like this.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condition:</span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>    do_something</span>
-<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> other_condition:</span>
-<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>    do_something_else</span>
-<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> last_condition:</span>
-<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a>    do_something_else_again</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condition:</span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>    do_something</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> other_condition:</span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>    do_something_else</span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> last_condition:</span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>    do_something_else_again</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here’s what it looks like for the previous example. I’ll first take <code>x = 5</code> and <code>y = 10</code>, which should trigger the <em>if</em> condition and increment <code>x</code> to <code>6</code>. Then I’ll take <code>x = 7</code> and <code>y = 4</code>, which should trigger the <em>else if</em> condition and increment <code>y</code> to <code>5</code>. Finally, I’ll take <code>x = 1</code> and <code>y = 1</code>, which should trigger the <em>else</em> condition and set both to <code>0</code>. To do the incrementing I’m going to use the shorthand operator <code>+=</code>. Writing <code>x += 1</code> means exactly the same thing as <code>x = x + 1</code>. Both increment <code>x</code> by one.</p>
 <p>I’m also going to use a <strong>format string</strong> to print the output. A format string is a way to print the output of a variable inside a string. They’re just strings with an <code>f</code> placed before the left quote. To pass a variable <code>x</code> into a format string we just use <code>{x}</code> at the place in the string we want <code>x</code> to render. Format strings are useful for doing nice printing. Instead of just typing <code>print(x)</code>, we can type something like <code>print(f'x = {x}')</code> to explicitly make it clear in the output what we’re printing. It’s more helpful for readers this way since they don’t have to try to figure out what it is you’re printing.</p>
 <div class="cell" data-execution_count="53">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&lt;</span> y:</span>
-<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'the if got executed'</span>)</span>
-<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a>    x <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> y <span class="op">&lt;</span> x:</span>
-<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'the elif got executed'</span>)</span>
-<span id="cb106-9"><a href="#cb106-9" aria-hidden="true" tabindex="-1"></a>    y <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb106-10"><a href="#cb106-10" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb106-11"><a href="#cb106-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'the else got executed'</span>)</span>
-<span id="cb106-12"><a href="#cb106-12" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb106-13"><a href="#cb106-13" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb106-14"><a href="#cb106-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb106-15"><a href="#cb106-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb106-16"><a href="#cb106-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>the if got executed
-x = 6
-y = 10</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="54">
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">7</span></span>
-<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">4</span></span>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&lt;</span> y:</span>
 <span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'the if got executed'</span>)</span>
@@ -712,14 +698,14 @@ y = 10</code></pre>
 <span id="cb108-15"><a href="#cb108-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb108-16"><a href="#cb108-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>the elif got executed
-x = 7
-y = 5</code></pre>
+<pre><code>the if got executed
+x = 6
+y = 10</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="55">
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">1</span></span>
+<div class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&lt;</span> y:</span>
 <span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'the if got executed'</span>)</span>
@@ -735,25 +721,48 @@ y = 5</code></pre>
 <span id="cb110-15"><a href="#cb110-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb110-16"><a href="#cb110-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
+<pre><code>the elif got executed
+x = 7
+y = 5</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&lt;</span> y:</span>
+<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'the if got executed'</span>)</span>
+<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>    x <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb112-7"><a href="#cb112-7" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> y <span class="op">&lt;</span> x:</span>
+<span id="cb112-8"><a href="#cb112-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'the elif got executed'</span>)</span>
+<span id="cb112-9"><a href="#cb112-9" aria-hidden="true" tabindex="-1"></a>    y <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb112-10"><a href="#cb112-10" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb112-11"><a href="#cb112-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'the else got executed'</span>)</span>
+<span id="cb112-12"><a href="#cb112-12" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb112-13"><a href="#cb112-13" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb112-14"><a href="#cb112-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb112-15"><a href="#cb112-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'x = </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb112-16"><a href="#cb112-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'y = </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>the else got executed
 x = 0
 y = 0</code></pre>
 </div>
 </div>
 <p>It’s kind of annoying to write these complex statements out like this every time. When we’re working with simple conditionals, python has a one-line way to write them called <strong>ternary statements</strong>. These are useful when we want to set a variable if a condition is true, otherwise set it to something else if the condition is false. Instead of writing this:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condition:</span>
-<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> foo</span>
-<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> bar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condition:</span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> foo</span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> bar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We can write the following one-liner to define <code>x</code>:</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> foo <span class="cf">if</span> condition <span class="cf">else</span> false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> foo <span class="cf">if</span> condition <span class="cf">else</span> false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It may seem confusing to write a statement this way if you’re not used to it, but it’s actually more readable if you try to read the statement literally from left to right. You’ll get used to it. As an example, we could use a ternary statement like this to write the <code>is_even</code> example using one line. Here’s what it’d look like for <code>x = 6</code>.</p>
 <div class="cell" data-execution_count="56">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>is_even <span class="op">=</span> <span class="va">True</span> <span class="cf">if</span> (x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>) <span class="cf">else</span> <span class="va">False</span></span>
-<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(is_even)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>is_even <span class="op">=</span> <span class="va">True</span> <span class="cf">if</span> (x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>) <span class="cf">else</span> <span class="va">False</span></span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(is_even)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>True</code></pre>
 </div>
@@ -762,14 +771,14 @@ y = 0</code></pre>
 <section id="loops" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="loops"><span class="header-section-number">1.3</span> Loops</h2>
 <p>Let’s go back to lists. Suppose we had a large list of numbers of arbitrary length, and we needed to find the largest element in the list. How would we go about doing that? With what we’ve covered so far, we’d literally have to index into every single element one-by-one, print them all out, and then manually find the largest number. That might be fine if the list contains like ten numbers. But suppose it contained a million numbers. We clearly need a smarter way to proceed. This brings us to the topic of <strong>loops</strong>. A loop is a systematic way of iterating over some iterable data structure. To iterate over the elements of a list <code>array</code> in python, we can use the following syntax:</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> array:</span>
-<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>    do_something</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> array:</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>    do_something</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is called a <strong>for loop</strong>. What it’ll do is pick out each element <code>x</code> in the list from left to right, and with that element it’ll execute <code>do_something</code>. For example, doing something could just mean printing out <code>x</code>. Here’s an example. I’ll iterate over all the whole numbers from <span class="math inline">\(0\)</span> to <span class="math inline">\(9\)</span> and print them out.</p>
 <div class="cell" data-execution_count="57">
-<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
-<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> array:</span>
-<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> array:</span>
+<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0
 1
@@ -786,8 +795,8 @@ y = 0</code></pre>
 <p>In python, a convenient way to create an array like this is to use the <code>range</code> function. Writing <code>range(10)</code> would create a list of all the whole numbers from <span class="math inline">\(0\)</span> to <span class="math inline">\(10-1=9\)</span>. Strictly speaking, <code>range(10)</code> is not a <em>list</em> but an <strong>iterator</strong>. That just means it doesn’t store the elements in the list directly, but iterates over them. When executing a loop this doesn’t really matter since we’re iterating one-by-one anyway. If you need a range object as an explicit list, just re-cast it the usual way using <code>list(range(10))</code>.</p>
 <p>Range iterators can do more interesting things too. If we wanted to iterate starting from some other number, say 5, we could just use <code>range(5, 10)</code> instead, which will create an iterator of whole numbers from <span class="math inline">\(5\)</span> to <span class="math inline">\(9\)</span> instead. We can also skip over numbers in the sequence too. For example, if we only wanted the <em>even</em> numbers from <span class="math inline">\(-2\)</span> to <span class="math inline">\(10\)</span>, we could use <code>range(-2, 10, 2)</code>. The <code>2</code> on the right says to start from <code>-2</code>, counting to <code>10-1</code> in steps of <code>2</code>.</p>
 <div class="cell" data-execution_count="58">
-<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0
 1
@@ -802,16 +811,16 @@ y = 0</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="59">
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">range</span>(<span class="dv">10</span>))</span>
-<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">10</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">range</span>(<span class="dv">10</span>))</span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">10</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>range(0, 10)
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>, <span class="dv">10</span>)))</span>
-<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>, <span class="dv">10</span>)))</span>
+<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">10</span>, <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[5, 6, 7, 8, 9]
 [-2, 0, 2, 4, 6, 8]</code></pre>
@@ -820,21 +829,21 @@ y = 0</code></pre>
 <p>Back to our original loop example. Suppose we had a large list of numbers and wanted to find the largest one. How could we do this using a for loop? Well, what we can do is loop through the list, using another variable <code>largest</code> to keep track of the largest element we’ve seen so far. To do that we’ll need to use an if statement inside the loop to check whether <code>largest</code> is larger than the current value or not. Once we get to the end of the list, <code>largest</code> will be the largest in the entire list. For this to work, we have to pre-initialize <code>largest</code> to some value smaller than any element in the list. A reasonable choice would be negative infinity, which in python is denoted by <code>float('-inf')</code>.</p>
 <p>Here’s an example, using the list <code>[5, 2, 9, 6, 0, 1, 8]</code>. The largest element should be <code>9</code> in this case. Note that python actually has a builtin function to find the largest element in a list, called <code>max</code>. We could just use that instead and save having to write out the loop. Similarly, we can get the <em>smallest</em> element in a list using the <code>min</code> function.</p>
 <div class="cell" data-execution_count="61">
-<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">8</span>]</span>
-<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a>largest <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb125-4"><a href="#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> array:</span>
-<span id="cb125-5"><a href="#cb125-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
-<span id="cb125-6"><a href="#cb125-6" aria-hidden="true" tabindex="-1"></a>        largest <span class="op">=</span> x</span>
-<span id="cb125-7"><a href="#cb125-7" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb125-8"><a href="#cb125-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(largest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">8</span>]</span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a>largest <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
+<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> array:</span>
+<span id="cb127-5"><a href="#cb127-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
+<span id="cb127-6"><a href="#cb127-6" aria-hidden="true" tabindex="-1"></a>        largest <span class="op">=</span> x</span>
+<span id="cb127-7"><a href="#cb127-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb127-8"><a href="#cb127-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(largest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>9</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">max</span>(array))</span>
-<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">min</span>(array))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">max</span>(array))</span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">min</span>(array))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>9
 0</code></pre>
@@ -843,70 +852,70 @@ y = 0</code></pre>
 <p>We can loop over other iterable data structures as well, like tuples and dictionaries. When looping over a dictionary, note that the loop iterates over the <em>keys</em>, not the <em>values</em>. Since keys aren’t really ordered, you can’t really predict what order the dictionary will iterate in either.</p>
 <p>We can have loops inside of loops as well. One for loop inside another for loop is called a <em>double loop</em>. Double loops might be used, for example, when you have to iterate over a list of lists. For example, suppose we needed to iterate over the following list and find its largest element. Each element of <code>array</code> is a list itself. To access the actual values in the array we’d need to index twice. For example, to get element <code>3</code> from list <code>2</code>, we’d index using <code>array[2][3]</code>.</p>
 <div class="cell" data-execution_count="63">
-<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [</span>
-<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
-<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
-<span id="cb129-4"><a href="#cb129-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>],</span>
-<span id="cb129-5"><a href="#cb129-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>]</span>
-<span id="cb129-6"><a href="#cb129-6" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb129-7"><a href="#cb129-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(array)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [</span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>],</span>
+<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>],</span>
+<span id="cb131-5"><a href="#cb131-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>]</span>
+<span id="cb131-6"><a href="#cb131-6" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb131-7"><a href="#cb131-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(array)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1, 0, 1, 0, 1], [1, 2, 1, 2, 1], [1, 3, 1, 3, 1], [1, 4, 1, 4, 1]]</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="64">
-<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>array[<span class="dv">2</span>][<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>array[<span class="dv">2</span>][<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="64">
 <pre><code>3</code></pre>
 </div>
 </div>
 <p>Suppose we wanted to find the largest element in this array. How could we do it programmatically? What we could do is use a double loop, with the outer loop running over the inner lists, and the inner loop running over the elements of each list. We’d again need to keep a <code>largest</code> variable. Note that using <code>max</code> won’t work as is for a list of lists like this. It’ll just return one of the inner lists, not a number.</p>
 <div class="cell" data-execution_count="65">
-<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>largest <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
-<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> array:</span>
-<span id="cb133-3"><a href="#cb133-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> row:</span>
-<span id="cb133-4"><a href="#cb133-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
-<span id="cb133-5"><a href="#cb133-5" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> x</span>
-<span id="cb133-6"><a href="#cb133-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb133-7"><a href="#cb133-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(largest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>largest <span class="op">=</span> <span class="bu">float</span>(<span class="st">'-inf'</span>)</span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> array:</span>
+<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> row:</span>
+<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
+<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> x</span>
+<span id="cb135-6"><a href="#cb135-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-7"><a href="#cb135-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(largest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>4</code></pre>
 </div>
 </div>
 <p>Suppose we had a list <code>array</code>, and wanted to create another list from <code>array</code> whose elements are <em>squares</em> of the elements in <code>array</code>. One way to do this would be to use a for loop like this. We’d initialize an empty array <code>squares</code>, loop over <code>array</code>, and append the square of each <code>x</code> to <code>squares</code>. This will work fine, creating the array <code>[1, 4, 9, 16, 25]</code>.</p>
 <div class="cell" data-execution_count="66">
-<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
-<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> []</span>
-<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> array:</span>
-<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a>    x_sq <span class="op">=</span> x <span class="op">**</span> <span class="dv">2</span></span>
-<span id="cb135-6"><a href="#cb135-6" aria-hidden="true" tabindex="-1"></a>    squares.append(x_sq)</span>
-<span id="cb135-7"><a href="#cb135-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb135-8"><a href="#cb135-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(squares)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> []</span>
+<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> array:</span>
+<span id="cb137-5"><a href="#cb137-5" aria-hidden="true" tabindex="-1"></a>    x_sq <span class="op">=</span> x <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb137-6"><a href="#cb137-6" aria-hidden="true" tabindex="-1"></a>    squares.append(x_sq)</span>
+<span id="cb137-7"><a href="#cb137-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb137-8"><a href="#cb137-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(squares)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1, 4, 9, 16, 25]</code></pre>
 </div>
 </div>
 <p>An even simpler way to create <code>squares</code> is to use a <strong>list comprehension</strong>. A list comprehension is a python shorthand syntax for creating a list by iterating over another list. We can fill in <code>squares</code> with the same numbers using the following single line of code:</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> [x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> array]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> [x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> array]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Notice that all we’re essentially doing is doing the loop over <code>array</code> inside of the list definition for <code>squares</code>. This allows us to cut four lines of code down to one. It’s also more readable, once you get used to it at least. Note that list comprehensions only work when it’s simple to define <code>squares</code> from <code>array</code>. If the operation is too complex you’re stuck writing out the full loop. You’d be surprised how much we can do with list comprehensions though. We can do double loops inside of a list comprehension, and even ternary statements.</p>
 <div class="cell" data-execution_count="67">
-<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> [x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> array]</span>
-<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(squares)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> [x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> array]</span>
+<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(squares)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1, 4, 9, 16, 25]</code></pre>
 </div>
 </div>
 <p>I’ll just briefly mention one other type of loop that occasionally shows up, called a <strong>while loop</strong>. A for loop just iterates over a list or some iterable. A while loop keeps iterating as long as some condition is true, whether there’s an iterable involved or not. The syntax of a while loop in python is:</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> condition:</span>
-<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a>    do_something</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> condition:</span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>    do_something</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here’s a simple example of this. I’ll define a while loop that continues as long as some variable <code>x</code> is less than 5. Each step of the loop will increment <code>x</code> by one. In order to use a while loop like this we first have to make sure to initialize <code>x</code> to some value, otherwise <code>x</code> will be undefined inside the loop when we try to increment it. I’ll initialize <code>x</code> to <code>0</code> in this example.</p>
 <div class="cell" data-execution_count="80">
-<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> x <span class="op">&lt;</span> <span class="dv">5</span>:</span>
-<span id="cb141-3"><a href="#cb141-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb141-4"><a href="#cb141-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb141-5"><a href="#cb141-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> x <span class="op">&lt;</span> <span class="dv">5</span>:</span>
+<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb143-4"><a href="#cb143-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb143-5"><a href="#cb143-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>5</code></pre>
 </div>
@@ -916,26 +925,26 @@ y = 0</code></pre>
 <h2 data-number="1.4" class="anchored" data-anchor-id="functions"><span class="header-section-number">1.4</span> Functions</h2>
 <p>Very often we find ourselves needing to perform the same set of computations over and over. It’s convenient therefore to be able to package re-used computations up in a way that makes them easier to reuse later on. The most common way to do this is using a <strong>function</strong>. A computational function is an abstraction for mapping inputs to some desired outputs using a sequence of computational steps that get abstracted away from the user.</p>
 <p>It’s hard to underestimate how important functions are to programming. They allow us to abstract away many repetitive, complex tasks so we can focus on other things. Any time you find yourself reusing the same code over and over, rather than copy and paste it you should consider defining a function to execute that code for you. Doing this well is more an art than a science. It’s in essence the bread and butter of software engineering.</p>
-<p>In python, a function is defined by specifying a <em>function signature</em> that states the name of the function and the inputs it takes in. Once the computation inside a function gets performed, its output gets returned via a <strong>return</strong> statement. Here’s a simple example of a function <code>foobar</code> that takes in two inputs <code>foo</code> and <code>bar</code>, and returns an output <code>output</code></p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> foobar(foo, bar):</span>
-<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>    do_something</span>
-<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In python, a function is defined by specifying a <em>function signature</em> that states the name of the function and the inputs it takes in. Once the computation inside a function gets performed, its output gets returned via a <strong>return</strong> statement. Here’s a simple example of a function called <code>function</code> that takes in two inputs <code>foo</code> and <code>bar</code>, and returns an output <code>output</code></p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> function(foo, bar):</span>
+<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>    do_something</span>
+<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Once the function has been defined, it can be called and executed later on using a command like</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> foobar(foo, bar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> function(foo, bar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can place pretty much any computation you like inside a function. Only the inputs and outputs get exposed to the user when the function is used. All of the inner computation gets abstracted away. The variables that get used inside the function are all <strong>local variables</strong> unless specified otherwise. That means they won’t be available outside the function. They’re created when the function is called, and immediately destroyed when the function returns. This contrasts with <strong>global variables</strong>, which are any variables that persist after a function is called. The inputs and outputs are examples of global variables.</p>
 <p>Let’s do an example. Suppose we got tired of writing out loops to find the largest elements in an array and wanted to package it inside a function that we can execute in one line, e.g.&nbsp;like the <code>max</code> function does. Let’s packages this sequence of steps inside a function I’ll call <code>maximum</code>. The function takes in a list <code>array</code> and returns the largest element <code>largest</code>.</p>
 <div class="cell" data-execution_count="68">
-<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximum(array):</span>
-<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>    largest <span class="op">=</span> array[<span class="dv">0</span>]</span>
-<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> array:</span>
-<span id="cb145-4"><a href="#cb145-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
-<span id="cb145-5"><a href="#cb145-5" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> x</span>
-<span id="cb145-6"><a href="#cb145-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> largest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximum(array):</span>
+<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a>    largest <span class="op">=</span> array[<span class="dv">0</span>]</span>
+<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> array:</span>
+<span id="cb147-4"><a href="#cb147-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
+<span id="cb147-5"><a href="#cb147-5" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> x</span>
+<span id="cb147-6"><a href="#cb147-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> largest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="69">
-<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">8</span>]</span>
-<span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a>largest <span class="op">=</span> maximum(array)</span>
-<span id="cb146-3"><a href="#cb146-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(largest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">8</span>]</span>
+<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a>largest <span class="op">=</span> maximum(array)</span>
+<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(largest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>9</code></pre>
 </div>
@@ -945,18 +954,18 @@ y = 0</code></pre>
 <p>In general, if you fail to specify a base case, recursion will keep going indefinitely, which will cause a <em>stack overflow</em>. A stack overflow results when you’ve used up all the memory your program is allowed to use, which will crash the kernel and force you to start over.</p>
 <p>So you can see how recursion works, I’m going to define a nested list and call flatten on it, while printing the input each time the function gets called. You can see the it starts by printing the original array, but then it prints <code>[1, 2]</code>, the first list inside of <code>array</code>. Since the elements in <code>[1, 2]</code> are just numbers we’ve hit the base case and we can move onto the next element in <code>array</code>, which is the list <code>[3, [4, [5, 6]]]</code>. The second element in this list is another list, <code>[4, [5, 6]]</code>, so it’ll recurse again on that. And then it’ll recurse again on <code>[5, 6]</code>. Once it’s hit this point there are no more lists left. All the numbers have been added to <code>output</code>, and we can return. The final output should be the flattened array <code>[1, 2, 3, 4, 5, 6]</code>.</p>
 <div class="cell" data-execution_count="70">
-<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> flatten(array):</span>
-<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(array)</span>
-<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> []</span>
-<span id="cb148-4"><a href="#cb148-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> array:</span>
-<span id="cb148-5"><a href="#cb148-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(x, <span class="bu">list</span>):</span>
-<span id="cb148-6"><a href="#cb148-6" aria-hidden="true" tabindex="-1"></a>            output <span class="op">+=</span> flatten(x)</span>
-<span id="cb148-7"><a href="#cb148-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb148-8"><a href="#cb148-8" aria-hidden="true" tabindex="-1"></a>            output.append(x)</span>
-<span id="cb148-9"><a href="#cb148-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output</span>
-<span id="cb148-10"><a href="#cb148-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb148-11"><a href="#cb148-11" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, [<span class="dv">4</span>, [<span class="dv">5</span>, <span class="dv">6</span>]]]]</span>
-<span id="cb148-12"><a href="#cb148-12" aria-hidden="true" tabindex="-1"></a>flattened <span class="op">=</span> flatten(array)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> flatten(array):</span>
+<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(array)</span>
+<span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> []</span>
+<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> array:</span>
+<span id="cb150-5"><a href="#cb150-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(x, <span class="bu">list</span>):</span>
+<span id="cb150-6"><a href="#cb150-6" aria-hidden="true" tabindex="-1"></a>            output <span class="op">+=</span> flatten(x)</span>
+<span id="cb150-7"><a href="#cb150-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb150-8"><a href="#cb150-8" aria-hidden="true" tabindex="-1"></a>            output.append(x)</span>
+<span id="cb150-9"><a href="#cb150-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output</span>
+<span id="cb150-10"><a href="#cb150-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-11"><a href="#cb150-11" aria-hidden="true" tabindex="-1"></a>array <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, [<span class="dv">4</span>, [<span class="dv">5</span>, <span class="dv">6</span>]]]]</span>
+<span id="cb150-12"><a href="#cb150-12" aria-hidden="true" tabindex="-1"></a>flattened <span class="op">=</span> flatten(array)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1, 2], [3, [4, [5, 6]]]]
 [1, 2]
@@ -966,62 +975,62 @@ y = 0</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="71">
-<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flattened)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flattened)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1, 2, 3, 4, 5, 6]</code></pre>
 </div>
 </div>
 <p>We can now use <code>flatten</code> combined with <code>maximum</code> to find the largest element in any list we like, no matter how many lists are nested inside it. Let’s test it out on the above example, whose largest element should be <code>6</code>. Looks like it works fine, at least on the example tested.</p>
 <div class="cell" data-execution_count="72">
-<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>maximum(flattened)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a>maximum(flattened)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="72">
 <pre><code>6</code></pre>
 </div>
 </div>
 <p>This doesn’t mean the function will work fine for all inputs though. You have to be very careful in making sure you explicitly lay out what the valid inputs should be as well as thinking about what edge case inputs are and whether the function gives the right value for those. One edge case for <code>maximum</code> might be an empty list, <code>[]</code>. What’s the largest element in an empty list? It’s kind of an ill-defined question that we’d need to think about how to handle. An easy convention is to just return <code>None</code> if the input list is empty. If we do that then the function as already defined will work fine even on an empty list.</p>
 <p>Functions can also take in <strong>keyword arguments</strong>, which are optional inputs that can be used to modify the state of the function. With a keyword argument, we’d specify a default value. When we call a function and don’t pass in that keyword argument it’ll default to that default value. Otherwise it’ll use the value of what we pass in. Here’s what the signature might look like for a function that takes a keyword argument <code>keyword</code> with a default value <code>default</code>.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> function(<span class="bu">input</span>, keyword<span class="op">=</span>default):</span>
-<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a>    do_something</span>
-<span id="cb154-3"><a href="#cb154-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> function(<span class="bu">input</span>, keyword<span class="op">=</span>default):</span>
+<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a>    do_something</span>
+<span id="cb156-3"><a href="#cb156-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>As an example, suppose we wanted to modify <code>maximum</code> by specifying an optional return value <code>if_empty_return</code> when an empty list is passed in. If no keyword is passed in, we’ll assume that <code>if_empty_return</code> has a default value of <code>float('-inf')</code>. To actually use the keyword argument as intended, we need to check whether the input array is empty, and if it is return whatever <code>if_empty_return</code> is set to.</p>
 <p>I’ll test the function on two cases. The first has no keyword argument is passed in. That one should return <code>None</code> when an empty list is passed in. The second has a keyword <code>if_empty_return='empty list has no elements'</code>. This one should return the string <code>'empty list has no elements'</code> when an empty list is passed in.</p>
 <div class="cell" data-execution_count="74">
-<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximum(array, if_empty_return<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(array) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb155-3"><a href="#cb155-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> if_empty_return</span>
-<span id="cb155-4"><a href="#cb155-4" aria-hidden="true" tabindex="-1"></a>    largest <span class="op">=</span> array[<span class="dv">0</span>]</span>
-<span id="cb155-5"><a href="#cb155-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> array:</span>
-<span id="cb155-6"><a href="#cb155-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
-<span id="cb155-7"><a href="#cb155-7" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> x</span>
-<span id="cb155-8"><a href="#cb155-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> largest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximum(array, if_empty_return<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb157-2"><a href="#cb157-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(array) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb157-3"><a href="#cb157-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> if_empty_return</span>
+<span id="cb157-4"><a href="#cb157-4" aria-hidden="true" tabindex="-1"></a>    largest <span class="op">=</span> array[<span class="dv">0</span>]</span>
+<span id="cb157-5"><a href="#cb157-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> array:</span>
+<span id="cb157-6"><a href="#cb157-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
+<span id="cb157-7"><a href="#cb157-7" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> x</span>
+<span id="cb157-8"><a href="#cb157-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> largest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="75">
-<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a>maximum([])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a>maximum([])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="75">
 <pre><code>-inf</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="76">
-<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a>maximum([], if_empty_return<span class="op">=</span><span class="st">'empty list has no elements'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a>maximum([], if_empty_return<span class="op">=</span><span class="st">'empty list has no elements'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="76">
 <pre><code>'empty list has no elements'</code></pre>
 </div>
 </div>
 <p>Frequently we’ll find ourselves implementing functions that only perform a single line of computation. For these simple kinds of functions python has a nice syntax that we can use to implement them in one line. These are called <strong>lambda functions</strong>. Lambda functions can be defined using the following syntax:</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a>function <span class="op">=</span> <span class="kw">lambda</span> <span class="bu">input</span>: output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>function <span class="op">=</span> <span class="kw">lambda</span> <span class="bu">input</span>: output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Calling these functions works exactly the same way as ordinary functions do: <code>output = function(input)</code>. Lambda functions only work when the output is really simple to calculate from the input. Thankfully, in this book most functions you’ll see are simple enough to state using lambda functions. That’s because most of those functions will be mathematical functions like <span class="math inline">\(f(x) = x^2\)</span> or <span class="math inline">\(f(x, y) = \sqrt{x + y}\)</span>. These functions are simple enough to do in one line.</p>
 <p>Here’s an example of a function I’ll call <code>square</code> that takes in a number <code>x</code> and returns its square.</p>
 <div class="cell" data-execution_count="78">
-<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a>square <span class="op">=</span> <span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a>square(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>square <span class="op">=</span> <span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>square(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="78">
 <pre><code>9</code></pre>
 </div>
 </div>
 <p>And here’s another function I’ll call <code>sqrt</code> that takes in two numbers <code>x</code> and <code>y</code> and computes the square too of their sum.</p>
 <div class="cell" data-execution_count="79">
-<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>sqrt <span class="op">=</span> <span class="kw">lambda</span> x, y: (x <span class="op">+</span> y)<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</span>
-<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>sqrt(<span class="dv">2</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a>sqrt <span class="op">=</span> <span class="kw">lambda</span> x, y: (x <span class="op">+</span> y)<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a>sqrt(<span class="dv">2</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="79">
 <pre><code>2.0</code></pre>
 </div>
@@ -1034,12 +1043,12 @@ y = 0</code></pre>
 <p>At their root, computer programs are about executing a given sequence of instructions. The way those instructions are written depend on the programming language, but the instructions themselves do not. A sequence of instructions for performing some given task is called an <strong>algorithm</strong>. An algorithm abstracts away the idea of what language we’re coding in, what hardware we’re using, what operating system we’re running on, and focuses only on the instructions we want to be executed. Very roughly speaking, you can think of a program or a function as an algorithm.</p>
 <p>We’ve already seen an example of an algorithm in this lesson: Finding the maximum element in a list. In its original form, its python function looked like this:</p>
 <div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximum(array):</span>
-<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a>    largest <span class="op">=</span> array[<span class="dv">0</span>]</span>
-<span id="cb165-3"><a href="#cb165-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> array:</span>
-<span id="cb165-4"><a href="#cb165-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
-<span id="cb165-5"><a href="#cb165-5" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> x</span>
-<span id="cb165-6"><a href="#cb165-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> largest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximum(array):</span>
+<span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a>    largest <span class="op">=</span> array[<span class="dv">0</span>]</span>
+<span id="cb167-3"><a href="#cb167-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> array:</span>
+<span id="cb167-4"><a href="#cb167-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
+<span id="cb167-5"><a href="#cb167-5" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> x</span>
+<span id="cb167-6"><a href="#cb167-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> largest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>One way to think about this function is as a few lines of python code that get interpreted into machine code and then executed in hardware. Another way to think about it is as a sequence of instructions in English:</p>
 <ul>
@@ -1064,35 +1073,35 @@ y = 0</code></pre>
 <p>Suppose we wanted to use unit testing on <code>maximum</code>. What we’d do is define a few simple example inputs where we already know what the largest element is. The more examples the better, and the more varied and complex the examples are the better. When creating a set of examples, it’s good to think about edge cases inputs that might occur, and to test as many different edge cases as we can.</p>
 <p>Let’s think about what these might look like for <code>maximum</code>. One thing we might want to do is test the algorithm on a few random input lists, where the maximum element could be anywhere in the list. Another thing we might want to think about are the edge cases. One case, for example, might be when the input list is empty. What do we return then? Another case might be when all the elements in the list are the same value, for example all zeros or ones. Another case might be when an input list is passed in that contains things other than numbers, for example strings or other lists.</p>
 <p>I’ll write a new function called <code>test_maximum</code> to do this. It takes in no inputs, and returns no outputs. All it does is tests that <code>maximum</code> gives the right outputs on a few example input lists. To test each example I’ll use the python <strong>assert</strong> statement. The syntax for an assert statement is:</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> statement, optional_error_message</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If <code>statement</code> is false, python will print <code>optional_error_message</code>. If no error message is passed it’ll just throw an assertion error with no message. If <code>statement</code> is true it’ll continue on to the next example. I’ll test the <code>maximum</code> algorithm on the following example lists: - input <code>[5, 4, 3, 2, 1]</code>: output <code>5</code> - input <code>[4, 3, -5, 7, 0]</code>: output <code>7</code> - input <code>[1, 1, 1, 1, 1]</code>: output <code>1</code> - input <code>range(10000)</code>: output <code>9999</code> - input <code>[]</code>: output <code>None</code></p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb168-1"><a href="#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> statement, optional_error_message</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If <code>statement</code> is false, python will print <code>optional_error_message</code> and throw an assertion error. If no error message is passed it’ll just throw an assertion error with no message. If <code>statement</code> is true it’ll continue on to the next example. I’ll test the <code>maximum</code> algorithm on the following example lists: - input <code>[5, 4, 3, 2, 1]</code>: output <code>5</code> - input <code>[4, 3, -5, 7, 0]</code>: output <code>7</code> - input <code>[1, 1, 1, 1, 1]</code>: output <code>1</code> - input <code>range(10000)</code>: output <code>9999</code> - input <code>[]</code>: output <code>None</code></p>
 <div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_maximum():</span>
-<span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> maximum([<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>]) <span class="op">==</span> <span class="dv">5</span></span>
-<span id="cb167-3"><a href="#cb167-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> maximum([<span class="dv">4</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">0</span>]) <span class="op">==</span> <span class="dv">7</span></span>
-<span id="cb167-4"><a href="#cb167-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> maximum([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]) <span class="op">==</span> <span class="dv">1</span></span>
-<span id="cb167-5"><a href="#cb167-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> maximum(<span class="bu">range</span>(<span class="dv">10000</span>)) <span class="op">==</span> <span class="dv">9999</span></span>
-<span id="cb167-6"><a href="#cb167-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> maximum([]) <span class="op">==</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_maximum():</span>
+<span id="cb169-2"><a href="#cb169-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> maximum([<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>]) <span class="op">==</span> <span class="dv">5</span></span>
+<span id="cb169-3"><a href="#cb169-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> maximum([<span class="dv">4</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">0</span>]) <span class="op">==</span> <span class="dv">7</span></span>
+<span id="cb169-4"><a href="#cb169-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> maximum([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]) <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb169-5"><a href="#cb169-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> maximum(<span class="bu">range</span>(<span class="dv">10000</span>)) <span class="op">==</span> <span class="dv">9999</span></span>
+<span id="cb169-6"><a href="#cb169-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> maximum([]) <span class="op">==</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb168"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb168-1"><a href="#cb168-1" aria-hidden="true" tabindex="-1"></a>test_maximum()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a>test_maximum()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>IndexError: list index out of range</code></pre>
 </div>
 </div>
 <p>It looks like this test fails on the last example, which tests that the maximum of an empty list is <code>None</code>. This shouldn’t be surprising. After all we assumed when defining <code>maximum</code> that the input was a list of numbers with at least one element. If we did want an empty list to return <code>None</code> we can just modify <code>maximum</code> to first check if the input list is empty, and if it is return <code>None</code>. Let’s do that and then run the test again. It should pass now.</p>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximum(array):</span>
-<span id="cb170-2"><a href="#cb170-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(array) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb170-3"><a href="#cb170-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb170-4"><a href="#cb170-4" aria-hidden="true" tabindex="-1"></a>    largest <span class="op">=</span> array[<span class="dv">0</span>]</span>
-<span id="cb170-5"><a href="#cb170-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> array:</span>
-<span id="cb170-6"><a href="#cb170-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
-<span id="cb170-7"><a href="#cb170-7" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> x</span>
-<span id="cb170-8"><a href="#cb170-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> largest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximum(array):</span>
+<span id="cb172-2"><a href="#cb172-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(array) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb172-3"><a href="#cb172-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb172-4"><a href="#cb172-4" aria-hidden="true" tabindex="-1"></a>    largest <span class="op">=</span> array[<span class="dv">0</span>]</span>
+<span id="cb172-5"><a href="#cb172-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> array:</span>
+<span id="cb172-6"><a href="#cb172-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> largest:</span>
+<span id="cb172-7"><a href="#cb172-7" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> x</span>
+<span id="cb172-8"><a href="#cb172-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> largest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb171"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a>test_maximum()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb173"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a>test_maximum()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="efficiency" class="level3" data-number="1.5.2">
@@ -1137,59 +1146,19 @@ y = 0</code></pre>
 <p>All this asymptotics stuff is all well and good. It gives a half decent proxy for how slow an algorithm will be or how much memory it uses. But remember that it’s doing a lot of coarse graining. In calculating <span class="math inline">\(T(n)\)</span> and <span class="math inline">\(M(n)\)</span> we’re ignoring a lot of important details, like what hardware the algorithm is running on, what language it’s programmed in, whether things are being run in parallel, what else the operating system is running, etc. In practice, a much better way to estimate how slow an algorithm is, or how much memory it’s using, is to use a <strong>profiler</strong>. A profiler is a tool that runs a given routine and analyzes how much time or memory is being used, usually averaged over a bunch of runs.</p>
 <p>In Jupyter Notebook, the easiest way to profile a function is to use the <code>%timeit</code> magic. A <em>magic</em> is any special command prefixed by <code>%</code> or <code>%%</code>. One of those special commands is <code>timeit</code>, which runs a given statement a bunch of times and estimates the average amount of time it takes to execute that statement. Let’s use <code>timeit</code> to profile our <code>maximum</code> function and see how long it’s taking to run. Just for fun, let’s compare it to python’s builtin <code>max</code> function. Theoretically both algorithms should be <span class="math inline">\(O(n)\)</span>. But what happens in practice? I’ll run both functions using the same fairly big input <code>range(10000)</code>.</p>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit maximum(<span class="bu">range</span>(<span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit maximum(<span class="bu">range</span>(<span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>425 µs ± 5.8 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit <span class="bu">max</span>(<span class="bu">range</span>(<span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit <span class="bu">max</span>(<span class="bu">range</span>(<span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>185 µs ± 4.46 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</code></pre>
 </div>
 </div>
-<p>Even though both algorithms are linear time and perform the same task, python’s builtin <code>max</code> function seems to run about twice as fast as our custom <code>maximum</code> function. What gives?</p>
-<ul>
-<li><p>Give a crude model of a computer (von Neumann architecture)</p></li>
-<li><p>Show a simple example of how to improve an algorithm’s runtime and memory, with useful tips on ways to do that</p></li>
-<li><p><code>%timeit</code>: Runs the code a bunch of times and returns the average time it takes for the line to run. This is useful when you just want to get an idea how long something takes to run.</p></li>
-<li><p><code>%prun</code>: Runs a profiler on the code and reports various timing statistics on the entire function.</p></li>
-<li><p><code>%lprun</code>: Runs a profiler on the code, but reports timing statistics line-by-line, so you can see which lines of code are running slow.</p>
-<ul>
-<li>This is the most useful profiler in my opinion since you can see which actual lines are running slow.</li>
-<li>Need to install the <code>line_profiler</code> library first and load in the notebook with <code>%load_ext line_profiler</code></li>
-</ul></li>
-<li><p><code>%memit</code>: Runs a memory profiler on the code, returning statistics on how much memory is being taken up.</p>
-<ul>
-<li>Need to install the <code>memory_profiler</code> library first and load in the notebook with <code>%load_ext memory_profiler</code></li>
-</ul></li>
-<li><p><code>%mprun</code>: Runs a memory profiler on the code, giving line-by-line statistics on how much memory each line is taking up.</p>
-<ul>
-<li>Annoyingly, this only works for functions defined from a python script, not from a notebook</li>
-<li>Need to install the <code>memory_profiler</code> library first and load in the notebook with<code>%load_ext memory_profiler</code></li>
-</ul></li>
-</ul>
-<div class="sourceCode" id="cb176"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> element_wise_multiply(x, y):</span>
-<span id="cb176-2"><a href="#cb176-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
-<span id="cb176-3"><a href="#cb176-3" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> [x[i] <span class="op">*</span> y[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n)]</span>
-<span id="cb176-4"><a href="#cb176-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> z</span>
-<span id="cb176-5"><a href="#cb176-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb176-6"><a href="#cb176-6" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
-<span id="cb176-7"><a href="#cb176-7" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.ones(n).tolist()</span>
-<span id="cb176-8"><a href="#cb176-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.ones(n).tolist()</span>
-<span id="cb176-9"><a href="#cb176-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb176-10"><a href="#cb176-10" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext line_profiler</span>
-<span id="cb176-11"><a href="#cb176-11" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext memory_profiler</span>
-<span id="cb176-12"><a href="#cb176-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb176-13"><a href="#cb176-13" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>timeit element_wise_multiply</span>
-<span id="cb176-14"><a href="#cb176-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb176-15"><a href="#cb176-15" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="op">%</span>prun <span class="op">-</span>r <span class="op">-</span>s tottime element_wise_multiply(x, y)<span class="op">;</span></span>
-<span id="cb176-16"><a href="#cb176-16" aria-hidden="true" tabindex="-1"></a>a.print_stats()</span>
-<span id="cb176-17"><a href="#cb176-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb176-18"><a href="#cb176-18" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="op">%</span>lprun <span class="op">-</span>r <span class="op">-</span>f element_wise_multiply element_wise_multiply(x, y)<span class="op">;</span></span>
-<span id="cb176-19"><a href="#cb176-19" aria-hidden="true" tabindex="-1"></a>a.print_stats()</span>
-<span id="cb176-20"><a href="#cb176-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb176-21"><a href="#cb176-21" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>memit element_wise_multiply(x, y)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Even though both algorithms are linear time and perform the same task, python’s builtin <code>max</code> function seems to run about twice as fast as our custom <code>maximum</code> function. What gives? Well, <code>timeit</code> is capturing not just the <span class="math inline">\(O(n)\)</span> nature of the algorithm, but also the practical aspects as well. Things like, what processor are the operations running on, what priority does the operating system give the operations relative to other things the computer is doing, whether any operations are being run in parallel, what programming language is being used, how efficiently the memory hierarchy is being managed, etc. Algorithmic complexity captures <em>none</em> of these important things, while profilers capture essentially all of them.</p>
+<p>Not only can we profile the total runtime of a program, but we can even profile a program <em>line by line</em> to see which lines are running slow. In Jupyter you can do this using the <code>%lprun</code> magic. We can also profile the memory taken up by a program, but as a whole or line-by-line. In Jupyter you can do these with the <code>%memit</code> and <code>%mprun</code> magics. Usually we’ll be more worried about runtime than memory, but it is occasionally useful to profile the memory too. One major example is when running large models on the GPU. Since GPUs have a relatively small amount of memory, we have to be careful not to run out of GPU memory, which means it’s often useful to run a memory profiler on a training or inference loop.</p>
 
 
 </section>
