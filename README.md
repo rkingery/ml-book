@@ -1,2 +1,2 @@
-# Math and Programming for Machine Learning
+# Math for Machine Learning
 A book I'm writing. Check back soon.
